@@ -1,1 +1,30 @@
-<p>nav-page works!</p>
+<section
+  class="nav-page__container"
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  [ngStyle]="{ 'background-color': this.backgroundColor, color: this.color }"
+>
+  <nav
+    class="nav-page__tab nav-page__tab--hover"
+    *ngIf="!this.toShowAll"
+    fxLayout="column"
+    fxLayoutAlign="end center"
+  >
+    <span class="nav-page__tab-text">
+      {{ this.navLabel }}
+    </span>
+  </nav>
+  <article class="nav-page__page" *ngIf="this.toShowAll">
+    <ng-content></ng-content>
+  </article>
+  <div
+    class="nav-page__tab"
+    *ngIf="this.toShowAll"
+    fxLayout="column"
+    fxLayoutAlign="end center"
+  >
+    <span class="nav-page__tab-text">
+      {{ this.navLabel }}
+    </span>
+  </div>
+</section>
