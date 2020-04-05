@@ -1,6 +1,6 @@
 {
-  "name": "client-app",
-  "short_name": "client-app",
+  "name": "white-spaces-web-app",
+  "short_name": "white-spaces",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
