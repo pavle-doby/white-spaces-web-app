@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { HomePageRoutingModule } from './home-page-routing.module';
 import { HomePageComponent } from './home-page.component';
-import { NavPageModule } from './nav-page/nav-page.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
@@ -12,7 +11,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     CommonModule,
     FlexLayoutModule,
     HomePageRoutingModule,
-    NavPageModule,
   ],
   exports: [HomePageComponent],
 })

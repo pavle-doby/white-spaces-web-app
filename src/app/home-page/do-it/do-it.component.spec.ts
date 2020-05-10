@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavPageComponent } from './nav-page.component';
+import { DoItComponent } from './do-it.component';
 
-describe('NavPageComponent', () => {
-  let component: NavPageComponent;
-  let fixture: ComponentFixture<NavPageComponent>;
+describe('DoItComponent', () => {
+  let component: DoItComponent;
+  let fixture: ComponentFixture<DoItComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NavPageComponent ]
+      declarations: [ DoItComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NavPageComponent);
+    fixture = TestBed.createComponent(DoItComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
