@@ -4,6 +4,11 @@ import { CommonModule } from '@angular/common';
 import { HomePageRoutingModule } from './home-page-routing.module';
 import { HomePageComponent } from './home-page.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HomeModule } from './home/home.module';
+import { BelieveInModule } from './believe-in/believe-in.module';
+import { DoItModule } from './do-it/do-it.module';
+import { WorksModule } from './works/works.module';
+import { YouGetModule } from './you-get/you-get.module';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -11,6 +16,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     CommonModule,
     FlexLayoutModule,
     HomePageRoutingModule,
+    HomeModule,
+    BelieveInModule,
+    DoItModule,
+    WorksModule,
+    YouGetModule
   ],
   exports: [HomePageComponent],
 })
