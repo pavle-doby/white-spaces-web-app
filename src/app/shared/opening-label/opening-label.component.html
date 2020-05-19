@@ -1,0 +1,13 @@
+<div
+  fxLayout="column"
+  fxLayoutAlign="start start"
+  fxLayoutGap="10px"
+  fxFlex
+  (mouseenter)="this.showDescription()"
+  (mouseleave)="this.hideDescription()"
+>
+  <h3>{{ this.label }}</h3>
+  <span *ngIf="this.toShowDescription">
+    {{ this.description }}
+  </span>
+</div>
