@@ -1,0 +1,32 @@
+//TODO: Set proper size
+$normal-size: 100px;
+$big-size: 120px;
+
+.ws-title {
+  background-size: 100%;
+
+  background-clip: text;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+.title-text--normal {
+  font-size: $normal-size;
+}
+
+.title-text--normal-bold {
+  font-size: $normal-size;
+  font-weight: 800;
+}
+
+.title-text--big {
+  font-size: $big-size;
+}
+
+.title-text--big-bold {
+  font-size: $big-size;
+  font-weight: 800;
+}

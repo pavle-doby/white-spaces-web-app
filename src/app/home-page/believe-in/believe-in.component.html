@@ -1,1 +1,43 @@
-<p>believe-in works!</p>
+<div
+  class="belive-in__container"
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  fxFlex
+>
+  <section
+    class="belive-in__section belive-in__divider--right"
+    fxLayout="column"
+    fxLayoutAlign="center end"
+    fxLayoutGap="5px"
+    fxFlex="50"
+  >
+    <app-title
+      text="WE"
+      [size]="this.titleSize"
+      [gradient]="this.titleGradient"
+    ></app-title>
+    <app-title
+      text="BELIVE"
+      [size]="this.titleSize"
+      [gradient]="this.titleGradient"
+    ></app-title>
+    <app-title
+      text="IN"
+      [size]="this.titleSize"
+      [gradient]="this.titleGradient"
+    ></app-title>
+  </section>
+  <section
+    class="belive-in__section"
+    fxLayout="column"
+    fxLayoutAlign="center start"
+    fxLayoutGap="5px"
+    fxFlex="50"
+  >
+    <app-opening-label
+      *ngFor="let item of this.openingLabelsArray"
+      [label]="item?.label"
+      [description]="item?.description"
+    ></app-opening-label>
+  </section>
+</div>
