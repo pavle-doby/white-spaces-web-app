@@ -1,4 +1,4 @@
-export enum TitleTypes {
+export enum TitleSize {
   NORMAL = 'title-text--normal',
   NORMAL_BOLD = 'title-text--normal-bold',
   BIG = 'title-text--big',

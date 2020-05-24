@@ -1,1 +1,42 @@
-<p>you-get works!</p>
+<div class="you-get__container" fxLayout="column" fxLayoutAlign="start start">
+  <app-title [text]="this.youGetTitle.text"></app-title>
+  <div
+    class="you-get__content-container"
+    fxLayout="row"
+    fxLayoutAlign="space-around center"
+    fxLayoutGap="20px"
+    fxFill
+  >
+    <div
+      class="you-get__video-container you-get__content-height"
+      fxLayout="column"
+      fxLayoutAlign="end end"
+      fxFlex
+    >
+      <div class="iframe-container">
+        <iframe
+          src="https://www.youtube.com/embed/yXoILGnHnvM"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+    <div
+      class="you-get__content-height"
+      fxLayout="column"
+      fxLayoutAlign="space-between start"
+      fxFlex="45"
+    >
+      <div>
+        <app-opening-label
+          *ngFor="let item of this.openingLabelsArray"
+          [label]="item?.label"
+          [description]="item?.description"
+        ></app-opening-label>
+      </div>
+
+      <div>Download example</div>
+    </div>
+  </div>
+</div>
