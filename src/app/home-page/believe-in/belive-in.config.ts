@@ -2,7 +2,7 @@ import { OpeningLabel } from 'src/app/shared/opening-label/OpeningLabel';
 
 export const LINER_GRADIENT = `linear-gradient(90deg, rgba(255,180,248,1) 0%, rgba(211,107,202,1) 55%, rgba(199,118,192,1) 100%)`;
 
-export const OPENING_LABELS = [
+export const BELIVE_IN_OPENING_LABELS = [
   new OpeningLabel(
     'wellbeing',
     `No matter the size of the space you own you deserve home that is

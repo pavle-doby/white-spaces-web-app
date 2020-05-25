@@ -1,0 +1,25 @@
+@import "../../../styles.scss";
+
+.do-it__container {
+  width: $page-width;
+}
+
+.do-it__video-container {
+  padding-top: 10%;
+}
+
+.do-it__container {
+  width: $page-width;
+  //TODO: Set size with variables
+  min-height: 500px;
+}
+
+.do-it__content-height {
+  //TODO: Set size with variables
+  min-height: 400px !important;
+}
+
+.do-it__content-container {
+  //TODO: Set size with variables
+  min-height: 450px !important;
+}

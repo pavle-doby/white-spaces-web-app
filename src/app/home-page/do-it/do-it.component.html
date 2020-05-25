@@ -1,1 +1,41 @@
-<p>do-it works!</p>
+<div class="do-it__container" fxLayout="column" fxLayoutAlign="start center">
+  <app-title [text]="this.doItTitle.text"></app-title>
+  <div
+    class="do-it__content-container"
+    fxLayout="row"
+    fxLayoutAlign="space-around center"
+    fxLayoutGap="20px"
+    fxFill
+  >
+    <div
+      class="do-it__content-height"
+      fxLayout="column"
+      fxLayoutAlign="start start"
+      fxFlex="45"
+    >
+      <div *ngFor="let para of this.paragraphs">
+        <p *ngIf="para.isBold">
+          <b>{{ para.text }}</b>
+        </p>
+        <p *ngIf="!para.isBold">
+          {{ para.text }}
+        </p>
+      </div>
+    </div>
+    <div
+      class="do-it__video-container do-it__content-height"
+      fxLayout="column"
+      fxLayoutAlign="end end"
+      fxFlex
+    >
+      <div class="iframe-container">
+        <iframe
+          src="https://www.youtube.com/embed/qu577tNp1hA"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</div>
