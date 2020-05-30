@@ -1,3 +1,9 @@
-<div class="width-100" fxLayout="column" fxLayoutAlign="start center">
+<div
+  (wheel)="onMouseWheel($event)"
+  class="width-100"
+  fxLayout="column"
+  fxLayoutAlign="center"
+  class="app-container"
+>
   <router-outlet></router-outlet>
 </div>
