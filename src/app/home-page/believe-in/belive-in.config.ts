@@ -1,6 +1,6 @@
 import { OpeningLabel } from 'src/app/shared/opening-label/OpeningLabel';
 
-export const LINER_GRADIENT = `linear-gradient(90deg, rgba(255,180,248,1) 0%, rgba(211,107,202,1) 55%, rgba(199,118,192,1) 100%)`;
+export const LINER_GRADIENT = `linear-gradient(90deg, rgba(217,183,197,1) 0%, rgba(2,0,36,1) 0%, rgba(217,183,197,1) 0%, rgba(206,167,190,1) 100%)`;
 
 export const BELIVE_IN_OPENING_LABELS = [
   new OpeningLabel(

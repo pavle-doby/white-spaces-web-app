@@ -5,9 +5,10 @@
   fxFlex
   (mouseenter)="this.showDescription()"
   (mouseleave)="this.hideDescription()"
+  class="opening-label__container"
 >
-  <h3>{{ this.label }}</h3>
-  <span *ngIf="this.toShowDescription">
+  <h3 class="opening-label__title">{{ this.label }}</h3>
+  <span *ngIf="this.toShowDescription" [@inOutAnimation]>
     {{ this.description }}
   </span>
 </div>

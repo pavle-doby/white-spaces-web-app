@@ -1,3 +1,5 @@
+export const DO_IT_LINEAR_GRADIENT = `linear-gradient(90deg, rgba(206,167,190,1) 0%, rgba(2,0,36,1) 0%, rgba(217,183,197,1) 0%, rgba(106,104,166,1) 100%)`;
+
 export const DO_IT_PARAGRAPH_1 = `By prioritising human factor at the beginning
 of the process we reorganise your existing
 floor plan, maximising it and providing you

@@ -1,7 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 
 $page-width: 940px;
-
+$width-viewport-100: 100vw;
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
+  * {
+    font-family: "Roboto", sans-serif;
+  }
+}
 .width-100 {
   width: 100% !important;
 }
@@ -15,7 +26,7 @@ $page-width: 940px;
 }
 
 .app__container {
-  width: calc(5 * #{$page-width});
+  width: calc(7 * #{$page-width});
 }
 
 .iframe-container {
