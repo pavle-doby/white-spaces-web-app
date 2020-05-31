@@ -1,9 +1,11 @@
+//TODO(Mladen): introduce and refactor styling to include variables
+@import "../../../styles.scss";
 .footer__container {
   position: absolute;
   bottom: 0%;
   padding: 15px 0 15px 0;
   background: orange;
-  width: 250%;
+  width: calc(7 * #{$page-width});
   background: rgb(242, 232, 220);
   background: -moz-linear-gradient(
     90deg,
@@ -26,11 +28,6 @@
 }
 
 .footer__main-message {
-  margin: 0 auto 0 auto;
-  width: 800px;
-  display: inline-block;
-  text-align: center;
-  margin-left: 30vw;
   letter-spacing: 2px;
   font-size: 21px;
   font-weight: 400;

@@ -12,10 +12,12 @@
     ></app-title>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="15px">
-    <div>Slikica</div>
-    <div>Slikica</div>
-    <div>Slikica</div>
-    <div>Slikica</div>
-    <div>Slikica</div>
+    <div *ngFor="let imageDescription of this.imageDescriptionArray">
+      <app-image-description
+        [image]="imageDescription.image"
+        [number]="imageDescription.number"
+        [description]="imageDescription.description"
+      ></app-image-description>
+    </div>
   </div>
 </div>

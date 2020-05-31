@@ -1,1 +1,1 @@
-export const WINDOW_SCROLL_SPEED = 50;
+export const WINDOW_SCROLL_SPEED = 75;

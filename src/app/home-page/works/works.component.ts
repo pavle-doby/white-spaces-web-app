@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppTitle } from 'src/app/shared/title/AppTitle';
 import { TitleSize } from 'src/app/shared/title/TitleSize';
-import { WORKS_LINEAR_GRADIENT } from './works.config';
+import { WORKS_IMAGE_DESCRIPTION, WORKS_LINEAR_GRADIENT } from './works.config';
 
 @Component({
   selector: 'app-works',
@@ -12,6 +12,7 @@ export class WorksComponent implements OnInit {
   public worksTitleNormal: AppTitle;
   public worksTitleBold: AppTitle;
   public gradient: string = WORKS_LINEAR_GRADIENT;
+  public imageDescriptionArray: object[] = WORKS_IMAGE_DESCRIPTION;
 
   constructor() {
     this.worksTitleNormal = new AppTitle('HOW IT', null, TitleSize.NORMAL);

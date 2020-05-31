@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from './footer.component';
+import { ImageDescriptionComponent } from './image-description.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
-  declarations: [FooterComponent],
+  declarations: [ImageDescriptionComponent],
   imports: [CommonModule, FlexLayoutModule],
-  exports: [FooterComponent],
+  exports: [ImageDescriptionComponent],
 })
-export class FooterModule {}
+export class ImageDescriptionModule {}
