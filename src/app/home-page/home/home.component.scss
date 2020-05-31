@@ -1,6 +1,40 @@
 @import "../../../styles.scss";
 
 .home__container {
-  width: $page-width;
-  min-height: 500px;
+  //width: $page-width;
+  min-height: 100vh;
+  width: 100vw;
+  display: block;
+  position: relative;
+}
+
+.home__container::after {
+  content: "";
+  background: url("../../../assets/images/home/HomeBackground.png") no-repeat
+    center;
+  background-size: 50%;
+  opacity: 0.1;
+  top: 5vh;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.home__slogan-container {
+  margin-top: 25vh;
+  margin-bottom: 20vh;
+  line-height: 45px;
+  > span {
+    font-size: 27px;
+    letter-spacing: 2px;
+  }
+}
+
+.home__logo {
+  width: 15%;
+  display: block;
+  margin-bottom: 30px;
+  margin-top: 60px;
 }
