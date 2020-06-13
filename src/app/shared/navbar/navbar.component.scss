@@ -1,0 +1,17 @@
+@import "../../../styles.scss";
+
+.navbar__container {
+  position: fixed;
+  bottom: 50%;
+  right: calc(-#{$navbar-width} / 2 + #{$navbar-height} / 2);
+
+  z-index: 2000;
+  -ms-transform: rotate(-90deg); /* IE 9 */
+  transform: rotate(-90deg);
+
+  width: $navbar-width;
+}
+
+.navbar__btn {
+  background-color: white;
+}
