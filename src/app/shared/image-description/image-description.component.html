@@ -1,5 +1,14 @@
-<div fxLayout="column" fxLayoutAlign="center center">
-  <span>{{ this.number }}</span>
-  <img src="{{ this.image }}" alt="{{ this.description }}" />
-  <span>{{ this.description }}</span>
+<div
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  class="image-description--container"
+>
+  <span class="image-description--number">{{ this.number }}</span>
+  <img
+    width="100px"
+    height="100px"
+    src="{{ this.image }}"
+    alt="{{ this.description }}"
+  />
+  <span class="image-description--description">{{ this.description }}</span>
 </div>
