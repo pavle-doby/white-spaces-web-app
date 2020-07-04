@@ -7,6 +7,14 @@
   <button class="app__btn bckg-color--white">Contact</button>
   <button class="app__btn bckg-color--white">About</button>
   <button class="app__btn bckg-color--white">Blog</button>
-  <button class="app__btn bckg-color--white">FQA'S</button>
-  <button class="app__btn bckg-color--white">PACKAGES</button>
+  <button class="app__btn bckg-color--white" (click)="this.onFQASClick()">
+    FQA'S
+  </button>
+  <button class="app__btn bckg-color--white" (click)="this.onPackagesClick()">
+    PACKAGES
+  </button>
 </div>
+
+<app-side-card-packages *ngIf="this.isPackagesSelected">
+</app-side-card-packages>
+<app-side-card-fqa *ngIf="this.isFQASelected"> </app-side-card-fqa>
