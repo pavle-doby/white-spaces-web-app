@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  NavbarButtons,
+  NavbarButtonsArray,
+  NavBtnsInitStateObj,
+} from './navbar.content';
 
 @Component({
   selector: 'app-navbar',
@@ -6,20 +11,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  public isPackagesSelected: boolean = true;
-  public isFQASelected: boolean = false;
+  public navbarButtonsArray: NavbarButtons[];
+  public navBtnsStateObj: Record<NavbarButtons, boolean>;
+  public selectedButton: NavbarButtons;
 
-  constructor() {}
+  public readonly FQAS = NavbarButtons.FQAS;
+
+  constructor() {
+    this.navbarButtonsArray = [...NavbarButtonsArray];
+    this.navBtnsStateObj = { ...NavBtnsInitStateObj };
+  }
 
   ngOnInit(): void {}
 
-  public onPackagesClick(): void {
-    this.isPackagesSelected = !this.isPackagesSelected;
-    this.isFQASelected = false;
-  }
+  public onNavButtonClick(button: NavbarButtons): void {
+    const isSelected = !this.navBtnsStateObj[button];
+    this.navBtnsStateObj = { ...NavBtnsInitStateObj };
+    this.navBtnsStateObj[button] = isSelected;
+    this.selectedButton = isSelected ? button : null;
 
-  public onFQASClick(): void {
-    this.isFQASelected = !this.isFQASelected;
-    this.isPackagesSelected = false;
+    if (button === NavbarButtons.BLOG) {
+      //TODO: change route
+    }
   }
 }

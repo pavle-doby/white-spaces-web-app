@@ -1,3 +1,33 @@
 <app-side-card>
-  <p>side-card-fqa works!</p>
+  <div
+    class="sc-fqa__container"
+    fxLayout="row"
+    fxLayoutAlign="start start"
+    fxLayoutGap="60px"
+  >
+    <div fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="20px">
+      <div
+        *ngFor="let label of this.navLabels"
+        class="sc-fqa__nav-label cursor-pointer"
+        [ngClass]="{
+          'sc-fqa__nav-label--selected': label === this.selectedNavLabel
+        }"
+        (click)="this.selectContent(label)"
+      >
+        {{ label }}
+      </div>
+    </div>
+    <div
+      class="sc-fqa__content"
+      fxLayout="column"
+      fxLayoutAlign="start start"
+      fxLayoutGap="10px"
+    >
+      <app-opening-label
+        *ngFor="let content of this.contentList"
+        [label]="content.label"
+        [description]="content.description"
+      ></app-opening-label>
+    </div>
+  </div>
 </app-side-card>

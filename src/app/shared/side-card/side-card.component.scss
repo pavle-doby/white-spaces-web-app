@@ -1,14 +1,14 @@
 @import "../../../styles.scss";
 
+$sc-additional-height: 16px;
+
 .side-card__container {
   position: fixed;
-  bottom: 11.5%;
-  right: $navbar-height;
-
-  z-index: 2001;
+  bottom: calc(11% - #{$sc-additional-height} / 2);
+  right: 0;
 
   width: 70vw;
-  height: $navbar-width;
+  height: calc(#{$navbar-width} + #{$sc-additional-height});
 
   color: white;
   background: rgb(214, 184, 214);

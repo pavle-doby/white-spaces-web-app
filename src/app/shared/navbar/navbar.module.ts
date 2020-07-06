@@ -4,6 +4,8 @@ import { NavbarComponent } from './navbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SideCardFqaModule } from '../side-card-fqa/side-card-fqa.module';
 import { SideCardPackagesModule } from '../side-card-packages/side-card-packages.module';
+import { SideCardAboutModule } from '../side-card-about/side-card-about.module';
+import { SideCardContactModule } from '../side-card-contact/side-card-contact.module';
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -12,6 +14,8 @@ import { SideCardPackagesModule } from '../side-card-packages/side-card-packages
     FlexLayoutModule,
     SideCardFqaModule,
     SideCardPackagesModule,
+    SideCardAboutModule,
+    SideCardContactModule,
   ],
   exports: [NavbarComponent],
 })
