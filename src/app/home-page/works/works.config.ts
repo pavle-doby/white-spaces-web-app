@@ -18,27 +18,27 @@ export const WORKS_IMAGES_ARRAY = [
 export const WORKS_IMAGE_DESCRIPTION = [
   {
     number: 1,
-    description: 'Upload floor plan',
+    description: 'Upload floor \n plan',
     image: '../../../assets/images/home/uploadFloorPlan.png',
   },
   {
     number: 2,
-    description: 'Upload photos',
+    description: 'Upload \n photos',
     image: '../../../assets/images/home/uploadPhotos.png',
   },
   {
     number: 3,
-    description: 'Fill out questionnaire',
+    description: 'Fill out \n questionnaire',
     image: '../../../assets/images/home/fillOutQuestionaire.png',
   },
   {
     number: 4,
-    description: 'Add ons',
+    description: 'Add \n ons',
     image: '../../../assets/images/home/addOns.png',
   },
   {
     number: 5,
-    description: 'Review & pay',
+    description: 'Review \n & pay',
     image: '../../../assets/images/home/reviewPay.png',
   },
 ];
