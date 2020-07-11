@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SideCadrPackage } from '../side-card-packages.component';
+import { SideCadrPackage } from '../SideCardPackage';
 
 export enum PackageType {
   SMALL = 'S // SMALL',

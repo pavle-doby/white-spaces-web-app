@@ -4,6 +4,7 @@ import {
   NavbarButtonsArray,
   NavBtnsInitStateObj,
 } from './navbar.content';
+import { Button } from 'protractor';
 
 @Component({
   selector: 'app-navbar',
@@ -20,6 +21,9 @@ export class NavbarComponent implements OnInit {
   constructor() {
     this.navbarButtonsArray = [...NavbarButtonsArray];
     this.navBtnsStateObj = { ...NavBtnsInitStateObj };
+
+    this.navBtnsStateObj[NavbarButtons.PACKAGES] = true;
+    this.selectedButton = NavbarButtons.PACKAGES;
   }
 
   ngOnInit(): void {}

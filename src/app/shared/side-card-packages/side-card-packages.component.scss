@@ -1,0 +1,19 @@
+@import "../../../styles-colors.scss";
+
+.sd-packages__title {
+  font-size: 3rem;
+  font-weight: 800;
+
+  margin-top: 3%;
+  text-shadow: 4px 4px 5px $text-shadow;
+}
+
+.sd-packages__subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.sd-packages__subtitle-decs {
+  font-size: 0.85rem;
+  width: 60%;
+}
