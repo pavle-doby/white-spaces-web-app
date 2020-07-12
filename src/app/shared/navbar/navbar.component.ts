@@ -1,15 +1,38 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  NavbarButtons,
+  NavbarButtonsArray,
+  NavBtnsInitStateObj,
+} from './navbar.content';
+import { Button } from 'protractor';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  public navbarButtonsArray: NavbarButtons[];
+  public navBtnsStateObj: Record<NavbarButtons, boolean>;
+  public selectedButton: NavbarButtons;
 
-  constructor() { }
+  public readonly FQAS = NavbarButtons.FQAS;
 
-  ngOnInit(): void {
+  constructor() {
+    this.navbarButtonsArray = [...NavbarButtonsArray];
+    this.navBtnsStateObj = { ...NavBtnsInitStateObj };
   }
 
+  ngOnInit(): void {}
+
+  public onNavButtonClick(button: NavbarButtons): void {
+    const isSelected = !this.navBtnsStateObj[button];
+    this.navBtnsStateObj = { ...NavBtnsInitStateObj };
+    this.navBtnsStateObj[button] = isSelected;
+    this.selectedButton = isSelected ? button : null;
+
+    if (button === NavbarButtons.BLOG) {
+      //TODO: change route
+    }
+  }
 }

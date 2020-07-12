@@ -2,6 +2,12 @@
 
 $page-width: 940px;
 $width-viewport-100: 100vw;
+
+$btn-height: 30px;
+
+$navbar-width: 80vh;
+$navbar-height: $btn-height;
+
 html,
 body {
   height: 100%;
@@ -35,6 +41,7 @@ body {
   padding-bottom: 56.25%;
   height: 0;
 }
+
 .iframe-container iframe {
   position: absolute;
   top: 0;
@@ -44,5 +51,25 @@ body {
   max-height: 300px;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.app__btn {
+  width: calc(#{$navbar-width} * 0.2);
+  height: $btn-height;
+
+  // background-color: transparent;
+  // border: 1px solid black;
+
+  &:hover {
+    cursor: pointer;
+  }
+  &:active {
+    border-style: none;
+  }
+}

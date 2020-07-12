@@ -10,6 +10,12 @@ import { ButtonMonochromeComponent } from './button-monochrome/button-monochrome
 import { ButtonMonochromeModule } from './button-monochrome/button-monochrome.module';
 import { AttachmentModule } from './attachment/attachment.module';
 import { AttachmentComponent } from './attachment/attachment.component';
+import { SideCardModule } from './side-card/side-card.module';
+import { SideCardComponent } from './side-card/side-card.component';
+import { SideCardPackagesModule } from './side-card-packages/side-card-packages.module';
+import { SideCardFqaModule } from './side-card-fqa/side-card-fqa.module';
+import { SideCardPackagesComponent } from './side-card-packages/side-card-packages.component';
+import { SideCardFqaComponent } from './side-card-fqa/side-card-fqa.component';
 
 @NgModule({
   declarations: [],
@@ -20,6 +26,9 @@ import { AttachmentComponent } from './attachment/attachment.component';
     ImageDescriptionModule,
     ButtonMonochromeModule,
     AttachmentModule,
+    SideCardModule,
+    SideCardPackagesModule,
+    SideCardFqaModule,
   ],
   exports: [
     FooterComponent,
@@ -27,6 +36,9 @@ import { AttachmentComponent } from './attachment/attachment.component';
     ImageDescriptionComponent,
     ButtonMonochromeComponent,
     AttachmentComponent,
+    SideCardComponent,
+    SideCardPackagesComponent,
+    SideCardFqaComponent,
   ],
 })
 export class SharedModule {}

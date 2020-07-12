@@ -1,0 +1,40 @@
+<div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5%">
+  <div
+    *ngIf="this.package"
+    class="sc-packages-box__container"
+    fxLayout="column"
+    fxLayoutAlign="space-around center"
+    fxLayoutGap="10px"
+  >
+    <span class="packages-box__type">
+      {{ this.package?.box?.type }}
+    </span>
+    <span class="packages-box__price"> ${{ this.package?.box?.price }} </span>
+    <span class="packages-box__description">
+      {{ this.package?.box?.description }}
+    </span>
+
+    <div
+      fxLayoutAlign="center center"
+      class="packages-box__select"
+      (click)="this.selectPackage()"
+    >
+      SELECT
+    </div>
+  </div>
+
+  <div
+    class="packages-out-box__conatainer"
+    fxLayout="column"
+    fxLayoutAlign="start center"
+    fxLayoutGap="10px"
+  >
+    <div
+      *ngFor="let desc of this.package.descriptions"
+      class="packages-out-box__description"
+    >
+      {{ desc }}
+      <br />
+    </div>
+  </div>
+</div>
