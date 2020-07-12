@@ -21,6 +21,9 @@ export class NavbarComponent implements OnInit {
   constructor() {
     this.navbarButtonsArray = [...NavbarButtonsArray];
     this.navBtnsStateObj = { ...NavBtnsInitStateObj };
+
+    this.navBtnsStateObj[NavbarButtons.CONTACT] = true;
+    this.selectedButton = NavbarButtons.CONTACT;
   }
 
   ngOnInit(): void {}
