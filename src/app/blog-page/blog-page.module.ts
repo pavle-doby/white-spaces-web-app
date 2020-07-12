@@ -4,9 +4,16 @@ import { BlogPageComponent } from './blog-page.component';
 import { BlogPageRoutingModule } from './blog-page-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { BlogPostModule } from './blog-post/blog-post.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [BlogPageComponent],
-  imports: [CommonModule, BlogPageRoutingModule, SharedModule, BlogPostModule],
+  imports: [
+    CommonModule,
+    BlogPageRoutingModule,
+    SharedModule,
+    BlogPostModule,
+    FlexLayoutModule,
+  ],
 })
 export class BlogPageModule {}
