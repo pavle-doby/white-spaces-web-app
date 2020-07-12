@@ -1,0 +1,17 @@
+.attachment {
+  width: 100%;
+  &__photo {
+    font-weight: 300;
+    color: grey;
+  }
+
+  &__pdf {
+    font-weight: 300;
+    color: grey;
+  }
+
+  &__video {
+    font-weight: 300;
+    color: pink;
+  }
+}

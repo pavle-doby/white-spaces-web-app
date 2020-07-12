@@ -51,6 +51,14 @@ body {
   max-height: 300px;
 }
 
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 .app__btn {
   width: calc(#{$navbar-width} * 0.2);
   height: $btn-height;

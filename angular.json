@@ -29,6 +29,7 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.scss",
               "src/styles-colors.scss"
             ],
@@ -97,6 +98,7 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.scss",
               "src/styles-colors.scss"
             ],
@@ -111,9 +113,7 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
@@ -129,6 +129,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "white-spaces-web-app"
 }

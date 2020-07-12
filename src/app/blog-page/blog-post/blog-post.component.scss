@@ -1,0 +1,15 @@
+.blog-post {
+  width: 300px;
+  text-align: left;
+  padding: 20px;
+  border: 2px solid black;
+  text-overflow: ellipsis;
+  h3 {
+    font-weight: 500;
+    font-size: 24px;
+  }
+  p {
+    font-weight: 300;
+    line-height: 25px;
+  }
+}
