@@ -1,3 +1,41 @@
 <app-side-card>
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <div fxFlex="17"></div>
+    <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <span>CONTACT US</span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <!-- Form -->
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
+          <!-- first section -->
+          <div
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+            fxLayoutGap="10px"
+          >
+            <div
+              fxLayout="column"
+              fxLayoutAlign="start start"
+              fxLayoutGap="10px"
+            >
+              <!-- TODO: make component label-input -->
+              <input type="text" placeholder="Name" />
+              <input type="email" name="contactEmail" placeholder="Email" />
+            </div>
+            <div
+              fxLayout="column"
+              fxLayoutAlign="start start"
+              fxLayoutGap="10px"
+            >
+              <!-- TODO: make component label-input -->
+              <input type="text" placeholder="City" />
+              <input type="text" placeholder="Phone" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <p>side-card-contact works!</p>
 </app-side-card>
