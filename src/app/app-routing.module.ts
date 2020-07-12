@@ -7,6 +7,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./home-page/home-page.module').then((m) => m.HomePageModule),
   },
+  {
+    path: 'blog',
+    loadChildren: () =>
+      import('./blog-page/blog-page.module').then((m) => m.BlogPageModule),
+  },
 ];
 
 @NgModule({

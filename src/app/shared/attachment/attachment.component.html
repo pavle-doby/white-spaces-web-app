@@ -1,0 +1,10 @@
+<div class="attachment" *ngIf="this.hasNoInputs">
+  <span>Attachment&nbsp;</span>
+  <span *ngIf="this.photo" class="attachment__photo">
+    &nbsp;// {{ this.photo }}</span
+  >
+  <span *ngIf="this.video" class="attachment__video">
+    &nbsp;// {{ this.video }}</span
+  >
+  <span *ngIf="this.pdf" class="attachment__pdf"> &nbsp;// {{ this.pdf }}</span>
+</div>

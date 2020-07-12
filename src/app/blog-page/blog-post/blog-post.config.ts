@@ -1,0 +1,1 @@
+export const BLOG_POST_MAX_TEXT_LENGTH = 256;
