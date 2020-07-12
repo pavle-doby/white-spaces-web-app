@@ -7,7 +7,9 @@
   (mouseleave)="this.hideDescription()"
   class="opening-label__container"
 >
-  <h3 class="opening-label__title">{{ this.label }}</h3>
+  <div class="opening-label__title">
+    {{ this.label }}
+  </div>
   <span *ngIf="this.toShowDescription" [@inOutAnimation]>
     {{ this.description }}
   </span>

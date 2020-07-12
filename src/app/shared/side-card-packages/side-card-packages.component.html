@@ -1,0 +1,37 @@
+<app-side-card>
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <div fxFlex="17"></div>
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="3%" fxFlex>
+      <div
+        class="sd-packages__header"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap="5px"
+      >
+        <span class="sd-packages__title">
+          FIND THE RIGHT PACKAGE
+        </span>
+        <span class="sd-packages__subtitle">
+          HOW BIG IS YOUR SPACE?
+        </span>
+        <span class="sd-packages__subtitle-decs">
+          We specialise in apartments and lofts renovation projects and our core
+          packages are based on the size of your space.
+        </span>
+      </div>
+      <div
+        class="sc-pakages__body"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+        fxLayoutGap="20px"
+      >
+        <app-side-card-packages-box
+          *ngFor="let package of this.packages"
+          [package]="package"
+        >
+        </app-side-card-packages-box>
+      </div>
+    </div>
+    <div fxFlex="10"></div>
+  </div>
+</app-side-card>

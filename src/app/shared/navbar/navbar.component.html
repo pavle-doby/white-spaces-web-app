@@ -1,1 +1,27 @@
-<p>navbar works!</p>
+<div
+  class="navbar__container"
+  fxLayout="row"
+  fxLayoutAlign="space-around center"
+  fxLayoutGap="5%"
+>
+  <div
+    *ngFor="let navBtn of this.navbarButtonsArray"
+    class="navbar__btn cursor-pointer"
+    [ngClass]="{
+      'navbar__button--inactive': navBtn !== this.selectedButton,
+      'navbar__button--active': navBtn === this.selectedButton
+    }"
+    fxLayoutAlign="center center"
+    (click)="this.onNavButtonClick(navBtn)"
+  >
+    <span>{{ navBtn }}</span>
+  </div>
+</div>
+
+<app-side-card-packages *ngIf="this.navBtnsStateObj.PACKAGES">
+</app-side-card-packages>
+<app-side-card-fqa *ngIf="this.navBtnsStateObj[this.FQAS]"> </app-side-card-fqa>
+<app-side-card-about *ngIf="this.navBtnsStateObj.ABOUT"></app-side-card-about>
+<app-side-card-contact
+  *ngIf="this.navBtnsStateObj.CONTACT"
+></app-side-card-contact>
