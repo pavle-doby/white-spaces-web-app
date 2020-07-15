@@ -1,0 +1,41 @@
+@import "../../../styles.scss";
+@import "../../../styles-colors.scss";
+
+$font-size-big: 4.3vw;
+$grey-color: rgb(230, 230, 230);
+
+.sc-about__label-big {
+  font-weight: 300;
+  font-size: $font-size-big;
+  color: $grey-color;
+}
+
+.sc-about__label-big--bold {
+  @extend .app__text-shadow;
+
+  font-size: $font-size-big;
+  font-weight: bold;
+}
+
+.sc-about__title-little {
+  @extend .app__text-shadow;
+
+  font-size: 1.9vw;
+  font-weight: bold;
+
+  margin-top: 0.6vw;
+  padding-bottom: 2vw;
+}
+
+.sc-about__content {
+  padding: 12vh 10vh 2vh 2vh;
+}
+
+.sc-about__p {
+  font-size: 0.9vw;
+  font-weight: 300;
+}
+
+.sc-about__mail {
+  font-weight: bold;
+}

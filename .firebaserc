@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "whitespacesweb": {
+      "hosting": {
+        "white-spaces-web-app": [
+          "whitespacesweb"
+        ]
+      }
+    }
+  }
+}

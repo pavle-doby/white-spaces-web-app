@@ -15,13 +15,21 @@ export class SideCardFqaComponent implements OnInit {
   constructor() {
     this.navLabels = Object.keys(FQAContentObj) as FQALabels[];
     this.selectedNavLabel = this.navLabels[0];
-    this.contentList = FQAContentObj[this.selectedNavLabel];
+    this.contentList = FQAContentObj[this.selectedNavLabel].slice();
   }
 
   ngOnInit(): void {}
 
   public selectContent(label: FQALabels): void {
     this.selectedNavLabel = label;
-    this.contentList = FQAContentObj[label];
+    this.contentList = FQAContentObj[label].slice();
+  }
+
+  public onStatusChange(toShowDesc: boolean, index: number): void {
+    this.contentList = this.contentList.map((openingLabel, i) => {
+      openingLabel.isOpen = false;
+      return openingLabel;
+    });
+    this.contentList[index].isOpen = toShowDesc;
   }
 }

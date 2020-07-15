@@ -12,6 +12,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { OpeningLabelModule } from './shared/opening-label/opening-label.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { YouGetDialogModule } from './home-page/you-get/you-get-dialog/you-get-dialog.module';
+import { YouGetDialogComponent } from './home-page/you-get/you-get-dialog/you-get-dialog.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,8 +36,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       enabled: environment.production,
     }),
     OpeningLabelModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
+  entryComponents: [YouGetDialogComponent],
 })
 export class AppModule {}
