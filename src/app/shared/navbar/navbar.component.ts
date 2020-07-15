@@ -4,6 +4,7 @@ import {
   NavbarButtonsArray,
   NavBtnsInitStateObj,
 } from './navbar.content';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +18,7 @@ export class NavbarComponent implements OnInit {
 
   public readonly FQAS = NavbarButtons.FQAS;
 
-  constructor() {
+  constructor(private router: Router) {
     this.navbarButtonsArray = [...NavbarButtonsArray];
     this.navBtnsStateObj = { ...NavBtnsInitStateObj };
 
@@ -34,7 +35,7 @@ export class NavbarComponent implements OnInit {
     this.selectedButton = isSelected ? button : null;
 
     if (button === NavbarButtons.BLOG) {
-      //TODO: change route
+      this.router.navigateByUrl('/blog');
     }
   }
 }
