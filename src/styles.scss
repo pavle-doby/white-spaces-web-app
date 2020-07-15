@@ -1,5 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
-
+// Overriding ng material theme
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./styles-colors.scss";
 $page-width: 940px;
 $width-viewport-100: 100vw;
 
@@ -72,4 +73,21 @@ body {
   &:active {
     border-style: none;
   }
+}
+
+/* Scrollbar tweaks */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: lightgrey;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $text-shadow;
 }
