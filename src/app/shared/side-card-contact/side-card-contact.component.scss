@@ -1,0 +1,71 @@
+@import "../../../styles.scss";
+
+$from-width: 24vw;
+$input-width: 10.8vw;
+$section-side-margin: 2.3vw;
+
+.sc-contact__footer {
+  margin-top: 11vh;
+  font-size: 0.8vw;
+}
+
+.sc-contact__form {
+  width: $from-width;
+  margin-right: $section-side-margin;
+}
+
+.sc-contact__form--width {
+  width: $from-width;
+}
+
+.sc-contact__grid-input {
+  background-color: transparent;
+  border: 0.5px solid white;
+  color: white;
+  padding: 4px;
+  width: $input-width;
+}
+
+.sc-contact__textarea {
+  background-color: transparent;
+  border: 0.5px solid white;
+  color: white;
+  width: calc(#{$from-width} - 6px);
+}
+
+.sc-contact__info {
+  width: 17vw;
+  height: 16.6vw;
+  padding-left: $section-side-margin;
+  border-left: 0.5px solid white;
+}
+
+.sc-contact__title {
+  font-size: 4.4vw;
+  font-weight: bold;
+
+  margin-top: 4vw;
+  margin-bottom: 4vw;
+}
+
+.sc-contact__name {
+  font-size: 1.3vw;
+}
+
+.sc-contact__location {
+  font-size: 0.95vw;
+}
+
+.sc-contact__number {
+  font-size: 0.95vw;
+}
+
+.sc-contact__msg {
+  font-size: 0.95vw;
+  font-weight: 300;
+}
+
+.sc-contact__input-label {
+  font-size: 0.76vw;
+  font-weight: 300;
+}
