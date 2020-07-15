@@ -15,3 +15,13 @@
   //TODO: Set size with variables
   min-height: 450px !important;
 }
+
+.you-get__img {
+  width: 32vw;
+  height: auto;
+  object-fit: cover;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

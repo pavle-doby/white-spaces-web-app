@@ -6,7 +6,8 @@ export const PROJECT_CONTENT = [
     `No matter the size of the space you own you deserve home that is working for you and
         not against you. By this we mean that there is no need to compromise between function
         and beauty. We will solve functionality of your floor plan and give you base for all
-        further beautifying. `
+        further beautifying. `,
+    true
   ),
   new OpeningLabel(
     'Do photos need to be in certain file format?',
@@ -34,7 +35,8 @@ export const TIMING_CONTENT = [
     `No matter the size of the space you own you deserve home that is working for you and
           not against you. By this we mean that there is no need to compromise between function
           and beauty. We will solve functionality of your floor plan and give you base for all
-          further beautifying. `
+          further beautifying. `,
+    true
   ),
   new OpeningLabel(
     'Do photos need to be in certain file format?',
@@ -62,7 +64,8 @@ export const FILES_CONTENT = [
     `No matter the size of the space you own you deserve home that is working for you and
           not against you. By this we mean that there is no need to compromise between function
           and beauty. We will solve functionality of your floor plan and give you base for all
-          further beautifying. `
+          further beautifying. `,
+    true
   ),
   new OpeningLabel(
     'Do photos need to be in certain file format?',
@@ -89,7 +92,8 @@ export const PRICING_CONTENT = [
     `No matter the size of the space you own you deserve home that is working for you and
           not against you. By this we mean that there is no need to compromise between function
           and beauty. We will solve functionality of your floor plan and give you base for all
-          further beautifying. `
+          further beautifying. `,
+    true
   ),
   new OpeningLabel(
     'Do photos need to be in certain file format?',
@@ -117,7 +121,8 @@ export const WSRE_CONTENT = [
     `No matter the size of the space you own you deserve home that is working for you and
           not against you. By this we mean that there is no need to compromise between function
           and beauty. We will solve functionality of your floor plan and give you base for all
-          further beautifying. `
+          further beautifying. `,
+    true
   ),
   new OpeningLabel(
     'Do photos need to be in certain file format?',

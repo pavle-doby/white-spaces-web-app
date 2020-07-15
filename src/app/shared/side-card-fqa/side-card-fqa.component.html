@@ -24,9 +24,11 @@
       fxLayoutGap="10px"
     >
       <app-opening-label
-        *ngFor="let content of this.contentList"
+        *ngFor="let content of this.contentList; index as i"
         [label]="content.label"
         [description]="content.description"
+        [toShowDescription]="content.isOpen"
+        (stateChangesEvent)="this.onStatusChange($event, i)"
       ></app-opening-label>
     </div>
   </div>
