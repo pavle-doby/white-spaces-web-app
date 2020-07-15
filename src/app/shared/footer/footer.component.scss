@@ -1,6 +1,7 @@
 //TODO(Mladen): introduce and refactor styling to include variables
 @import "../../../styles.scss";
 .footer__container {
+  height: 2.5vh;
   position: absolute;
   bottom: 0%;
   padding: 15px 0 15px 0;
@@ -32,11 +33,18 @@
   font-size: 21px;
   font-weight: 400;
   color: white;
+  position: fixed;
+  left: 37.5vw;
 }
 
 .footer__scroll-container {
+  position: fixed;
+  left: 85vw;
   * {
     color: white;
+  }
+  span {
+    margin-right: 0.8vw;
   }
 }
 

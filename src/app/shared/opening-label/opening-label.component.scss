@@ -1,7 +1,14 @@
 .opening-label__container {
   cursor: pointer;
+  span {
+    font-weight: 300;
+
+    margin-bottom: 10px;
+  }
 }
 
 .opening-label__title {
   font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 10px;
 }
