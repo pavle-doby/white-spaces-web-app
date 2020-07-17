@@ -4,7 +4,8 @@ export const YOU_GET_OPENING_LABELS = [
   new OpeningLabel(
     '1 // Redesigned floor plan with scheme of movement',
     `Scaled floor plan with areas distribution and scheme of movement
-    through the space with list of different are sizes `
+    through the space with list of different are sizes `,
+    true
   ),
   new OpeningLabel(
     `2 // Redesigned floor plan with furniture disposition`,

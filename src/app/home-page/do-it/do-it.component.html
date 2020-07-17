@@ -2,19 +2,19 @@
   <app-title
     [gradient]="this.gradient"
     [text]="this.doItTitle.text"
+    [size]="this.doItTitle.size"
   ></app-title>
   <div
     class="do-it__content-container"
     fxLayout="row"
-    fxLayoutAlign="space-around center"
-    fxLayoutGap="20px"
+    fxLayoutAlign="center center"
     fxFill
   >
     <div
       class="do-it__content-height"
       fxLayout="column"
-      fxLayoutAlign="start start"
-      fxFlex="45"
+      fxLayoutAlign="start center"
+      fxFlex="25"
     >
       <div *ngFor="let para of this.paragraphs">
         <p *ngIf="para.isBold">
@@ -29,7 +29,7 @@
       class="do-it__video-container do-it__content-height"
       fxLayout="column"
       fxLayoutAlign="end end"
-      fxFlex
+      fxFlex="35"
     >
       <div class="iframe-container">
         <iframe

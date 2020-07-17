@@ -8,6 +8,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { YouGetDialogComponent } from './you-get-dialog/you-get-dialog.component';
+import { TitleSize } from 'src/app/shared/title/TitleSize';
 
 @Component({
   selector: 'app-you-get',
@@ -17,12 +18,15 @@ import { YouGetDialogComponent } from './you-get-dialog/you-get-dialog.component
 export class YouGetComponent implements OnInit, OnDestroy {
   public readonly youGetTitle: AppTitle;
   public readonly openingLabelsArray: OpeningLabel[];
-  public gradient: string = YOU_GET_LINEAR_GRADIENT;
 
   private $subDialog: Subscription;
 
   constructor(private readonly MatDialog: MatDialog) {
-    this.youGetTitle = new AppTitle('WHAT YOU GET');
+    this.youGetTitle = new AppTitle(
+      'WHAT YOU GET',
+      YOU_GET_LINEAR_GRADIENT,
+      TitleSize.BIG_BOLD
+    );
     this.openingLabelsArray = YOU_GET_OPENING_LABELS;
   }
 

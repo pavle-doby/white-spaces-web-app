@@ -1,15 +1,14 @@
 <div
   class="belive-in__container"
   fxLayout="row"
-  fxLayoutAlign="center center"
+  fxLayoutAlign="center start"
   fxFlex
 >
   <section
     class="belive-in__section belive-in__divider--right"
     fxLayout="column"
-    fxLayoutAlign="center end"
+    fxLayoutAlign="start end"
     fxLayoutGap="5px"
-    fxFlex="50"
   >
     <app-title
       text="WE"
@@ -28,16 +27,17 @@
     ></app-title>
   </section>
   <section
-    class="belive-in__section"
+    class="belive-in__section belive-in__section-labels"
     fxLayout="column"
-    fxLayoutAlign="center start"
+    fxLayoutAlign="start start"
     fxLayoutGap="5px"
-    fxFlex="50"
+    fxFlex="30"
   >
     <app-opening-label
       *ngFor="let item of this.openingLabelsArray"
       [label]="item?.label"
       [description]="item?.description"
+      [toShowDescription]="item?.isOpen"
     ></app-opening-label>
   </section>
 </div>
