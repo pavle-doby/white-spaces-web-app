@@ -6,6 +6,7 @@ import { SideCardFqaModule } from '../side-card-fqa/side-card-fqa.module';
 import { SideCardPackagesModule } from '../side-card-packages/side-card-packages.module';
 import { SideCardAboutModule } from '../side-card-about/side-card-about.module';
 import { SideCardContactModule } from '../side-card-contact/side-card-contact.module';
+import { SideCardModule } from '../side-card/side-card.module';
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -16,6 +17,7 @@ import { SideCardContactModule } from '../side-card-contact/side-card-contact.mo
     SideCardPackagesModule,
     SideCardAboutModule,
     SideCardContactModule,
+    SideCardModule,
   ],
   exports: [NavbarComponent],
 })

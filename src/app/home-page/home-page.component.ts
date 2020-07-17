@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { NavBtnsInitStateObj } from '../shared/navbar/navbar.content';
 
 @Component({
   selector: 'app-home-page',
@@ -10,6 +11,10 @@ export class HomePageComponent implements OnInit {
   constructor(private window: Window) {}
 
   ngOnInit(): void {}
+
+  public onClick(): void {
+    console.log('Implement service or state to close side-card');
+  }
 
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {

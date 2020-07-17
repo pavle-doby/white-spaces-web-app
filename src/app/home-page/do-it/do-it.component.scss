@@ -2,16 +2,12 @@
 
 .do-it__container {
   width: $page-width;
+  //TODO: Set size with variables
+  min-height: 500px;
 }
 
 .do-it__video-container {
   padding-top: 10%;
-}
-
-.do-it__container {
-  width: $page-width;
-  //TODO: Set size with variables
-  min-height: 500px;
 }
 
 .do-it__container--p {

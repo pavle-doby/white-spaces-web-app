@@ -9,7 +9,8 @@ export const BELIVE_IN_OPENING_LABELS = [
 working for you and not against you. By this we mean that there is
 no need to compromise between function and beauty. We will solve
 functionality of your floor plan and give you base for all
-further beautifying. `
+further beautifying. `,
+    true
   ),
   new OpeningLabel(
     `funcionality`,

@@ -6,6 +6,7 @@ import {
   DO_IT_PARAGRAPH_3,
   DO_IT_LINEAR_GRADIENT,
 } from './do-it.config';
+import { TitleSize } from 'src/app/shared/title/TitleSize';
 
 const DO_IT_TITLE = 'HOW WE DO IT';
 
@@ -20,7 +21,7 @@ export class DoItComponent implements OnInit {
   public paragraphs: { text: string; isBold: boolean }[];
 
   constructor() {
-    this.doItTitle = new AppTitle(DO_IT_TITLE, null);
+    this.doItTitle = new AppTitle(DO_IT_TITLE, null, TitleSize.BIG_BOLD);
     this.paragraphs = [
       { text: DO_IT_PARAGRAPH_1, isBold: false },
       { text: DO_IT_PARAGRAPH_2, isBold: false },

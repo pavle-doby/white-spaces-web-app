@@ -2,17 +2,14 @@
 
 .you-get__container {
   width: $page-width;
-  //TODO: Set size with variables
   min-height: 500px;
 }
 
 .you-get__content-height {
-  //TODO: Set size with variables
   min-height: 400px !important;
 }
 
 .you-get__content-container {
-  //TODO: Set size with variables
   min-height: 450px !important;
 }
 
@@ -24,4 +21,8 @@
   &:hover {
     cursor: pointer;
   }
+}
+
+.you-get__labels-container {
+  width: 30vw;
 }

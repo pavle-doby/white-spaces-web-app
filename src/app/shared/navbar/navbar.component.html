@@ -18,10 +18,15 @@
   </div>
 </div>
 
-<app-side-card-packages *ngIf="this.navBtnsStateObj.PACKAGES">
-</app-side-card-packages>
-<app-side-card-fqa *ngIf="this.navBtnsStateObj[this.FQAS]"> </app-side-card-fqa>
-<app-side-card-about *ngIf="this.navBtnsStateObj.ABOUT"></app-side-card-about>
-<app-side-card-contact
-  *ngIf="this.navBtnsStateObj.CONTACT"
-></app-side-card-contact>
+<app-side-card [toShow]="this.navBtnsStateObj.PACKAGES">
+  <app-side-card-packages> </app-side-card-packages>
+</app-side-card>
+<app-side-card [toShow]="this.navBtnsStateObj[this.FQAS]">
+  <app-side-card-fqa> </app-side-card-fqa>
+</app-side-card>
+<app-side-card [toShow]="this.navBtnsStateObj.ABOUT">
+  <app-side-card-about></app-side-card-about>
+</app-side-card>
+<app-side-card [toShow]="this.navBtnsStateObj.CONTACT">
+  <app-side-card-contact></app-side-card-contact>
+</app-side-card>

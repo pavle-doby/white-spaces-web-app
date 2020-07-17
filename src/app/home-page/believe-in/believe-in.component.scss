@@ -1,9 +1,17 @@
+@import "../../../styles.scss";
+
+.belive-in__container {
+  width: $page-width;
+}
+
 .belive-in__section {
-  //TODO: set proper size
-  width: 470px;
   padding: 15px;
 }
 
 .belive-in__divider--right {
   border-right: 1px solid black;
+}
+
+.belive-in__section-labels {
+  padding-top: 35px;
 }

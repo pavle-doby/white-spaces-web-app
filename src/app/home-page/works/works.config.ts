@@ -15,7 +15,13 @@ export const WORKS_IMAGES_ARRAY = [
   '../../../assets/images/reviewPay.png',
 ];
 
-export const WORKS_IMAGE_DESCRIPTION = [
+export interface IImageDescription {
+  number: number;
+  description: string;
+  image: string;
+}
+
+export const WORKS_IMAGE_DESCRIPTION: IImageDescription[] = [
   {
     number: 1,
     description: 'Upload floor \n plan',
