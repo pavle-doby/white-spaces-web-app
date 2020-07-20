@@ -6,25 +6,29 @@ import { FloorPalnUploadComponent } from './floor-paln-upload/floor-paln-upload.
 import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
 import { SpacePhotosComponent } from './space-photos/space-photos.component';
 
-export const CHECKOUT_ROUTER_OUTLET = 'checkout-ro';
+export const CHECKOUT_ROUTER_OUTLET = 'checkoutSteps';
 
 const routes: Routes = [
   { path: '', component: CheckoutPageComponent },
-  { path: '', component: FloorPalnUploadComponent, outlet: 'checkoutro' },
+  {
+    path: '',
+    component: FloorPalnUploadComponent,
+    outlet: CHECKOUT_ROUTER_OUTLET,
+  },
   {
     path: 'floor-plan',
     component: FloorPalnUploadComponent,
-    outlet: 'checkoutro',
+    outlet: CHECKOUT_ROUTER_OUTLET,
   },
   {
     path: 'questionnarie',
     component: QuestionnaireComponent,
-    outlet: 'checkoutro',
+    outlet: CHECKOUT_ROUTER_OUTLET,
   },
   {
     path: 'space-photos',
     component: SpacePhotosComponent,
-    outlet: 'checkoutro',
+    outlet: CHECKOUT_ROUTER_OUTLET,
   },
 ];
 

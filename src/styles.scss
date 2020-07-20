@@ -39,7 +39,8 @@ body {
 }
 
 .app__container {
-  width: calc(5 * #{$page-width});
+  // width: calc(5 * #{$page-width});
+  width: 100%;
 }
 
 .iframe-container {
