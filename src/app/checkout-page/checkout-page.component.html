@@ -1,6 +1,14 @@
-<p>checkout-page works!</p>
-<button routerLink="/checkout/space-photos">
-  Space Photoooos
-</button>
-<button (click)="this.goToSpacePhotos()">Drugi pokusaj</button>
-<router-outlet name="checkout_ro"></router-outlet>
+<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
+  <a [routerLink]="[{ outlets: { checkoutro: ['floor-plan'] } }]">
+    Ovdee FP
+  </a>
+  <a [routerLink]="[{ outlets: { checkoutro: ['questionnarie'] } }]">
+    Ovdee Q
+  </a>
+  <a
+    [routerLink]="[{ outlets: { checkoutro: ['space-photos'] } }]"
+    routerLinkActive="router-link-active"
+  >
+    Ovdee SP
+  </a>
+</div>

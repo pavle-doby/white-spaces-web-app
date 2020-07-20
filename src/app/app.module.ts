@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { YouGetDialogModule } from './home-page/you-get/you-get-dialog/you-get-dialog.module';
 import { YouGetDialogComponent } from './home-page/you-get/you-get-dialog/you-get-dialog.component';
 import { CheckoutPageModule } from './checkout-page/checkout-page.module';
+import { FloorPalnUploadModule } from './checkout-page/floor-paln-upload/floor-paln-upload.module';
 
 @NgModule({
   declarations: [AppComponent],

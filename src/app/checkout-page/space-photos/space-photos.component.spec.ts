@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpacePhotosUploadComponent } from './space-photos-upload.component';
+import { SpacePhotosComponent } from './space-photos.component';
 
-describe('SpacePhotosUploadComponent', () => {
-  let component: SpacePhotosUploadComponent;
-  let fixture: ComponentFixture<SpacePhotosUploadComponent>;
+describe('SpacePhotosComponent', () => {
+  let component: SpacePhotosComponent;
+  let fixture: ComponentFixture<SpacePhotosComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SpacePhotosUploadComponent ]
+      declarations: [ SpacePhotosComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SpacePhotosUploadComponent);
+    fixture = TestBed.createComponent(SpacePhotosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

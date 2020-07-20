@@ -3,21 +3,28 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { CheckoutPageComponent } from './checkout-page.component';
 import { FloorPalnUploadComponent } from './floor-paln-upload/floor-paln-upload.component';
-import { SpacePhotosUploadComponent } from './space-photos-upload/space-photos-upload.component';
+import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
+import { SpacePhotosComponent } from './space-photos/space-photos.component';
 
-export const CHECKOUT_ROUTER_OUTLET = 'checkout_ro';
+export const CHECKOUT_ROUTER_OUTLET = 'checkout-ro';
 
 const routes: Routes = [
   { path: '', component: CheckoutPageComponent },
+  { path: '', component: FloorPalnUploadComponent, outlet: 'checkoutro' },
   {
-    path: 'floor-pan',
+    path: 'floor-plan',
     component: FloorPalnUploadComponent,
-    outlet: CHECKOUT_ROUTER_OUTLET,
+    outlet: 'checkoutro',
+  },
+  {
+    path: 'questionnarie',
+    component: QuestionnaireComponent,
+    outlet: 'checkoutro',
   },
   {
     path: 'space-photos',
-    component: SpacePhotosUploadComponent,
-    outlet: CHECKOUT_ROUTER_OUTLET,
+    component: SpacePhotosComponent,
+    outlet: 'checkoutro',
   },
 ];
 
