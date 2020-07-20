@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
 
   public readonly FQAS = NavbarButtons.FQAS;
 
-  constructor(private router: Router) {
+  constructor(private readonly router: Router) {
     this.navbarButtonsArray = [...NavbarButtonsArray];
     this.navBtnsStateObj = { ...NavBtnsInitStateObj };
   }

@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const MAIN_ROUTER_OUTLET = 'main_ro';
-const CHECKOUT_ROUTER_OUTLET = 'checkout_ro';
-
 const routes: Routes = [
   {
     path: '',

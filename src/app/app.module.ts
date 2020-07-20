@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { YouGetDialogModule } from './home-page/you-get/you-get-dialog/you-get-dialog.module';
 import { YouGetDialogComponent } from './home-page/you-get/you-get-dialog/you-get-dialog.component';
+import { CheckoutPageModule } from './checkout-page/checkout-page.module';
 
 @NgModule({
   declarations: [AppComponent],
