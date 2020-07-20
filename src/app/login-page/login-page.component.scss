@@ -1,0 +1,26 @@
+$form-width: 30vw;
+
+.login__form {
+  width: $form-width;
+}
+
+.login__input-label {
+  font-size: 0.76vw;
+  font-weight: 300;
+}
+
+.login__form-width {
+  width: $form-width;
+}
+
+.login__form-width--name-label {
+  width: calc(#{$form-width} / 2 - 1vw);
+}
+
+.login__input {
+  background-color: transparent;
+  border: 0.5px solid black;
+  color: black;
+  padding: 4px;
+  width: 100%;
+}

@@ -19,6 +19,11 @@ const routes: Routes = [
         (m) => m.CheckoutPageModule
       ),
   },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./login-page/login-page.module').then((m) => m.LoginPageModule),
+  },
 ];
 
 @NgModule({
