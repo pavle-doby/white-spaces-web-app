@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+const MAIN_ROUTER_OUTLET = 'main_ro';
+const CHECKOUT_ROUTER_OUTLET = 'checkout_ro';
+
 const routes: Routes = [
   {
     path: '',
@@ -11,6 +14,13 @@ const routes: Routes = [
     path: 'blog',
     loadChildren: () =>
       import('./blog-page/blog-page.module').then((m) => m.BlogPageModule),
+  },
+  {
+    path: 'checkout',
+    loadChildren: () =>
+      import('./checkout-page/checkout-page.module').then(
+        (m) => m.CheckoutPageModule
+      ),
   },
 ];
 

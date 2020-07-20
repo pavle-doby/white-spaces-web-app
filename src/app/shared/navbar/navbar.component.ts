@@ -33,6 +33,8 @@ export class NavbarComponent implements OnInit {
 
     if (button === NavbarButtons.BLOG) {
       this.router.navigateByUrl('/blog');
+    } else if (button === NavbarButtons.PACKAGES) {
+      this.router.navigateByUrl('/checkout');
     }
   }
 }
