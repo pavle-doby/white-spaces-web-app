@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CheckoutState } from '../store/reducers/checkout.reducer';
 
 @Component({
@@ -10,8 +10,9 @@ import { CheckoutState } from '../store/reducers/checkout.reducer';
   templateUrl: './checkout-page.component.html',
   styleUrls: ['./checkout-page.component.scss'],
 })
-export class CheckoutPageComponent implements OnInit {
+export class CheckoutPageComponent implements OnInit, OnDestroy {
   public $checkoutState: Observable<CheckoutState>;
+  public $subCheckoutState: Subscription;
   public checkoutState: CheckoutState;
 
   constructor(
@@ -22,11 +23,15 @@ export class CheckoutPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.$checkoutState.subscribe((checkoutState) => {
+    this.$subCheckoutState = this.$checkoutState.subscribe((checkoutState) => {
       if (!checkoutState) {
         return;
       }
       this.checkoutState = checkoutState;
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.$subCheckoutState) this.$subCheckoutState.unsubscribe();
   }
 }

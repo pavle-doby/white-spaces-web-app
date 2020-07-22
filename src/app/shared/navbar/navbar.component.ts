@@ -5,6 +5,7 @@ import {
   NavBtnsInitStateObj,
 } from './navbar.content';
 import { Router } from '@angular/router';
+import { MainRouterPaths } from 'src/models/MainRouterPaths';
 
 @Component({
   selector: 'app-navbar',
@@ -32,9 +33,7 @@ export class NavbarComponent implements OnInit {
     this.selectedButton = isSelected ? button : null;
 
     if (button === NavbarButtons.BLOG) {
-      this.router.navigateByUrl('/blog');
-    } else if (button === NavbarButtons.PACKAGES) {
-      this.router.navigateByUrl('/checkout');
+      this.router.navigateByUrl(`/${MainRouterPaths.BLOG}`);
     }
   }
 }
