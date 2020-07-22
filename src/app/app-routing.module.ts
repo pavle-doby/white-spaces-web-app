@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { MainRouterPaths } from 'src/models/MainRouterPaths';
 
 const routes: Routes = [
   {
@@ -8,19 +9,24 @@ const routes: Routes = [
       import('./home-page/home-page.module').then((m) => m.HomePageModule),
   },
   {
-    path: 'blog',
+    path: MainRouterPaths.HOME,
+    loadChildren: () =>
+      import('./home-page/home-page.module').then((m) => m.HomePageModule),
+  },
+  {
+    path: MainRouterPaths.BLOG,
     loadChildren: () =>
       import('./blog-page/blog-page.module').then((m) => m.BlogPageModule),
   },
   {
-    path: 'checkout',
+    path: MainRouterPaths.CHECKOUT,
     loadChildren: () =>
       import('./checkout-page/checkout-page.module').then(
         (m) => m.CheckoutPageModule
       ),
   },
   {
-    path: 'login',
+    path: MainRouterPaths.LOGIN,
     loadChildren: () =>
       import('./login-page/login-page.module').then((m) => m.LoginPageModule),
   },

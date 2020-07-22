@@ -5,6 +5,8 @@ import { PackagesBox } from './side-card-packages-box/side-card-packages-box.com
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { selectPackage } from 'src/app/store/actions/checkout.action';
+import { Router } from '@angular/router';
+import { MainRouterPaths } from 'src/models/MainRouterPaths';
 
 @Component({
   selector: 'app-side-card-packages',
@@ -14,11 +16,15 @@ import { selectPackage } from 'src/app/store/actions/checkout.action';
 export class SideCardPackagesComponent implements OnInit {
   public readonly packages: SideCadrPackage[] = PACKAGES;
 
-  constructor(private readonly $store: Store<AppState>) {}
+  constructor(
+    private readonly $store: Store<AppState>,
+    private readonly router: Router
+  ) {}
 
   ngOnInit(): void {}
 
   public onSelectEvent(box: PackagesBox): void {
     this.$store.dispatch(selectPackage({ packageBox: box }));
+    this.router.navigateByUrl(`/${MainRouterPaths.LOGIN}`);
   }
 }
