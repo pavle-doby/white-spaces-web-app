@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store';
+import { Observable } from 'rxjs';
+import { CheckoutState } from '../store/reducers/checkout.reducer';
 
 @Component({
   selector: 'app-checkout-page',
@@ -7,18 +11,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./checkout-page.component.scss'],
 })
 export class CheckoutPageComponent implements OnInit {
-  constructor(private readonly router: Router) {}
+  public $checkoutState: Observable<CheckoutState>;
+  public checkoutState: CheckoutState;
 
-  ngOnInit(): void {}
+  constructor(
+    private readonly router: Router,
+    private readonly $store: Store<AppState>
+  ) {
+    this.$checkoutState = this.$store.select((state) => state.checkout);
+  }
 
-  public goToSpacePhotos(): void {
-    this.router.navigate([
-      {
-        outlets: {
-          primary: 'checkout',
-          checkout_ro: ['checkout', 'space-photos'],
-        },
-      },
-    ]);
+  ngOnInit(): void {
+    this.$checkoutState.subscribe((checkoutState) => {
+      if (!checkoutState) {
+        return;
+      }
+      this.checkoutState = checkoutState;
+    });
   }
 }

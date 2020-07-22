@@ -10,6 +10,9 @@ import { AddOnsModule } from './add-ons/add-ons.module';
 import { QuestionnaireModule } from './questionnaire/questionnaire.module';
 import { ReviewAndPayModule } from './review-and-pay/review-and-pay.module';
 import { ThankYouPageModule } from './thank-you-page/thank-you-page.module';
+import { LogoModule } from '../shared/logo/logo.module';
+import { TabbarModule } from '../shared/tabbar/tabbar.module';
+import { InfoModule } from '../shared/info/info.module';
 
 @NgModule({
   declarations: [CheckoutPageComponent],
@@ -23,6 +26,9 @@ import { ThankYouPageModule } from './thank-you-page/thank-you-page.module';
     QuestionnaireModule,
     ReviewAndPayModule,
     ThankYouPageModule,
+    LogoModule,
+    TabbarModule,
+    InfoModule,
   ],
   exports: [CheckoutPageComponent],
 })

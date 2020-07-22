@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="2vw">
-  <img src="../../../assets/images/home/logo.png" alt="Website Logo" />
+  <app-logo></app-logo>
   <div
     class="login__form"
     fxLayout="column"
@@ -7,9 +7,9 @@
     fxLayoutGap="1vw"
   >
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
-      <div>Register</div>
+      <div class="cursor-pointer">Register</div>
       <span>//</span>
-      <div>Log in</div>
+      <div class="login__btn">Log in</div>
     </div>
     <div>Let's create something personal!</div>
     <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2vw">
@@ -54,6 +54,8 @@
       <span class="login__input-label">Repate password*</span>
       <input class="login__input" type="text" />
     </div>
-    <div>Confirm</div>
+    <div class="login__btn" [routerLink]="['/checkout']">
+      Confirm
+    </div>
   </div>
 </div>

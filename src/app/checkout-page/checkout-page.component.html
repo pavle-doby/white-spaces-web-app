@@ -1,27 +1,13 @@
-<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="3vw">
-  <img src="../../../assets/images/home/logo.png" alt="Website Logo" />
-  <div>
-    checkout nav
-  </div>
-  <div>
-    Bold text
-  </div>
-  <div>
-    NonBold text
-  </div>
+<div
+  *ngIf="this.checkoutState"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  fxLayoutGap="3vw"
+>
+  <app-logo></app-logo>
+  <app-tabbar></app-tabbar>
+  <app-info
+    [info]="this.checkoutState.info"
+    [description]="this.checkoutState.infoDesc"
+  ></app-info>
 </div>
-
-<!-- <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
-  <a [routerLink]="[{ outlets: { checkoutSteps: ['floor-plan'] } }]">
-    Ovdee FP
-  </a>
-  <a [routerLink]="[{ outlets: { checkoutSteps: ['questionnarie'] } }]">
-    Ovdee Q
-  </a>
-  <a
-    [routerLink]="[{ outlets: { checkoutSteps: ['space-photos'] } }]"
-    routerLinkActive="router-link-active"
-  >
-    Ovdee SP
-  </a>
-</div> -->
