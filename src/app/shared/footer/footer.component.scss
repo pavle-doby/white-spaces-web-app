@@ -6,8 +6,7 @@
   bottom: 0%;
   padding: 15px 0 15px 0;
   background: orange;
-  // width: calc(5 * #{$page-width});
-  width: 100%;
+  width: calc(5 * #{$page-width});
   background: rgb(242, 232, 220);
   background: -moz-linear-gradient(
     90deg,
