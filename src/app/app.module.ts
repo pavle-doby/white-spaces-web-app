@@ -15,10 +15,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { YouGetDialogModule } from './home-page/you-get/you-get-dialog/you-get-dialog.module';
 import { YouGetDialogComponent } from './home-page/you-get/you-get-dialog/you-get-dialog.component';
+import { CommonModule } from '@angular/common';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -37,6 +40,7 @@ import { YouGetDialogComponent } from './home-page/you-get/you-get-dialog/you-ge
     }),
     OpeningLabelModule,
     MatDialogModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
