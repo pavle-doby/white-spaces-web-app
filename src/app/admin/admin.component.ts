@@ -12,10 +12,8 @@ export class AdminComponent implements OnInit {
     console.log(this.window);
     this.window.document.body.style.width = '100vw';
     this.window.document.body.style.overflowY = 'scroll';
-    this.isLoggedIn = this.authService.isAuthenticated.subscribe(
-      (isAuthenticated: boolean) => {
-        this.isLoggedIn = isAuthenticated;
-      }
+    this.authService.isAuthenticated.subscribe(
+      (isLoggedIn) => (this.isLoggedIn = isLoggedIn)
     );
   }
 

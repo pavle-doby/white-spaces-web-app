@@ -19,7 +19,14 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
   dataSource: AdminOrdersDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  displayedColumns = [
+    'id',
+    'customer',
+    'date',
+    'orderValue',
+    'status',
+    'onProject',
+  ];
 
   ngOnInit() {
     this.dataSource = new AdminOrdersDataSource();

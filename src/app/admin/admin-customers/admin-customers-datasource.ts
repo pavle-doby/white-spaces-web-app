@@ -6,22 +6,74 @@ import { Observable, of as observableOf, merge } from 'rxjs';
 
 // TODO: Replace this with your own data model type
 export interface AdminCustomersItem {
-  name: string;
-  id: number;
+  customerId: number;
+  customerName: string;
+  dateOfRegistration: string | Date;
+  email: string;
 }
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: AdminCustomersItem[] = [
-  { id: 1, name: 'Hydrogen' },
-  { id: 2, name: 'Helium' },
-  { id: 3, name: 'Lithium' },
-  { id: 4, name: 'Beryllium' },
-  { id: 5, name: 'Boron' },
-  { id: 6, name: 'Carbon' },
-  { id: 7, name: 'Nitrogen' },
-  { id: 8, name: 'Oxygen' },
-  { id: 9, name: 'Fluorine' },
-  { id: 10, name: 'Neon' },
+  {
+    customerId: 1,
+    customerName: 'Petar Mijovic',
+    dateOfRegistration: '15.06.2020',
+    email: 'mijo.tarpe@gmail.com',
+  },
+  {
+    customerId: 1,
+    customerName: 'Petar Mijovic',
+    dateOfRegistration: '15.06.2020',
+    email: 'mijo.tarpe@gmail.com',
+  },
+  {
+    customerId: 1,
+    customerName: 'Petar Mijovic',
+    dateOfRegistration: '15.06.2020',
+    email: 'mijo.tarpe@gmail.com',
+  },
+  {
+    customerId: 1,
+    customerName: 'Petar Mijovic',
+    dateOfRegistration: '15.06.2020',
+    email: 'mijo.tarpe@gmail.com',
+  },
+  {
+    customerId: 1,
+    customerName: 'Petar Mijovic',
+    dateOfRegistration: '15.06.2020',
+    email: 'mijo.tarpe@gmail.com',
+  },
+  {
+    customerId: 1,
+    customerName: 'Petar Mijovic',
+    dateOfRegistration: '15.06.2020',
+    email: 'mijo.tarpe@gmail.com',
+  },
+  {
+    customerId: 1,
+    customerName: 'Petar Mijovic',
+    dateOfRegistration: '15.06.2020',
+    email: 'mijo.tarpe@gmail.com',
+  },
+  {
+    customerId: 1,
+    customerName: 'Petar Mijovic',
+    dateOfRegistration: '15.06.2020',
+    email: 'mijo.tarpe@gmail.com',
+  },
+  {
+    customerId: 1,
+    customerName: 'Petar Mijovic',
+    dateOfRegistration: '15.06.2020',
+    email: 'mijo.tarpe@gmail.com',
+  },
+  {
+    customerId: 1,
+    customerName: 'Petar Mijovic',
+    dateOfRegistration: '15.06.2020',
+    email: 'mijo.tarpe@gmail.com',
+  },
 ];
 
 /**
@@ -87,9 +139,9 @@ export class AdminCustomersDataSource extends DataSource<AdminCustomersItem> {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
         case 'name':
-          return compare(a.name, b.name, isAsc);
+          return compare(a.customerName, b.customerName, isAsc);
         case 'id':
-          return compare(+a.id, +b.id, isAsc);
+          return compare(+a.customerId, +b.customerId, isAsc);
         default:
           return 0;
       }

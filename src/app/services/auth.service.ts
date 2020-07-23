@@ -6,14 +6,14 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  public isAuthenticated = new BehaviorSubject<boolean>(false);
+  public isAuthenticated = new BehaviorSubject<boolean>(true); //set for true for testing purposes
   constructor(private router: Router) {}
 
   public login(username: string, password: string) {
     this.isAuthenticated.next(true);
   }
 
-  public logout(redirect: string) {
+  public logout() {
     this.isAuthenticated.next(false);
   }
 }

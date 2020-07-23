@@ -33,7 +33,9 @@
       </button>
 
       <span>White Spaces Admin Panel</span>
-      <button class="admin-logout" mat-flat-button>Log out</button>
+      <button class="admin-logout" mat-flat-button (click)="this.logOut()">
+        Log out
+      </button>
     </mat-toolbar>
     <!-- Add Content Here -->
   </mat-sidenav-content>
