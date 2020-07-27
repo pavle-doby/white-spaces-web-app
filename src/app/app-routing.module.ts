@@ -19,6 +19,11 @@ const routes: Routes = [
       import('./blog-page/blog-page.module').then((m) => m.BlogPageModule),
   },
   {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
     path: MainRouterPaths.CHECKOUT,
     loadChildren: () =>
       import('./checkout-page/checkout-page.module').then(

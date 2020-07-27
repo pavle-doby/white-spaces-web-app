@@ -1,0 +1,8 @@
+<div class="admin">
+  <div *ngIf="this.isLoggedIn">
+    <app-admin-dashboard> </app-admin-dashboard>
+  </div>
+  <div *ngIf="!this.isLoggedIn">
+    <app-admin-login></app-admin-login>
+  </div>
+</div>

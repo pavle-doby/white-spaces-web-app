@@ -40,7 +40,7 @@ body {
 
 .app__container {
   // width: calc(5 * #{$page-width});
-  width: 100%;
+  //width: 100%;
 }
 
 .iframe-container {
@@ -66,6 +66,7 @@ body {
 
 body {
   margin: 0;
+  width: calc(5 * #{$page-width});
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -86,6 +87,9 @@ body {
   }
 }
 
+.table-container {
+  min-width: 60vw;
+}
 /* Scrollbar tweaks */
 ::-webkit-scrollbar {
   width: 5px;
