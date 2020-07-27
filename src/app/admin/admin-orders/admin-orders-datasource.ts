@@ -10,8 +10,9 @@ export interface AdminOrdersItem {
   customer: string;
   date: string | Date;
   orderValue: string;
-  status: string;
+  status: number;
   onProject: string;
+  orderDetails: any;
 }
 
 // TODO: replace this with real data from your application
@@ -21,80 +22,90 @@ const EXAMPLE_DATA: AdminOrdersItem[] = [
     customer: 'Petar Mijovic',
     date: '15.06.2020.',
     orderValue: '1$',
-    status: 'Not Acc',
+    status: 0,
     onProject: 'Natasa Nikolic',
+    orderDetails: 'masivni detalji',
   },
   {
     id: 1,
     customer: 'Petar Mijovic',
     date: '15.06.2020.',
     orderValue: '1$',
-    status: 'Not Acc',
+    status: 0,
     onProject: 'Natasa Nikolic',
+    orderDetails: 'masivni detalji',
   },
   {
     id: 1,
     customer: 'Petar Mijovic',
     date: '15.06.2020.',
     orderValue: '1$',
-    status: 'Not Acc',
+    status: 0,
     onProject: 'Natasa Nikolic',
+    orderDetails: 'masivni detalji',
   },
   {
     id: 1,
     customer: 'Petar Mijovic',
     date: '15.06.2020.',
     orderValue: '1$',
-    status: 'Not Acc',
+    status: 0,
     onProject: 'Natasa Nikolic',
+    orderDetails: 'masivni detalji',
   },
   {
     id: 1,
     customer: 'Petar Mijovic',
     date: '15.06.2020.',
     orderValue: '1$',
-    status: 'Not Acc',
+    status: 0,
     onProject: 'Natasa Nikolic',
+    orderDetails: 'masivni detalji',
   },
   {
     id: 1,
     customer: 'Petar Mijovic',
     date: '15.06.2020.',
     orderValue: '1$',
-    status: 'Not Acc',
+    status: 0,
     onProject: 'Natasa Nikolic',
+    orderDetails: 'masivni detalji',
   },
   {
     id: 1,
     customer: 'Petar Mijovic',
     date: '15.06.2020.',
     orderValue: '1$',
-    status: 'Not Acc',
+    status: 0,
     onProject: 'Natasa Nikolic',
+    orderDetails: 'masivni detalji',
   },
   {
     id: 1,
     customer: 'Petar Mijovic',
     date: '15.06.2020.',
     orderValue: '1$',
-    status: 'Not Acc',
+    status: 0,
     onProject: 'Natasa Nikolic',
+    orderDetails: 'masivni detalji',
   },
   {
     id: 1,
     customer: 'Petar Mijovic',
     date: '15.06.2020.',
     orderValue: '1$',
-    status: 'Not Acc',
+    status: 0,
     onProject: 'Natasa Nikolic',
+    orderDetails: 'masivni detalji',
   },
   {
     id: 1,
     customer: 'Petar Mijovic',
     date: '15.06.2020.',
     orderValue: '1$',
-    status: 'Not Acc',
+    status: 0,
     onProject: 'Natasa Nikolic',
+    orderDetails: 'masivni detalji',
   },
 ];
 

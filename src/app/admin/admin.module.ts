@@ -16,6 +16,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { AdminOrdersModule } from './admin-orders/admin-orders.module';
 import { AdminCustomersModule } from './admin-customers/admin-customers.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [AdminComponent, AdminDashboardComponent],
@@ -36,6 +37,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AdminCustomersModule,
     FlexLayoutModule,
     MatButtonModule,
+    MatDialogModule,
   ],
   exports: [AdminComponent],
 })
