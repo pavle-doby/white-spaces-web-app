@@ -25,7 +25,7 @@ export class SideCardPackagesBoxComponent implements OnInit {
   public package: SideCadrPackage;
 
   @Output()
-  public selectEvent: EventEmitter<void>;
+  public selectEvent: EventEmitter<PackagesBox>;
 
   public isPackageSelected: boolean = false;
 
@@ -35,7 +35,7 @@ export class SideCardPackagesBoxComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public selectPackage(): void {
-    this.selectEvent.emit();
+  public selectPackage(box: PackagesBox): void {
+    this.selectEvent.emit(box);
   }
 }

@@ -1,0 +1,13 @@
+<div
+  *ngIf="this.checkoutState"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  fxLayoutGap="3vw"
+>
+  <app-logo></app-logo>
+  <app-tabbar></app-tabbar>
+  <app-info
+    [info]="this.checkoutState.info"
+    [description]="this.checkoutState.infoDesc"
+  ></app-info>
+</div>
