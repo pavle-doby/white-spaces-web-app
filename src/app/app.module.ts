@@ -39,6 +39,7 @@ import { FloorPalnUploadModule } from './checkout-page/floor-paln-upload/floor-p
     }),
     OpeningLabelModule,
     MatDialogModule,
+    CheckoutPageModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

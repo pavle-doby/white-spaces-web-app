@@ -5,18 +5,19 @@ import {
 import { AddOn } from 'src/models/AddOn';
 import { Question } from 'src/models/Question';
 import { Action, createReducer, on } from '@ngrx/store';
-import { selectPackage } from '../actions/checkout.action';
+import {
+  checkoutSelectPackage,
+  checkoutSetInfo,
+} from '../actions/checkout.action';
 import {
   TabbarButton,
   getTabbarContnet,
 } from 'src/app/shared/tabbar/tabbar.content';
 
-import * as CheckoutActions from 'src/app/store/actions/checkout.action';
-
 export interface CheckoutState {
   packageBox?: PackagesBox; // Jedan paket koji je u side kartici
   info: string; //
-  infoDesc: string;
+  infoDesc: string[];
   floorPlan?: File;
   spacePhotos?: File[];
   addOns: AddOn[];
@@ -27,7 +28,7 @@ export interface CheckoutState {
 const initState: CheckoutState = {
   packageBox: null,
   info: 'Welcome to your renovation project!',
-  infoDesc: '',
+  infoDesc: [''],
   floorPlan: null,
   spacePhotos: null,
   addOns: null,
@@ -37,8 +38,11 @@ const initState: CheckoutState = {
 
 const reducer = createReducer(
   initState,
-  on(CheckoutActions.selectPackage, (state, { packageBox }) => {
+  on(checkoutSelectPackage, (state, { packageBox }) => {
     return { ...state, packageBox: packageBox };
+  }),
+  on(checkoutSetInfo, (state, { info, description }) => {
+    return { ...state, info: info, infoDesc: description };
   })
 );
 

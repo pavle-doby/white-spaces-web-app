@@ -1,12 +1,25 @@
 <div
   (wheel)="onMouseWheel($event)"
+  *ngIf="!this.ShowCheckoutPage"
   fxLayout="column"
   fxLayoutAlign="center"
   class="app-container"
 >
   <router-outlet></router-outlet>
-  <router-outlet name="checkoutSteps"></router-outlet>
 
-  <app-footer></app-footer>
+  <app-footer class="app__footer--home"></app-footer>
+  <app-navbar></app-navbar>
+</div>
+
+<div
+  *ngIf="this.ShowCheckoutPage"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  fxLayoutGap="10px"
+>
+  <app-checkout-page>
+    <router-outlet name="checkoutSteps"></router-outlet>
+  </app-checkout-page>
+  <app-footer class="app__footer--checkout"></app-footer>
   <app-navbar></app-navbar>
 </div>

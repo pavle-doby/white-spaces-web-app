@@ -12,8 +12,6 @@ import { CheckoutState } from '../store/reducers/checkout.reducer';
 })
 export class CheckoutPageComponent implements OnInit, OnDestroy {
   public $checkoutState: Observable<CheckoutState>;
-  public $subCheckoutState: Subscription;
-  public checkoutState: CheckoutState;
 
   constructor(
     private readonly router: Router,
@@ -22,16 +20,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
     this.$checkoutState = this.$store.select((state) => state.checkout);
   }
 
-  ngOnInit(): void {
-    this.$subCheckoutState = this.$checkoutState.subscribe((checkoutState) => {
-      if (!checkoutState) {
-        return;
-      }
-      this.checkoutState = checkoutState;
-    });
-  }
+  ngOnInit(): void {}
 
-  ngOnDestroy(): void {
-    if (this.$subCheckoutState) this.$subCheckoutState.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 }

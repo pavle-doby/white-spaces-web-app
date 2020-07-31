@@ -9,7 +9,7 @@ export class InfoComponent implements OnInit {
   @Input()
   public info: string;
   @Input()
-  public description: string;
+  public description: string[];
 
   constructor() {}
 

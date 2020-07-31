@@ -16,6 +16,8 @@ import { SideCardPackagesModule } from './side-card-packages/side-card-packages.
 import { SideCardFqaModule } from './side-card-fqa/side-card-fqa.module';
 import { SideCardPackagesComponent } from './side-card-packages/side-card-packages.component';
 import { SideCardFqaComponent } from './side-card-fqa/side-card-fqa.component';
+import { UploadGridModule } from './upload-grid/upload-grid.module';
+import { UploadGridComponent } from './upload-grid/upload-grid.component';
 
 @NgModule({
   declarations: [],
@@ -29,6 +31,7 @@ import { SideCardFqaComponent } from './side-card-fqa/side-card-fqa.component';
     SideCardModule,
     SideCardPackagesModule,
     SideCardFqaModule,
+    UploadGridModule,
   ],
   exports: [
     FooterComponent,
@@ -39,6 +42,7 @@ import { SideCardFqaComponent } from './side-card-fqa/side-card-fqa.component';
     SideCardComponent,
     SideCardPackagesComponent,
     SideCardFqaComponent,
+    UploadGridComponent,
   ],
 })
 export class SharedModule {}
