@@ -14,8 +14,8 @@ import {
 import * as CheckoutActions from 'src/app/store/actions/checkout.action';
 
 export interface CheckoutState {
-  packageBox?: PackagesBox;
-  info: string;
+  packageBox?: PackagesBox; // Jedan paket koji je u side kartici
+  info: string; //
   infoDesc: string;
   floorPlan?: File;
   spacePhotos?: File[];

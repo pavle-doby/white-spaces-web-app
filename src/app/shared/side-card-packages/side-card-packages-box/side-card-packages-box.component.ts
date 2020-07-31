@@ -8,6 +8,8 @@ export enum PackageType {
 }
 
 export class PackagesBox {
+  public id: any;
+
   constructor(
     public type: PackageType,
     public price: number,
