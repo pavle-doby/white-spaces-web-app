@@ -1,3 +1,13 @@
 <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="2vw">
-  Nesto
+  <app-upload
+    [data]="this.uploadData"
+    (uploadEvent)="this.onUploadEvent($event)"
+  ></app-upload>
+  <section fxLayout="row wrap" fxLayoutAlign="start grid" fxLayoutGap="10px">
+    <img
+      *ngFor="let url of this.imgURLs"
+      class="upload-grid__img"
+      [src]="url"
+    />
+  </section>
 </div>

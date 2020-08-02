@@ -1,10 +1,11 @@
 <div
   *ngIf="this.$checkoutState | async"
+  class="checkout-page"
   fxLayout="column"
   fxLayoutAlign="start center"
   fxLayoutGap="3vw"
 >
-  <app-logo></app-logo>
+  <app-logo ></app-logo>
   <app-tabbar></app-tabbar>
   <app-info
     [info]="(this.$checkoutState | async).info"

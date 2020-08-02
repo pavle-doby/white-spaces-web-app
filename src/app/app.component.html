@@ -8,18 +8,19 @@
   <router-outlet></router-outlet>
 
   <app-footer class="app__footer--home"></app-footer>
-  <app-navbar></app-navbar>
 </div>
 
 <div
   *ngIf="this.ShowCheckoutPage"
+  class="height-100vh"
   fxLayout="column"
-  fxLayoutAlign="start center"
+  fxLayoutAlign="space-between center"
   fxLayoutGap="10px"
 >
   <app-checkout-page>
     <router-outlet name="checkoutSteps"></router-outlet>
   </app-checkout-page>
   <app-footer class="app__footer--checkout"></app-footer>
-  <app-navbar></app-navbar>
 </div>
+
+<app-navbar></app-navbar>
