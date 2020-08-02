@@ -1,3 +1,22 @@
-<div fxLayout="column" fxLayoutAlign="start center">
-  <app-upload-grid></app-upload-grid>
+<div
+  class="floor-plan-upload__container"
+  fxLayout="column"
+  fxLayoutAlign="space-between center"
+>
+  <app-upload
+    [data]="this.uploadData"
+    (uploadEvent)="this.onUploadEvent($event)"
+  ></app-upload>
+  <div
+    *ngIf="(this.$chekcoutState | async).floorPlan?.name"
+    fxLayout="column"
+    fxLayoutAlign="start center"
+  >
+    <span class="floor-paln-upload__msg">
+      {{ this.successMsg }}
+    </span>
+    <span class="floor-plan-upload__file-name">
+      {{ (this.$chekcoutState | async).floorPlan?.name }}
+    </span>
+  </div>
 </div>

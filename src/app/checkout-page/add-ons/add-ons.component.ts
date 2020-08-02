@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
-import { checkoutSetInfo } from 'src/app/store/actions/checkout.action';
+import { setInfoCheckout } from 'src/app/store/actions/checkout.action';
 
 const INFO = `If you feel like you want more you can easily
 customise you package & add extra plans and drawings.`;
@@ -17,7 +17,7 @@ engagement and time for finishing project.`;
 export class AddOnsComponent implements OnInit {
   constructor(private readonly $store: Store<AppState>) {
     this.$store.dispatch(
-      checkoutSetInfo({ info: INFO, description: [INFO_DESC] })
+      setInfoCheckout({ info: INFO, description: [INFO_DESC] })
     );
   }
 

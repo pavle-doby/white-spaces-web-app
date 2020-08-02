@@ -23,7 +23,7 @@ export class UploadGridComponent implements OnInit {
     //Dobar argument zasto ovakve dodele treba da idu u constructor
     this.uploadData = new UploadData({
       limit: LIMIT,
-    });
+    }); 
   }
 
   ngOnInit(): void {}

@@ -5,11 +5,13 @@
   fxLayoutAlign="start center"
   fxLayoutGap="3vw"
 >
-  <app-logo ></app-logo>
+  <app-logo></app-logo>
   <app-tabbar></app-tabbar>
   <app-info
     [info]="(this.$checkoutState | async).info"
     [description]="(this.$checkoutState | async).infoDesc"
   ></app-info>
-  <ng-content></ng-content>
+  <div>
+    <ng-content></ng-content>
+  </div>
 </div>

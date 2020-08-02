@@ -6,7 +6,12 @@ export const checkoutSelectPackage = createAction(
   props<{ packageBox: PackagesBox }>()
 );
 
-export const checkoutSetInfo = createAction(
+export const setInfoCheckout = createAction(
   '[CHECKOUT] SET_INFO',
   props<{ info: string; description: string[] }>()
+);
+
+export const setFloorPlanCheckout = createAction(
+  '[CHECKOUT] SET_FLOOT_PLAN',
+  props<{ file: File }>()
 );

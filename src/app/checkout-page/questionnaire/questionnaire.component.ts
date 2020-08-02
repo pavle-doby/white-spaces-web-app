@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
-import { checkoutSetInfo } from 'src/app/store/actions/checkout.action';
+import { setInfoCheckout } from 'src/app/store/actions/checkout.action';
 
 const INFO = `Feel free to load us with information so that we
 can truly get to know both you and your space
@@ -18,7 +18,7 @@ to complete understanding of your needs and 100% project success`;
 export class QuestionnaireComponent implements OnInit {
   constructor(private readonly $store: Store<AppState>) {
     this.$store.dispatch(
-      checkoutSetInfo({ info: INFO, description: [INFO_DESC] })
+      setInfoCheckout({ info: INFO, description: [INFO_DESC] })
     );
   }
 

@@ -7,7 +7,8 @@ import { Question } from 'src/models/Question';
 import { Action, createReducer, on } from '@ngrx/store';
 import {
   checkoutSelectPackage,
-  checkoutSetInfo,
+  setInfoCheckout,
+  setFloorPlanCheckout,
 } from '../actions/checkout.action';
 import {
   TabbarButton,
@@ -41,8 +42,11 @@ const reducer = createReducer(
   on(checkoutSelectPackage, (state, { packageBox }) => {
     return { ...state, packageBox: packageBox };
   }),
-  on(checkoutSetInfo, (state, { info, description }) => {
+  on(setInfoCheckout, (state, { info, description }) => {
     return { ...state, info: info, infoDesc: description };
+  }),
+  on(setFloorPlanCheckout, (state, { file }) => {
+    return { ...state, floorPlan: file };
   })
 );
 
