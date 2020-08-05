@@ -4,6 +4,7 @@
   fxLayoutAlign="center center"
   fxLayoutGap="2vh"
 >
+  <app-question-stepper></app-question-stepper>
   <app-question
     [question]="this.questions[this.toShowIndex]"
     (changeAnswerEvent)="this.onChangeAnswer($event)"

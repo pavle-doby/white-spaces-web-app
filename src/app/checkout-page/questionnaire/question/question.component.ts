@@ -33,10 +33,10 @@ export class QuestionComponent implements OnInit {
   }
 
   public onFocusOut(): void {
-    const newQuestion = {
+    const newQuestion: Question = {
       ...this.question,
       answer: this.answer,
-      isAswerd: !!this.answer,
+      isAnswerd: !!this.answer,
     };
     this.changeAnswerEvent.emit(newQuestion);
   }

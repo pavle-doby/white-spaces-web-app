@@ -13,6 +13,7 @@ import {
   setSpacePhotosURLsCheckout,
   setAddOnIsSelectedCheckout,
   setAnswerCheckout,
+  setCurrentIndexCheckout,
 } from '../actions/checkout.action';
 import {
   TabbarButton,
@@ -20,6 +21,7 @@ import {
 } from 'src/app/shared/tabbar/tabbar.content';
 
 import * as _ from 'lodash';
+import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
 
 export interface CheckoutState {
   packageBox?: PackagesBox; // Jedan paket koji je u side kartici
@@ -31,6 +33,7 @@ export interface CheckoutState {
   addOnList: AddOn[];
   questions: Question[];
   tabbarButtons: TabbarButton[];
+  questionStepper: QuestionStepper;
 }
 
 const initState: CheckoutState = {
@@ -93,8 +96,30 @@ const initState: CheckoutState = {
       question: 'How are you? 3',
       index: 3,
     }),
+    new Question({
+      id: 4,
+      question: 'How are you? 3',
+      index: 4,
+    }),
+    new Question({
+      id: 5,
+      question: 'How are you? 3',
+      index: 5,
+    }),
+    new Question({
+      id: 6,
+      question: 'How are you? 3',
+      index: 6,
+    }),
   ],
   tabbarButtons: getTabbarContnet(),
+  questionStepper: new QuestionStepper({
+    rangeStart: 0,
+    rangeEnd: 2,
+    numberOfRangeToShow: 3,
+    numberOfSteps: 7,
+    indexCurrent: 0,
+  }),
 };
 
 const reducer = createReducer(
@@ -128,7 +153,30 @@ const reducer = createReducer(
     const newQuestions = state.questions.map((q) => {
       return q.id === question.id ? { ...question } : { ...q };
     });
+
     return { ...state, questions: newQuestions };
+  }),
+  on(setCurrentIndexCheckout, (state, { currentIndex }) => {
+    let newRangeStart = state.questionStepper.rangeStart;
+    let newRangeEnd = state.questionStepper.rangeEnd;
+    let range = state.questionStepper.numberOfRangeToShow;
+
+    if (currentIndex > state.questionStepper.rangeEnd) {
+      newRangeStart = currentIndex - range + 1;
+      newRangeEnd = currentIndex;
+    } else if (currentIndex < state.questionStepper.rangeStart) {
+      newRangeStart = currentIndex;
+      newRangeEnd = currentIndex + range - 1;
+    }
+
+    const newStepper: QuestionStepper = {
+      ...state.questionStepper,
+      indexCurrent: currentIndex,
+      rangeStart: newRangeStart,
+      rangeEnd: newRangeEnd,
+    };
+
+    return { ...state, questionStepper: newStepper };
   })
 );
 

@@ -4,6 +4,7 @@ import { AppState } from 'src/app/store';
 import {
   setInfoCheckout,
   setAnswerCheckout,
+  setCurrentIndexCheckout,
 } from 'src/app/store/actions/checkout.action';
 import { Observable, Subscription } from 'rxjs';
 import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
@@ -47,13 +48,15 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   public onChangeAnswer(question: Question): void {
-    console.log(question);
-
     this.$store.dispatch(setAnswerCheckout({ question: { ...question } }));
   }
 
   public moveQuestionTo(index: number): void {
     this.toShowIndex =
       index >= 0 ? index % this.questions.length : this.questions.length - 1;
+
+    this.$store.dispatch(
+      setCurrentIndexCheckout({ currentIndex: this.toShowIndex })
+    );
   }
 }

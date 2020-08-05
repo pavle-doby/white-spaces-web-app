@@ -37,3 +37,8 @@ export const setAnswerCheckout = createAction(
   '[CHECKOUT] SET_ANSWER',
   props<{ question: Question }>()
 );
+
+export const setCurrentIndexCheckout = createAction(
+  '[CHECKOUT] SET_CURRENT_INDEX',
+  props<{ currentIndex: number }>()
+);

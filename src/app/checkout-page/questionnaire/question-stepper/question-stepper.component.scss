@@ -1,0 +1,29 @@
+.question-stepper__step {
+  width: 2.5vw;
+  height: 2.5vw;
+
+  border: 2px solid skyblue;
+  color: skyblue;
+}
+
+.question-stepper__label {
+  font-size: 1.3vw;
+}
+
+//If you change name of this class, change also class Step.
+.question-stepper__step--uncomplited {
+  border: 2px solid grey;
+  color: grey;
+}
+
+//If you change name of this class, change also class Step.
+.question-stepper__step--current {
+  border: 2px solid #010153;
+  color: #010153;
+}
+
+//If you change name of this class, change also class Step.
+.question-stepper__step--complited {
+  border: 2px solid rosybrown;
+  color: rosybrown;
+}
