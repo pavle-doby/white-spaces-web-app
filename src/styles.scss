@@ -90,6 +90,15 @@ body {
 .table-container {
   min-width: 60vw;
 }
+
+.table-dialog {
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  &:hover {
+    color: #4051b5;
+  }
+}
 /* Scrollbar tweaks */
 ::-webkit-scrollbar {
   width: 5px;

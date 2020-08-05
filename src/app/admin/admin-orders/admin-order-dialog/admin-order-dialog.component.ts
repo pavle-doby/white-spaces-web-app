@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-admin-order-dialog',
   templateUrl: './admin-order-dialog.component.html',

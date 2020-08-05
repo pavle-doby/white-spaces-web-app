@@ -6,6 +6,7 @@ import { AdminCustomersComponent } from './admin-customers/admin-customers.compo
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminPackagesComponent } from './admin-packages/admin-packages.component';
+import { AdminBlogComponent } from './admin-blog/admin-blog.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
       {
         path: 'packages',
         component: AdminPackagesComponent,
+      },
+      {
+        path: 'blog',
+        component: AdminBlogComponent,
       },
     ],
   },

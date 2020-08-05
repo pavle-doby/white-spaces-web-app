@@ -20,6 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { AdminPackagesModule } from './admin-packages/admin-packages.module';
+import { AdminBlogModule } from './admin-blog/admin-blog.module';
 
 @NgModule({
   declarations: [AdminComponent, AdminDashboardComponent],
@@ -39,6 +40,7 @@ import { AdminPackagesModule } from './admin-packages/admin-packages.module';
     AdminOrdersModule,
     AdminCustomersModule,
     AdminPackagesModule,
+    AdminBlogModule,
     FlexLayoutModule,
     MatButtonModule,
     MatDialogModule,
