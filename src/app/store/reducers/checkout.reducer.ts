@@ -12,11 +12,14 @@ import {
   setSpacePhotosCheckout,
   setSpacePhotosURLsCheckout,
   setAddOnIsSelectedCheckout,
+  setAnswerCheckout,
 } from '../actions/checkout.action';
 import {
   TabbarButton,
   getTabbarContnet,
 } from 'src/app/shared/tabbar/tabbar.content';
+
+import * as _ from 'lodash';
 
 export interface CheckoutState {
   packageBox?: PackagesBox; // Jedan paket koji je u side kartici
@@ -69,7 +72,28 @@ const initState: CheckoutState = {
       price: 399,
     }),
   ],
-  questions: null,
+  questions: [
+    new Question({
+      id: 0,
+      question: 'How are you? 0',
+      index: 0,
+    }),
+    new Question({
+      id: 1,
+      question: 'How are you? 1',
+      index: 1,
+    }),
+    new Question({
+      id: 2,
+      question: 'How are you? 2',
+      index: 2,
+    }),
+    new Question({
+      id: 3,
+      question: 'How are you? 3',
+      index: 3,
+    }),
+  ],
   tabbarButtons: getTabbarContnet(),
 };
 
@@ -99,6 +123,12 @@ const reducer = createReducer(
       };
     });
     return { ...state, addOnList: addOns };
+  }),
+  on(setAnswerCheckout, (state, { question }) => {
+    const newQuestions = state.questions.map((q) => {
+      return q.id === question.id ? { ...question } : { ...q };
+    });
+    return { ...state, questions: newQuestions };
   })
 );
 

@@ -20,10 +20,10 @@ export enum CheckoutPaths {
 
 //Changing order of this Map will change order of tabbar display
 export const CHECKOUT_PATHS_TO_LABEL_MAP = {
-  'floor-plan': 'Floor plan',
-  'space-photos': 'Space Photos',
-  'add-on-list': 'Add ons',
-  questionnarie: 'Questionnarie',
+  'floor-plan': 'Floor plan //',
+  'space-photos': 'Space Photos //',
+  'add-on-list': 'Add ons //',
+  questionnarie: 'Questionnarie //',
   'review-and-pay': 'Review & Pay',
 };
 
