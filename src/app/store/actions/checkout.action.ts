@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { PackagesBox } from 'src/app/shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
+import { AddOn } from 'src/models/AddOn';
 
 export const checkoutSelectPackage = createAction(
   '[CHECKOUT] SELECT_PACKAGE',
@@ -14,4 +15,19 @@ export const setInfoCheckout = createAction(
 export const setFloorPlanCheckout = createAction(
   '[CHECKOUT] SET_FLOOT_PLAN',
   props<{ file: File }>()
+);
+
+export const setSpacePhotosCheckout = createAction(
+  '[CHECKOUT] SET_SPACE_PHOTOS',
+  props<{ files: FileList }>()
+);
+
+export const setSpacePhotosURLsCheckout = createAction(
+  '[CHECKOUT] SET_SPACE_PHOTOS_URLS',
+  props<{ filesURLs: string[] }>()
+);
+
+export const setAddOnIsSelectedCheckout = createAction(
+  '[CHECKOUT] SELECT_ADD_ON',
+  props<{ addOn: AddOn; isSelected: boolean }>()
 );

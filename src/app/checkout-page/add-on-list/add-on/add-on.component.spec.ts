@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddonListComponent } from './addon-list.component';
+import { AddOnComponent } from './add-on.component';
 
-describe('AddonListComponent', () => {
-  let component: AddonListComponent;
-  let fixture: ComponentFixture<AddonListComponent>;
+describe('AddOnComponent', () => {
+  let component: AddOnComponent;
+  let fixture: ComponentFixture<AddOnComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddonListComponent ]
+      declarations: [ AddOnComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddonListComponent);
+    fixture = TestBed.createComponent(AddOnComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -38,9 +38,12 @@ export class UploadComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.data.supportedFileTypes =
+      this.data.supportedFileTypes || SUPPERTED_FILES;
+
     this.data.info =
       this.data.info ||
-      `Make sure that file is in any of the following formats\n ${SUPPERTED_FILES}`;
+      `Make sure that file is in any of the following formats\n ${this.data.supportedFileTypes}`;
   }
 
   ngAfterViewInit(): void {

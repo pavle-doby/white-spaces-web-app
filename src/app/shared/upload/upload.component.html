@@ -4,23 +4,23 @@
   fxLayoutAlign="start center"
   fxLayoutGap="1vw"
 >
-  <div class="upload__message">
+  <div *ngIf="this.data?.message" class="upload__message">
     {{ this.data?.message }}
   </div>
-  <div class="upload__info">
+  <div *ngIf="this.data?.info" class="upload__info">
     {{ this.data?.info }}
   </div>
   <div fxLayout="column" fxLayoutAlign="start center">
-    <button (click)="onUpload()">
+    <div class="checkout__btn" (click)="onUpload()">
       Upload
-    </button>
+    </div>
     <input
       type="file"
       #fileUpload23
       [multiple]="this.data.isMultiple"
-      [accept]="this.supportedFileTypes"
+      [accept]="this.data.supportedFileTypes"
       style="display: none;"
-    />
-    <span class="upload__info"> You can upload: {{ this.data.limit }} </span>
+      />
+      <span class="upload__info"> You can upload: {{ this.data.limit }} </span>
   </div>
 </div>

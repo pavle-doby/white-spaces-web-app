@@ -92,6 +92,24 @@ body {
   }
 }
 
+.basic__btn {
+  padding: 0.4vw 1.5vw 0.4vw 1.5vw;
+  cursor: pointer;
+}
+
+.checkout__btn {
+  @extend .basic__btn;
+  background-color: rgb(27, 0, 105);
+  color: white;
+  border: 0.5 solid rgb(27, 0, 105);
+}
+.checkout__btn--invert {
+  @extend .basic__btn;
+  background-color: transparent;
+  color: black;
+  border: 0.5px solid black;
+}
+
 /* Scrollbar tweaks */
 ::-webkit-scrollbar {
   width: 5px;

@@ -6,13 +6,13 @@ import { CheckoutPageComponent } from './checkout-page.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FloorPalnUploadModule } from './floor-paln-upload/floor-paln-upload.module';
 import { SpacePhotosModule } from './space-photos/space-photos.module';
-import { AddOnsModule } from './add-ons/add-ons.module';
 import { QuestionnaireModule } from './questionnaire/questionnaire.module';
 import { ReviewAndPayModule } from './review-and-pay/review-and-pay.module';
 import { ThankYouPageModule } from './thank-you-page/thank-you-page.module';
 import { LogoModule } from '../shared/logo/logo.module';
 import { TabbarModule } from '../shared/tabbar/tabbar.module';
 import { InfoModule } from '../shared/info/info.module';
+import { AddOnListModule } from './add-on-list/add-on-list.module';
 
 @NgModule({
   declarations: [CheckoutPageComponent],
@@ -22,7 +22,7 @@ import { InfoModule } from '../shared/info/info.module';
     FlexLayoutModule,
     FloorPalnUploadModule,
     SpacePhotosModule,
-    AddOnsModule,
+    AddOnListModule,
     QuestionnaireModule,
     ReviewAndPayModule,
     ThankYouPageModule,

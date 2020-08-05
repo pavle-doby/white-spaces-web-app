@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddOnsComponent } from './add-ons.component';
+import { AddOnComponent } from './add-on.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
-  declarations: [AddOnsComponent],
+  declarations: [AddOnComponent],
   imports: [CommonModule, FlexLayoutModule],
-  exports: [AddOnsComponent],
+  exports: [AddOnComponent],
 })
-export class AddOnsModule {}
+export class AddOnModule {}

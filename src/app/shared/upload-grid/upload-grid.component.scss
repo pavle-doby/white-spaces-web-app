@@ -1,5 +1,16 @@
+$img_size: 7vw;
+$grid_gap: 1vw;
+
 .upload-grid__img {
-  width: 10vw;
-  height: 10vw;
+  width: $img_size;
+  height: $img_size;
   object-fit: cover;
+}
+
+.upload-grid__container {
+  padding: 0;
+}
+
+.upload-grid__img-grid {
+  width: calc(#{$img_size} * 8 + #{$grid_gap} * 8);
 }

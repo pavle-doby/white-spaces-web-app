@@ -12,26 +12,37 @@ const LIMIT = 16;
 export class UploadGridComponent implements OnInit {
   @Input()
   public uploadData: UploadData;
+  @Input()
+  public imgURLs: (string | ArrayBuffer)[] = [];
+  @Input()
+  public files: FileList;
+
   @Output()
   public uploadFilesEvent: EventEmitter<FileList>;
 
-  public imagePath: any;
-  public imgURLs: (string | ArrayBuffer)[] = [];
-
   constructor() {
     this.uploadFilesEvent = new EventEmitter();
+
     //Dobar argument zasto ovakve dodele treba da idu u constructor
     this.uploadData = new UploadData({
       limit: LIMIT,
-    }); 
+    });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.files) {
+      this.showFiles(this.files);
+    }
+  }
 
   public onUploadEvent(files: FileList): void {
-    this.imgURLs = [];
-    //TODO: Catch this event and send files to BE
     this.uploadFilesEvent.emit(files);
+    this.showFiles(files);
+    this.files = files;
+  }
+
+  public showFiles(files: FileList): void {
+    this.imgURLs = [];
     Object.keys(files).forEach((key) => {
       const reader = new FileReader();
       reader.readAsDataURL(files[key]);

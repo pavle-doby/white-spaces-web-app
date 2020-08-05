@@ -1,0 +1,38 @@
+<div
+  class="add-on"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  (mouseenter)="this.showDescription()"
+  (mouseleave)="this.hideDescription()"
+>
+  <div
+    class="width-100"
+    fxLayout="row"
+    fxLayoutAlign="space-between centar"
+    fxLayoutGap="3vw"
+  >
+    <span class="add-on__label">
+      {{ this.addOn.name }}
+    </span>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+      <span class="add-on__label"> ${{ this.addOn.price }} </span>
+      <div
+        [ngClass]="{
+          checkout__btn: this.addOn.isSelected,
+          'checkout__btn--invert': !this.addOn.isSelected
+        }"
+        (click)="this.clickOnAddOn()"
+      >
+        {{ this.addRemoveLabel }}
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="this.toShowDescription"
+    class="add-on__decription"
+    fxLayout="row"
+    fxLayoutAlign="start start"
+  >
+    {{ this.addOn.description }}
+  </div>
+</div>

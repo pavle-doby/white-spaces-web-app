@@ -5,15 +5,15 @@ import { CheckoutPageComponent } from './checkout-page.component';
 import { FloorPalnUploadComponent } from './floor-paln-upload/floor-paln-upload.component';
 import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
 import { SpacePhotosComponent } from './space-photos/space-photos.component';
-import { AddOnsComponent } from './add-ons/add-ons.component';
 import { ReviewAndPayComponent } from './review-and-pay/review-and-pay.component';
+import { AddOnListComponent } from './add-on-list/add-on-list.component';
 
 export const CHECKOUT_ROUTER_OUTLET = 'checkoutSteps';
 
 export enum CheckoutPaths {
   FLOOR_PLAN = 'floor-plan',
   SPACE_PHOTOS = 'space-photos',
-  ADD_ONS = 'add-ons',
+  ADD_ON_LIST = 'add-on-list',
   QUESTIONNARIE = 'questionnarie',
   REVIEW_AND_PAY = 'review-and-pay',
 }
@@ -22,7 +22,7 @@ export enum CheckoutPaths {
 export const CHECKOUT_PATHS_TO_LABEL_MAP = {
   'floor-plan': 'Floor plan',
   'space-photos': 'Space Photos',
-  'add-ons': 'Add ons',
+  'add-on-list': 'Add ons',
   questionnarie: 'Questionnarie',
   'review-and-pay': 'Review & Pay',
 };
@@ -45,8 +45,8 @@ const routes: Routes = [
     outlet: CHECKOUT_ROUTER_OUTLET,
   },
   {
-    path: CheckoutPaths.ADD_ONS,
-    component: AddOnsComponent,
+    path: CheckoutPaths.ADD_ON_LIST,
+    component: AddOnListComponent,
     outlet: CHECKOUT_ROUTER_OUTLET,
   },
   {

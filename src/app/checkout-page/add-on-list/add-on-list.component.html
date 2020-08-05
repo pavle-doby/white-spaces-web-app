@@ -1,0 +1,8 @@
+<div class="add-on-list" fxLayout="column" fxLayoutAlign="start start">
+  <app-add-on
+    class="width-100"
+    *ngFor="let addOn of (this.$chekoutState | async).addOnList"
+    [addOn]="addOn"
+    (addRemoveAddOnEvent)="this.onAddRemoveAddOn($event)"
+  ></app-add-on>
+</div>

@@ -4,6 +4,7 @@ export class UploadData {
   public limit: number;
   public file?: File;
   public isMultiple?: boolean;
+  public supportedFileTypes?: string;
 
   constructor(obj: UploadData) {
     this.message = obj.message;
@@ -11,5 +12,6 @@ export class UploadData {
     this.file = obj.file;
     this.limit = obj.limit;
     this.isMultiple = this.limit > 1;
+    this.supportedFileTypes = obj.supportedFileTypes;
   }
 }
