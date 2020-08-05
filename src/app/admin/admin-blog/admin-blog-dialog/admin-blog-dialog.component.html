@@ -1,1 +1,23 @@
-<p>admin-blog-dialog works!</p>
+<div class="admin-blog-dialog">
+  <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="300px">
+    <h2 mat-dialog-title>Post No. 1</h2>
+    <div fxLayout="column" fxLayoutAlign="start end">
+      <mat-form-field appearance="fill">
+        <mat-label>Creator</mat-label>
+        <mat-select>
+          <mat-option
+            *ngFor="let assignee of creatorMock"
+            [value]="assignee.value"
+          >
+            {{ assignee.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button class="width-100" mat-flat-button color="primary">Post</button>
+    </div>
+  </div>
+
+  <mat-dialog-content class="admin-blog-dialog__content mat-typography">
+    <ckeditor [editor]="editor" [(ngModel)]="editorData"></ckeditor>
+  </mat-dialog-content>
+</div>

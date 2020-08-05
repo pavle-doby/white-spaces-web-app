@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 @Component({
   selector: 'app-admin-blog-dialog',
   templateUrl: './admin-blog-dialog.component.html',
@@ -8,7 +8,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class AdminBlogDialogComponent implements OnInit {
   public data: any;
-
+  public editor = ClassicEditor;
+  public editorData: string = '<p>Hello, world!</p>';
+  public creatorMock: any = [
+    { value: 0, viewValue: 'Natasa Nikolic' },
+    { value: 1, viewValue: 'Admin 2' },
+  ];
   constructor(
     private dialogRef: MatDialogRef<AdminBlogDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data

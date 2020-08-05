@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CheckoutPageModule } from './checkout-page/checkout-page.module';
 import { FloorPalnUploadModule } from './checkout-page/floor-paln-upload/floor-paln-upload.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { FloorPalnUploadModule } from './checkout-page/floor-paln-upload/floor-p
     AppRoutingModule,
     SharedModule,
     FlexLayoutModule,
+    FormsModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {
