@@ -1,33 +1,17 @@
+@import "src/styles.scss";
+
 $form-width: 30vw;
+
+.login-page__logo {
+  margin-top: 15vh;
+}
 
 .login__form {
   width: $form-width;
 }
 
-.login__input-label {
-  font-size: 0.76vw;
-  font-weight: 300;
+.login-page {
+  height: calc(90vh);
+  //TODO: Make this work...
+  // height: calc(100vh - #{$footer-height});
 }
-
-.login__form-width {
-  width: $form-width;
-}
-
-.login__form-width--name-label {
-  width: calc(#{$form-width} / 2 - 1vw);
-}
-
-.login__input {
-  background-color: transparent;
-  border: 0.5px solid black;
-  color: black;
-  padding: 4px;
-  width: 100%;
-}
-
-// .login__btn {
-//   background-color: rgb(27, 0, 105);
-//   color: white;
-//   padding: 0.4vw 1.5vw 0.4vw 1.5vw;
-//   cursor: pointer;
-// }

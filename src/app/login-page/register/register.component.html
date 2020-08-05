@@ -1,0 +1,35 @@
+<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="1vw">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2vw">
+    <div
+      class="login__form-width--name-label"
+      fxLayout="column"
+      fxLayoutAlign="start start"
+    >
+      <span class="login__input-label">Name*</span>
+      <input class="login__input" type="text" />
+    </div>
+    <div
+      class="login__form-width--name-label"
+      fxLayout="column"
+      fxLayoutAlign="start start"
+    >
+      <span class="login__input-label">Surname*</span>
+      <input class="login__input" type="text" />
+    </div>
+  </div>
+  <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
+    <span class="login__input-label">Mail</span>
+    <input class="login__input" type="text" />
+  </div>
+  <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
+    <span class="login__input-label">Password*</span>
+    <input class="login__input" type="text" />
+  </div>
+  <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
+    <span class="login__input-label">Repate password*</span>
+    <input class="login__input" type="text" />
+  </div>
+  <div class="checkout__btn" [routerLink]="['/checkout']">
+    Confirm
+  </div>
+</div>
