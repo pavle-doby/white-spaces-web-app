@@ -20,7 +20,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { CheckoutPageModule } from './checkout-page/checkout-page.module';
 import { FloorPalnUploadModule } from './checkout-page/floor-paln-upload/floor-paln-upload.module';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],

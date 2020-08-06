@@ -35,6 +35,7 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
 
   constructor(public dialog: MatDialog, private adminService: AdminService) {
     this.adminService.getAllOrders().subscribe((res) => console.log(res));
+    console.log(window.localStorage);
   }
   ngOnInit() {
     this.dataSource = new AdminOrdersDataSource();

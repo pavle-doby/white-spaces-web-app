@@ -11,17 +11,36 @@ export const API_URL = 'http://18.221.175.43';
   providedIn: 'root',
 })
 export class AuthService {
-  public isAuthenticated = new BehaviorSubject<boolean>(true); //set for true for testing purposes
-  constructor(private router: Router, private http: HttpClient) {}
+  public isAuthenticated = new BehaviorSubject<boolean>(false); //set for true for testing purposes
+  constructor(private router: Router, private http: HttpClient) {
+    this.isAuth().subscribe(
+      (res) => {
+        this.isAuthenticated.next(true);
+      },
+      (error) => this.isAuthenticated.next(false)
+    );
+  }
+
+  public isAuth(): Observable<any> {
+    return this.http.get(`${API_URL}/api/auth/my_data`, {
+      withCredentials: true,
+    });
+  }
 
   public login(username: string, password: string) {
     this.http
-      .post(`${API_URL}/api/auth/login`, {
-        email: username,
-        password: password,
-      })
+      .post(
+        `${API_URL}/api/auth/login`,
+        {
+          email: username,
+          password: password,
+        },
+        { observe: 'response', withCredentials: true }
+      )
       .subscribe(
-        (res) => this.isAuthenticated.next(true),
+        (res) => {
+          return this.isAuthenticated.next(true);
+        },
         (error) => alert(error.error)
       );
   }

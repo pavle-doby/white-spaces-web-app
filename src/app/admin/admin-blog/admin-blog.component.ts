@@ -41,6 +41,7 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
   public openDialog(order: any): void {
     const dialogRef = this.dialog.open(AdminBlogDialogComponent, {
       data: order,
+      width: '40vw',
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);

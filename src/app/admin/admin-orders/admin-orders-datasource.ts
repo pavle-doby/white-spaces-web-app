@@ -15,6 +15,19 @@ export interface AdminOrdersItem {
   orderDetails: any;
 }
 
+export class AdminOrders implements AdminOrdersItem {
+  id: string | number;
+  customer: string;
+  date: string | Date;
+  orderValue: string;
+  status: number;
+  onProject: string;
+  orderDetails: any;
+  constructor(order: any) {
+    this.id = order.id;
+  }
+}
+
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: AdminOrdersItem[] = [
   {
