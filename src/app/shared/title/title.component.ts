@@ -18,7 +18,7 @@ export class TitleComponent implements OnInit {
 
   public gradientStyle: { 'background-image': string };
   public sizeClass: Record<string, boolean>;
-  
+
   constructor() {
     this.sizeClass = {};
   }
@@ -29,5 +29,6 @@ export class TitleComponent implements OnInit {
     this.gradientStyle = {
       'background-image': this.gradient || DEFAULT_GRADIENT,
     };
+    // this.gradientStyle = { nesto: true };
   }
 }

@@ -96,8 +96,8 @@ export class GradientDirective {
       newEndRGB = diffArray3.map(
         (element) => Math.round((endPercentage * element) / 200) + 1
       );
-      console.log(newStartRGB);
-      console.log(newEndRGB);
+      // console.log(newStartRGB);
+      // console.log(newEndRGB);
 
       this.renderer.setStyle(
         this.element.nativeElement,

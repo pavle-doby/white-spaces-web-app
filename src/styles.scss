@@ -20,7 +20,7 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  overflow-y: hidden;
+  // overflow-y: hidden; ZASTOOOOO?!?!?!?!
   * {
     font-family: "Roboto", sans-serif;
   }
@@ -39,7 +39,8 @@ body {
 }
 
 .app__container {
-  width: calc(5 * #{$page-width});
+  // width: calc(5 * #{$page-width});
+  //width: 100%;
 }
 
 .iframe-container {
@@ -65,6 +66,7 @@ body {
 
 body {
   margin: 0;
+  width: calc(5 * #{$page-width});
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -85,6 +87,19 @@ body {
   }
 }
 
+.table-container {
+  min-width: 60vw;
+  margin-top: 5vh;
+}
+
+.table-dialog {
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  &:hover {
+    color: #4051b5;
+  }
+}
 /* Scrollbar tweaks */
 ::-webkit-scrollbar {
   width: 5px;

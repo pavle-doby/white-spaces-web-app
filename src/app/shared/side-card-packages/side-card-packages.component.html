@@ -32,6 +32,7 @@
       <app-side-card-packages-box
         *ngFor="let package of this.packages"
         [package]="package"
+        (selectEvent)="this.onSelectEvent($event)"
       >
       </app-side-card-packages-box>
     </div>

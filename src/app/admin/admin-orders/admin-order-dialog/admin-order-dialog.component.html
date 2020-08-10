@@ -1,0 +1,42 @@
+<div class="admin-order-dialog">
+  <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="300px">
+    <div fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="5px">
+      <h2 mat-dialog-title>Order No. 1</h2>
+      <span>Client: <b>Petar Mijovic</b> </span>
+      <span>Email: <b>petar.mijovic@email.com</b></span>
+      <span>Package: <b>Medium</b></span>
+      <span>Add ons: <b>Lighting plan, Kitchen plan</b></span>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="space-around center">
+      <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let status of statusArray" [value]="status.value">
+            {{ status.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>On Project</mat-label>
+        <mat-select>
+          <mat-option
+            *ngFor="let assignee of onProjectMock"
+            [value]="assignee.value"
+          >
+            {{ assignee.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <mat-dialog-content class="mat-typography">
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="Floor Plan">Picture Here</mat-tab>
+      <mat-tab label="Photos">Picture Array Here</mat-tab>
+      <mat-tab label="Questionnaire">Questionnaire Response Here</mat-tab>
+    </mat-tab-group>
+  </mat-dialog-content>
+</div>
