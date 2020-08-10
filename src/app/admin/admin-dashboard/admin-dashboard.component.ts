@@ -20,10 +20,19 @@ export class AdminDashboardComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    router: Router,
+    private router: Router,
     private authService: AuthService
-  ) {}
+  ) {
+    console.log(this.router);
+  }
 
+  public get headerName() {
+    let name = this.router.url.slice(7);
+    return (
+      name.charAt(0).toUpperCase() + name.slice(1) ||
+      'White Spaces Redesign - Admin Panel'
+    );
+  }
   public logOut(): void {
     this.authService.logout();
   }

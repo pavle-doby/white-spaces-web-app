@@ -1,24 +1,21 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 @Component({
-  selector: 'app-admin-order-dialog',
-  templateUrl: './admin-order-dialog.component.html',
-  styleUrls: ['./admin-order-dialog.component.scss'],
+  selector: 'app-admin-blog-dialog',
+  templateUrl: './admin-blog-dialog.component.html',
+  styleUrls: ['./admin-blog-dialog.component.scss'],
 })
-export class AdminOrderDialogComponent implements OnInit {
+export class AdminBlogDialogComponent implements OnInit {
   public data: any;
-  public statusArray: any = [
-    { value: 0, viewValue: 'Not Accepted' },
-    { value: 1, viewValue: 'In Progress' },
-    { value: 2, viewValue: 'Finished' },
-  ];
-
-  public onProjectMock: any = [
+  public editor = ClassicEditor;
+  public editorData: string = '<p>Hello, world!</p>';
+  public creatorMock: any = [
     { value: 0, viewValue: 'Natasa Nikolic' },
     { value: 1, viewValue: 'Admin 2' },
   ];
   constructor(
-    private dialogRef: MatDialogRef<AdminOrderDialogComponent>,
+    private dialogRef: MatDialogRef<AdminBlogDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data
   ) {
     this.data = data;

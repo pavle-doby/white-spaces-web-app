@@ -8,6 +8,7 @@ import {
 } from './admin-orders-datasource';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminOrderDialogComponent } from './admin-order-dialog/admin-order-dialog.component';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-admin-orders',
@@ -30,8 +31,12 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
     'onProject',
     'orderDetails',
   ];
+  public data: any;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private adminService: AdminService) {
+    this.adminService.getAllOrders().subscribe((res) => console.log(res));
+    console.log(window.localStorage);
+  }
   ngOnInit() {
     this.dataSource = new AdminOrdersDataSource();
   }

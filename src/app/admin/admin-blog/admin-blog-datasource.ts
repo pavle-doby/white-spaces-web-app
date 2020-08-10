@@ -5,130 +5,98 @@ import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 
 // TODO: Replace this with your own data model type
-export interface AdminOrdersItem {
+export interface AdminBlogItem {
   id: string | number;
-  customer: string;
+  topic: string;
+  creator: string;
   date: string | Date;
-  orderValue: string;
-  status: number;
-  onProject: string;
-  orderDetails: any;
-}
-
-export class AdminOrders implements AdminOrdersItem {
-  id: string | number;
-  customer: string;
-  date: string | Date;
-  orderValue: string;
-  status: number;
-  onProject: string;
-  orderDetails: any;
-  constructor(order: any) {
-    this.id = order.id;
-  }
+  attachment: string;
+  viewBlog: any;
 }
 
 // TODO: replace this with real data from your application
-const EXAMPLE_DATA: AdminOrdersItem[] = [
+const EXAMPLE_DATA: AdminBlogItem[] = [
   {
     id: 1,
-    customer: 'Petar Mijovic',
-    date: '15.06.2020.',
-    orderValue: '1$',
-    status: 0,
-    onProject: 'Natasa Nikolic',
-    orderDetails: 'masivni detalji',
+    topic: 'Topic',
+    creator: 'Natasa Nikolic',
+    date: '15.06.2020',
+    attachment: 'PDF',
+    viewBlog: 'view blog',
   },
   {
     id: 1,
-    customer: 'Petar Mijovic',
-    date: '15.06.2020.',
-    orderValue: '1$',
-    status: 0,
-    onProject: 'Natasa Nikolic',
-    orderDetails: 'masivni detalji',
+    topic: 'Topic',
+    creator: 'Natasa Nikolic',
+    date: '15.06.2020',
+    attachment: 'PDF',
+    viewBlog: 'view blog',
   },
   {
     id: 1,
-    customer: 'Petar Mijovic',
-    date: '15.06.2020.',
-    orderValue: '1$',
-    status: 0,
-    onProject: 'Natasa Nikolic',
-    orderDetails: 'masivni detalji',
+    topic: 'Topic',
+    creator: 'Natasa Nikolic',
+    date: '15.06.2020',
+    attachment: 'PDF',
+    viewBlog: 'view blog',
   },
   {
     id: 1,
-    customer: 'Petar Mijovic',
-    date: '15.06.2020.',
-    orderValue: '1$',
-    status: 0,
-    onProject: 'Natasa Nikolic',
-    orderDetails: 'masivni detalji',
+    topic: 'Topic',
+    creator: 'Natasa Nikolic',
+    date: '15.06.2020',
+    attachment: 'PDF',
+    viewBlog: 'view blog',
   },
   {
     id: 1,
-    customer: 'Petar Mijovic',
-    date: '15.06.2020.',
-    orderValue: '1$',
-    status: 0,
-    onProject: 'Natasa Nikolic',
-    orderDetails: 'masivni detalji',
+    topic: 'Topic',
+    creator: 'Natasa Nikolic',
+    date: '15.06.2020',
+    attachment: 'PDF',
+    viewBlog: 'view blog',
   },
   {
     id: 1,
-    customer: 'Petar Mijovic',
-    date: '15.06.2020.',
-    orderValue: '1$',
-    status: 0,
-    onProject: 'Natasa Nikolic',
-    orderDetails: 'masivni detalji',
+    topic: 'Topic',
+    creator: 'Natasa Nikolic',
+    date: '15.06.2020',
+    attachment: 'PDF',
+    viewBlog: 'view blog',
   },
   {
     id: 1,
-    customer: 'Petar Mijovic',
-    date: '15.06.2020.',
-    orderValue: '1$',
-    status: 0,
-    onProject: 'Natasa Nikolic',
-    orderDetails: 'masivni detalji',
+    topic: 'Topic',
+    creator: 'Natasa Nikolic',
+    date: '15.06.2020',
+    attachment: 'PDF',
+    viewBlog: 'view blog',
   },
   {
     id: 1,
-    customer: 'Petar Mijovic',
-    date: '15.06.2020.',
-    orderValue: '1$',
-    status: 0,
-    onProject: 'Natasa Nikolic',
-    orderDetails: 'masivni detalji',
+    topic: 'Topic',
+    creator: 'Natasa Nikolic',
+    date: '15.06.2020',
+    attachment: 'PDF',
+    viewBlog: 'view blog',
   },
   {
     id: 1,
-    customer: 'Petar Mijovic',
-    date: '15.06.2020.',
-    orderValue: '1$',
-    status: 0,
-    onProject: 'Natasa Nikolic',
-    orderDetails: 'masivni detalji',
-  },
-  {
-    id: 1,
-    customer: 'Petar Mijovic',
-    date: '15.06.2020.',
-    orderValue: '1$',
-    status: 0,
-    onProject: 'Natasa Nikolic',
-    orderDetails: 'masivni detalji',
+    topic: 'Topic',
+    creator: 'Natasa Nikolic',
+    date: '15.06.2020',
+    attachment: 'PDF',
+    viewBlog: 'view blog',
   },
 ];
 
 /**
- * Data source for the AdminOrders view. This class should
+ * Data source for the AdminBlog view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class AdminOrdersDataSource extends DataSource<AdminOrdersItem> {
-  data: AdminOrdersItem[] = EXAMPLE_DATA;
+export class AdminBlogDataSource extends DataSource<AdminBlogItem> {
+  data: AdminBlogItem[] = EXAMPLE_DATA;
   paginator: MatPaginator;
   sort: MatSort;
 
@@ -141,7 +109,7 @@ export class AdminOrdersDataSource extends DataSource<AdminOrdersItem> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<AdminOrdersItem[]> {
+  connect(): Observable<AdminBlogItem[]> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
@@ -167,7 +135,7 @@ export class AdminOrdersDataSource extends DataSource<AdminOrdersItem> {
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: AdminOrdersItem[]) {
+  private getPagedData(data: AdminBlogItem[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
   }
@@ -176,7 +144,7 @@ export class AdminOrdersDataSource extends DataSource<AdminOrdersItem> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: AdminOrdersItem[]) {
+  private getSortedData(data: AdminBlogItem[]) {
     if (!this.sort.active || this.sort.direction === '') {
       return data;
     }
@@ -184,8 +152,8 @@ export class AdminOrdersDataSource extends DataSource<AdminOrdersItem> {
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
-        case 'name':
-          return compare(a.customer, b.customer, isAsc);
+        case 'topic':
+          return compare(a.topic, b.topic, isAsc);
         case 'id':
           return compare(+a.id, +b.id, isAsc);
         default:

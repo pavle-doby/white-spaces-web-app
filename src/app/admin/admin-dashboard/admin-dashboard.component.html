@@ -17,7 +17,7 @@
       <a mat-list-item [routerLink]="'customers'">Customers</a>
       <a mat-list-item [routerLink]="'orders'">Orders</a>
       <a mat-list-item [routerLink]="'packages'">Packages</a>
-      <a mat-list-item href="#">Blog</a>
+      <a mat-list-item [routerLink]="'blog'">Blog</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -32,7 +32,7 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
-      <span>White Spaces Admin Panel</span>
+      <span>{{ this.headerName }}</span>
       <button class="admin-logout" mat-flat-button (click)="this.logOut()">
         Log out
       </button>
