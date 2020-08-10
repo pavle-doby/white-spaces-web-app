@@ -15,9 +15,11 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly router: Router,
-    private readonly $store: Store<AppState>
+    private readonly $store: Store<AppState>,
+    private readonly window: Window
   ) {
     this.$checkoutState = this.$store.select((state) => state.checkout);
+    this.window.document.body.style.width = `100vw`;
   }
 
   ngOnInit(): void {}

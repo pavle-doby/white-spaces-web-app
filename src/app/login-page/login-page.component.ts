@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
   public toRegister: boolean = true;
-  constructor() {}
+  constructor(private readonly window: Window) {
+    this.window.document.body.style.width = `100vw`;
+  }
 
   ngOnInit(): void {}
 
