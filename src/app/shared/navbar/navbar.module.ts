@@ -7,6 +7,7 @@ import { SideCardPackagesModule } from '../side-card-packages/side-card-packages
 import { SideCardAboutModule } from '../side-card-about/side-card-about.module';
 import { SideCardContactModule } from '../side-card-contact/side-card-contact.module';
 import { SideCardModule } from '../side-card/side-card.module';
+import { GradientDirectiveModule } from '../directives/gradient.directive.module';
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -18,6 +19,7 @@ import { SideCardModule } from '../side-card/side-card.module';
     SideCardAboutModule,
     SideCardContactModule,
     SideCardModule,
+    GradientDirectiveModule,
   ],
   exports: [NavbarComponent],
 })
