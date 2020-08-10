@@ -35,7 +35,6 @@ export class AuthService {
           email: username,
           password: password,
         },
-        { observe: 'response', withCredentials: true }
       )
       .subscribe(
         (res) => {
