@@ -13,13 +13,11 @@ export class AppComponent {
   constructor(private readonly window: Window, private router: Router) {
     this.router.events.subscribe((route) => {
       this.isAdmin = this.router.url.includes('admin');
-      console.log(this.isAdmin);
     });
   }
 
   public onMouseWheel($event): void {
     if ($event.wheelDeltaX !== 0) return;
     this.window.scrollBy($event.wheelDelta, 0);
-    console.log($event);
   }
 }
