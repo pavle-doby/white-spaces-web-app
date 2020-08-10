@@ -37,10 +37,6 @@ export class GradientDirective {
   onWindowScroll($event) {
     this.pageXOffset = this.window.pageXOffset;
     this.currentPosition = this.pageXOffset + this.window.innerWidth;
-    console.log(this.pageXOffset);
-    console.log(this.currentPosition);
-    console.log(this.window.innerWidth);
-
     this.calculateRelativeGradient();
   }
 
