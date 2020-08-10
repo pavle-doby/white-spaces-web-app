@@ -15,17 +15,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { YouGetDialogModule } from './home-page/you-get/you-get-dialog/you-get-dialog.module';
 import { YouGetDialogComponent } from './home-page/you-get/you-get-dialog/you-get-dialog.component';
+import { CommonModule } from '@angular/common';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { CheckoutPageModule } from './checkout-page/checkout-page.module';
 import { FloorPalnUploadModule } from './checkout-page/floor-paln-upload/floor-paln-upload.module';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
     FlexLayoutModule,
+    FormsModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {
@@ -40,6 +46,8 @@ import { FloorPalnUploadModule } from './checkout-page/floor-paln-upload/floor-p
     OpeningLabelModule,
     MatDialogModule,
     CheckoutPageModule,
+    MatPaginatorModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
