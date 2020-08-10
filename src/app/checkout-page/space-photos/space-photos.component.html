@@ -1,3 +1,10 @@
-<div fxLayout="column" fxLayoutAlign="center center">
-  <p>space-photos works!</p>
+<div
+  class="space-photos__container"
+  fxLayout="column"
+  fxLayoutAlign="start start"
+>
+  <app-upload-grid
+    (uploadFilesEvent)="this.onUploadFilesEvent($event)"
+    [files]="(this.$checkoutState | async).spacePhotos"
+  ></app-upload-grid>
 </div>

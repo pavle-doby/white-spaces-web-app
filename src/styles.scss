@@ -14,16 +14,19 @@ $shadow-h-len: 4px;
 $shadow-v-len: 4px;
 $shadow-blur-radius: 5px;
 
+$footer-height: 2.5vh;
+
 html,
 body {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
-  // overflow-y: hidden; ZASTOOOOO?!?!?!?!
+  overflow-y: hidden;
   * {
     font-family: "Roboto", sans-serif;
   }
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .width-100 {
@@ -34,13 +37,15 @@ body {
   height: 100% !important;
 }
 
+.height-100vh {
+  height: 100vh;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
 
 .app__container {
-  // width: calc(5 * #{$page-width});
-  //width: 100%;
 }
 
 .iframe-container {
@@ -59,17 +64,6 @@ body {
   max-height: 300px;
 }
 
-html,
-body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  width: calc(5 * #{$page-width});
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
 .app__btn {
   width: calc(#{$navbar-width} * 0.2);
   height: $btn-height;
@@ -85,6 +79,26 @@ body {
   &:active {
     border-style: none;
   }
+}
+
+.basic__btn {
+  padding: 0.4vw 1.5vw 0.4vw 1.5vw;
+  cursor: pointer;
+  text-align: center;
+}
+
+.checkout__btn {
+  @extend .basic__btn;
+  background-color: rgb(27, 0, 105);
+  color: white;
+  border: 0.5px solid #1b0069;
+}
+
+.checkout__btn--invert {
+  @extend .basic__btn;
+  background-color: transparent;
+  color: black;
+  border: 0.5px solid black;
 }
 
 .table-container {

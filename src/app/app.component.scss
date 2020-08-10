@@ -5,3 +5,11 @@
   width: 100%;
   justify-content: center;
 }
+
+.app__footer--checkout {
+  width: 100vw;
+}
+
+.app__footer--home {
+  width: calc(5 * #{$page-width}) !important;
+}

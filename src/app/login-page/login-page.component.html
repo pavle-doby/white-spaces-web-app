@@ -1,5 +1,10 @@
-<div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="2vw">
-  <app-logo></app-logo>
+<div
+  class="login-page"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  fxLayoutGap="2vw"
+>
+  <app-logo class="login-page__logo"></app-logo>
   <div
     class="login__form"
     fxLayout="column"
@@ -7,55 +12,16 @@
     fxLayoutGap="1vw"
   >
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
-      <div class="cursor-pointer">Register</div>
+      <div class="cursor-pointer" (click)="this.showRegisterTab()">
+        Register
+      </div>
       <span>//</span>
-      <div class="login__btn">Log in</div>
+      <div class="checkout__btn" (click)="this.showLoginTab()">
+        Log in
+      </div>
     </div>
     <div>Let's create something personal!</div>
-    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2vw">
-      <div
-        class="login__form-width--name-label"
-        fxLayout="column"
-        fxLayoutAlign="start start"
-      >
-        <span class="login__input-label">Name*</span>
-        <input class="login__input" type="text" />
-      </div>
-      <div
-        class="login__form-width--name-label"
-        fxLayout="column"
-        fxLayoutAlign="start start"
-      >
-        <span class="login__input-label">Surname*</span>
-        <input class="login__input" type="text" />
-      </div>
-    </div>
-    <div
-      class="login__form-width"
-      fxLayout="column"
-      fxLayoutAlign="start start"
-    >
-      <span class="login__input-label">Mail</span>
-      <input class="login__input" type="text" />
-    </div>
-    <div
-      class="login__form-width"
-      fxLayout="column"
-      fxLayoutAlign="start start"
-    >
-      <span class="login__input-label">Password*</span>
-      <input class="login__input" type="text" />
-    </div>
-    <div
-      class="login__form-width"
-      fxLayout="column"
-      fxLayoutAlign="start start"
-    >
-      <span class="login__input-label">Repate password*</span>
-      <input class="login__input" type="text" />
-    </div>
-    <div class="login__btn" [routerLink]="['/checkout']">
-      Confirm
-    </div>
+    <app-register *ngIf="this.toRegister"></app-register>
+    <app-login *ngIf="!this.toRegister"></app-login>
   </div>
 </div>

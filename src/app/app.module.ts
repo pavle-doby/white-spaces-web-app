@@ -45,6 +45,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     }),
     OpeningLabelModule,
     MatDialogModule,
+    CheckoutPageModule,
     MatPaginatorModule,
     HttpClientModule,
   ],

@@ -4,7 +4,7 @@ import { SideCadrPackage } from './SideCardPackage';
 import { PackagesBox } from './side-card-packages-box/side-card-packages-box.component';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
-import { selectPackage } from 'src/app/store/actions/checkout.action';
+import { checkoutSelectPackage } from 'src/app/store/actions/checkout.action';
 import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths';
 
@@ -24,7 +24,7 @@ export class SideCardPackagesComponent implements OnInit {
   ngOnInit(): void {}
 
   public onSelectEvent(box: PackagesBox): void {
-    this.$store.dispatch(selectPackage({ packageBox: box }));
+    this.$store.dispatch(checkoutSelectPackage({ packageBox: box }));
     this.router.navigateByUrl(`/${MainRouterPaths.LOGIN}`);
   }
 }

@@ -1,3 +1,27 @@
-<div fxLayout="column" fxLayoutAlign="center center">
-  <p>questionnaire works!</p>
+<div
+  *ngIf="this.questions?.length"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  fxLayoutGap="2vh"
+>
+  <app-question-stepper></app-question-stepper>
+  <app-question
+    [question]="this.questions[this.toShowIndex]"
+    (changeAnswerEvent)="this.onChangeAnswer($event)"
+  >
+  </app-question>
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="1vw">
+    <div
+      class="checkout__btn--invert questionnaire__btn"
+      (click)="this.moveQuestionTo(this.toShowIndex - 1)"
+    >
+      PREVIOUS
+    </div>
+    <div
+      class="checkout__btn questionnaire__btn"
+      (click)="this.moveQuestionTo(this.toShowIndex + 1)"
+    >
+      NEXT
+    </div>
+  </div>
 </div>

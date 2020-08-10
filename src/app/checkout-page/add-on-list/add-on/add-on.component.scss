@@ -1,0 +1,20 @@
+.add-on {
+  padding: 0.5vw 0 0.5vw 0;
+}
+
+.add-on__info {
+  margin-top: 2px;
+  &:hover {
+    color: #b2b2b2;
+  }
+}
+
+.add-on__label {
+  font-size: 1.7vw;
+  font-weight: 400;
+}
+
+.add-on__decription {
+  padding: 0 6vw 0 2vw;
+  font-size: 1vw;
+}
