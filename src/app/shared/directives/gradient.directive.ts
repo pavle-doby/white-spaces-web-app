@@ -30,7 +30,10 @@ export class GradientDirective {
   ) {
     this.documentWidth =
       this.window.document.body.offsetWidth - this.window.innerWidth;
-    this.calculateFirstHalfGradient();
+    this.window.scrollBy(1, 0);
+    this.pageXOffset = this.window.pageXOffset;
+    this.currentPosition = this.pageXOffset + this.window.innerWidth;
+    this.calculateRelativeGradient();
   }
 
   @HostListener('window:scroll', ['$event'])
