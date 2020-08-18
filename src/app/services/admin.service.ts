@@ -19,8 +19,18 @@ export class AdminService {
     return this.http.get(`${API_URL}/order/get-all`, { withCredentials: true });
   }
 
+  public getAllBlogs(): Observable<any> {
+    return this.http.get(`${API_URL}/blog/all`, { withCredentials: true });
+  }
+
   public getAllAdmins(): Observable<any> {
     return this.http.get(`${API_URL}/api/auth/admins`, {
+      withCredentials: true,
+    });
+  }
+
+  public getOrder(id: number): Observable<any> {
+    return this.http.get(`${API_URL}/order/get/${id}`, {
       withCredentials: true,
     });
   }

@@ -11,13 +11,13 @@ export const API_URL = 'http://18.221.175.43';
   providedIn: 'root',
 })
 export class AuthService {
-  public isAuthenticated = new BehaviorSubject<boolean>(false); //set for true for testing purposes
+  public isAuthenticated = new BehaviorSubject<boolean>(true); //set for true for testing purposes
   constructor(private router: Router, private http: HttpClient) {
     this.isAuth().subscribe(
       (res) => {
         this.isAuthenticated.next(true);
       },
-      (error) => this.isAuthenticated.next(false)
+      (error) => this.isAuthenticated.next(true)
     );
   }
 
@@ -35,6 +35,9 @@ export class AuthService {
           email: username,
           password: password,
         },
+        {
+          withCredentials: true,
+        }
       )
       .subscribe(
         (res) => {

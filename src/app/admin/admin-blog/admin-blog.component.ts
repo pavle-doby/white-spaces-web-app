@@ -5,6 +5,7 @@ import { MatTable } from '@angular/material/table';
 import { AdminBlogDataSource, AdminBlogItem } from './admin-blog-datasource';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminBlogDialogComponent } from './admin-blog-dialog/admin-blog-dialog.component';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-admin-blog',
@@ -27,7 +28,9 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
     'viewBlog',
   ];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private adminService: AdminService) {
+    this.adminService.getAllBlogs().subscribe((res) => console.log(res));
+  }
   ngOnInit() {
     this.dataSource = new AdminBlogDataSource();
   }
