@@ -54,4 +54,8 @@ export class AuthService {
       { ...userVM }
     );
   }
+
+  public getUserData(user_id: number): Observable<AppUser> {
+    return this.http.get<AppUser>(`${API_URL}/api/auth/user/${user_id}`);
+  }
 }

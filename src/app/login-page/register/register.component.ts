@@ -3,7 +3,7 @@ import { UserVM } from 'src/models/User.model';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { MainRouterPaths } from 'src/models/MainRouterPaths';
+import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -77,11 +77,10 @@ export class RegisterComponent implements OnInit {
       .then((res) => {
         //TODO: implment logic
         console.log({ res });
+        this.router.navigateByUrl(`/${MainRouterPaths.CHECKOUT}`);
       })
       .catch((err) => {
         console.log({ err });
       });
-
-    //this.router.navigateByUrl(`/${MainRouterPaths.CHECKOUT}`);
   }
 }

@@ -11,7 +11,7 @@ export class PackagesBox {
   public id: any;
 
   constructor(
-    public type: PackageType,
+    public type: string,
     public price: number,
     public description: string
   ) {}

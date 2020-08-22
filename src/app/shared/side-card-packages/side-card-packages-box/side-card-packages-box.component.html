@@ -3,18 +3,20 @@
     *ngIf="this.package"
     class="sc-packages-box__container"
     fxLayout="column"
-    fxLayoutAlign="space-around center"
+    fxLayoutAlign="space-between center"
     fxLayoutGap="10px"
   >
-    <span class="packages-box__type">
-      {{ this.package?.box?.type }}
-    </span>
-    <span class="packages-box__price app__text-shadow">
-      ${{ this.package?.box?.price }}
-    </span>
-    <span class="packages-box__description">
-      {{ this.package?.box?.description }}
-    </span>
+    <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <span class="packages-box__type">
+        {{ this.package?.box?.type }}
+      </span>
+      <span class="packages-box__price app__text-shadow">
+        ${{ this.package?.box?.price }}
+      </span>
+      <span class="packages-box__description">
+        {{ this.package?.box?.description }}
+      </span>
+    </div>
 
     <div
       fxLayoutAlign="center center"

@@ -3,7 +3,7 @@ import {
   PackagesBox,
 } from 'src/app/shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
 import { AddOn } from 'src/models/AddOn';
-import { Question } from 'src/models/Question';
+import { Question } from 'src/models/Question.model';
 import { Action, createReducer, on } from '@ngrx/store';
 import {
   checkoutSelectPackage,

@@ -6,7 +6,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { checkoutSelectPackage } from 'src/app/store/actions/checkout.action';
 import { Router } from '@angular/router';
-import { MainRouterPaths } from 'src/models/MainRouterPaths';
+import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
+import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 
 @Component({
   selector: 'app-side-card-packages',
@@ -14,14 +15,27 @@ import { MainRouterPaths } from 'src/models/MainRouterPaths';
   styleUrls: ['./side-card-packages.component.scss'],
 })
 export class SideCardPackagesComponent implements OnInit {
-  public readonly packages: SideCadrPackage[] = PACKAGES;
+  public packages: SideCadrPackage[] = PACKAGES;
 
   constructor(
     private readonly $store: Store<AppState>,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly CheckOutService: CheckoutService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.CheckOutService.getAllPackages().subscribe((allPackages) => {
+      console.log({ allPackages });
+      this.packages = allPackages.map((packageDTO) => {
+        const box = new PackagesBox(
+          packageDTO.name,
+          packageDTO.price,
+          packageDTO.data.description
+        );
+        return new SideCadrPackage(box, []);
+      });
+    });
+  }
 
   public onSelectEvent(box: PackagesBox): void {
     this.$store.dispatch(checkoutSelectPackage({ packageBox: box }));

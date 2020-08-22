@@ -1,0 +1,4 @@
+* Quesstion nema id?
+* category_id postojece opije, sta mi zavisi od toga?
+* Nema ga description ispod kocke packages... Sta sa tim?
+* Da se promeni name u kao sto je kod mene u enumu PackageType.

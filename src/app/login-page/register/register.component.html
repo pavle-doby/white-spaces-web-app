@@ -14,6 +14,7 @@
       </span>
       <input
         class="login__input"
+        [ngClass]="{ 'login__input--error': !this.isFirstNameValid }"
         type="text"
         [(ngModel)]="this.userVM.first_name"
         required
@@ -33,6 +34,7 @@
       </span>
       <input
         class="login__input"
+        [ngClass]="{ 'login__input--error': !this.isLastNameValid }"
         type="text"
         [(ngModel)]="this.userVM.last_name"
       />
@@ -46,7 +48,12 @@
       Mail*
       {{ !this.isEmailValid ? this.requiredErorrMessage : "" }}
     </span>
-    <input class="login__input" type="email" [(ngModel)]="this.userVM.email" />
+    <input
+      class="login__input"
+      [ngClass]="{ 'login__input--error': !this.isEmailValid }"
+      type="email"
+      [(ngModel)]="this.userVM.email"
+    />
   </div>
   <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
     <span
