@@ -4,7 +4,7 @@
       class="login__input-label"
       [ngClass]="{ 'login__input-label--error': !this.isEmailValid }"
     >
-      Mail*
+      E-Mail*
       {{ !this.isEmailValid ? this.requiredErorrMessage : "" }}
     </span>
     <input class="login__input" type="email" [(ngModel)]="this.email" />

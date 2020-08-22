@@ -8,6 +8,7 @@ import { checkoutSelectPackage } from 'src/app/store/actions/checkout.action';
 import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
+import { LoginParam } from 'src/app/app.config';
 
 @Component({
   selector: 'app-side-card-packages',
@@ -39,6 +40,12 @@ export class SideCardPackagesComponent implements OnInit {
 
   public onSelectEvent(box: PackagesBox): void {
     this.$store.dispatch(checkoutSelectPackage({ packageBox: box }));
-    this.router.navigateByUrl(`/${MainRouterPaths.LOGIN}`);
+    // this.router.navigateByUrl(`/${MainRouterPaths.LOGIN}`);
+    this.router.navigate([`/${MainRouterPaths.LOGIN}`], {
+      queryParams: {
+        login: LoginParam.LOGIN,
+      },
+      queryParamsHandling: 'merge',
+    });
   }
 }
