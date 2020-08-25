@@ -18,6 +18,10 @@
   </div>
 
   <mat-dialog-content class="admin-blog-dialog__content mat-typography">
-    <ckeditor [editor]="editor" [(ngModel)]="editorData"></ckeditor>
+    <ckeditor
+      [editor]="customEditor"
+      [(ngModel)]="editorData"
+      [config]="config"
+    ></ckeditor>
   </mat-dialog-content>
 </div>
