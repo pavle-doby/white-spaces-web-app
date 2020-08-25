@@ -9,6 +9,18 @@ import { API_URL } from './auth.service';
 export class AdminService {
   constructor(private http: HttpClient) {}
 
+  public getAllAddons(): Observable<any> {
+    return this.http.get(`${API_URL}/api/addons/all`, {
+      withCredentials: true,
+    });
+  }
+
+  public getAllPackages(): Observable<any> {
+    return this.http.get(`${API_URL}/api/packages/all`, {
+      withCredentials: true,
+    });
+  }
+
   public getAllCustomers(): Observable<any> {
     return this.http.get(`${API_URL}/api/auth/customers`, {
       withCredentials: true,
