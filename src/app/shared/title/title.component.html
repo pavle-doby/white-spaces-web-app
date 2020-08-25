@@ -1,3 +1,9 @@
-<div class="ws-title" [ngClass]="this.sizeClass" [ngStyle]="this.gradientStyle">
+<div
+  class="ws-title"
+  [ngClass]="this.sizeClass"
+  [ngStyle]="this.gradientStyle"
+  appGradient
+  [letters]="true"
+>
   {{ this.text }}
 </div>
