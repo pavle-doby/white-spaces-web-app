@@ -14,6 +14,8 @@ import {
   setAddOnIsSelectedCheckout,
   setAnswerCheckout,
   setCurrentIndexCheckout,
+  addSpacePhotoURLCheckout,
+  clearSpacePhotosURLsCheckout,
 } from '../actions/checkout.action';
 import {
   TabbarButton,
@@ -22,12 +24,14 @@ import {
 
 import * as _ from 'lodash';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { FloorPlan } from 'src/models/FloorPlan.model';
 
 export interface CheckoutState {
   packageBox?: PackagesBox; // Jedan paket koji je u side kartici
   info: string; //
   infoDesc: string[];
-  floorPlan?: File;
+  floorPlan?: FloorPlan;
   spacePhotos?: FileList;
   spacePhotosURLs: string[];
   addOnList: AddOn[];
@@ -40,9 +44,9 @@ const initState: CheckoutState = {
   packageBox: null,
   info: 'Welcome to your renovation project!',
   infoDesc: [''],
-  floorPlan: null,
+  floorPlan: LocalStorageService.Instance.FloorPlan,
   spacePhotos: null,
-  spacePhotosURLs: [],
+  spacePhotosURLs: LocalStorageService.Instance.SpacePhotosUrls ?? [],
   addOnList: [
     new AddOn({
       id: 0,
@@ -130,14 +134,24 @@ const reducer = createReducer(
   on(setInfoCheckout, (state, { info, description }) => {
     return { ...state, info: info, infoDesc: description };
   }),
-  on(setFloorPlanCheckout, (state, { file }) => {
-    return { ...state, floorPlan: file };
+  on(setFloorPlanCheckout, (state, { floorPlan }) => {
+    LocalStorageService.Instance.FloorPlan = floorPlan;
+    return { ...state, floorPlan: floorPlan };
   }),
   on(setSpacePhotosCheckout, (state, { files }) => {
     return { ...state, spacePhotos: files };
   }),
   on(setSpacePhotosURLsCheckout, (state, { filesURLs }) => {
+    LocalStorageService.Instance.SpacePhotosUrls = filesURLs;
     return { ...state, spacePhotosURLs: filesURLs };
+  }),
+  on(addSpacePhotoURLCheckout, (state, { fileURL }) => {
+    const newUrls = [...state.spacePhotosURLs, fileURL];
+    LocalStorageService.Instance.SpacePhotosUrls = newUrls;
+    return { ...state, spacePhotosURLs: newUrls };
+  }),
+  on(clearSpacePhotosURLsCheckout, (state) => {
+    return { ...state, spacePhotosURLs: [] };
   }),
   on(setAddOnIsSelectedCheckout, (state, { addOn, isSelected }) => {
     const addOns = state.addOnList.map((ao) => {

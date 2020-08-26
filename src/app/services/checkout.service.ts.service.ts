@@ -5,6 +5,7 @@ import { API_URL } from '../app.config';
 import { ShoppingCard } from 'src/models/ShopingCart.model';
 import { AddOnVM } from 'src/models/AddOnVM.model';
 import { PackageDTO } from 'src/models/PackageDTO.model';
+import { Link } from 'src/models/Link.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,15 +13,11 @@ import { PackageDTO } from 'src/models/PackageDTO.model';
 export class CheckoutService {
   constructor(private http: HttpClient) {}
 
-  public uploadFloorPlan(file: File): Observable<any> {
+  public uploadFloorPlan(file: File): Observable<Link> {
     const data = new FormData();
     data.append('file', file);
-
-    return this.http.post(`${API_URL}/api/file/upload`, data, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    
+    return this.http.post<Link>(`${API_URL}/api/file/upload`, data);
   }
 
   //TODO: Make DTO model

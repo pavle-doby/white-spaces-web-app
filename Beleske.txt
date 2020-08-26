@@ -2,3 +2,8 @@
 * category_id postojece opije, sta mi zavisi od toga? 1 - package, 2 - addon //Proveri i nemoj da hardkodiras... 
 * Nema ga description ispod kocke packages... Sta sa tim? - static
 * Da se promeni name u kao sto je kod mene u enumu PackageType. - ce se doda type (ce bude u additional_data) i name
+
+//PItanja 2.0 (26.08.2020.)
+
+* Povlacenje slika? Da li je to povlacenje cele narudzbine ili to cuavamo u local storage ili tako nesto?
+* Da li se useru u bazi appenduju slike ili se prelepljuju?

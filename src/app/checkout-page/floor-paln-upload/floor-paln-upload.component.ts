@@ -8,6 +8,8 @@ import {
 import { UploadData } from 'src/app/shared/upload/upload.model';
 import { Observable } from 'rxjs';
 import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
+import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
+import { FloorPlan } from 'src/models/FloorPlan.model';
 
 const INFO = 'Welcome to your renovation project!';
 
@@ -23,7 +25,10 @@ export class FloorPalnUploadComponent implements OnInit {
 
   public $chekcoutState: Observable<CheckoutState>;
 
-  constructor(private readonly $store: Store<AppState>) {
+  constructor(
+    private readonly $store: Store<AppState>,
+    private readonly checkoutService: CheckoutService
+  ) {
     this.$store.dispatch(setInfoCheckout({ info: INFO, description: [] }));
     this.$chekcoutState = this.$store.select((state) => state.checkout);
 
@@ -37,7 +42,23 @@ export class FloorPalnUploadComponent implements OnInit {
   ngOnInit(): void {}
 
   public onUploadEvent(files: FileList): void {
-    this.$store.dispatch(setFloorPlanCheckout({ file: files[0] }));
-    this.fileName = files[0].name;
+    this.checkoutService
+      .uploadFloorPlan(files[0])
+      .toPromise()
+      .then((linkObj) => {
+        console.log(linkObj);
+        this.$store.dispatch(
+          setFloorPlanCheckout({
+            floorPlan: new FloorPlan({
+              url: linkObj.url,
+              name: files[0].name,
+            }),
+          })
+        );
+        this.fileName = files[0].name;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 }
