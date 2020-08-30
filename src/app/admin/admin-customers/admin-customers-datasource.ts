@@ -83,13 +83,14 @@ const EXAMPLE_DATA: AdminCustomersItem[] = [
  * (including sorting, pagination, and filtering).
  */
 export class AdminCustomersDataSource extends DataSource<AdminCustomersItem> {
-  data: AdminCustomersItem[];
+  data: AdminCustomersItem[] = [];
   paginator: MatPaginator;
   sort: MatSort;
   ready: boolean = false;
 
-  constructor(private adminService: AdminService) {
+  constructor(data?: AdminCustomersItem[]) {
     super();
+    if (data) this.data = data;
   }
 
   /**
@@ -106,13 +107,11 @@ export class AdminCustomersDataSource extends DataSource<AdminCustomersItem> {
       this.sort.sortChange,
     ];
 
-    if (this.data) {
-      return merge(...dataMutations).pipe(
-        map(() => {
-          return this.getPagedData(this.getSortedData([...this.data]));
-        })
-      );
-    }
+    return merge(...dataMutations).pipe(
+      map(() => {
+        return this.getPagedData(this.getSortedData([...this.data]));
+      })
+    );
   }
 
   /**

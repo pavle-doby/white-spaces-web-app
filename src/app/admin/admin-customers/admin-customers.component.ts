@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTable } from '@angular/material/table';
 import {
   AdminCustomersDataSource,
   AdminCustomersItem,
@@ -14,10 +14,10 @@ import { AdminService } from 'src/app/services/admin.service';
   styleUrls: ['./admin-customers.component.scss'],
 })
 export class AdminCustomersComponent implements AfterViewInit, OnInit {
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<AdminCustomersItem>;
-  dataSource: MatTableDataSource<any>;
+  dataSource: AdminCustomersDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = [
@@ -31,18 +31,19 @@ export class AdminCustomersComponent implements AfterViewInit, OnInit {
     this.adminService.getAllCustomers().subscribe((res) => {
       console.log(res);
       res = [...res];
-      this.dataSource = new MatTableDataSource(
-        res.map((element) => {
-          return {
-            customerId: element.id,
-            customerName: element.first_name + element.last_name,
-            dateOfRegistration: '',
-            email: element.email,
-          };
-        })
-      );
-      this.dataSource.paginator = this.paginator;
+      const data = res.map((element) => {
+        return {
+          customerId: element.id,
+          customerName: element.first_name + element.last_name,
+          dateOfRegistration: '',
+          email: element.email,
+        };
+      });
+
+      this.dataSource = new AdminCustomersDataSource(data);
       this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.table.dataSource = this.dataSource;
     });
   }
   ngOnInit() {}

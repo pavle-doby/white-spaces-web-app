@@ -96,7 +96,7 @@ const EXAMPLE_DATA: AdminBlogItem[] = [
  * (including sorting, pagination, and filtering).
  */
 export class AdminBlogDataSource extends DataSource<AdminBlogItem> {
-  data: AdminBlogItem[] = EXAMPLE_DATA;
+  data: AdminBlogItem[] = [];
   paginator: MatPaginator;
   sort: MatSort;
 

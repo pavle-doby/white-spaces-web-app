@@ -1,11 +1,5 @@
-<div class="mat-elevation-z8 table-container" *ngIf="this.dataSource?.data">
-  <table
-    mat-table
-    class="full-width-table"
-    matSort
-    aria-label="Elements"
-    [dataSource]="dataSource.data"
-  >
+<div class="mat-elevation-z8 table-container">
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
     <!-- Id Column -->
     <ng-container matColumnDef="customerId">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Customer Id</th>
@@ -34,5 +28,12 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[25, 50, 100, 250]"> </mat-paginator>
+  <mat-paginator
+    #paginator
+    [length]="dataSource?.data.length"
+    [pageIndex]="0"
+    [pageSize]="50"
+    [pageSizeOptions]="[25, 50, 100, 250]"
+  >
+  </mat-paginator>
 </div>

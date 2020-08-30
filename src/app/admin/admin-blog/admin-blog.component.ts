@@ -52,13 +52,6 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
   }
   ngOnInit() {}
 
-  id: string | number;
-  topic: string;
-  creator: string;
-  date: string | Date;
-  attachment: string;
-  viewBlog: any;
-
   ngAfterViewInit() {}
 
   public openDialog(order?: any): void {
