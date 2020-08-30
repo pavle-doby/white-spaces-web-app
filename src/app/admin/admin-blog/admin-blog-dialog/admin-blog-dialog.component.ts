@@ -14,19 +14,26 @@ export class AdminBlogDialogComponent implements OnInit {
   public data: any;
   //public editor = ClassicEditor;
   public customEditor = Editor;
-  public editorData: string = '<p>Hello, world!</p>';
+  public editorData: string = '';
   public config;
   public creatorMock: any = [
     { value: 0, viewValue: 'Natasa Nikolic' },
     { value: 1, viewValue: 'Admin 2' },
   ];
-
+  public selectedAdmin: string = '';
+  public title: string = '';
+  public isEdit: boolean;
   constructor(
     private dialogRef: MatDialogRef<AdminBlogDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data
   ) {
     this.data = data;
-    console.log(data);
+    if (this.data) {
+      this.isEdit = true;
+      this.title = this.data.topic;
+      this.editorData = this.data.viewBlog;
+      this.selectedAdmin = this.data.creator;
+    } else this.isEdit = false;
   }
 
   ngOnInit() {
@@ -72,19 +79,27 @@ export class AdminBlogDialogComponent implements OnInit {
       licenseKey: '',
       simpleUpload: {
         uploadUrl: 'http://18.221.175.43/api/file/upload',
-        withCredentials: true,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
+        //withCredentials: true,
+        // headers: {
+        //   'Content-Type': 'multipart/form-data',
+        // },
       },
     };
+  }
+  public onOptionClick(value: string) {
+    this.selectedAdmin = value;
   }
   //{{HOST}}/api/file/upload
   public onReady($event) {
     console.log($event, 'lmao');
   }
   public save() {
-    this.dialogRef.close(this.data);
+    this.dialogRef.close({
+      html: this.editorData,
+      creator: this.selectedAdmin,
+      title: this.title,
+      isEdit: this.isEdit,
+    });
   }
 
   close() {

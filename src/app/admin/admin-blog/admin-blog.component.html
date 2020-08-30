@@ -1,3 +1,6 @@
+<button mat-raised-button color="primary" (click)="this.createBlogDialog()">
+  New Blog
+</button>
 <div class="mat-elevation-z8 table-container">
   <table mat-table class="full-width-table" matSort aria-label="Elements">
     <ng-container matColumnDef="id">
@@ -31,7 +34,7 @@
         class="table-dialog"
         mat-cell
         *matCellDef="let row"
-        (click)="openDialog(row.viewBlog)"
+        (click)="openDialog(row)"
       >
         Edit Blog
       </td>

@@ -11,6 +11,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [AdminBlogComponent, AdminBlogDialogComponent],
@@ -25,6 +26,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatDialogModule,
     MatSelectModule,
     MatButtonModule,
+    MatInputModule,
   ],
   exports: [AdminBlogComponent],
   entryComponents: [AdminBlogDialogComponent, CKEditorComponent],

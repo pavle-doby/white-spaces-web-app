@@ -35,6 +35,41 @@ export class AdminService {
     return this.http.get(`${API_URL}/blog/all`, { withCredentials: true });
   }
 
+  public postBlog(
+    html: string,
+    creator: string = 'Natasa Nikolic',
+    title: string = 'test'
+  ): Observable<any> {
+    return this.http.post(
+      `${API_URL}/blog/add`,
+      {
+        text: html,
+        image_links: null,
+        youtube_link: null,
+        additional_data: { blog_title: title },
+      },
+      { withCredentials: true }
+    );
+  }
+
+  public editBlog(
+    id: number,
+    html: string,
+    creator: string = 'Natasa Nikolic',
+    title: string = 'test'
+  ): Observable<any> {
+    return this.http.post(
+      `${API_URL}/blog/${id}/update`,
+      {
+        text: html,
+        image_links: null,
+        youtube_link: null,
+        additional_data: { blog_title: title },
+      },
+      { withCredentials: true }
+    );
+  }
+
   public getAllAdmins(): Observable<any> {
     return this.http.get(`${API_URL}/api/auth/admins`, {
       withCredentials: true,

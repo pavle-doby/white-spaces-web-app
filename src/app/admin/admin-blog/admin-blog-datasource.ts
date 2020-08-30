@@ -10,8 +10,8 @@ export interface AdminBlogItem {
   topic: string;
   creator: string;
   date: string | Date;
-  attachment: string;
-  viewBlog: any;
+  attachment?: string;
+  viewBlog?: any;
 }
 
 // TODO: replace this with real data from your application
@@ -100,8 +100,9 @@ export class AdminBlogDataSource extends DataSource<AdminBlogItem> {
   paginator: MatPaginator;
   sort: MatSort;
 
-  constructor() {
+  constructor(data?: AdminBlogItem[]) {
     super();
+    if (data) this.data = data;
   }
 
   /**

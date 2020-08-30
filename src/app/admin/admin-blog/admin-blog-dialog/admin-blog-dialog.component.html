@@ -1,19 +1,28 @@
 <div class="admin-blog-dialog">
-  <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="300px">
-    <h2 mat-dialog-title>Post No. 1</h2>
-    <div fxLayout="column" fxLayoutAlign="start end">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="300px">
+    <div fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="20px">
       <mat-form-field appearance="fill">
         <mat-label>Creator</mat-label>
-        <mat-select>
+        <mat-select [(value)]="selectedAdmin">
           <mat-option
             *ngFor="let assignee of creatorMock"
             [value]="assignee.value"
+            (click)="this.onOptionClick(assignee.viewValue)"
           >
             {{ assignee.viewValue }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <button class="width-100" mat-flat-button color="primary">Post</button>
+      <input matInput placeholder="Title" [(ngModel)]="title" />
+
+      <button
+        class="width-100"
+        mat-flat-button
+        color="primary"
+        (click)="this.save()"
+      >
+        Post
+      </button>
     </div>
   </div>
 
