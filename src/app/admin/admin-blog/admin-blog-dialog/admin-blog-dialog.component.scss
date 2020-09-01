@@ -1,6 +1,12 @@
 .admin-blog-dialog {
   overflow-x: hidden;
   overflow-y: visible;
+  button {
+    display: block;
+    margin-left: auto;
+    margin-top: 30px;
+    width: 5vw;
+  }
 }
 
 .admin-blog-dialog__content {
