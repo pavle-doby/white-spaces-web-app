@@ -9,7 +9,7 @@ import { NavBtnsInitStateObj } from '../shared/navbar/navbar.content';
 })
 export class HomePageComponent implements OnInit {
   constructor(private window: Window) {
-    this.window.document.body.style.width = `${100 * 5}vw`;
+    //this.window.document.body.style.width = `${100 * 5}vw`;
   }
 
   ngOnInit(): void {}

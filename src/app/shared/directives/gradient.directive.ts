@@ -16,6 +16,7 @@ import { DOCUMENT } from '@angular/common';
 })
 export class GradientDirective {
   @Input() calculateByHeight: boolean = false;
+  @Input() letters: boolean = true;
   private documentWidth: number; //ceo width gradient 0 do 1
   private pageXOffset: number; //razdaljina trenutnog prozora od pocetka documentWidth. gradient 0+pageXOffset do 1.
   private currentPosition: number;
@@ -30,7 +31,10 @@ export class GradientDirective {
   ) {
     this.documentWidth =
       this.window.document.body.offsetWidth - this.window.innerWidth;
-    this.calculateFirstHalfGradient();
+    this.window.scrollBy(1, 0);
+    this.pageXOffset = this.window.pageXOffset;
+    this.currentPosition = this.pageXOffset + this.window.innerWidth;
+    this.calculateRelativeGradient();
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -77,9 +81,10 @@ export class GradientDirective {
       newEndRGB = diffArray2.map(
         (element) => Math.round((endPercentage * element) / 100) + 1
       );
+
       this.renderer.setStyle(
         this.element.nativeElement,
-        'background',
+        `${this.letters ? 'backgroundImage' : 'background'}`,
         `linear-gradient(to right,
       rgba(${242 - newStartRGB[0]}, ${232 - newStartRGB[1]}, ${
           220 - newStartRGB[2]
@@ -101,7 +106,7 @@ export class GradientDirective {
 
       this.renderer.setStyle(
         this.element.nativeElement,
-        'background',
+        `${this.letters ? 'backgroundImage' : 'background'}`,
         `linear-gradient(to right,
       rgba(${217 - newStartRGB[0]}, ${183 - newStartRGB[1]}, ${
           197 - newStartRGB[2]

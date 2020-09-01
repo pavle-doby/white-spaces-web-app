@@ -1,33 +1,33 @@
-  <div
-    class="sc-fqa__container"
-    fxLayout="row"
-    fxLayoutAlign="start start"
-    fxLayoutGap="60px"
-  >
-    <div fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="20px">
-      <div
-        *ngFor="let label of this.navLabels"
-        class="sc-fqa__nav-label cursor-pointer"
-        [ngClass]="{
-          'sc-fqa__nav-label--selected': label === this.selectedNavLabel
-        }"
-        (click)="this.selectContent(label)"
-      >
-        {{ label }}
-      </div>
-    </div>
+<div
+  class="sc-fqa__container"
+  fxLayout="row"
+  fxLayoutAlign="start start"
+  fxLayoutGap="3.125vw"
+>
+  <div fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="1.041vw">
     <div
-      class="sc-fqa__content"
-      fxLayout="column"
-      fxLayoutAlign="start start"
-      fxLayoutGap="10px"
+      *ngFor="let label of this.navLabels"
+      class="sc-fqa__nav-label cursor-pointer"
+      [ngClass]="{
+        'sc-fqa__nav-label--selected': label === this.selectedNavLabel
+      }"
+      (click)="this.selectContent(label)"
     >
-      <app-opening-label
-        *ngFor="let content of this.contentList; index as i"
-        [label]="content.label"
-        [description]="content.description"
-        [toShowDescription]="content.isOpen"
-        (stateChangesEvent)="this.onStatusChange($event, i)"
-      ></app-opening-label>
+      {{ label }}
     </div>
   </div>
+  <div
+    class="sc-fqa__content"
+    fxLayout="column"
+    fxLayoutAlign="start start"
+    fxLayoutGap=".52vw"
+  >
+    <app-opening-label
+      *ngFor="let content of this.contentList; index as i"
+      [label]="content.label"
+      [description]="content.description"
+      [toShowDescription]="content.isOpen"
+      (stateChangesEvent)="this.onStatusChange($event, i)"
+    ></app-opening-label>
+  </div>
+</div>
