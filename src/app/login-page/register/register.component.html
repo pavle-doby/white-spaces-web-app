@@ -5,31 +5,90 @@
       fxLayout="column"
       fxLayoutAlign="start start"
     >
-      <span class="login__input-label">Name*</span>
-      <input class="login__input" type="text" />
+      <span
+        class="login__input-label"
+        [ngClass]="{ 'login__input-label--error': !this.isFirstNameValid }"
+      >
+        Name*
+        {{ !this.isFirstNameValid ? this.requiredErorrMessage : "" }}
+      </span>
+      <input
+        class="login__input"
+        type="text"
+        [(ngModel)]="this.userVM.first_name"
+        required
+      />
     </div>
     <div
       class="login__form-width--name-label"
       fxLayout="column"
       fxLayoutAlign="start start"
     >
-      <span class="login__input-label">Surname*</span>
-      <input class="login__input" type="text" />
+      <span
+        class="login__input-label"
+        [ngClass]="{ 'login__input-label--error': !this.isLastNameValid }"
+      >
+        Surname*
+        {{ !this.isLastNameValid ? this.requiredErorrMessage : "" }}
+      </span>
+      <input
+        class="login__input"
+        type="text"
+        [(ngModel)]="this.userVM.last_name"
+      />
     </div>
   </div>
   <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
-    <span class="login__input-label">Mail</span>
-    <input class="login__input" type="text" />
+    <span
+      class="login__input-label"
+      [ngClass]="{ 'login__input-label--error': !this.isEmailValid }"
+    >
+      Mail*
+      {{ !this.isEmailValid ? this.requiredErorrMessage : "" }}
+    </span>
+    <input class="login__input" type="email" [(ngModel)]="this.userVM.email" />
   </div>
   <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
-    <span class="login__input-label">Password*</span>
-    <input class="login__input" type="text" />
+    <span
+      class="login__input-label"
+      [ngClass]="{
+        'login__input-label--error':
+          !this.isPasswordValid || !this.arePasswordsSame
+      }"
+    >
+      Password*
+      {{ !this.isPasswordValid ? this.requiredErorrMessage : "" }}
+      {{ !this.arePasswordsSame ? this.passwordErrorMEssage : "" }}
+    </span>
+    <input
+      class="login__input"
+      [ngClass]="{ 'login__input--error': !this.isPasswordValid }"
+      type="password"
+      [(ngModel)]="this.userVM.password"
+      (input)="this.repeatPassword$.next($event.target.value)"
+    />
   </div>
+  <!-- (input)="this.checkPasswords($event.target.value)" -->
   <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
-    <span class="login__input-label">Repate password*</span>
-    <input class="login__input" type="text" />
+    <span
+      class="login__input-label"
+      [ngClass]="{
+        'login__input-label--error':
+          !this.isPasswordValid || !this.arePasswordsSame
+      }"
+    >
+      Repeat password*
+      {{ !this.isPasswordValid ? this.requiredErorrMessage : "" }}
+      {{ !this.arePasswordsSame ? this.passwordErrorMEssage : "" }}
+    </span>
+    <input
+      class="login__input"
+      [ngClass]="{ 'login__input--error': !this.isPasswordValid }"
+      type="password"
+      (input)="this.repeatPassword$.next($event.target.value)"
+    />
   </div>
-  <div class="checkout__btn" [routerLink]="['/checkout']">
+  <div class="checkout__btn" (click)="this.submitRegistration()">
     Confirm
   </div>
 </div>

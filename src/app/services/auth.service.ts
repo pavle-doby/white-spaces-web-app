@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { UserVM, AppUser } from 'src/models/User.model';
+import { API_URL } from '../app.config';
 //http://18.221.175.43//api/auth/login
 //email: 'petar@psoftware.com',
 //password: 'test',
 
-export const API_URL = 'http://18.221.175.43';
 @Injectable({
   providedIn: 'root',
 })
@@ -49,5 +50,14 @@ export class AuthService {
 
   public logout() {
     this.isAuthenticated.next(false);
+  }
+
+  public registerUser(
+    userVM: UserVM
+  ): Observable<{ message: string; user_info: AppUser }> {
+    return this.http.post<{ message: string; user_info: AppUser }>(
+      `${API_URL}/api/auth/register`,
+      { ...userVM }
+    );
   }
 }
