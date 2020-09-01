@@ -6,6 +6,7 @@ import {
   AdminCustomersDataSource,
   AdminCustomersItem,
 } from './admin-customers-datasource';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-admin-customers',
@@ -26,13 +27,29 @@ export class AdminCustomersComponent implements AfterViewInit, OnInit {
     'email',
   ];
 
-  ngOnInit() {
-    this.dataSource = new AdminCustomersDataSource();
+  constructor(private adminService: AdminService) {
+    this.adminService.getAllCustomers().subscribe((res) => {
+      console.log(res);
+      res = [...res];
+      const data = res.map((element) => {
+        return {
+          customerId: element.id,
+          customerName: element.first_name + element.last_name,
+          dateOfRegistration: '',
+          email: element.email,
+        };
+      });
+
+      this.dataSource = new AdminCustomersDataSource(data);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.table.dataSource = this.dataSource;
+    });
   }
+  ngOnInit() {}
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+    // console.log(this.table.dataSource);
+    // this.table.dataSource = this.dataSource;
   }
 }

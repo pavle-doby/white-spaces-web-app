@@ -33,6 +33,11 @@ export class AdminDashboardComponent {
       'White Spaces Redesign - Admin Panel'
     );
   }
+
+  public get isDashboard() {
+    return this.router.url === '/admin';
+  }
+
   public logOut(): void {
     this.authService.logout();
   }

@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
+import { AdminService } from 'src/app/services/admin.service';
 
 // TODO: Replace this with your own data model type
 export interface AdminCustomersItem {
@@ -82,12 +83,14 @@ const EXAMPLE_DATA: AdminCustomersItem[] = [
  * (including sorting, pagination, and filtering).
  */
 export class AdminCustomersDataSource extends DataSource<AdminCustomersItem> {
-  data: AdminCustomersItem[] = EXAMPLE_DATA;
+  data: AdminCustomersItem[] = [];
   paginator: MatPaginator;
   sort: MatSort;
+  ready: boolean = false;
 
-  constructor() {
+  constructor(data?: AdminCustomersItem[]) {
     super();
+    if (data) this.data = data;
   }
 
   /**

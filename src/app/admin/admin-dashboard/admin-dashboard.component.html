@@ -7,7 +7,7 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
-    <mat-toolbar
+    <mat-toolbar [routerLink]="'/admin'"
       ><img
         src="../../../assets/images/home/logo.png"
         alt="Whitespaces logo"
@@ -41,6 +41,33 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
+<!-- <div fxLayout="column" fxLayoutAlign="space-between center">
+  <div fxLayout="row" fxLayoutAlign="start start"> -->
+
 <div fxLayout="row" fxLayoutAlign="center center">
+  <section *ngIf="this.isDashboard" class="admin-dashboard__greeting">
+    <div
+      fxLayout="column"
+      fxLayoutAlign="start center"
+      class="admin-dashboard__greeting--message"
+    >
+      <h1>Hello, Petar</h1>
+      <h2>Welcome to your admin panel</h2>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="3vw">
+      <div fxLayout="column" fxLayoutAlign="space-between center">
+        <span>0</span>
+        <span>Finished Projects</span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="space-between center">
+        <span>1</span>
+        <span>In progress projects</span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="space-between center">
+        <span>0</span>
+        <span>Not accepted projects</span>
+      </div>
+    </div>
+  </section>
   <router-outlet></router-outlet>
 </div>

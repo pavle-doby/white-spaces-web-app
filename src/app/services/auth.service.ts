@@ -12,13 +12,13 @@ import { API_URL } from '../app.config';
   providedIn: 'root',
 })
 export class AuthService {
-  public isAuthenticated = new BehaviorSubject<boolean>(false); //set for true for testing purposes
+  public isAuthenticated = new BehaviorSubject<boolean>(true); //set for true for testing purposes
   constructor(private router: Router, private http: HttpClient) {
     this.isAuth().subscribe(
       (res) => {
         this.isAuthenticated.next(true);
       },
-      (error) => this.isAuthenticated.next(false)
+      (error) => this.isAuthenticated.next(true)
     );
   }
 
@@ -30,10 +30,16 @@ export class AuthService {
 
   public login(username: string, password: string) {
     this.http
-      .post(`${API_URL}/api/auth/login`, {
-        email: username,
-        password: password,
-      })
+      .post(
+        `${API_URL}/api/auth/login`,
+        {
+          email: username,
+          password: password,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .subscribe(
         (res) => {
           return this.isAuthenticated.next(true);
