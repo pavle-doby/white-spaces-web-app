@@ -1,16 +1,17 @@
-<section class="blog-page" fxLayout="column" fxLayoutGap="3vw">
+<section
+  class="blog-page"
+  fxLayout="column"
+  fxLayoutGap="3vw"
+  *ngIf="this.ready"
+>
   <div fxLayout="row" fxLayoutGap="3vw" fxLayoutAlign="start center">
-    <app-blog-post></app-blog-post>
-
-    <app-blog-post></app-blog-post>
-
-    <app-blog-post></app-blog-post>
+    <div *ngFor="let post of this.topBlogPosts">
+      <app-blog-post [title]="post.title" [text]="post.text"></app-blog-post>
+    </div>
   </div>
   <div fxLayout="row" fxLayoutGap="3vw" fxLayoutAlign="start center">
-    <app-blog-post></app-blog-post>
-
-    <app-blog-post></app-blog-post>
-
-    <app-blog-post></app-blog-post>
+    <div *ngFor="let post of this.bottomBlogPosts">
+      <app-blog-post [title]="post.title" [text]="post.text"></app-blog-post>
+    </div>
   </div>
 </section>
