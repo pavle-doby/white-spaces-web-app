@@ -1,7 +1,7 @@
 <div class="admin-blog-dialog">
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="300px">
     <div fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="20px">
-      <mat-form-field appearance="fill">
+      <!-- <mat-form-field appearance="fill">
         <mat-label>Creator</mat-label>
         <mat-select [(value)]="selectedAdmin">
           <mat-option
@@ -12,17 +12,11 @@
             {{ assignee.viewValue }}
           </mat-option>
         </mat-select>
-      </mat-form-field>
-      <input matInput placeholder="Title" [(ngModel)]="title" />
-
-      <button
-        class="width-100"
-        mat-flat-button
-        color="primary"
-        (click)="this.save()"
-      >
-        Post
-      </button>
+      </mat-form-field> -->
+      <div fxLayout="row" fxLayoutGap="10px">
+        <mat-label>Title: </mat-label>
+        <input matInput placeholder="Title" [(ngModel)]="title" />
+      </div>
     </div>
   </div>
 
@@ -33,4 +27,6 @@
       [config]="config"
     ></ckeditor>
   </mat-dialog-content>
+
+  <button mat-flat-button color="primary" (click)="this.save()">Post</button>
 </div>

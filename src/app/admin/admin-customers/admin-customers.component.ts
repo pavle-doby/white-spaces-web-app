@@ -20,12 +20,7 @@ export class AdminCustomersComponent implements AfterViewInit, OnInit {
   dataSource: AdminCustomersDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = [
-    'customerId',
-    'customerName',
-    'dateOfRegistration',
-    'email',
-  ];
+  displayedColumns = ['customerId', 'customerName', 'email'];
 
   constructor(private adminService: AdminService) {
     this.adminService.getAllCustomers().subscribe((res) => {
@@ -35,7 +30,6 @@ export class AdminCustomersComponent implements AfterViewInit, OnInit {
         return {
           customerId: element.id,
           customerName: element.first_name + element.last_name,
-          dateOfRegistration: '',
           email: element.email,
         };
       });

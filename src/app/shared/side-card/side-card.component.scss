@@ -1,6 +1,6 @@
 @import "../../../styles.scss";
 
-$sc-additional-height: 16px;
+$sc-additional-height: 0.834vw;
 
 .side-card__container {
   position: fixed;
@@ -11,6 +11,9 @@ $sc-additional-height: 16px;
   height: calc(#{$navbar-width} + #{$sc-additional-height});
 
   color: white;
+  span {
+    font-size: 5vw;
+  }
   // background: rgb(214, 184, 214);
   // background: -moz-linear-gradient(
   //   90deg,

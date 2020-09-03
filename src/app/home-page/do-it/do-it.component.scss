@@ -3,7 +3,10 @@
 .do-it__container {
   width: $page-width;
   //TODO: Set size with variables
-  min-height: 500px;
+  min-height: 50vh;
+  p {
+    font-size: 0.833vw;
+  }
 }
 
 .do-it__video-container {
@@ -15,10 +18,10 @@
 }
 .do-it__content-height {
   //TODO: Set size with variables
-  min-height: 400px !important;
+  min-height: 40vh !important;
 }
 
 .do-it__content-container {
   //TODO: Set size with variables
-  min-height: 450px !important;
+  min-height: 45vh !important;
 }

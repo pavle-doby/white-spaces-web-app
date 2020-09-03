@@ -19,14 +19,7 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
   dataSource: AdminBlogDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = [
-    'id',
-    'topic',
-    'creator',
-    'date',
-    'attachment',
-    'viewBlog',
-  ];
+  displayedColumns = ['id', 'topic', 'date', 'viewBlog'];
 
   constructor(public dialog: MatDialog, private adminService: AdminService) {
     this.adminService.getAllBlogs().subscribe((res) => {
