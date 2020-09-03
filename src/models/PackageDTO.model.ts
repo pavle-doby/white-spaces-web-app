@@ -1,4 +1,5 @@
 import { QuestionDTO } from './QuestionDTO.model';
+import { PackageType } from 'src/app/shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
 
 export interface PackageDTO {
   id: number;
@@ -9,6 +10,7 @@ export interface PackageDTO {
   };
   additional_data: {
     questions: Record<string, QuestionDTO[]>;
+    type: PackageType;
   };
   quantity: number;
   price: number;

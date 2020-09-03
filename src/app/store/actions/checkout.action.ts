@@ -3,6 +3,8 @@ import { PackagesBox } from 'src/app/shared/side-card-packages/side-card-package
 import { AddOn } from 'src/models/AddOn';
 import { Question } from 'src/models/Question.model';
 import { FloorPlan } from 'src/models/FloorPlan.model';
+import { QuestionDTO } from 'src/models/QuestionDTO.model';
+import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
 
 export const checkoutSelectPackage = createAction(
   '[CHECKOUT] SELECT_PACKAGE',
@@ -44,9 +46,29 @@ export const setAddOnIsSelectedCheckout = createAction(
   props<{ addOn: AddOn; isSelected: boolean }>()
 );
 
+export const setAddOnListCheckout = createAction(
+  '[CHECKOUT] SET_ADD_ON_LIST',
+  props<{ addOnList: AddOn[] }>()
+);
+
 export const setAnswerCheckout = createAction(
   '[CHECKOUT] SET_ANSWER',
   props<{ question: Question }>()
+);
+
+export const appendQuestionsCheckout = createAction(
+  '[CHECKOUT] APPEND_QUESTIONS',
+  props<{ questions: Question[] }>()
+);
+
+export const setQuestionsCheckout = createAction(
+  '[CHECKOUT] SET_QUESTIONS',
+  props<{ questions: Question[] }>()
+);
+
+export const setQuestionStepperCheckout = createAction(
+  '[CHECKOUT] SET_QUESTION_STEPPER',
+  props<{ questionStepper: QuestionStepper }>()
 );
 
 export const setCurrentIndexCheckout = createAction(

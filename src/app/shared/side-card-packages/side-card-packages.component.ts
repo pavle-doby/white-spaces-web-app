@@ -1,14 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { PACKAGES } from './side-card-packages.content';
 import { SideCadrPackage } from './SideCardPackage';
 import { PackagesBox } from './side-card-packages-box/side-card-packages-box.component';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
-import { checkoutSelectPackage } from 'src/app/store/actions/checkout.action';
+import {
+  checkoutSelectPackage,
+  appendQuestionsCheckout,
+  setQuestionStepperCheckout,
+  setQuestionsCheckout,
+} from 'src/app/store/actions/checkout.action';
 import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 import { LoginParam } from 'src/app/app.config';
+import { QuestionDTO } from 'src/models/QuestionDTO.model';
+import { Question } from 'src/models/Question.model';
+import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
 
 @Component({
   selector: 'app-side-card-packages',
@@ -16,7 +23,7 @@ import { LoginParam } from 'src/app/app.config';
   styleUrls: ['./side-card-packages.component.scss'],
 })
 export class SideCardPackagesComponent implements OnInit {
-  public packages: SideCadrPackage[] = PACKAGES;
+  public packages: SideCadrPackage[] = [];
 
   constructor(
     private readonly $store: Store<AppState>,
@@ -27,11 +34,29 @@ export class SideCardPackagesComponent implements OnInit {
   ngOnInit(): void {
     this.CheckOutService.getAllPackages().subscribe((allPackages) => {
       console.log({ allPackages });
+
       this.packages = allPackages.map((packageDTO) => {
+        let buffQuestionsDTO: QuestionDTO[] = [];
+        Object.values(packageDTO.additional_data.questions).forEach(
+          (questions) => {
+            buffQuestionsDTO = [...buffQuestionsDTO, ...questions];
+          }
+        );
+        let buffQuestions: Question[] = [];
+        buffQuestions = buffQuestionsDTO.map((question) => {
+          return new Question({
+            id: question.id,
+            question: question.question,
+            image_required: question.image_required,
+          });
+        });
+
         const box = new PackagesBox(
           packageDTO.name,
           packageDTO.price,
-          packageDTO.data.description
+          packageDTO.data.description,
+          packageDTO.additional_data.type,
+          buffQuestions
         );
         return new SideCadrPackage(box, []);
       });
@@ -40,7 +65,21 @@ export class SideCardPackagesComponent implements OnInit {
 
   public onSelectEvent(box: PackagesBox): void {
     this.$store.dispatch(checkoutSelectPackage({ packageBox: box }));
-    // this.router.navigateByUrl(`/${MainRouterPaths.LOGIN}`);
+    console.log({ box });
+
+    this.$store.dispatch(setQuestionsCheckout({ questions: box.questions }));
+
+    this.$store.dispatch(
+      setQuestionStepperCheckout({
+        questionStepper: new QuestionStepper({
+          rangeStart: 0,
+          rangeEnd: 15,
+          numberOfRangeToShow: 16,
+          numberOfSteps: box.questions.length,
+          indexCurrent: 0,
+        }),
+      })
+    );
     this.router.navigate([`/${MainRouterPaths.LOGIN}`], {
       queryParams: {
         login: LoginParam.LOGIN,

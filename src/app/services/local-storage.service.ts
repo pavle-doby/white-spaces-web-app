@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FloorPlan } from 'src/models/FloorPlan.model';
+import { ShoppingCart } from 'src/models/ShopingCart.model';
+import { PackagesBox } from '../shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
+import { Question } from 'src/models/Question.model';
 
 interface FileUrlObj {
   url: string[];
@@ -11,6 +14,7 @@ export enum LocalStorageKey {
   SPACE_PHOTOS_URLS = 'space-photos-urls',
   ADD_ON_LIST = 'add-ons',
   QUESTIONS = 'questions',
+  SHOPPING_CART = 'shopping-cart',
 }
 
 @Injectable({
@@ -55,5 +59,35 @@ export class LocalStorageService {
   public get FloorPlan(): FloorPlan {
     const obj = JSON.parse(this.storage.getItem(LocalStorageKey.FLOOR_PLAN));
     return obj ? new FloorPlan(obj) : null;
+  }
+
+  public set ShoppingCart(obj: ShoppingCart) {
+    this.storage.setItem(LocalStorageKey.SHOPPING_CART, JSON.stringify(obj));
+  }
+
+  public get ShoppingCart(): ShoppingCart {
+    return JSON.parse(
+      this.storage.getItem(LocalStorageKey.SHOPPING_CART)
+    ) as ShoppingCart;
+  }
+
+  public get Questions(): Question[] {
+    return JSON.parse(
+      this.storage.getItem(LocalStorageKey.QUESTIONS)
+    ) as Question[];
+  }
+
+  public set Questions(questions: Question[]) {
+    this.storage.setItem(LocalStorageKey.QUESTIONS, JSON.stringify(questions));
+  }
+
+  public appendQuestions(questions: Question[]): void {
+    const oldQuestions = this.Questions ?? [];
+    const newQuestions = [...oldQuestions, questions];
+    this.storage.setItem(
+      LocalStorageKey.QUESTIONS,
+      JSON.stringify(newQuestions)
+    );
+    console.log('LS:', this.Questions);
   }
 }

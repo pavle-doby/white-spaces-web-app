@@ -1,4 +1,4 @@
-export class ShoppingCard {
+export class ShoppingCart {
   public id: number;
   public datetime: string | Date;
   public state: string;

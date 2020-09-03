@@ -16,6 +16,10 @@ import {
   setCurrentIndexCheckout,
   addSpacePhotoURLCheckout,
   clearSpacePhotosURLsCheckout,
+  setAddOnListCheckout,
+  appendQuestionsCheckout,
+  setQuestionStepperCheckout,
+  setQuestionsCheckout,
 } from '../actions/checkout.action';
 import {
   TabbarButton,
@@ -26,6 +30,7 @@ import * as _ from 'lodash';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { FloorPlan } from 'src/models/FloorPlan.model';
+import { ShoppingCart } from 'src/models/ShopingCart.model';
 
 export interface CheckoutState {
   packageBox?: PackagesBox; // Jedan paket koji je u side kartici
@@ -38,6 +43,7 @@ export interface CheckoutState {
   questions: Question[];
   tabbarButtons: TabbarButton[];
   questionStepper: QuestionStepper;
+  shoppingCart: ShoppingCart;
 }
 
 const initState: CheckoutState = {
@@ -47,83 +53,17 @@ const initState: CheckoutState = {
   floorPlan: LocalStorageService.Instance.FloorPlan,
   spacePhotos: null,
   spacePhotosURLs: LocalStorageService.Instance.SpacePhotosUrls ?? [],
-  addOnList: [
-    new AddOn({
-      id: 0,
-      name: '1 // Lighting plan',
-      description: `Includes all necessary drawings for production company
-    with all dimensions, space distribution and also separated
-    drawings of each element both external and internal.
-    No additional engagement required.
-    You only need to built it!`,
-      price: 179,
-    }),
-    new AddOn({
-      id: 1,
-      name: '2 // Closet drawings',
-      description: `Includes all necessary drawings for production company
-    with all dimensions, space distribution and also separated
-    drawings of each element both external and internal.
-    No additional engagement required.
-    You only need to built it!`,
-      price: 269,
-    }),
-    new AddOn({
-      id: 2,
-      name: '3 // Kitchen plans',
-      description: `Includes all necessary drawings for production company
-    with all dimensions, space distribution and also separated
-    drawings of each element both external and internal.
-    No additional engagement required.
-    You only need to built it!`,
-      price: 399,
-    }),
-  ],
-  questions: [
-    new Question({
-      id: 0,
-      question: 'How are you? 0',
-      index: 0,
-    }),
-    new Question({
-      id: 1,
-      question: 'How are you? 1',
-      index: 1,
-    }),
-    new Question({
-      id: 2,
-      question: 'How are you? 2',
-      index: 2,
-    }),
-    new Question({
-      id: 3,
-      question: 'How are you? 3',
-      index: 3,
-    }),
-    new Question({
-      id: 4,
-      question: 'How are you? 3',
-      index: 4,
-    }),
-    new Question({
-      id: 5,
-      question: 'How are you? 3',
-      index: 5,
-    }),
-    new Question({
-      id: 6,
-      question: 'How are you? 3',
-      index: 6,
-    }),
-  ],
+  addOnList: [],
+  questions: LocalStorageService.Instance.Questions,
   tabbarButtons: getTabbarContnet(),
   questionStepper: new QuestionStepper({
     rangeStart: 0,
-    rangeEnd: 2,
-    numberOfRangeToShow: 3,
-    numberOfSteps: 7,
+    rangeEnd: 15,
+    numberOfRangeToShow: 16,
+    numberOfSteps: LocalStorageService.Instance.Questions.length,
     indexCurrent: 0,
   }),
+  shoppingCart: null,
 };
 
 const reducer = createReducer(
@@ -163,10 +103,25 @@ const reducer = createReducer(
     });
     return { ...state, addOnList: addOns };
   }),
+  on(setAddOnListCheckout, (state, { addOnList }) => {
+    return { ...state, addOnList: addOnList };
+  }),
+  on(setQuestionsCheckout, (state, { questions }) => {
+    LocalStorageService.Instance.Questions = questions;
+    return { ...state, questions: questions };
+  }),
+  on(appendQuestionsCheckout, (state, { questions }) => {
+    LocalStorageService.Instance.appendQuestions(questions);
+    return { ...state, questions: [...state.questions, ...questions] };
+  }),
+  on(setQuestionStepperCheckout, (state, { questionStepper }) => {
+    return { ...state, questionStepper: questionStepper };
+  }),
   on(setAnswerCheckout, (state, { question }) => {
     const newQuestions = state.questions.map((q) => {
       return q.id === question.id ? { ...question } : { ...q };
     });
+    LocalStorageService.Instance.Questions = newQuestions;
 
     return { ...state, questions: newQuestions };
   }),

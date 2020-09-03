@@ -1,19 +1,23 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SideCadrPackage } from '../SideCardPackage';
+import { QuestionDTO } from 'src/models/QuestionDTO.model';
+import { Question } from 'src/models/Question.model';
 
 export enum PackageType {
-  SMALL = 'S // SMALL',
-  MEDIUM = 'M // MEDIUM',
-  LARGE = 'L // LARGE',
+  SMALL = 'S',
+  MEDIUM = 'M',
+  LARGE = 'L',
 }
 
 export class PackagesBox {
   public id: any;
 
   constructor(
-    public type: string,
+    public name: string,
     public price: number,
-    public description: string
+    public description: string,
+    public type: PackageType,
+    public questions: Question[] = []
   ) {}
 }
 
