@@ -8,6 +8,6 @@
 * Da li se useru u bazi appenduju slike ili se prelepljuju?
 * AddOnDTO nema description
 
-* KAd upload-ujes slike posle treba da se doda se doda u order
+* KAd upload-ujes slike posle treba da se doda i u order
 * Kod odgovaranja na pitanja, treba da se proveri da li je potrebna slika i ako jeste da se doda.
 * Odvoji add on pitanja i package pitanja

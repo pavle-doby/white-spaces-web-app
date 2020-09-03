@@ -1,3 +1,39 @@
-<div fxLayout="column" fxLayoutAlign="center center">
-  <p>review-and-pay works!</p>
+<div class="width-100" fxLayout="column" fxLayoutAlign="center center">
+  <div class="width-100" fxLayout="row">
+    <div
+      class="review-pay__left width-100"
+      fxLayout="column"
+      fxLayoutAlign="starat start"
+      fxLayoutGap="10px"
+    >
+      <div>
+        <h2>Order summary</h2>
+        <span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
+        <div>
+          <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+            <span class="review-pay__label">Project</span>
+            <span class="review-pay__info">
+              {{ this.projectName }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="review-pay__right width-100"
+      fxLayout="column"
+      fxLayoutAlign="starat start"
+      fxLayoutGap="10px"
+    >
+      <div>
+        <h2>Order summary</h2>
+        <span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
+        Potvrtda informacija
+      </div>
+    </div>
+  </div>
 </div>

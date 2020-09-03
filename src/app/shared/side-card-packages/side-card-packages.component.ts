@@ -16,6 +16,7 @@ import { LoginParam } from 'src/app/app.config';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
 import { Question } from 'src/models/Question.model';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
+import { convertQuestionsDTOListToQuestionsList } from '../Utilities';
 
 @Component({
   selector: 'app-side-card-packages',
@@ -36,20 +37,9 @@ export class SideCardPackagesComponent implements OnInit {
       console.log({ allPackages });
 
       this.packages = allPackages.map((packageDTO) => {
-        let buffQuestionsDTO: QuestionDTO[] = [];
-        Object.values(packageDTO.additional_data.questions).forEach(
-          (questions) => {
-            buffQuestionsDTO = [...buffQuestionsDTO, ...questions];
-          }
+        const buffQuestions = convertQuestionsDTOListToQuestionsList(
+          packageDTO.additional_data.questions
         );
-        let buffQuestions: Question[] = [];
-        buffQuestions = buffQuestionsDTO.map((question) => {
-          return new Question({
-            id: question.id,
-            question: question.question,
-            image_required: question.image_required,
-          });
-        });
 
         const box = new PackagesBox(
           packageDTO.name,

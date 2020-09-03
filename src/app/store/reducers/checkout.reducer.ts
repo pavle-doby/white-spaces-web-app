@@ -53,14 +53,14 @@ const initState: CheckoutState = {
   floorPlan: LocalStorageService.Instance.FloorPlan,
   spacePhotos: null,
   spacePhotosURLs: LocalStorageService.Instance.SpacePhotosUrls ?? [],
-  addOnList: [],
-  questions: LocalStorageService.Instance.Questions,
+  addOnList: LocalStorageService.Instance.AddOnList ?? [],
+  questions: LocalStorageService.Instance.Questions ?? [],
   tabbarButtons: getTabbarContnet(),
   questionStepper: new QuestionStepper({
     rangeStart: 0,
     rangeEnd: 15,
     numberOfRangeToShow: 16,
-    numberOfSteps: LocalStorageService.Instance.Questions.length,
+    numberOfSteps: LocalStorageService.Instance.Questions?.length ?? 16,
     indexCurrent: 0,
   }),
   shoppingCart: null,
@@ -94,25 +94,55 @@ const reducer = createReducer(
     return { ...state, spacePhotosURLs: [] };
   }),
   on(setAddOnIsSelectedCheckout, (state, { addOn, isSelected }) => {
-    const addOns = state.addOnList.map((ao) => {
-      const isSelec = ao.id === addOn.id ? isSelected : ao.isSelected;
-      return {
-        ...ao,
-        isSelected: isSelec,
-      };
-    });
-    return { ...state, addOnList: addOns };
+    if (isSelected) {
+      LocalStorageService.Instance.appendQuestions(addOn.questions);
+    } else {
+      LocalStorageService.Instance.Questions = LocalStorageService.Instance.Questions.filter(
+        (q) => !addOn.questions.find((addOnQ) => addOnQ.id === q.id)
+      );
+    }
+
+    LocalStorageService.Instance.chageAddOnState(addOn, isSelected);
+    return {
+      ...state,
+      addOnList: LocalStorageService.Instance.AddOnList,
+      questions: LocalStorageService.Instance.Questions,
+      questionStepper: {
+        ...state.questionStepper,
+        numberOfSteps: LocalStorageService.Instance.Questions?.length,
+        indexCurrent: 0,
+        rangeStart: 0,
+        rangeEnd: 15,
+        numberOfRangeToShow: 16,
+      },
+    };
   }),
   on(setAddOnListCheckout, (state, { addOnList }) => {
+    LocalStorageService.Instance.AddOnList = addOnList;
     return { ...state, addOnList: addOnList };
   }),
   on(setQuestionsCheckout, (state, { questions }) => {
     LocalStorageService.Instance.Questions = questions;
-    return { ...state, questions: questions };
+    return {
+      ...state,
+      questions: questions,
+      questionStepper: {
+        ...state.questionStepper,
+        numberOfSteps: questions.length,
+        indexCurrent: 0,
+      },
+    };
   }),
   on(appendQuestionsCheckout, (state, { questions }) => {
     LocalStorageService.Instance.appendQuestions(questions);
-    return { ...state, questions: [...state.questions, ...questions] };
+    return {
+      ...state,
+      questions: [...state.questions, ...questions],
+      questionStepper: {
+        ...state.questionStepper,
+        numberOfSteps: questions.length,
+      },
+    };
   }),
   on(setQuestionStepperCheckout, (state, { questionStepper }) => {
     return { ...state, questionStepper: questionStepper };

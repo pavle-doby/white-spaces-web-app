@@ -10,6 +10,8 @@ import {
 } from 'src/app/store/actions/checkout.action';
 import { AddOn } from 'src/models/AddOn';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
+import { convertQuestionsDTOListToQuestionsList } from 'src/app/shared/Utilities';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 const INFO = `If you feel like you want more you can easily
 customise you package & add extra plans and drawings.`;
@@ -37,19 +39,32 @@ export class AddOnListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.checkoutService.getAllAddOns().subscribe((addOnList) => {
-      this.addOnList = addOnList.map((addOnDTO) => {
-        return new AddOn({
-          id: addOnDTO.id,
-          name: addOnDTO.name,
-          description: addOnDTO.data?.description,
-          price: addOnDTO.price,
-          isSelected: false,
-        });
-      });
+    this.addOnList = LocalStorageService.Instance.AddOnList;
 
-      this.$store.dispatch(setAddOnListCheckout({ addOnList: this.addOnList }));
-    });
+    if (!this.addOnList?.length) {
+      this.checkoutService
+        .getAllAddOns()
+        .toPromise()
+        .then((addOnList) => {
+          this.addOnList = addOnList.map((addOnDTO) => {
+            const questions = convertQuestionsDTOListToQuestionsList(
+              addOnDTO.additional_data.questions
+            );
+            return new AddOn({
+              id: addOnDTO.id,
+              name: addOnDTO.name,
+              description: addOnDTO.data?.description,
+              price: addOnDTO.price,
+              isSelected: false,
+              questions: questions,
+            });
+          });
+
+          this.$store.dispatch(
+            setAddOnListCheckout({ addOnList: this.addOnList })
+          );
+        });
+    }
   }
 
   public onAddRemoveAddOn(addOn: AddOn): void {

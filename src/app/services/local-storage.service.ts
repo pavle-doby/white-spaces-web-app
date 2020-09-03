@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FloorPlan } from 'src/models/FloorPlan.model';
 import { ShoppingCart } from 'src/models/ShopingCart.model';
-import { PackagesBox } from '../shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
 import { Question } from 'src/models/Question.model';
+import { AddOn } from 'src/models/AddOn';
 
 interface FileUrlObj {
   url: string[];
@@ -25,8 +25,6 @@ export class LocalStorageService {
 
   public storage: Storage = localStorage;
 
-  private spacePhotsUrlsObj: FileUrlObj;
-
   private constructor() {}
 
   public static get Instance(): LocalStorageService {
@@ -34,22 +32,14 @@ export class LocalStorageService {
   }
 
   public set SpacePhotosUrls(spacePhotosUrls: string[]) {
-    this.spacePhotsUrlsObj = {
-      url: spacePhotosUrls,
-    };
-
     this.storage.setItem(
       LocalStorageKey.SPACE_PHOTOS_URLS,
-      JSON.stringify(this.spacePhotsUrlsObj)
+      JSON.stringify(spacePhotosUrls)
     );
   }
 
   public get SpacePhotosUrls(): string[] {
-    this.spacePhotsUrlsObj = JSON.parse(
-      this.storage.getItem(LocalStorageKey.SPACE_PHOTOS_URLS)
-    );
-
-    return this.spacePhotsUrlsObj.url;
+    return JSON.parse(this.storage.getItem(LocalStorageKey.SPACE_PHOTOS_URLS));
   }
 
   public set FloorPlan(floorPlan: FloorPlan) {
@@ -83,11 +73,28 @@ export class LocalStorageService {
 
   public appendQuestions(questions: Question[]): void {
     const oldQuestions = this.Questions ?? [];
-    const newQuestions = [...oldQuestions, questions];
+    const newQuestions = [...oldQuestions, ...questions];
     this.storage.setItem(
       LocalStorageKey.QUESTIONS,
       JSON.stringify(newQuestions)
     );
     console.log('LS:', this.Questions);
+  }
+
+  public set AddOnList(addOnList: AddOn[]) {
+    this.storage.setItem(
+      LocalStorageKey.ADD_ON_LIST,
+      JSON.stringify(addOnList)
+    );
+  }
+
+  public get AddOnList(): AddOn[] {
+    return JSON.parse(this.storage.getItem(LocalStorageKey.ADD_ON_LIST));
+  }
+
+  public chageAddOnState(addOn: AddOn, isSelected: boolean): void {
+    this.AddOnList = this.AddOnList.map((ao) => {
+      return ao.id === addOn.id ? { ...addOn, isSelected: isSelected } : ao;
+    });
   }
 }

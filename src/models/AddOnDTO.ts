@@ -8,7 +8,7 @@ export class AddOnDTO {
     description: string;
   };
   public additional_data: {
-    questions: Record<string, QuestionDTO>;
+    questions: Record<string, QuestionDTO[]>;
   };
   public quantity: number;
   public price: number;
