@@ -2,7 +2,7 @@
   width: 2.5vw;
   height: 2.5vw;
 
-  border: 2px solid skyblue;
+  border: 0.1042vw solid skyblue;
   color: skyblue;
 }
 
@@ -12,18 +12,18 @@
 
 //If you change name of this class, change also class Step.
 .question-stepper__step--uncomplited {
-  border: 2px solid grey;
+  border: 0.1042vw solid grey;
   color: grey;
 }
 
 //If you change name of this class, change also class Step.
 .question-stepper__step--current {
-  border: 2px solid #010153;
+  border: 0.1042vw solid #010153;
   color: #010153;
 }
 
 //If you change name of this class, change also class Step.
 .question-stepper__step--complited {
-  border: 2px solid rosybrown;
+  border: 0.1042vw solid rosybrown;
   color: rosybrown;
 }

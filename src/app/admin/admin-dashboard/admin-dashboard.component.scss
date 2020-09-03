@@ -3,7 +3,7 @@
 }
 
 .sidenav {
-  width: 200px;
+  width: 10.5vw;
 }
 
 .sidenav .mat-toolbar {
@@ -18,4 +18,21 @@
 
 .admin-logout {
   margin-left: auto;
+}
+
+.admin-dashboard__greeting {
+  h1 {
+    font-size: 4vw;
+    margin-bottom: 0px;
+  }
+  h2 {
+    font-size: 2.5vw;
+  }
+  span {
+    font-size: 2vw;
+  }
+  .admin-dashboard__greeting--message {
+    margin-bottom: 10vh;
+    margin-top: 10vh;
+  }
 }

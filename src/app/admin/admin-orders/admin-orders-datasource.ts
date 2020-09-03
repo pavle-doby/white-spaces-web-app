@@ -132,8 +132,9 @@ export class AdminOrdersDataSource extends DataSource<AdminOrdersItem> {
   paginator: MatPaginator;
   sort: MatSort;
 
-  constructor() {
+  constructor(data?: AdminOrdersItem[]) {
     super();
+    if (data) this.data = data;
   }
 
   /**

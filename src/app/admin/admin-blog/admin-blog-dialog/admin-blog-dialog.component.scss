@@ -1,8 +1,17 @@
 .admin-blog-dialog {
   overflow-x: hidden;
   overflow-y: visible;
+  button {
+    display: block;
+    margin-left: auto;
+    margin-top: 30px;
+    width: 5vw;
+  }
 }
 
 .admin-blog-dialog__content {
-  margin-top: 50px;
+  margin-top: 5vh;
+}
+::ng-deep .ck-editor__editable {
+  min-height: 200px !important;
 }

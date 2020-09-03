@@ -1,7 +1,7 @@
 <div
   fxLayout="column"
   fxLayoutAlign="start start"
-  fxLayoutGap="10px"
+  fxLayoutGap=".52vw"
   fxFlex
   (mouseenter)="this.showDescription()"
   (mouseleave)="this.hideDescription()"
@@ -10,7 +10,11 @@
   <div class="opening-label__title">
     {{ this.label }}
   </div>
-  <span *ngIf="this.toShowDescription" [@inOutAnimation]>
+  <span
+    *ngIf="this.toShowDescription"
+    [@inOutAnimation]
+    class="opening-label__description"
+  >
     {{ this.description }}
   </span>
 </div>

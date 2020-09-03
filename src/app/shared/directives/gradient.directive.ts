@@ -16,10 +16,12 @@ import { DOCUMENT } from '@angular/common';
 })
 export class GradientDirective {
   @Input() calculateByHeight: boolean = false;
+  @Input() letters: boolean = true;
   private documentWidth: number; //ceo width gradient 0 do 1
   private pageXOffset: number; //razdaljina trenutnog prozora od pocetka documentWidth. gradient 0+pageXOffset do 1.
   private currentPosition: number;
   private elementDim: number;
+  private innerWidth: number;
   // x je objekat linear gradient 0-1
   //boja elementa je onda pageXOffset - 30 : x =documentWidth:(linear gradient ceo)
   constructor(
@@ -28,9 +30,13 @@ export class GradientDirective {
     private readonly document: Document,
     private renderer: Renderer2
   ) {
+    this.innerWidth = this.window.innerWidth;
     this.documentWidth =
       this.window.document.body.offsetWidth - this.window.innerWidth;
-    this.calculateFirstHalfGradient();
+    this.window.scrollBy(1, 0);
+    this.pageXOffset = this.window.pageXOffset;
+    this.currentPosition = this.pageXOffset + this.window.innerWidth;
+    this.calculateRelativeGradient();
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -45,6 +51,8 @@ export class GradientDirective {
   }
 
   private calculateFirstHalfGradient() {
+    this.documentWidth =
+      this.window.document.body.offsetWidth - this.window.innerWidth;
     this.elementDim = this.calculateByHeight
       ? this.element.nativeElement.offsetHeight
       : this.element.nativeElement.offsetWidth;
@@ -70,16 +78,17 @@ export class GradientDirective {
       ((this.currentPosition * 100) / this.window.document.body.offsetWidth) *
       2;
 
-    if (this.currentPosition - 1920 < this.documentWidth / 2) {
+    if (this.currentPosition - this.innerWidth < this.documentWidth / 2) {
       newStartRGB = diffArray2.map((element) =>
         Math.round((startPercentage * element) / 100)
       );
       newEndRGB = diffArray2.map(
         (element) => Math.round((endPercentage * element) / 100) + 1
       );
+
       this.renderer.setStyle(
         this.element.nativeElement,
-        'background',
+        `${this.letters ? 'backgroundImage' : 'background'}`,
         `linear-gradient(to right,
       rgba(${242 - newStartRGB[0]}, ${232 - newStartRGB[1]}, ${
           220 - newStartRGB[2]
@@ -91,17 +100,19 @@ export class GradientDirective {
       );
     } else {
       newStartRGB = diffArray3.map((element) =>
-        Math.round((startPercentage * element) / 200)
+        Math.round(
+          ((((startPercentage - 100) * startPercentage) / 100) * element) / 200
+        )
       );
-      newEndRGB = diffArray3.map(
-        (element) => Math.round((endPercentage * element) / 200) + 1
+      newEndRGB = diffArray3.map((element) =>
+        Math.round(
+          ((((endPercentage - 100) * endPercentage) / 100) * element) / 200
+        )
       );
-      // console.log(newStartRGB);
-      // console.log(newEndRGB);
 
       this.renderer.setStyle(
         this.element.nativeElement,
-        'background',
+        `${this.letters ? 'backgroundImage' : 'background'}`,
         `linear-gradient(to right,
       rgba(${217 - newStartRGB[0]}, ${183 - newStartRGB[1]}, ${
           197 - newStartRGB[2]

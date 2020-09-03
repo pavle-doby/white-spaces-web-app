@@ -3,8 +3,8 @@
     *ngIf="this.package"
     class="sc-packages-box__container"
     fxLayout="column"
-    fxLayoutAlign="space-between center"
-    fxLayoutGap="10px"
+    fxLayoutAlign="space-around center"
+    fxLayoutGap=".52vw"
   >
     <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
       <span class="packages-box__type">
@@ -31,7 +31,7 @@
     class="packages-out-box__conatainer"
     fxLayout="column"
     fxLayoutAlign="start center"
-    fxLayoutGap="10px"
+    fxLayoutGap=".52vw"
   >
     <div
       *ngFor="let desc of this.package.descriptions"

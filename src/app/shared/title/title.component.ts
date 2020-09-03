@@ -26,9 +26,9 @@ export class TitleComponent implements OnInit {
   ngOnInit(): void {
     this.size = this.size || TitleSize.NORMAL_BOLD;
     this.sizeClass[this.size] = true;
-    this.gradientStyle = {
-      'background-image': this.gradient || DEFAULT_GRADIENT,
-    };
+    // this.gradientStyle = {
+    //   'background-image': this.gradient || DEFAULT_GRADIENT,
+    // };
     // this.gradientStyle = { nesto: true };
   }
 }
