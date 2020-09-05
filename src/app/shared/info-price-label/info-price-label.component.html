@@ -1,1 +1,31 @@
-<p>info-price-label works!</p>
+<div
+  class="info-price-label width-100"
+  fxLayout="row"
+  fxLayoutAlign="start start"
+  fxLayoutGap="20px"
+>
+  <span class="info-price-label__label">
+    {{ this.label }}
+  </span>
+  <div
+    class="width-100"
+    fxLayout="column"
+    fxLayoutAlign="start center"
+    fxLayoutGap="10px"
+  >
+    <div
+      *ngFor="let infoPrice of this.infoPriceList"
+      class="width-100 info-price-label__info-price"
+    >
+      <span class="info-price-label__info">
+        {{ infoPrice.info }}
+      </span>
+      <span
+        class="info-price-label__price"
+        [ngClass]="{ 'info-price-label--bold': this.isPriceBold }"
+      >
+        {{ infoPrice.price ? "$" : "" }}{{ infoPrice.price }}
+      </span>
+    </div>
+  </div>
+</div>

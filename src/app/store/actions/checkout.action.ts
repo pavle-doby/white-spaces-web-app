@@ -3,7 +3,6 @@ import { PackagesBox } from 'src/app/shared/side-card-packages/side-card-package
 import { AddOn } from 'src/models/AddOn';
 import { Question } from 'src/models/Question.model';
 import { FloorPlan } from 'src/models/FloorPlan.model';
-import { QuestionDTO } from 'src/models/QuestionDTO.model';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
 
 export const checkoutSelectPackage = createAction(

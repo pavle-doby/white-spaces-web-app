@@ -47,7 +47,7 @@ export interface CheckoutState {
 }
 
 const initState: CheckoutState = {
-  packageBox: null,
+  packageBox: LocalStorageService.Instance.Package,
   info: 'Welcome to your renovation project!',
   infoDesc: [''],
   floorPlan: LocalStorageService.Instance.FloorPlan,
@@ -69,6 +69,7 @@ const initState: CheckoutState = {
 const reducer = createReducer(
   initState,
   on(checkoutSelectPackage, (state, { packageBox }) => {
+    LocalStorageService.Instance.Package = packageBox;
     return { ...state, packageBox: packageBox };
   }),
   on(setInfoCheckout, (state, { info, description }) => {

@@ -6,19 +6,59 @@
       fxLayoutAlign="starat start"
       fxLayoutGap="10px"
     >
-      <div>
-        <h2>Order summary</h2>
-        <span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span>
+      <div class="review-pay__left-header">
+        <h1>Order summary</h1>
+        <span>
+          Here is short summary of your order. You will receive full invoice via
+          mail after the purchase is complete.
+        </span>
       </div>
-      <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
-        <div>
-          <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-            <span class="review-pay__label">Project</span>
-            <span class="review-pay__info">
-              {{ this.projectName }}
-            </span>
-          </div>
-        </div>
+      <div
+        class="review-pay__label-group width-100"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap="10px"
+      >
+        <app-info-price-label
+          class="width-100"
+          [label]="this.projectInfo.label"
+          [infoPriceList]="this.projectInfo.infoPriceList"
+        ></app-info-price-label>
+        <app-info-price-label
+          class="width-100"
+          [label]="this.customerInfo.label"
+          [infoPriceList]="this.customerInfo.infoPriceList"
+        ></app-info-price-label>
+      </div>
+      <div
+        class="review-pay__label-group width-100"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap="10px"
+      >
+        <app-info-price-label
+          class="width-100"
+          [label]="this.packageInfo.label"
+          [infoPriceList]="this.packageInfo.infoPriceList"
+        ></app-info-price-label>
+        <app-info-price-label
+          class="width-100"
+          [label]="this.addOnInfo.label"
+          [infoPriceList]="this.addOnInfo.infoPriceList"
+        ></app-info-price-label>
+      </div>
+      <div
+        class="review-pay__label-group width-100"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap="10px"
+      >
+        <app-info-price-label
+          class="width-100"
+          [label]="this.totalInfo.label"
+          [infoPriceList]="this.totalInfo.infoPriceList"
+          [isPriceBold]="true"
+        ></app-info-price-label>
       </div>
     </div>
     <div
@@ -28,12 +68,17 @@
       fxLayoutGap="10px"
     >
       <div>
-        <h2>Order summary</h2>
-        <span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span>
+        <h1>Payment details</h1>
+        <span>
+          Please note that the value of your order will be charged to your card
+          instantly
+        </span>
       </div>
-      <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
-        Potvrtda informacija
-      </div>
+      <div
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap="10px"
+      ></div>
     </div>
   </div>
 </div>

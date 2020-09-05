@@ -3,10 +3,9 @@ import { FloorPlan } from 'src/models/FloorPlan.model';
 import { ShoppingCart } from 'src/models/ShopingCart.model';
 import { Question } from 'src/models/Question.model';
 import { AddOn } from 'src/models/AddOn';
+import { AppUser } from 'src/models/User.model';
+import { PackagesBox } from '../shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
 
-interface FileUrlObj {
-  url: string[];
-}
 
 export enum LocalStorageKey {
   PACKAGE = 'package',
@@ -15,6 +14,7 @@ export enum LocalStorageKey {
   ADD_ON_LIST = 'add-ons',
   QUESTIONS = 'questions',
   SHOPPING_CART = 'shopping-cart',
+  USER = 'user',
 }
 
 @Injectable({
@@ -78,7 +78,6 @@ export class LocalStorageService {
       LocalStorageKey.QUESTIONS,
       JSON.stringify(newQuestions)
     );
-    console.log('LS:', this.Questions);
   }
 
   public set AddOnList(addOnList: AddOn[]) {
@@ -96,5 +95,21 @@ export class LocalStorageService {
     this.AddOnList = this.AddOnList.map((ao) => {
       return ao.id === addOn.id ? { ...addOn, isSelected: isSelected } : ao;
     });
+  }
+
+  public get User(): AppUser {
+    return JSON.parse(this.storage.getItem(LocalStorageKey.USER));
+  }
+
+  public set User(user: AppUser) {
+    this.storage.setItem(LocalStorageKey.USER, JSON.stringify(user));
+  }
+
+  public get Package(): PackagesBox {
+    return JSON.parse(this.storage.getItem(LocalStorageKey.PACKAGE));
+  }
+
+  public set Package(packageBox: PackagesBox) {
+    this.storage.setItem(LocalStorageKey.PACKAGE, JSON.stringify(packageBox));
   }
 }
