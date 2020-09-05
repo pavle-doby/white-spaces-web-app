@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AppState } from 'src/app/store';
 import { Store } from '@ngrx/store';
 import { setInfoCheckout } from 'src/app/store/actions/checkout.action';
-import { KeyValue } from '@angular/common';
-import { KeyValuePair } from 'src/models/KeyValuePair.model';
 import { InfoPrice } from 'src/models/InfoPrice.model';
 import { InfoPriceLabelInputs } from 'src/app/shared/info-price-label/info-price-label.component';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AppUser } from 'src/models/User.model';
 import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
 
@@ -25,7 +23,26 @@ export class ReviewAndPayComponent implements OnInit {
   public addOnInfo: InfoPriceLabelInputs;
   public totalInfo: InfoPriceLabelInputs;
 
+  public fullName: string;
+  public address: string;
+  public email: string;
+  public iAgreeToTerms: boolean = false;
+
+  public isFullNameValid$: Subject<string>;
+  public isAddressValid$: Subject<string>;
+  public isEmailValid$: Subject<string>;
+
+  public isFullNameValid: boolean = true;
+  public isAddressValid: boolean = true;
+  public isEmailValid: boolean = true;
+
+  public requiredErorrMessage: string = 'required';
+
   constructor(private readonly $store: Store<AppState>) {
+    this.isFullNameValid$ = new Subject();
+    this.isAddressValid$ = new Subject();
+    this.isEmailValid$ = new Subject();
+
     this.projectInfo = new InfoPriceLabelInputs({
       label: 'Project: ',
     });
@@ -48,6 +65,16 @@ export class ReviewAndPayComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isFullNameValid$.subscribe((fullName) => {
+      this.isFullNameValid = !!fullName;
+    });
+    this.isAddressValid$.subscribe((address) => {
+      this.isAddressValid = !!address;
+    });
+    this.isEmailValid$.subscribe((email) => {
+      this.isEmailValid = !!email;
+    });
+
     this.user$.subscribe((user) => {
       const firstName = user.first_name;
       const firstNameLength = user.first_name.length;

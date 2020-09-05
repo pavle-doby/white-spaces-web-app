@@ -55,10 +55,7 @@ export class SideCardPackagesComponent implements OnInit {
 
   public onSelectEvent(box: PackagesBox): void {
     this.$store.dispatch(checkoutSelectPackage({ packageBox: box }));
-    console.log({ box });
-
     this.$store.dispatch(setQuestionsCheckout({ questions: box.questions }));
-
     this.$store.dispatch(
       setQuestionStepperCheckout({
         questionStepper: new QuestionStepper({
@@ -70,11 +67,9 @@ export class SideCardPackagesComponent implements OnInit {
         }),
       })
     );
-    this.router.navigate([`/${MainRouterPaths.LOGIN}`], {
-      queryParams: {
-        login: LoginParam.LOGIN,
-      },
-      queryParamsHandling: 'merge',
-    });
+
+    this.router.navigateByUrl(
+      `/${MainRouterPaths.LOGIN}?login=${LoginParam.LOGIN}`
+    );
   }
 }

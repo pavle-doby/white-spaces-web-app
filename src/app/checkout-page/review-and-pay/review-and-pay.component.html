@@ -67,7 +67,7 @@
       fxLayoutAlign="starat start"
       fxLayoutGap="10px"
     >
-      <div>
+      <div class="review-pay__right-header">
         <h1>Payment details</h1>
         <span>
           Please note that the value of your order will be charged to your card
@@ -75,10 +75,91 @@
         </span>
       </div>
       <div
+        class="width-100"
         fxLayout="column"
         fxLayoutAlign="start start"
-        fxLayoutGap="10px"
-      ></div>
+        fxLayoutGap="20px"
+      >
+        <div
+          class="width-100"
+          fxLayout="column"
+          fxLayoutAlign="start start"
+          fxLayoutGap="5px"
+        >
+          <span
+            class="review-pay__input-label"
+            [ngClass]="{
+              'review-pay__input-label--error': !this.isFullNameValid
+            }"
+          >
+            Full name*
+            {{ !this.isFullNameValid ? this.requiredErorrMessage : "" }}
+          </span>
+          <input
+            class="review-pay__input width-100"
+            [ngClass]="{ 'review-pay__input--error': !this.isFullNameValid }"
+            type="text"
+            (input)="this.isFullNameValid$.next($event.target.value)"
+            [(ngModel)]="this.fullName"
+          />
+        </div>
+        <div
+          class="width-100"
+          fxLayout="column"
+          fxLayoutAlign="start start"
+          fxLayoutGap="5px"
+        >
+          <span
+            class="review-pay__input-label"
+            [ngClass]="{
+              'review-pay__input-label--error': !this.isAddressValid
+            }"
+          >
+            Address*
+            {{ !this.isAddressValid ? this.requiredErorrMessage : "" }}
+          </span>
+          <input
+            class="review-pay__input width-100"
+            [ngClass]="{ 'review-pay__input--error': !this.isAddressValid }"
+            type="text"
+            (input)="this.isAddressValid$.next($event.target.value)"
+            [(ngModel)]="this.address"
+          />
+        </div>
+        <div
+          class="width-100"
+          fxLayout="column"
+          fxLayoutAlign="start start"
+          fxLayoutGap="5px"
+        >
+          <span
+            class="review-pay__input-label"
+            [ngClass]="{
+              'review-pay__input-label--error': !this.isEmailValid
+            }"
+          >
+            E-mail*
+            {{ !this.isEmailValid ? this.requiredErorrMessage : "" }}
+          </span>
+          <input
+            class="review-pay__input width-100"
+            [ngClass]="{ 'review-pay__input--error': !this.isEmailValid }"
+            type="text"
+            (input)="this.isEmailValid$.next($event.target.value)"
+            [(ngModel)]="this.email"
+          />
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+          <input
+            type="checkbox"
+            name="iAgreeToTerms"
+            [(ngModel)]="this.iAgreeToTerms"
+          />
+          <span> I agree to </span>
+          <a href="#"> Terms of Service</a>
+        </div>
+        <button class="review-pay__btn" appGradient>Make payment</button>
+      </div>
     </div>
   </div>
 </div>
