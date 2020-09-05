@@ -1,3 +1,165 @@
-<div fxLayout="column" fxLayoutAlign="center center">
-  <p>review-and-pay works!</p>
+<div class="width-100" fxLayout="column" fxLayoutAlign="center center">
+  <div class="width-100" fxLayout="row">
+    <div
+      class="review-pay__left width-100"
+      fxLayout="column"
+      fxLayoutAlign="starat start"
+      fxLayoutGap="10px"
+    >
+      <div class="review-pay__left-header">
+        <h1>Order summary</h1>
+        <span>
+          Here is short summary of your order. You will receive full invoice via
+          mail after the purchase is complete.
+        </span>
+      </div>
+      <div
+        class="review-pay__label-group width-100"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap="10px"
+      >
+        <app-info-price-label
+          class="width-100"
+          [label]="this.projectInfo.label"
+          [infoPriceList]="this.projectInfo.infoPriceList"
+        ></app-info-price-label>
+        <app-info-price-label
+          class="width-100"
+          [label]="this.customerInfo.label"
+          [infoPriceList]="this.customerInfo.infoPriceList"
+        ></app-info-price-label>
+      </div>
+      <div
+        class="review-pay__label-group width-100"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap="10px"
+      >
+        <app-info-price-label
+          class="width-100"
+          [label]="this.packageInfo.label"
+          [infoPriceList]="this.packageInfo.infoPriceList"
+        ></app-info-price-label>
+        <app-info-price-label
+          class="width-100"
+          [label]="this.addOnInfo.label"
+          [infoPriceList]="this.addOnInfo.infoPriceList"
+        ></app-info-price-label>
+      </div>
+      <div
+        class="review-pay__label-group width-100"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap="10px"
+      >
+        <app-info-price-label
+          class="width-100"
+          [label]="this.totalInfo.label"
+          [infoPriceList]="this.totalInfo.infoPriceList"
+          [isPriceBold]="true"
+        ></app-info-price-label>
+      </div>
+    </div>
+    <div
+      class="review-pay__right width-100"
+      fxLayout="column"
+      fxLayoutAlign="starat start"
+      fxLayoutGap="10px"
+    >
+      <div class="review-pay__right-header">
+        <h1>Payment details</h1>
+        <span>
+          Please note that the value of your order will be charged to your card
+          instantly
+        </span>
+      </div>
+      <div
+        class="width-100"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap="20px"
+      >
+        <div
+          class="width-100"
+          fxLayout="column"
+          fxLayoutAlign="start start"
+          fxLayoutGap="5px"
+        >
+          <span
+            class="review-pay__input-label"
+            [ngClass]="{
+              'review-pay__input-label--error': !this.isFullNameValid
+            }"
+          >
+            Full name*
+            {{ !this.isFullNameValid ? this.requiredErorrMessage : "" }}
+          </span>
+          <input
+            class="review-pay__input width-100"
+            [ngClass]="{ 'review-pay__input--error': !this.isFullNameValid }"
+            type="text"
+            (input)="this.isFullNameValid$.next($event.target.value)"
+            [(ngModel)]="this.fullName"
+          />
+        </div>
+        <div
+          class="width-100"
+          fxLayout="column"
+          fxLayoutAlign="start start"
+          fxLayoutGap="5px"
+        >
+          <span
+            class="review-pay__input-label"
+            [ngClass]="{
+              'review-pay__input-label--error': !this.isAddressValid
+            }"
+          >
+            Address*
+            {{ !this.isAddressValid ? this.requiredErorrMessage : "" }}
+          </span>
+          <input
+            class="review-pay__input width-100"
+            [ngClass]="{ 'review-pay__input--error': !this.isAddressValid }"
+            type="text"
+            (input)="this.isAddressValid$.next($event.target.value)"
+            [(ngModel)]="this.address"
+          />
+        </div>
+        <div
+          class="width-100"
+          fxLayout="column"
+          fxLayoutAlign="start start"
+          fxLayoutGap="5px"
+        >
+          <span
+            class="review-pay__input-label"
+            [ngClass]="{
+              'review-pay__input-label--error': !this.isEmailValid
+            }"
+          >
+            E-mail*
+            {{ !this.isEmailValid ? this.requiredErorrMessage : "" }}
+          </span>
+          <input
+            class="review-pay__input width-100"
+            [ngClass]="{ 'review-pay__input--error': !this.isEmailValid }"
+            type="text"
+            (input)="this.isEmailValid$.next($event.target.value)"
+            [(ngModel)]="this.email"
+          />
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+          <input
+            type="checkbox"
+            name="iAgreeToTerms"
+            [(ngModel)]="this.iAgreeToTerms"
+          />
+          <span> I agree to </span>
+          <a href="#"> Terms of Service</a>
+        </div>
+        <button class="review-pay__btn" appGradient>Make payment</button>
+      </div>
+    </div>
+  </div>
 </div>

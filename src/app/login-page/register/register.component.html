@@ -14,9 +14,11 @@
       </span>
       <input
         class="login__input"
+        [ngClass]="{ 'login__input--error': !this.isFirstNameValid }"
         type="text"
         [(ngModel)]="this.userVM.first_name"
         required
+        (input)="this.isFirstNameValid$.next($event.target.value)"
       />
     </div>
     <div
@@ -33,8 +35,10 @@
       </span>
       <input
         class="login__input"
+        [ngClass]="{ 'login__input--error': !this.isLastNameValid }"
         type="text"
         [(ngModel)]="this.userVM.last_name"
+        (input)="this.isLastNameValid$.next($event.target.value)"
       />
     </div>
   </div>
@@ -43,10 +47,16 @@
       class="login__input-label"
       [ngClass]="{ 'login__input-label--error': !this.isEmailValid }"
     >
-      Mail*
+      E-Mail*
       {{ !this.isEmailValid ? this.requiredErorrMessage : "" }}
     </span>
-    <input class="login__input" type="email" [(ngModel)]="this.userVM.email" />
+    <input
+      class="login__input"
+      [ngClass]="{ 'login__input--error': !this.isEmailValid }"
+      type="email"
+      [(ngModel)]="this.userVM.email"
+      (input)="this.isEmailValid$.next($event.target.value)"
+    />
   </div>
   <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
     <span
@@ -66,25 +76,26 @@
       type="password"
       [(ngModel)]="this.userVM.password"
       (input)="this.repeatPassword$.next($event.target.value)"
+      (input)="this.isFormValid$.next($event.target.value)"
     />
   </div>
-  <!-- (input)="this.checkPasswords($event.target.value)" -->
   <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
     <span
       class="login__input-label"
       [ngClass]="{
         'login__input-label--error':
-          !this.isPasswordValid || !this.arePasswordsSame
+          !this.isRepeatPasswordValid || !this.arePasswordsSame
       }"
     >
       Repeat password*
-      {{ !this.isPasswordValid ? this.requiredErorrMessage : "" }}
+      {{ !this.isRepeatPasswordValid ? this.requiredErorrMessage : "" }}
       {{ !this.arePasswordsSame ? this.passwordErrorMEssage : "" }}
     </span>
     <input
       class="login__input"
       [ngClass]="{ 'login__input--error': !this.isPasswordValid }"
       type="password"
+      [(ngModel)]="this.repeatPassword"
       (input)="this.repeatPassword$.next($event.target.value)"
     />
   </div>

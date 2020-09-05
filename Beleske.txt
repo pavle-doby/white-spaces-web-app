@@ -1,0 +1,13 @@
+* Quesstion nema id? - ima
+* category_id postojece opije, sta mi zavisi od toga? 1 - package, 2 - addon //Proveri i nemoj da hardkodiras... 
+* Nema ga description ispod kocke packages... Sta sa tim? - static
+* Da se promeni name u kao sto je kod mene u enumu PackageType. - ce se doda type (ce bude u additional_data) i name
+
+//PItanja 2.0 (26.08.2020.)
+
+* Da li se useru u bazi appenduju slike ili se prelepljuju?
+* AddOnDTO nema description
+
+* KAd upload-ujes slike posle treba da se doda i u order
+* Kod odgovaranja na pitanja, treba da se proveri da li je potrebna slika i ako jeste da se doda.
+* Odvoji add on pitanja i package pitanja

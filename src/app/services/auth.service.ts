@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UserVM, AppUser } from 'src/models/User.model';
 import { API_URL } from '../app.config';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store';
+import { setUser } from '../store/actions/user.actions';
 //http://18.221.175.43//api/auth/login
 //email: 'petar@psoftware.com',
 //password: 'test',
@@ -13,7 +16,11 @@ import { API_URL } from '../app.config';
 })
 export class AuthService {
   public isAuthenticated = new BehaviorSubject<boolean>(true); //set for true for testing purposes
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(
+    private readonly router: Router,
+    private readonly http: HttpClient,
+    private readonly store: Store<AppState>
+  ) {
     this.isAuth().subscribe(
       (res) => {
         this.isAuthenticated.next(true);
@@ -42,6 +49,9 @@ export class AuthService {
       )
       .subscribe(
         (res) => {
+          const userInfo = (res as any).user_info as AppUser;
+
+          this.store.dispatch(setUser({ user: userInfo }));
           return this.isAuthenticated.next(true);
         },
         (error) => alert(error.error)
@@ -59,5 +69,9 @@ export class AuthService {
       `${API_URL}/api/auth/register`,
       { ...userVM }
     );
+  }
+
+  public getUserData(user_id: number): Observable<AppUser> {
+    return this.http.get<AppUser>(`${API_URL}/api/auth/user/${user_id}`);
   }
 }

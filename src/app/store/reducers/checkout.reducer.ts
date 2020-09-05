@@ -3,7 +3,7 @@ import {
   PackagesBox,
 } from 'src/app/shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
 import { AddOn } from 'src/models/AddOn';
-import { Question } from 'src/models/Question';
+import { Question } from 'src/models/Question.model';
 import { Action, createReducer, on } from '@ngrx/store';
 import {
   checkoutSelectPackage,
@@ -14,6 +14,12 @@ import {
   setAddOnIsSelectedCheckout,
   setAnswerCheckout,
   setCurrentIndexCheckout,
+  addSpacePhotoURLCheckout,
+  clearSpacePhotosURLsCheckout,
+  setAddOnListCheckout,
+  appendQuestionsCheckout,
+  setQuestionStepperCheckout,
+  setQuestionsCheckout,
 } from '../actions/checkout.action';
 import {
   TabbarButton,
@@ -22,137 +28,131 @@ import {
 
 import * as _ from 'lodash';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { FloorPlan } from 'src/models/FloorPlan.model';
+import { ShoppingCart } from 'src/models/ShopingCart.model';
 
 export interface CheckoutState {
   packageBox?: PackagesBox; // Jedan paket koji je u side kartici
   info: string; //
   infoDesc: string[];
-  floorPlan?: File;
+  floorPlan?: FloorPlan;
   spacePhotos?: FileList;
   spacePhotosURLs: string[];
   addOnList: AddOn[];
   questions: Question[];
   tabbarButtons: TabbarButton[];
   questionStepper: QuestionStepper;
+  shoppingCart: ShoppingCart;
 }
 
 const initState: CheckoutState = {
-  packageBox: null,
+  packageBox: LocalStorageService.Instance.Package,
   info: 'Welcome to your renovation project!',
   infoDesc: [''],
-  floorPlan: null,
+  floorPlan: LocalStorageService.Instance.FloorPlan,
   spacePhotos: null,
-  spacePhotosURLs: [],
-  addOnList: [
-    new AddOn({
-      id: 0,
-      name: '1 // Lighting plan',
-      description: `Includes all necessary drawings for production company
-    with all dimensions, space distribution and also separated
-    drawings of each element both external and internal.
-    No additional engagement required.
-    You only need to built it!`,
-      price: 179,
-    }),
-    new AddOn({
-      id: 1,
-      name: '2 // Closet drawings',
-      description: `Includes all necessary drawings for production company
-    with all dimensions, space distribution and also separated
-    drawings of each element both external and internal.
-    No additional engagement required.
-    You only need to built it!`,
-      price: 269,
-    }),
-    new AddOn({
-      id: 2,
-      name: '3 // Kitchen plans',
-      description: `Includes all necessary drawings for production company
-    with all dimensions, space distribution and also separated
-    drawings of each element both external and internal.
-    No additional engagement required.
-    You only need to built it!`,
-      price: 399,
-    }),
-  ],
-  questions: [
-    new Question({
-      id: 0,
-      question: 'How are you? 0',
-      index: 0,
-    }),
-    new Question({
-      id: 1,
-      question: 'How are you? 1',
-      index: 1,
-    }),
-    new Question({
-      id: 2,
-      question: 'How are you? 2',
-      index: 2,
-    }),
-    new Question({
-      id: 3,
-      question: 'How are you? 3',
-      index: 3,
-    }),
-    new Question({
-      id: 4,
-      question: 'How are you? 3',
-      index: 4,
-    }),
-    new Question({
-      id: 5,
-      question: 'How are you? 3',
-      index: 5,
-    }),
-    new Question({
-      id: 6,
-      question: 'How are you? 3',
-      index: 6,
-    }),
-  ],
+  spacePhotosURLs: LocalStorageService.Instance.SpacePhotosUrls ?? [],
+  addOnList: LocalStorageService.Instance.AddOnList ?? [],
+  questions: LocalStorageService.Instance.Questions ?? [],
   tabbarButtons: getTabbarContnet(),
   questionStepper: new QuestionStepper({
     rangeStart: 0,
-    rangeEnd: 2,
-    numberOfRangeToShow: 3,
-    numberOfSteps: 7,
+    rangeEnd: 15,
+    numberOfRangeToShow: 16,
+    numberOfSteps: LocalStorageService.Instance.Questions?.length ?? 16,
     indexCurrent: 0,
   }),
+  shoppingCart: null,
 };
 
 const reducer = createReducer(
   initState,
   on(checkoutSelectPackage, (state, { packageBox }) => {
+    LocalStorageService.Instance.Package = packageBox;
     return { ...state, packageBox: packageBox };
   }),
   on(setInfoCheckout, (state, { info, description }) => {
     return { ...state, info: info, infoDesc: description };
   }),
-  on(setFloorPlanCheckout, (state, { file }) => {
-    return { ...state, floorPlan: file };
+  on(setFloorPlanCheckout, (state, { floorPlan }) => {
+    LocalStorageService.Instance.FloorPlan = floorPlan;
+    return { ...state, floorPlan: floorPlan };
   }),
   on(setSpacePhotosCheckout, (state, { files }) => {
     return { ...state, spacePhotos: files };
   }),
   on(setSpacePhotosURLsCheckout, (state, { filesURLs }) => {
+    LocalStorageService.Instance.SpacePhotosUrls = filesURLs;
     return { ...state, spacePhotosURLs: filesURLs };
   }),
+  on(addSpacePhotoURLCheckout, (state, { fileURL }) => {
+    const newUrls = [...state.spacePhotosURLs, fileURL];
+    LocalStorageService.Instance.SpacePhotosUrls = newUrls;
+    return { ...state, spacePhotosURLs: newUrls };
+  }),
+  on(clearSpacePhotosURLsCheckout, (state) => {
+    return { ...state, spacePhotosURLs: [] };
+  }),
   on(setAddOnIsSelectedCheckout, (state, { addOn, isSelected }) => {
-    const addOns = state.addOnList.map((ao) => {
-      const isSelec = ao.id === addOn.id ? isSelected : ao.isSelected;
-      return {
-        ...ao,
-        isSelected: isSelec,
-      };
-    });
-    return { ...state, addOnList: addOns };
+    if (isSelected) {
+      LocalStorageService.Instance.appendQuestions(addOn.questions);
+    } else {
+      LocalStorageService.Instance.Questions = LocalStorageService.Instance.Questions.filter(
+        (q) => !addOn.questions.find((addOnQ) => addOnQ.id === q.id)
+      );
+    }
+
+    LocalStorageService.Instance.chageAddOnState(addOn, isSelected);
+    return {
+      ...state,
+      addOnList: LocalStorageService.Instance.AddOnList,
+      questions: LocalStorageService.Instance.Questions,
+      questionStepper: {
+        ...state.questionStepper,
+        numberOfSteps: LocalStorageService.Instance.Questions?.length,
+        indexCurrent: 0,
+        rangeStart: 0,
+        rangeEnd: 15,
+        numberOfRangeToShow: 16,
+      },
+    };
+  }),
+  on(setAddOnListCheckout, (state, { addOnList }) => {
+    LocalStorageService.Instance.AddOnList = addOnList;
+    return { ...state, addOnList: addOnList };
+  }),
+  on(setQuestionsCheckout, (state, { questions }) => {
+    LocalStorageService.Instance.Questions = questions;
+    return {
+      ...state,
+      questions: questions,
+      questionStepper: {
+        ...state.questionStepper,
+        numberOfSteps: questions.length,
+        indexCurrent: 0,
+      },
+    };
+  }),
+  on(appendQuestionsCheckout, (state, { questions }) => {
+    LocalStorageService.Instance.appendQuestions(questions);
+    return {
+      ...state,
+      questions: [...state.questions, ...questions],
+      questionStepper: {
+        ...state.questionStepper,
+        numberOfSteps: questions.length,
+      },
+    };
+  }),
+  on(setQuestionStepperCheckout, (state, { questionStepper }) => {
+    return { ...state, questionStepper: questionStepper };
   }),
   on(setAnswerCheckout, (state, { question }) => {
     const newQuestions = state.questions.map((q) => {
       return q.id === question.id ? { ...question } : { ...q };
     });
+    LocalStorageService.Instance.Questions = newQuestions;
 
     return { ...state, questions: newQuestions };
   }),

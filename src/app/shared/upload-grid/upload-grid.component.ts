@@ -16,6 +16,8 @@ export class UploadGridComponent implements OnInit {
   public imgURLs: (string | ArrayBuffer)[] = [];
   @Input()
   public files: FileList;
+  @Input()
+  public toShowUploadedFilesFromDevice: boolean = false;
 
   @Output()
   public uploadFilesEvent: EventEmitter<FileList>;
@@ -30,18 +32,21 @@ export class UploadGridComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.files) {
-      this.showFiles(this.files);
+    if (this.files && this.toShowUploadedFilesFromDevice) {
+      this.showFilesFromDevice(this.files);
     }
   }
 
   public onUploadEvent(files: FileList): void {
     this.uploadFilesEvent.emit(files);
-    this.showFiles(files);
     this.files = files;
+
+    if (this.toShowUploadedFilesFromDevice) {
+      this.showFilesFromDevice(files);
+    }
   }
 
-  public showFiles(files: FileList): void {
+  public showFilesFromDevice(files: FileList): void {
     this.imgURLs = [];
     Object.keys(files).forEach((key) => {
       const reader = new FileReader();

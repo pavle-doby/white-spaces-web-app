@@ -11,17 +11,18 @@
   >
   </app-question>
   <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="1vw">
-    <div
+    <button
       class="checkout__btn--invert questionnaire__btn"
       (click)="this.moveQuestionTo(this.toShowIndex - 1)"
     >
       PREVIOUS
-    </div>
-    <div
+    </button>
+    <button
+      appGradient
       class="checkout__btn questionnaire__btn"
       (click)="this.moveQuestionTo(this.toShowIndex + 1)"
     >
       NEXT
-    </div>
+    </button>
   </div>
 </div>

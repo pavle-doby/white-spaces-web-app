@@ -5,6 +5,6 @@
 >
   <app-upload-grid
     (uploadFilesEvent)="this.onUploadFilesEvent($event)"
-    [files]="(this.$checkoutState | async).spacePhotos"
+    [imgURLs]="(this.$checkoutState | async).spacePhotosURLs"
   ></app-upload-grid>
 </div>

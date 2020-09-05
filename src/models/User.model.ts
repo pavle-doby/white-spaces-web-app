@@ -10,7 +10,7 @@ export class UserVM {
   public first_name: string;
   public last_name: string;
   public email: string;
-  public password: string;
+  public password?: string;
   public country: string;
   public city: string;
   public phone_number: string;

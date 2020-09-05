@@ -6,15 +6,17 @@
     fxLayoutAlign="space-around center"
     fxLayoutGap=".52vw"
   >
-    <span class="packages-box__type">
-      {{ this.package?.box?.type }}
-    </span>
-    <span class="packages-box__price app__text-shadow">
-      ${{ this.package?.box?.price }}
-    </span>
-    <span class="packages-box__description">
-      {{ this.package?.box?.description }}
-    </span>
+    <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <span class="packages-box__type">
+        {{ this.package?.box?.name }}
+      </span>
+      <span class="packages-box__price app__text-shadow">
+        ${{ this.package?.box?.price }}
+      </span>
+      <span class="packages-box__description">
+        {{ this.package?.box?.description }}
+      </span>
+    </div>
 
     <div
       fxLayoutAlign="center center"
@@ -25,7 +27,7 @@
     </div>
   </div>
 
-  <div
+  <!-- <div
     class="packages-out-box__conatainer"
     fxLayout="column"
     fxLayoutAlign="start center"
@@ -38,5 +40,5 @@
       {{ desc }}
       <br />
     </div>
-  </div>
+  </div> -->
 </div>

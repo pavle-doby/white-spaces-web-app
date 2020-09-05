@@ -1,0 +1,61 @@
+@import "src/styles-colors.scss";
+
+h1 {
+  margin: 0;
+}
+
+.review-pay__left {
+  padding: 20px 80px;
+  max-width: 650px;
+}
+
+.review-pay__right {
+  padding: 20px 80px;
+  max-width: 650px;
+
+  border-left: 2px solid $color-gray-7;
+}
+
+.review-pay__left-header {
+  padding: 10px 20px;
+  min-height: 80px;
+}
+
+.review-pay__right-header {
+  min-height: 100px;
+}
+
+.review-pay__label-group {
+  padding: 10px 20px;
+  border-top: 2px solid $color-gray-7;
+}
+
+.review-pay__btn {
+  font-size: 24px;
+  color: white;
+  padding: 5px 50px;
+  border: none;
+  cursor: pointer;
+}
+
+app-info-price-label {
+  font-size: 24px;
+}
+
+.review-pay__input-label {
+  font-size: 14px;
+}
+
+.review-pay__input {
+  font-size: 24px;
+}
+
+.review-pay__input-label--error {
+  transition: 200ms;
+  color: red;
+}
+
+.review-pay__input--error {
+  transition: 200ms;
+  border: 2px solid red;
+}

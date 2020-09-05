@@ -28,14 +28,20 @@
     </div>
   </div>
   <div fxLayout="column" fxLayoutAlign="start start">
-    <div
-      [ngClass]="{
-        checkout__btn: this.addOn.isSelected,
-        'checkout__btn--invert': !this.addOn.isSelected
-      }"
+    <button
+      *ngIf="this.addOn.isSelected"
+      appGradient
+      class="checkout__btn"
       (click)="this.clickOnAddOn()"
     >
       {{ this.addRemoveLabel }}
-    </div>
+    </button>
+    <button
+      *ngIf="!this.addOn.isSelected"
+      class="checkout__btn--invert"
+      (click)="this.clickOnAddOn()"
+    >
+      {{ this.addRemoveLabel }}
+    </button>
   </div>
 </div>

@@ -1,18 +1,30 @@
 @import "../../../styles-colors.scss";
 
-.sd-packages__title {
+.sc-packages {
+  height: 100%;
+}
+
+.sc-packages__title {
   font-size: 3.4vw;
   font-weight: 800;
 
   margin-top: 3%;
 }
 
-.sd-packages__subtitle {
+.sc-packages__subtitle {
   font-size: 1.1vw;
   font-weight: 500;
 }
 
-.sd-packages__subtitle-decs {
-  font-size: .9vw;
+.sc-packages__subtitle-decs {
+  font-size: 0.9vw;
   width: 60%;
+}
+
+.packages-out-box__description {
+  font-size: 0.7vw;
+  font-weight: 400;
+
+  text-align: left;
+  white-space: pre-line;
 }

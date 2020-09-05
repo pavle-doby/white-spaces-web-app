@@ -5,7 +5,7 @@ import {
   NavBtnsInitStateObj,
 } from './navbar.content';
 import { Router } from '@angular/router';
-import { MainRouterPaths } from 'src/models/MainRouterPaths';
+import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 
 @Component({
   selector: 'app-navbar',

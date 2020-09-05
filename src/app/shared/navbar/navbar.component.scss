@@ -15,6 +15,7 @@
 .navbar__btn {
   width: calc(#{$navbar-width} * 0.2);
   height: $btn-height;
+  border: none;
 }
 
 .navbar__button--active {
