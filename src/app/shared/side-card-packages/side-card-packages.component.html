@@ -32,8 +32,10 @@
     >
       <app-side-card-packages-box
         *ngFor="let package of this.packages"
+        [isSelected]="package.box?.id === (selectedPackageBox$ | async)?.id"
         [package]="package"
         (selectEvent)="this.onSelectEvent($event)"
+        (continueEvent)="this.onContinueEvent()"
       >
       </app-side-card-packages-box>
     </div>

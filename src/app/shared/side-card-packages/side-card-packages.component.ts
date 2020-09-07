@@ -5,18 +5,19 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import {
   checkoutSelectPackage,
-  appendQuestionsCheckout,
   setQuestionStepperCheckout,
   setQuestionsCheckout,
+  setAllPackagesCheckout,
 } from 'src/app/store/actions/checkout.action';
 import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 import { LoginParam } from 'src/app/app.config';
-import { QuestionDTO } from 'src/models/QuestionDTO.model';
-import { Question } from 'src/models/Question.model';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
 import { convertQuestionsDTOListToQuestionsList } from '../Utilities';
+import { async } from '@angular/core/testing';
+import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-side-card-packages',
@@ -25,29 +26,37 @@ import { convertQuestionsDTOListToQuestionsList } from '../Utilities';
 })
 export class SideCardPackagesComponent implements OnInit {
   public packages: SideCadrPackage[] = [];
+  public checkoutState$: Observable<CheckoutState>;
+  public selectedPackageBox$: Observable<PackagesBox>;
 
   constructor(
     private readonly $store: Store<AppState>,
     private readonly router: Router,
     private readonly CheckOutService: CheckoutService
-  ) {}
+  ) {
+    this.checkoutState$ = this.$store.select((state) => state.checkout);
+    this.selectedPackageBox$ = this.$store.select(
+      (state) => state.checkout.packageBox
+    );
+  }
 
   ngOnInit(): void {
-    this.CheckOutService.getAllPackages().subscribe((allPackages) => {
+    this.CheckOutService.getAllPackages().subscribe(async (allPackages) => {
       console.log({ allPackages });
 
       this.packages = allPackages.map((packageDTO) => {
         const buffQuestions = convertQuestionsDTOListToQuestionsList(
           packageDTO.additional_data.questions
         );
-
         const box = new PackagesBox(
           packageDTO.name,
           packageDTO.price,
           packageDTO.data.description,
           packageDTO.additional_data.type,
-          buffQuestions
+          buffQuestions,
+          packageDTO.id
         );
+
         return new SideCadrPackage(box, []);
       });
     });
@@ -68,6 +77,12 @@ export class SideCardPackagesComponent implements OnInit {
       })
     );
 
+    this.router.navigateByUrl(
+      `/${MainRouterPaths.LOGIN}?login=${LoginParam.LOGIN}`
+    );
+  }
+
+  public onContinueEvent(): void {
     this.router.navigateByUrl(
       `/${MainRouterPaths.LOGIN}?login=${LoginParam.LOGIN}`
     );

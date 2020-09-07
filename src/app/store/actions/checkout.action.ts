@@ -4,6 +4,7 @@ import { AddOn } from 'src/models/AddOn';
 import { Question } from 'src/models/Question.model';
 import { FloorPlan } from 'src/models/FloorPlan.model';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
+import { SideCadrPackage } from 'src/app/shared/side-card-packages/SideCardPackage';
 
 export const checkoutSelectPackage = createAction(
   '[CHECKOUT] SELECT_PACKAGE',
@@ -73,4 +74,14 @@ export const setQuestionStepperCheckout = createAction(
 export const setCurrentIndexCheckout = createAction(
   '[CHECKOUT] SET_CURRENT_INDEX',
   props<{ currentIndex: number }>()
+);
+
+export const setAllPackagesCheckout = createAction(
+  '[CHECKOUT] SET_ALL_PACKAGES',
+  props<{ packages: SideCadrPackage[] }>()
+);
+
+export const clearAllPackagesCheckout = createAction(
+  '[CHECKOUT] CLEAR_ALL_PACKAGES',
+  props()
 );

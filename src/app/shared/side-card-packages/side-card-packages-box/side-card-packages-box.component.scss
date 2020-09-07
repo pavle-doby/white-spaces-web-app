@@ -40,6 +40,19 @@ $sc-packages-width: 13vw;
   cursor: pointer !important;
 }
 
+.packages-box__continue {
+  width: 90%;
+
+  margin-bottom: 5%;
+  padding: 3.5%;
+
+  font-size: 1vw;
+  font-weight: 600;
+
+  border: 2px solid white;
+  cursor: pointer !important;
+}
+
 .packages-out-box__conatainer {
   width: $sc-packages-width;
   padding: 2.5%;
