@@ -1,13 +1,25 @@
 <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="1vw">
   <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
-    <span class="login__input-label">Mail</span>
-    <input class="login__input" type="text" />
+    <span
+      class="login__input-label"
+      [ngClass]="{ 'login__input-label--error': !this.isEmailValid }"
+    >
+      E-Mail*
+      {{ !this.isEmailValid ? this.requiredErorrMessage : "" }}
+    </span>
+    <input class="login__input" type="email" [(ngModel)]="this.email" />
   </div>
   <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
-    <span class="login__input-label">Password*</span>
-    <input class="login__input" type="text" />
+    <span
+      class="login__input-label"
+      [ngClass]="{
+        'login__input-label--error': !this.isPasswordValid
+      }"
+    >
+      Password*
+      {{ !this.isPasswordValid ? this.requiredErorrMessage : "" }}
+    </span>
+    <input class="login__input" type="password" [(ngModel)]="this.password" />
   </div>
-  <div class="checkout__btn" [routerLink]="['/checkout']">
-    Confirm
-  </div>
+  <button class="checkout__btn" (click)="this.logInUser()">Confirm</button>
 </div>

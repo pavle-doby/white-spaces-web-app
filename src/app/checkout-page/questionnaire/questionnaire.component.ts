@@ -8,7 +8,7 @@ import {
 } from 'src/app/store/actions/checkout.action';
 import { Observable, Subscription } from 'rxjs';
 import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
-import { Question } from 'src/models/Question';
+import { Question } from 'src/models/Question.model';
 
 const INFO = `Feel free to load us with information so that we
 can truly get to know both you and your space

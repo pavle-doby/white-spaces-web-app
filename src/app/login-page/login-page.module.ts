@@ -7,6 +7,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { LogoModule } from '../shared/logo/logo.module';
 import { LoginModule } from './login/login.module';
 import { RegisterModule } from './register/register.module';
+import { GradientDirectiveModule } from '../shared/directives/gradient.directive.module';
 
 @NgModule({
   declarations: [LoginPageComponent],

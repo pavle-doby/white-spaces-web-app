@@ -6,7 +6,7 @@ import {
   EventEmitter,
   SimpleChanges,
 } from '@angular/core';
-import { Question } from 'src/models/Question';
+import { Question } from 'src/models/Question.model';
 
 @Component({
   selector: 'app-question',

@@ -4,7 +4,8 @@
   fxLayoutAlign="space-around center"
   fxLayoutGap="5%"
 >
-  <div
+  <button
+    appGradient
     *ngFor="let navBtn of this.navbarButtonsArray"
     class="navbar__btn cursor-pointer"
     [ngClass]="{
@@ -13,11 +14,10 @@
     }"
     fxLayoutAlign="center center"
     (click)="this.onNavButtonClick(navBtn)"
-    appGradient
     [calculateByHeight]="true"
   >
     <span>{{ navBtn }}</span>
-  </div>
+  </button>
 </div>
 
 <app-side-card [toShow]="this.navBtnsStateObj.PACKAGES">

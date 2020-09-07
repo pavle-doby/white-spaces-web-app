@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Router, Scroll } from '@angular/router';
-import { MainRouterPaths } from 'src/models/MainRouterPaths';
 import { fromEvent, interval } from 'rxjs';
 import { debounce } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 
 @Component({
   selector: 'app-root',

@@ -1,9 +1,12 @@
-export class Question {
+import { QuestionDTO } from './QuestionDTO.model';
+
+export class Question implements QuestionDTO {
   public id: any;
   public question: string;
   public answer?: string;
   public isAnswerd?: boolean;
   public index?: number;
+  public image_required?: boolean;
 
   constructor(obj: Question) {
     this.id = obj.id;

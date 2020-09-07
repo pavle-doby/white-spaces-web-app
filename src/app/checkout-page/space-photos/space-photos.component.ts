@@ -3,11 +3,15 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import {
   setInfoCheckout,
-  setSpacePhotosCheckout,
+  setSpacePhotosURLsCheckout,
+  addSpacePhotoURLCheckout,
+  clearSpacePhotosURLsCheckout,
 } from 'src/app/store/actions/checkout.action';
 import { UploadData } from 'src/app/shared/upload/upload.model';
 import { Observable } from 'rxjs';
 import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
+import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
+import { LocalStorageKey } from 'src/app/services/local-storage.service';
 
 const INFO = `Please upload photos of your space.`;
 
@@ -25,7 +29,10 @@ export class SpacePhotosComponent implements OnInit {
   public $checkoutState: Observable<CheckoutState>;
   public uploadConfigData: UploadData;
 
-  constructor(private readonly $store: Store<AppState>) {
+  constructor(
+    private readonly $store: Store<AppState>,
+    private readonly chekcoutService: CheckoutService
+  ) {
     this.$store.dispatch(
       setInfoCheckout({ info: INFO, description: [INFO_DESC_0] })
     );
@@ -40,6 +47,17 @@ export class SpacePhotosComponent implements OnInit {
   ngOnInit(): void {}
 
   public onUploadFilesEvent(files: FileList): void {
-    this.$store.dispatch(setSpacePhotosCheckout({ files: { ...files } }));
+    if (files.length > 16) {
+      console.log('Kazi user-u ne moze! :D ');
+      return;
+    }
+
+    this.$store.dispatch(clearSpacePhotosURLsCheckout({}));
+
+    Object.values(files).forEach((file) => {
+      this.chekcoutService.uploadFloorPlan(file).subscribe((file) => {
+        this.$store.dispatch(addSpacePhotoURLCheckout({ fileURL: file.link }));
+      });
+    });
   }
 }

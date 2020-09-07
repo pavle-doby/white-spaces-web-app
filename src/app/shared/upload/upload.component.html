@@ -11,16 +11,16 @@
     {{ this.data?.info }}
   </div>
   <div fxLayout="column" fxLayoutAlign="start center">
-    <div class="checkout__btn" (click)="onUpload()">
+    <button appGradient class="checkout__btn" (click)="onUpload()">
       Upload
-    </div>
+    </button>
     <input
       type="file"
       #fileUpload23
       [multiple]="this.data.isMultiple"
       [accept]="this.data.supportedFileTypes"
-      style="display: none;"
-      />
-      <span class="upload__info"> You can upload: {{ this.data.limit }} </span>
+      style="display: none"
+    />
+    <span class="upload__info"> You can upload: {{ this.data.limit }} </span>
   </div>
 </div>

@@ -1,3 +1,5 @@
+@import "src/styles-colors.scss";
+
 .add-on {
   padding: 0.5vw 0 0.5vw 0;
 }
@@ -5,7 +7,7 @@
 .add-on__info {
   margin-top: 0.1042vw;
   &:hover {
-    color: #b2b2b2;
+    color: $color-gray-5;
   }
 }
 

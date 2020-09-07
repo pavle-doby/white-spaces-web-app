@@ -1,3 +1,6 @@
+import { Question } from 'src/models/Question.model';
+import { QuestionDTO } from 'src/models/QuestionDTO.model';
+
 /**
  * Generates arraye with ragne values for start to end
  * @param {numbet} start value where range starts
@@ -10,4 +13,22 @@ export const range = (start: number, end: number): number[] => {
     ans.push(i);
   }
   return ans;
+};
+
+export const convertQuestionsDTOListToQuestionsList = (
+  questionDTOList: Record<string, QuestionDTO[]>
+): Question[] => {
+  let buffQuestionsDTO: QuestionDTO[] = [];
+
+  Object.values(questionDTOList).forEach((questions) => {
+    buffQuestionsDTO = [...buffQuestionsDTO, ...questions];
+  });
+
+  return buffQuestionsDTO.map((question) => {
+    return new Question({
+      id: question.id,
+      question: question.question,
+      image_required: question.image_required,
+    });
+  });
 };
