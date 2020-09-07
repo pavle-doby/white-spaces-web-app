@@ -2,10 +2,30 @@
 
 .home-page__container {
   height: 95vh;
-  background-image: url("../../assets/images/home/we.png"),
-    url("../../assets/images/home/how.png"),
-    url("../../assets/images/home/what.png");
   background-repeat: no-repeat;
-  background-size: 10%, 15%, 15%;
-  background-position: 45% 95%, 65% 20%, 85% 90%;
+}
+
+.home-page__img {
+  position: absolute;
+  background-repeat: no-repeat;
+  &--we {
+    height: 39%;
+    left: 140vw;
+    z-index: -1;
+    top: 55vh;
+  }
+
+  &--how {
+    height: 35%;
+    left: 215vw;
+    z-index: -1;
+    top: 0vh;
+  }
+
+  &--what {
+    height: 35%;
+    left: 345vw;
+    z-index: -1;
+    top: 55vh;
+  }
 }

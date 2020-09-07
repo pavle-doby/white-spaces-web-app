@@ -14,14 +14,14 @@ $shadow-h-len: 0.209vw;
 $shadow-v-len: 0.209vw;
 $shadow-blur-radius: 0.26vw;
 
-$footer-height: 5vh;
+$footer-height: 3vh;
 
 body {
   height: 100%;
   //width: 500vw;
   margin: 0;
   padding: 0;
-  overflow-y: hidden;
+  overflow: hidden;
   * {
     font-family: "Roboto", sans-serif;
   }
