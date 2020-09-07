@@ -11,6 +11,7 @@ import { WorksModule } from './works/works.module';
 import { YouGetModule } from './you-get/you-get.module';
 import { SharedModule } from '../shared/shared.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ParallaxDirectiveModule } from '../shared/directives/parallax.directive.module';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -25,6 +26,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     WorksModule,
     YouGetModule,
     InfiniteScrollModule,
+    ParallaxDirectiveModule,
   ],
   exports: [HomePageComponent],
 })

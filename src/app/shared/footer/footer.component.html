@@ -1,7 +1,12 @@
 <div class="footer__container">
   <div class="footer__content">
     <span class="footer__main-message">{{ this.title }}</span>
-    <div class="footer__scroll-container" fxFlex fxLayoutAlign=" center">
+    <div
+      *ngIf="this.showScrollMessage"
+      class="footer__scroll-container"
+      fxFlex
+      fxLayoutAlign=" center"
+    >
       <span>scroll</span>
       <img src="../../../assets/icons/arrowIcon.png" alt="Scroll up Icon" />
     </div>

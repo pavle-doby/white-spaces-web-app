@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FOOTER_MAIN_MESSAGE } from './footer.config';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -8,7 +9,10 @@ import { FOOTER_MAIN_MESSAGE } from './footer.config';
 })
 export class FooterComponent implements OnInit {
   public title: string = FOOTER_MAIN_MESSAGE;
-  constructor() {}
+  public showScrollMessage: boolean = false;
+  constructor(private router: Router) {
+    this.showScrollMessage = this.router.url === '/';
+  }
 
   ngOnInit(): void {}
 }

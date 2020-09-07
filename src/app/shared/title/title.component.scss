@@ -1,6 +1,6 @@
 //TODO: Set proper size
 $normal-size: 4.167vw;
-$big-size: 6.25vw;
+$big-size: 8vw;
 
 .ws-title {
   background-size: 100%;
@@ -29,4 +29,5 @@ $big-size: 6.25vw;
 .title-text--big-bold {
   font-size: $big-size;
   font-weight: 800;
+  line-height: 12vh;
 }
