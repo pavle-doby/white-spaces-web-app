@@ -7,6 +7,7 @@ import { AddOnVM } from 'src/models/AddOnVM.model';
 import { PackageDTO } from 'src/models/PackageDTO.model';
 import { Link } from 'src/models/Link.model';
 import { AddOnDTO } from 'src/models/AddOnDTO';
+import { OrderVM } from 'src/models/OrderVM.model';
 
 @Injectable({
   providedIn: 'root',
@@ -21,12 +22,10 @@ export class CheckoutService {
     return this.http.post<Link>(`${API_URL}/api/file/upload`, data);
   }
 
-  //TODO: Make DTO model
   public getAllPackages(): Observable<PackageDTO[]> {
     return this.http.get<PackageDTO[]>(`${API_URL}/api/packages/all`);
   }
 
-  //TODO: Make DTO model
   public getAllAddOns(): Observable<AddOnDTO[]> {
     return this.http.get<AddOnDTO[]>(`${API_URL}/api/addons/all`);
   }
@@ -40,5 +39,11 @@ export class CheckoutService {
   public addAddOn(addOnVM: AddOnVM): Observable<any> {
     const URL = `${API_URL}/api/shopping-cart/add-product`;
     return this.http.post(URL, { ...addOnVM });
+  }
+
+  public createOrder(shopping_cart_id: number): Observable<unknown> {
+    const data = new OrderVM({ shopping_cart_id: shopping_cart_id });
+    const URL = `${API_URL}/api/order/create`;
+    return this.http.post(URL, { ...data });
   }
 }
