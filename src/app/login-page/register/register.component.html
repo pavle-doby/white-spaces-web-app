@@ -93,13 +93,13 @@
     </span>
     <input
       class="login__input"
-      [ngClass]="{ 'login__input--error': !this.isPasswordValid }"
+      [ngClass]="{ 'login__input--error': !this.isRepeatPasswordValid }"
       type="password"
       [(ngModel)]="this.repeatPassword"
       (input)="this.repeatPassword$.next($event.target.value)"
     />
   </div>
-  <div class="checkout__btn" (click)="this.submitRegistration()">
+  <button class="checkout__btn" (click)="this.submitRegistration()">
     Confirm
-  </div>
+  </button>
 </div>

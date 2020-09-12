@@ -43,10 +43,9 @@ export class FloorPalnUploadComponent implements OnInit {
 
   public onUploadEvent(files: FileList): void {
     this.checkoutService
-      .uploadFloorPlan(files[0])
+      .uploadFile(files[0])
       .toPromise()
       .then((linkObj) => {
-        console.log(linkObj);
         this.$store.dispatch(
           setFloorPlanCheckout({
             floorPlan: new FloorPlan({

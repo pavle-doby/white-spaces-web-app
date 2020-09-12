@@ -12,7 +12,7 @@ import {
   setSpacePhotosCheckout,
   setSpacePhotosURLsCheckout,
   setAddOnIsSelectedCheckout,
-  setAnswerCheckout,
+  updateQuestionCheckout,
   setCurrentIndexCheckout,
   addSpacePhotoURLCheckout,
   clearSpacePhotosURLsCheckout,
@@ -21,6 +21,7 @@ import {
   setQuestionStepperCheckout,
   setQuestionsCheckout,
   setAllPackagesCheckout,
+  setShoppingCartCheckout,
 } from '../actions/checkout.action';
 import {
   TabbarButton,
@@ -72,6 +73,9 @@ const initState: CheckoutState = {
 
 const reducer = createReducer(
   initState,
+  on(setShoppingCartCheckout, (state, { shoppingCart }) => {
+    return { ...state, shoppingCart: shoppingCart };
+  }),
   on(setAllPackagesCheckout, (state, { packages }) => {
     return { ...state, allPackageCards: packages };
   }),
@@ -155,7 +159,7 @@ const reducer = createReducer(
   on(setQuestionStepperCheckout, (state, { questionStepper }) => {
     return { ...state, questionStepper: questionStepper };
   }),
-  on(setAnswerCheckout, (state, { question }) => {
+  on(updateQuestionCheckout, (state, { question }) => {
     const newQuestions = state.questions.map((q) => {
       return q.id === question.id ? { ...question } : { ...q };
     });

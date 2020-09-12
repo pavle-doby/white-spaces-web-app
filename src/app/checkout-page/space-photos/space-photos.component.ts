@@ -55,7 +55,7 @@ export class SpacePhotosComponent implements OnInit {
     this.$store.dispatch(clearSpacePhotosURLsCheckout({}));
 
     Object.values(files).forEach((file) => {
-      this.chekcoutService.uploadFloorPlan(file).subscribe((file) => {
+      this.chekcoutService.uploadFile(file).subscribe((file) => {
         this.$store.dispatch(addSpacePhotoURLCheckout({ fileURL: file.link }));
       });
     });

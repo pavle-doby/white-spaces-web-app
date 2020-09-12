@@ -50,7 +50,6 @@ export class AuthService {
       .subscribe(
         (res) => {
           const userInfo = (res as any).user_info as AppUser;
-
           this.store.dispatch(setUser({ user: userInfo }));
           return this.isAuthenticated.next(true);
         },

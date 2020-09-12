@@ -10,4 +10,17 @@
 
 * KAd upload-ujes slike posle treba da se doda i u order
 * Kod odgovaranja na pitanja, treba da se proveri da li je potrebna slika i ako jeste da se doda.
-* Odvoji add on pitanja i package pitanja
+
+* Review & Pay - Read only --> Problem jer kad se korisnik registruje ne unosi adresu...
+* Login - Session token - header ??? 
+* Login verification - API call...
+* Odvoji add on pitanja i package pitanja zbog update-a... Znaci package & addOn...
+
+//Session tocken
+
+1) create order card
+2) add for packages & addons (product - packages, product -addons)
+3) update packages & addons (product - packages, product -addons)
+4) create order
+
+!!! Nemoj da saljes jedno pitanj, jer ce ostala da nestanu...

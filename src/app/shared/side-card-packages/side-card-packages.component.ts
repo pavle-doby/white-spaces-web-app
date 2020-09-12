@@ -18,6 +18,7 @@ import { convertQuestionsDTOListToQuestionsList } from '../Utilities';
 import { async } from '@angular/core/testing';
 import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
 import { Observable } from 'rxjs';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-side-card-packages',
@@ -43,6 +44,10 @@ export class SideCardPackagesComponent implements OnInit {
   ngOnInit(): void {
     this.CheckOutService.getAllPackages().subscribe(async (allPackages) => {
       console.log({ allPackages });
+
+      LocalStorageService.Instance.PackageCategroyId = allPackages?.length
+        ? allPackages[0].category_id
+        : null;
 
       this.packages = allPackages.map((packageDTO) => {
         const buffQuestions = convertQuestionsDTOListToQuestionsList(

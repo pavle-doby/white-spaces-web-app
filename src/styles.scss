@@ -135,3 +135,7 @@ body {
 .app__text-shadow {
   text-shadow: $shadow-h-len $shadow-v-len $shadow-blur-radius $text-shadow;
 }
+
+.app__uppercase {
+  text-transform: uppercase;
+}

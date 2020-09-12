@@ -5,6 +5,7 @@ import { Question } from 'src/models/Question.model';
 import { FloorPlan } from 'src/models/FloorPlan.model';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
 import { SideCadrPackage } from 'src/app/shared/side-card-packages/SideCardPackage';
+import { ShoppingCart } from 'src/models/ShopingCart.model';
 
 export const checkoutSelectPackage = createAction(
   '[CHECKOUT] SELECT_PACKAGE',
@@ -51,7 +52,7 @@ export const setAddOnListCheckout = createAction(
   props<{ addOnList: AddOn[] }>()
 );
 
-export const setAnswerCheckout = createAction(
+export const updateQuestionCheckout = createAction(
   '[CHECKOUT] SET_ANSWER',
   props<{ question: Question }>()
 );
@@ -84,4 +85,9 @@ export const setAllPackagesCheckout = createAction(
 export const clearAllPackagesCheckout = createAction(
   '[CHECKOUT] CLEAR_ALL_PACKAGES',
   props()
+);
+
+export const setShoppingCartCheckout = createAction(
+  '[CHECKOUT] SET_SHOPPING_CART',
+  props<{ shoppingCart: ShoppingCart }>()
 );

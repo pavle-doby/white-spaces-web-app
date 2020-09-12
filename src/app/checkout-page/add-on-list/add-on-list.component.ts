@@ -46,6 +46,9 @@ export class AddOnListComponent implements OnInit {
         .getAllAddOns()
         .toPromise()
         .then((addOnList) => {
+          LocalStorageService.Instance.AddOnCategroyId = addOnList?.length
+            ? addOnList[0].category_id
+            : null;
           this.addOnList = addOnList.map((addOnDTO) => {
             const questions = convertQuestionsDTOListToQuestionsList(
               addOnDTO.additional_data.questions

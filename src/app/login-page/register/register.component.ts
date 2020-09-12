@@ -81,8 +81,10 @@ export class RegisterComponent implements OnInit {
       });
 
     this.repeatPassword$
-      .pipe(debounceTime(debunceTimeMs), distinctUntilChanged())
+      .pipe(debounceTime(debunceTimeMs))
       .subscribe((repeatPassword) => {
+        console.log(this.repeatPassword);
+
         this.isPasswordValid = !!this.userVM.password;
         this.isRepeatPasswordValid = !!this.repeatPassword;
         this.arePasswordsSame = repeatPassword === this.userVM.password;
@@ -111,17 +113,16 @@ export class RegisterComponent implements OnInit {
     if (!this.isFormValid()) {
       return;
     }
+    console.log(this.userVM);
 
     this.authService
       .registerUser(this.userVM)
       .toPromise()
-      .then((res) => {
-        //TODO: implment logic
-        console.log({ res });
-        this.router.navigateByUrl(`/${MainRouterPaths.CHECKOUT}`);
+      .then(() => {
+        this.router.navigateByUrl(`/${MainRouterPaths.LOGIN}?login=1`);
       })
       .catch((err) => {
-        console.log({ err });
+        console.error({ err });
       });
   }
 }

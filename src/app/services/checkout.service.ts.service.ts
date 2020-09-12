@@ -15,7 +15,7 @@ import { OrderVM } from 'src/models/OrderVM.model';
 export class CheckoutService {
   constructor(private http: HttpClient) {}
 
-  public uploadFloorPlan(file: File): Observable<Link> {
+  public uploadFile(file: File): Observable<Link> {
     const data = new FormData();
     data.append('file', file);
 
@@ -30,7 +30,7 @@ export class CheckoutService {
     return this.http.get<AddOnDTO[]>(`${API_URL}/api/addons/all`);
   }
 
-  public makeShopingCart(): Observable<ShoppingCart> {
+  public getShopingCart(): Observable<ShoppingCart> {
     const URL = `${API_URL}/api/shopping-cart/get-shopping-cart`;
     return this.http.post<ShoppingCart>(URL, {});
   }

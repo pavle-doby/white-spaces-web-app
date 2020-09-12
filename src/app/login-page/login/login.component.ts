@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.email, this.password);
     this.authService.isAuthenticated.subscribe((heIs) => {
-      if (heIs) {
+      if (heIs && LocalStorageService.Instance?.User?.verified) {
         this.router.navigateByUrl(`/${MainRouterPaths.CHECKOUT}`);
       }
     });

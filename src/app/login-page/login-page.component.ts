@@ -4,6 +4,8 @@ import { Observable, Subscription } from 'rxjs';
 import { AppUser } from 'src/models/User.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store';
+import { CheckoutService } from '../services/checkout.service.ts.service';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
   selector: 'app-login-page',
@@ -13,6 +15,7 @@ import { AppState } from '../store';
 export class LoginPageComponent implements OnInit, OnDestroy {
   public toRegister: boolean = false;
   public isUserLoggedIn: boolean;
+  public isUserVerified: boolean;
 
   public user$: Observable<AppUser>;
   public subUser: Subscription;
@@ -21,7 +24,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     private readonly window: Window,
     private readonly router: Router,
     private readonly activeRoute: ActivatedRoute,
-    private readonly $store: Store<AppState>
+    private readonly $store: Store<AppState>,
+    private readonly checkoutService: CheckoutService
   ) {
     this.window.document.body.style.width = `100vw`;
     this.user$ = this.$store.select((state) => state.user?.user);
@@ -30,8 +34,16 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subUser = this.user$.subscribe((user) => {
       this.isUserLoggedIn = !!user;
-      if (this.isUserLoggedIn) {
-        this.router.navigateByUrl(`/checkout(checkoutSteps:floor-plan)`);
+      this.isUserVerified = user?.verified;
+
+      if (this.isUserLoggedIn && this.isUserVerified) {
+        this.checkoutService.getShopingCart().subscribe((res) => {
+          console.log({ res });
+          // const addedPackage = res.line_items.find((li) => li.)
+          const pack = LocalStorageService.Instance.Package;
+
+          this.router.navigateByUrl(`/checkout(checkoutSteps:floor-plan)`);
+        });
       }
     });
 
