@@ -5,6 +5,7 @@ import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly authService: AuthService,
-    private readonly store: Store<AppState>
+    private readonly store: Store<AppState>,
+    private readonly snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {}
