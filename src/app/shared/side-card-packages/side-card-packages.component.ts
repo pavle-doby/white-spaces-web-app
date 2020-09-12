@@ -43,8 +43,6 @@ export class SideCardPackagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.CheckOutService.getAllPackages().subscribe(async (allPackages) => {
-      console.log({ allPackages });
-
       LocalStorageService.Instance.PackageCategroyId = allPackages?.length
         ? allPackages[0].category_id
         : null;

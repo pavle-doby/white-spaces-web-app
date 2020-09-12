@@ -22,12 +22,12 @@ export class HomePageComponent implements OnInit {
   onKeyDown(event: KeyboardEvent) {
     switch (event.key) {
       case 'ArrowRight': {
-        console.log('ArrowRight');
+        console.log('ArrowRight - dodaj skrol');
 
         break;
       }
       case 'ArrowLeft': {
-        console.log('ArrowLeft');
+        console.log('ArrowLeft - dodaj skrol');
 
         break;
       }

@@ -32,7 +32,7 @@ export class CheckoutService {
 
   public getShopingCart(): Observable<ShoppingCart> {
     const URL = `${API_URL}/api/shopping-cart/get-shopping-cart`;
-    return this.http.post<ShoppingCart>(URL, {});
+    return this.http.get<ShoppingCart>(URL, {});
   }
 
   //TODO: Make DTO model

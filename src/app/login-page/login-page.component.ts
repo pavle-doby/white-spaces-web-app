@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store';
 import { CheckoutService } from '../services/checkout.service.ts.service';
 import { LocalStorageService } from '../services/local-storage.service';
+import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 
 @Component({
   selector: 'app-login-page',
@@ -39,7 +40,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       if (this.isUserLoggedIn && this.isUserVerified) {
         this.checkoutService.getShopingCart().subscribe((res) => {
           console.log({ res });
-          // const addedPackage = res.line_items.find((li) => li.)
           const pack = LocalStorageService.Instance.Package;
 
           this.router.navigateByUrl(`/checkout(checkoutSteps:floor-plan)`);
@@ -58,10 +58,10 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   public showLoginTab(): void {
-    this.toRegister = false;
+    this.router.navigateByUrl(`/${MainRouterPaths.LOGIN}?login=1`);
   }
 
   public showRegisterTab(): void {
-    this.toRegister = true;
+    this.router.navigateByUrl(`/${MainRouterPaths.LOGIN}?login=0`);
   }
 }
