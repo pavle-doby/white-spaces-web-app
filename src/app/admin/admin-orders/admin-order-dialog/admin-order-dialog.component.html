@@ -9,14 +9,21 @@
       fxLayoutAlign="space-around start"
       fxLayoutGap=".26vw"
     >
-      <h2 mat-dialog-title>Order No. 1</h2>
-      <span>Client: <b>Petar Mijovic</b> </span>
-      <span>Email: <b>petar.mijovic@email.com</b></span>
-      <span>Package: <b>Medium</b></span>
-      <span>Add ons: <b>Lighting plan, Kitchen plan</b></span>
+      <h2 mat-dialog-title>Order No. {{ this.data.id }}</h2>
+      <span
+        >Client: <b>{{ this.data.customer }}</b>
+      </span>
+      <span>Email: <b>todo</b></span>
+      <span
+        >Package: <b>{{ this.data.orderDetails.product.name }}</b></span
+      >
+      <span>Add ons: <b>todo</b></span>
     </div>
 
-    <div fxLayout="column" fxLayoutAlign="space-around center">
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="15px">
+      <div>
+        <a href="">Download project &darr;</a>
+      </div>
       <mat-form-field appearance="fill">
         <mat-label>Status</mat-label>
         <mat-select>
@@ -25,26 +32,73 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>On Project</mat-label>
-        <mat-select>
-          <mat-option
-            *ngFor="let assignee of onProjectMock"
-            [value]="assignee.value"
-          >
-            {{ assignee.viewValue }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
     </div>
   </div>
 
   <mat-dialog-content class="mat-typography">
     <mat-tab-group mat-align-tabs="center">
-      <mat-tab label="Floor Plan">Picture Here</mat-tab>
-      <mat-tab label="Photos">Picture Array Here</mat-tab>
-      <mat-tab label="Questionnaire">Questionnaire Response Here</mat-tab>
+      <mat-tab label="Floor Plan">
+        <div
+          *ngIf="this.data.orderDetails?.additional_data?.floor_plan"
+          fxLayout="column"
+          fxLayoutAlign="start center"
+          fxLayoutGap="30px"
+        >
+          <img
+            src="{{ this.data.orderDetails.additional_data.floor_plan }}"
+            alt=""
+          />
+        </div>
+      </mat-tab>
+      <mat-tab label="Photos">
+        <div
+          *ngIf="this.data.orderDetails?.additional_data?.images?.length"
+          fxLayout="column"
+          fxLayoutAlign="start center"
+          fxLayoutGap="30px"
+        >
+          <img
+            *ngFor="let img of this.data.orderDetails.additional_data.images"
+            src="{{ img }}"
+            alt=""
+          />
+          <img
+            *ngFor="let img of this.data.orderDetails.additional_data.images"
+            src="{{ img }}"
+            alt=""
+          />
+        </div>
+      </mat-tab>
+      <mat-tab label="Questionnaire">
+        <div
+          *ngFor="
+            let question of this.data.orderDetails.additional_data.questions
+          "
+        >
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title> {{ question.quesiton }} </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div
+              *ngIf="this.data.orderDetails?.additional_data?.images?.length"
+              fxLayout="column"
+              fxLayoutAlign="start center"
+              fxLayoutGap="30px"
+            >
+              <span>Section: {{ question.section }}</span>
+              <span>Client Anwser: {{ question.answer }}</span>
+              <div *ngIf="question.images !== null && question.images !== []">
+                <img
+                  *ngFor="let img of question.images"
+                  src="{{ img }}"
+                  alt=""
+                />
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </div>
+      </mat-tab>
     </mat-tab-group>
   </mat-dialog-content>
 </div>

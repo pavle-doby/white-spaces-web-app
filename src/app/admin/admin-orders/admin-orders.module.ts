@@ -7,6 +7,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { StatusTableModule } from 'src/app/shared/status-table/status-table.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AdminOrderDialogModule } from './admin-order-dialog/admin-order-dialog.module';
+import { MatExpansionModule } from '@angular/material/expansion';
 @NgModule({
   declarations: [AdminOrdersComponent],
   imports: [
@@ -17,6 +18,7 @@ import { AdminOrderDialogModule } from './admin-order-dialog/admin-order-dialog.
     StatusTableModule,
     MatDialogModule,
     AdminOrderDialogModule,
+    MatExpansionModule,
   ],
   exports: [AdminOrdersComponent],
 })

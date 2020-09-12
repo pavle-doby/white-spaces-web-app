@@ -5,6 +5,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [AdminOrderDialogComponent],
@@ -14,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatDialogModule,
     MatTabsModule,
     MatSelectModule,
+    MatExpansionModule,
   ],
   exports: [AdminOrderDialogComponent],
 })
