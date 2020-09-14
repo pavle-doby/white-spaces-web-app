@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../app.config';
-import { ShoppingCart } from 'src/models/ShopingCart.model';
+import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { PackageDTO } from 'src/models/PackageDTO.model';
 import { Link } from 'src/models/Link.model';
 import { AddOnDTO } from 'src/models/AddOnDTO';

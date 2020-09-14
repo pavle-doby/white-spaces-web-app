@@ -50,11 +50,12 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
         });
 
       if (!package_) {
-        const updateProductVM = new ProductVM({
+        const updateProductVM: ProductVM = {
           shopping_cart_id: shoppingCart.id,
           product_id: this.package.id,
+          quantity: 1,
           additional_data: {},
-        });
+        };
 
         shoppingCart = await this.checkoutService
           .addProduct(updateProductVM)

@@ -5,7 +5,7 @@ import { Question } from 'src/models/Question.model';
 import { FloorPlan } from 'src/models/FloorPlan.model';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
 import { SideCadrPackage } from 'src/app/shared/side-card-packages/SideCardPackage';
-import { ShoppingCart } from 'src/models/ShopingCart.model';
+import { ShoppingCart } from 'src/models/ShoppingCart.model';
 
 export const checkoutSelectPackage = createAction(
   '[CHECKOUT] SELECT_PACKAGE',

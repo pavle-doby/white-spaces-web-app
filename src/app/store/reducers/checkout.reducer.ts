@@ -32,7 +32,7 @@ import * as _ from 'lodash';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { FloorPlan } from 'src/models/FloorPlan.model';
-import { ShoppingCart } from 'src/models/ShopingCart.model';
+import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { SideCadrPackage } from 'src/app/shared/side-card-packages/SideCardPackage';
 
 export interface CheckoutState {
@@ -74,6 +74,7 @@ const initState: CheckoutState = {
 const reducer = createReducer(
   initState,
   on(setShoppingCartCheckout, (state, { shoppingCart }) => {
+    LocalStorageService.Instance.ShoppingCart = shoppingCart;
     return { ...state, shoppingCart: shoppingCart };
   }),
   on(setAllPackagesCheckout, (state, { packages }) => {

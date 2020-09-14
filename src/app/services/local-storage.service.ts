@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FloorPlan } from 'src/models/FloorPlan.model';
-import { ShoppingCart } from 'src/models/ShopingCart.model';
+import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { Question } from 'src/models/Question.model';
 import { AddOn } from 'src/models/AddOn';
 import { AppUser } from 'src/models/User.model';
