@@ -4,7 +4,7 @@ import { PackageType } from 'src/app/shared/side-card-packages/side-card-package
 export interface Product {
   id: number;
   name: string;
-  format: Object;
+  format: any;
   quantity: number;
   price: number;
   category_id: number; //ENUM for category

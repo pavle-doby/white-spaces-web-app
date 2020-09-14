@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../app.config';
 import { ShoppingCart } from 'src/models/ShopingCart.model';
@@ -8,6 +8,7 @@ import { PackageDTO } from 'src/models/PackageDTO.model';
 import { Link } from 'src/models/Link.model';
 import { AddOnDTO } from 'src/models/AddOnDTO';
 import { OrderVM } from 'src/models/OrderVM.model';
+import { MockShoppingCart } from '../mock-data';
 
 @Injectable({
   providedIn: 'root',
@@ -30,14 +31,15 @@ export class CheckoutService {
     return this.http.get<AddOnDTO[]>(`${API_URL}/api/addons/all`);
   }
 
-  public getShopingCart(): Observable<ShoppingCart> {
-    const URL = `${API_URL}/api/shopping-cart/get-shopping-cart`;
+  public getShoppingCart(): Observable<ShoppingCart> {
+    const URL = `${API_URL}/shopping-cart/get-shopping-cart`;
+    return of(MockShoppingCart);
     return this.http.get<ShoppingCart>(URL, {});
   }
 
   //TODO: Make DTO model
   public addAddOn(addOnVM: AddOnVM): Observable<any> {
-    const URL = `${API_URL}/api/shopping-cart/add-product`;
+    const URL = `${API_URL}/shopping-cart/add-product`;
     return this.http.post(URL, { ...addOnVM });
   }
 

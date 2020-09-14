@@ -5,7 +5,6 @@ import { AppUser } from 'src/models/User.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store';
 import { CheckoutService } from '../services/checkout.service.ts.service';
-import { LocalStorageService } from '../services/local-storage.service';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 
 @Component({
@@ -34,16 +33,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subUser = this.user$.subscribe((user) => {
-      this.isUserLoggedIn = !!user;
-      this.isUserVerified = user?.verified;
-
-      if (this.isUserLoggedIn && this.isUserVerified) {
-        this.checkoutService.getShopingCart().subscribe((res) => {
-          console.log({ res });
-          const pack = LocalStorageService.Instance.Package;
-
-          this.router.navigateByUrl(`/checkout(checkoutSteps:floor-plan)`);
-        });
+      if (!!user && user.verified) {
+        this.router.navigateByUrl(`/checkout(checkoutSteps:floor-plan)`);
       }
     });
 

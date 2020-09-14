@@ -116,6 +116,7 @@ export class RegisterComponent implements OnInit {
       .toPromise()
       .then((res) => {
         this.router.navigateByUrl(`/${MainRouterPaths.LOGIN}?login=1`);
+        alert('Verification link is send to your email.');
       })
       .catch((err) => {
         console.error({ err });

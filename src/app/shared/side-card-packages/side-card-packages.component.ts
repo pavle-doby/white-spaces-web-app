@@ -81,7 +81,7 @@ export class SideCardPackagesComponent implements OnInit {
     );
 
     this.router.navigateByUrl(
-      `/${MainRouterPaths.LOGIN}?login=${LoginParam.LOGIN}`
+      `/${MainRouterPaths.LOGIN}?login=${LoginParam.REGISTER}`
     );
   }
 
