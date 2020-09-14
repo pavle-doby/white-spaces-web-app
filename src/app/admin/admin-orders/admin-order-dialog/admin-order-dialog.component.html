@@ -26,8 +26,8 @@
       </div>
       <mat-form-field appearance="fill">
         <mat-label>Status</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let status of statusArray" [value]="status.value">
+        <mat-select (selectionChange)="this.handleSelect($event.value)">
+          <mat-option *ngFor="let status of statusArray" [value]="status.value" >
             {{ status.viewValue }}
           </mat-option>
         </mat-select>

@@ -35,24 +35,24 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
   public data: any;
 
   constructor(public dialog: MatDialog, private adminService: AdminService) {
-    // this.adminService.getAllOrders().subscribe((res) => {
-    //   res = [...res];
-    //   const data = res.map((element) => {
-    //     return {
-    //       id: element.id,
-    //       customer: '',
-    //       date: element.datetime,
-    //       orderValue: element.line_items[0].price,
-    //       status: element.state,
-    //       onProject: '',
-    //       orderDetails: element.line_items[0],
-    //     };
-    //   });
-    //   this.dataSource = new AdminOrdersDataSource(data);
-    //   this.dataSource.sort = this.sort;
-    //   this.dataSource.paginator = this.paginator;
-    //   this.table.dataSource = this.dataSource;
-    // });
+    this.adminService.getAllOrders().subscribe((res) => {
+      res = [...res];
+      const data = res.map((element) => {
+        return {
+          id: element.id,
+          customer: '',
+          date: element.datetime,
+          orderValue: element.line_items[0].price,
+          status: element.state,
+          onProject: '',
+          orderDetails: element.line_items[0],
+        };
+      });
+      this.dataSource = new AdminOrdersDataSource(data);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.table.dataSource = this.dataSource;
+    });
   }
   ngOnInit() {
     const data = ORDERS_MOCK.map((element) => {

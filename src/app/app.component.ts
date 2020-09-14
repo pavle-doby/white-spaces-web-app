@@ -35,12 +35,12 @@ export class AppComponent {
       this.isAdmin = this.router.url.includes('admin');
     });
     this.scroll = fromEvent<any>(window, 'wheel')
-      .pipe(debounce(() => interval(100)))
+      .pipe(debounce(() => interval()))
       .subscribe((event) =>
         this.window.scrollBy({
-          left: event.wheelDelta * 5,
+          left: event.wheelDelta*.5,
           top: 0,
-          behavior: 'smooth',
+          //behavior: 'smooth',
         })
       );
   }
