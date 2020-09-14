@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { fromEvent, interval, Observable } from 'rxjs';
 import { debounce, map, shareReplay } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
@@ -22,6 +22,7 @@ export class AppComponent {
   public title = 'white-spaces-web-app';
   public showCheckoutPage: boolean = true;
   public scroll;
+  public footerActive:boolean=false;
 
   public get ShowCheckoutPage(): boolean {
     return this.router.url.includes(MainRouterPaths.CHECKOUT);
@@ -32,6 +33,7 @@ export class AppComponent {
     private breakpointObserver: BreakpointObserver
   ) {
     this.router.events.subscribe((route) => {
+      this.footerActive = route instanceof NavigationEnd  || this.footerActive;
       this.isAdmin = this.router.url.includes('admin');
     });
     this.scroll = fromEvent<any>(window, 'wheel')
