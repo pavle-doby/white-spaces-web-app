@@ -1,5 +1,8 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { NavBtnsInitStateObj } from '../shared/navbar/navbar.content';
+import { Observable } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home-page',
@@ -8,8 +11,26 @@ import { NavBtnsInitStateObj } from '../shared/navbar/navbar.content';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  constructor(private window: Window) {
-    this.window.document.body.style.width = `${100 * 5}vw`;
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
+    .pipe(
+      map((result) => result.matches),
+      shareReplay()
+    );
+
+  constructor(
+    private window: Window,
+    private breakpointObserver: BreakpointObserver
+  ) {
+    this.isHandset$.subscribe((res) => {
+      if (res) {
+        this.window.document.body.style.width = '100vw';
+        this.window.document.body.style.height = '500vh';
+      } else {
+        this.window.document.body.style.width = '500vw';
+      }
+    });
+    //this.window.document.body.style.width = `${100 * 5}vw`;
   }
 
   ngOnInit(): void {}

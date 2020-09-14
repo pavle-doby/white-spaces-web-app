@@ -20,7 +20,7 @@
     </app-checkout-page>
     <app-footer class="app__footer--checkout"></app-footer>
   </div>
-  <app-navbar></app-navbar>
+  <app-navbar *ngIf="!(this.isHandset$ | async)"></app-navbar>
 </div>
 
 <ng-template #admin>
