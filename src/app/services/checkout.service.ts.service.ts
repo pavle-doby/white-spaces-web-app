@@ -3,12 +3,12 @@ import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../app.config';
 import { ShoppingCart } from 'src/models/ShopingCart.model';
-import { AddOnVM } from 'src/models/AddOnVM.model';
 import { PackageDTO } from 'src/models/PackageDTO.model';
 import { Link } from 'src/models/Link.model';
 import { AddOnDTO } from 'src/models/AddOnDTO';
 import { OrderVM } from 'src/models/OrderVM.model';
 import { MockShoppingCart } from '../mock-data';
+import { ProductVM } from 'src/models/ProductVM.model';
 
 @Injectable({
   providedIn: 'root',
@@ -37,10 +37,14 @@ export class CheckoutService {
     return this.http.get<ShoppingCart>(URL, {});
   }
 
-  //TODO: Make DTO model
-  public addAddOn(addOnVM: AddOnVM): Observable<any> {
+  public addProduct(productVM: ProductVM): Observable<ShoppingCart> {
     const URL = `${API_URL}/shopping-cart/add-product`;
-    return this.http.post(URL, { ...addOnVM });
+    return this.http.post<ShoppingCart>(URL, { ...productVM });
+  }
+
+  public updateProduct(productVM: ProductVM): Observable<ShoppingCart> {
+    const URL = `${API_URL}/shopping-cart/update-product`;
+    return this.http.post<ShoppingCart>(URL, { ...productVM });
   }
 
   public createOrder(shopping_cart_id: number): Observable<unknown> {

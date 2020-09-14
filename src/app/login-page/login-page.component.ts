@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store';
 import { CheckoutService } from '../services/checkout.service.ts.service';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
+import { LoginParam } from '../app.config';
 
 @Component({
   selector: 'app-login-page',
@@ -49,10 +50,14 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   public showLoginTab(): void {
-    this.router.navigateByUrl(`/${MainRouterPaths.LOGIN}?login=1`);
+    this.router.navigateByUrl(
+      `/${MainRouterPaths.LOGIN}?login=${LoginParam.LOGIN}`
+    );
   }
 
   public showRegisterTab(): void {
-    this.router.navigateByUrl(`/${MainRouterPaths.LOGIN}?login=0`);
+    this.router.navigateByUrl(
+      `/${MainRouterPaths.LOGIN}?login=${LoginParam.REGISTER}`
+    );
   }
 }
