@@ -15,7 +15,7 @@
     * Address input 
 * Login - Session token - header ??? 
 * Login verification - API call...
-* Odvoji add on pitanja i package pitanja zbog update-a... Znaci package & addOn...
+* Odvoji add on pitanja i package pitanja zbog update-a... Znaci package & addOn... - dodao produc_id
 
 //Session tocken
 
