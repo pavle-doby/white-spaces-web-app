@@ -45,6 +45,22 @@
   <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
     <span
       class="login__input-label"
+      [ngClass]="{ 'login__input-label--error': !this.isAddressValid }"
+    >
+      Address*
+      {{ !this.isAddressValid ? this.requiredErorrMessage : "" }}
+    </span>
+    <input
+      class="login__input"
+      [ngClass]="{ 'login__input--error': !this.isAddressValid }"
+      type="email"
+      [(ngModel)]="this.userVM.address"
+      (input)="this.isAddressValid$.next($event.target.value)"
+    />
+  </div>
+  <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
+    <span
+      class="login__input-label"
       [ngClass]="{ 'login__input-label--error': !this.isEmailValid }"
     >
       E-Mail*

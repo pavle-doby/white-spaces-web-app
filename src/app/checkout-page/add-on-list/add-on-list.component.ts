@@ -51,7 +51,8 @@ export class AddOnListComponent implements OnInit {
             : null;
           this.addOnList = addOnList.map((addOnDTO) => {
             const questions = convertQuestionsDTOListToQuestionsList(
-              addOnDTO.additional_data.questions
+              addOnDTO.additional_data.questions,
+              addOnDTO
             );
             return new AddOn({
               id: addOnDTO.id,

@@ -49,7 +49,8 @@ export class SideCardPackagesComponent implements OnInit {
 
       this.packages = allPackages.map((packageDTO) => {
         const buffQuestions = convertQuestionsDTOListToQuestionsList(
-          packageDTO.additional_data.questions
+          packageDTO.additional_data.questions,
+          packageDTO
         );
         const box = new PackagesBox(
           packageDTO.name,

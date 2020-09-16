@@ -4,7 +4,6 @@
       class="review-pay__left width-100"
       fxLayout="column"
       fxLayoutAlign="starat start"
-      fxLayoutGap="10px"
     >
       <div class="review-pay__left-header">
         <h1>Order summary</h1>
@@ -92,11 +91,12 @@
               'review-pay__input-label--error': !this.isFullNameValid
             }"
           >
-            Full name*
+            Full name
             {{ !this.isFullNameValid ? this.requiredErorrMessage : "" }}
           </span>
           <input
             class="review-pay__input width-100"
+            [disabled]="true"
             [ngClass]="{ 'review-pay__input--error': !this.isFullNameValid }"
             type="text"
             (input)="this.isFullNameValid$.next($event.target.value)"
@@ -115,11 +115,12 @@
               'review-pay__input-label--error': !this.isAddressValid
             }"
           >
-            Address*
+            Address
             {{ !this.isAddressValid ? this.requiredErorrMessage : "" }}
           </span>
           <input
             class="review-pay__input width-100"
+            [disabled]="true"
             [ngClass]="{ 'review-pay__input--error': !this.isAddressValid }"
             type="text"
             (input)="this.isAddressValid$.next($event.target.value)"
@@ -138,11 +139,12 @@
               'review-pay__input-label--error': !this.isEmailValid
             }"
           >
-            E-mail*
+            E-mail
             {{ !this.isEmailValid ? this.requiredErorrMessage : "" }}
           </span>
           <input
             class="review-pay__input width-100"
+            [disabled]="true"
             [ngClass]="{ 'review-pay__input--error': !this.isEmailValid }"
             type="text"
             (input)="this.isEmailValid$.next($event.target.value)"
@@ -158,7 +160,7 @@
           <span> I agree to </span>
           <a href="#"> Terms of Service</a>
         </div>
-        <button class="review-pay__btn" appGradient>Make payment</button>
+        <button class="review-pay__btn" appGradient>Create order</button>
       </div>
     </div>
   </div>

@@ -2,6 +2,7 @@ import { QuestionDTO } from './QuestionDTO.model';
 
 export class Question implements QuestionDTO {
   public id: any; //for BE
+  public product_id: number; //For easier update...
   public question: string; //for BE
   public answer?: string; //for BE
   public isAnswerd?: boolean;
@@ -13,6 +14,7 @@ export class Question implements QuestionDTO {
 
   constructor(obj: Question) {
     this.id = obj.id;
+    this.product_id = obj.product_id;
     this.question = obj.question;
     this.answer = obj.answer ?? '';
     this.isAnswerd = obj.isAnswerd ?? false;

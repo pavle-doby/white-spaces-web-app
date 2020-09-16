@@ -7,8 +7,8 @@ import { PackageDTO } from 'src/models/PackageDTO.model';
 import { Link } from 'src/models/Link.model';
 import { AddOnDTO } from 'src/models/AddOnDTO';
 import { OrderVM } from 'src/models/OrderVM.model';
-import { MockShoppingCart } from '../mock-data';
 import { ProductVM } from 'src/models/ProductVM.model';
+import { MockShoppingCart } from '../mock-data';
 
 @Injectable({
   providedIn: 'root',

@@ -83,6 +83,10 @@ export class ReviewAndPayComponent implements OnInit {
           ? firstName.slice(0, firstNameLength - 1)
           : firstName;
 
+      this.fullName = `${user.first_name} ${user.last_name}`;
+      this.email = user.email;
+      this.address = user.address;
+
       this.projectInfo.infoPriceList = [
         new InfoPrice({ info: `${firstNameLabel}'s apartment renovation` }),
       ];

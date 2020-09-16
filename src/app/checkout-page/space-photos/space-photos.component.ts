@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import {
   setInfoCheckout,
-  setSpacePhotosURLsCheckout,
   addSpacePhotoURLCheckout,
   clearSpacePhotosURLsCheckout,
+  setSpacePhotosURLsCheckout,
 } from 'src/app/store/actions/checkout.action';
 import { UploadData } from 'src/app/shared/upload/upload.model';
 import { Observable } from 'rxjs';
@@ -48,16 +48,27 @@ export class SpacePhotosComponent implements OnInit {
 
   public onUploadFilesEvent(files: FileList): void {
     if (files.length > 16) {
-      console.log('Kazi user-u ne moze! :D ');
+      alert('Max number of photos is 16.');
       return;
     }
 
     this.$store.dispatch(clearSpacePhotosURLsCheckout({}));
+    let fileLinks: string[] = [];
 
     Object.values(files).forEach((file) => {
-      this.chekcoutService.uploadFile(file).subscribe((file) => {
-        this.$store.dispatch(addSpacePhotoURLCheckout({ fileURL: file.link }));
-      });
+      this.chekcoutService
+        .uploadFile(file)
+        .toPromise()
+        .then((file) => {
+          fileLinks = [...fileLinks, file.link];
+          
+        })
+        .catch((error) => {
+          console.error(error);
+          alert(error.messages);
+        });
     });
+
+    this.$store.dispatch(setSpacePhotosURLsCheckout({ filesURLs: fileLinks }));
   }
 }

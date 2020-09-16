@@ -74,8 +74,6 @@ export class FloorPalnUploadComponent implements OnInit {
           },
         };
 
-        // console.log(JSON.stringify(productVM));
-
         this.checkoutService
           .updateProduct(productVM)
           .toPromise()
