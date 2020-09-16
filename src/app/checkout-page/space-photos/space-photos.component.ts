@@ -28,11 +28,10 @@ export const SUPPERTED_FILES = '.jpg, .jpeg, .png ';
 })
 export class SpacePhotosComponent implements OnInit, OnDestroy {
   public $checkoutState: Observable<CheckoutState>;
-  public uploadConfigData: UploadData;
-
   public subChekcoutState: Subscription;
-
+  
   public shoppingCart: ShoppingCart;
+  public uploadConfigData: UploadData;
 
   constructor(
     private readonly $store: Store<AppState>,

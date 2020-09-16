@@ -48,6 +48,12 @@ export class CheckoutService {
     return this.http.post<ShoppingCart>(URL, { ...productVM });
   }
 
+  public deleteProduct(line_item_id: number): Observable<string> {
+    const URL = `${API_URL}/shopping-cart/delete-product/${line_item_id}`;
+    return of('Line item is deleted');
+    return this.http.delete<string>(URL);
+  }
+
   public createOrder(shopping_cart_id: number): Observable<unknown> {
     const data = new OrderVM({ shopping_cart_id: shopping_cart_id });
     const URL = `${API_URL}/api/order/create`;

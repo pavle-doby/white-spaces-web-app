@@ -25,4 +25,26 @@ export class ShoppingCart {
         LocalStorageService.Instance.PackageCategroyId
     );
   }
+
+  public static getLineItemWithProductId(
+    shoppingCart: ShoppingCart,
+    productId: number
+  ): LineIntem {
+    return shoppingCart.line_items.find((lineItem) => {
+      return lineItem.product.id === productId;
+    });
+  }
+
+  public static deleteLineItem(
+    shoppingCart: ShoppingCart,
+    lineItemId: number
+  ): ShoppingCart {
+    let newShoppingCart: ShoppingCart = JSON.parse(
+      JSON.stringify(shoppingCart)
+    );
+    newShoppingCart.line_items = newShoppingCart.line_items.filter(
+      (lineItem) => lineItem.id !== lineItemId
+    );
+    return newShoppingCart;
+  }
 }
