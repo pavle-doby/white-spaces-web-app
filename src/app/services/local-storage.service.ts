@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { FloorPlan } from 'src/models/FloorPlan.model';
-import { ShoppingCart } from 'src/models/ShopingCart.model';
+import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { Question } from 'src/models/Question.model';
 import { AddOn } from 'src/models/AddOn';
 import { AppUser } from 'src/models/User.model';
 import { PackagesBox } from '../shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
 
-
 export enum LocalStorageKey {
   PACKAGE = 'package',
+  PACKAGE_CATEGORY_ID = 'PACKAGE_CATEGORY_ID',
+  ADDON_CATEGORY_ID = 'ADDON_CATEGORY_ID',
   FLOOR_PLAN = 'floor-plan-link',
   SPACE_PHOTOS_URLS = 'space-photos-urls',
   ADD_ON_LIST = 'add-ons',
@@ -111,5 +112,29 @@ export class LocalStorageService {
 
   public set Package(packageBox: PackagesBox) {
     this.storage.setItem(LocalStorageKey.PACKAGE, JSON.stringify(packageBox));
+  }
+
+  public get PackageCategroyId(): number {
+    return JSON.parse(
+      this.storage.getItem(LocalStorageKey.PACKAGE_CATEGORY_ID)
+    );
+  }
+
+  public set PackageCategroyId(category_id: number) {
+    this.storage.setItem(
+      LocalStorageKey.PACKAGE_CATEGORY_ID,
+      JSON.stringify(category_id)
+    );
+  }
+
+  public get AddOnCategroyId(): number {
+    return JSON.parse(this.storage.getItem(LocalStorageKey.ADDON_CATEGORY_ID));
+  }
+
+  public set AddOnCategroyId(category_id: number) {
+    this.storage.setItem(
+      LocalStorageKey.ADDON_CATEGORY_ID,
+      JSON.stringify(category_id)
+    );
   }
 }

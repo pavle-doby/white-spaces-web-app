@@ -12,7 +12,7 @@ import {
   setSpacePhotosCheckout,
   setSpacePhotosURLsCheckout,
   setAddOnIsSelectedCheckout,
-  setAnswerCheckout,
+  updateQuestionCheckout,
   setCurrentIndexCheckout,
   addSpacePhotoURLCheckout,
   clearSpacePhotosURLsCheckout,
@@ -20,6 +20,8 @@ import {
   appendQuestionsCheckout,
   setQuestionStepperCheckout,
   setQuestionsCheckout,
+  setAllPackagesCheckout,
+  setShoppingCartCheckout,
 } from '../actions/checkout.action';
 import {
   TabbarButton,
@@ -30,10 +32,12 @@ import * as _ from 'lodash';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { FloorPlan } from 'src/models/FloorPlan.model';
-import { ShoppingCart } from 'src/models/ShopingCart.model';
+import { ShoppingCart } from 'src/models/ShoppingCart.model';
+import { SideCadrPackage } from 'src/app/shared/side-card-packages/SideCardPackage';
 
 export interface CheckoutState {
   packageBox?: PackagesBox; // Jedan paket koji je u side kartici
+  allPackageCards: SideCadrPackage[];
   info: string; //
   infoDesc: string[];
   floorPlan?: FloorPlan;
@@ -48,6 +52,7 @@ export interface CheckoutState {
 
 const initState: CheckoutState = {
   packageBox: LocalStorageService.Instance.Package,
+  allPackageCards: [],
   info: 'Welcome to your renovation project!',
   infoDesc: [''],
   floorPlan: LocalStorageService.Instance.FloorPlan,
@@ -68,6 +73,13 @@ const initState: CheckoutState = {
 
 const reducer = createReducer(
   initState,
+  on(setShoppingCartCheckout, (state, { shoppingCart }) => {
+    LocalStorageService.Instance.ShoppingCart = shoppingCart;
+    return { ...state, shoppingCart: shoppingCart };
+  }),
+  on(setAllPackagesCheckout, (state, { packages }) => {
+    return { ...state, allPackageCards: packages };
+  }),
   on(checkoutSelectPackage, (state, { packageBox }) => {
     LocalStorageService.Instance.Package = packageBox;
     return { ...state, packageBox: packageBox };
@@ -148,7 +160,7 @@ const reducer = createReducer(
   on(setQuestionStepperCheckout, (state, { questionStepper }) => {
     return { ...state, questionStepper: questionStepper };
   }),
-  on(setAnswerCheckout, (state, { question }) => {
+  on(updateQuestionCheckout, (state, { question }) => {
     const newQuestions = state.questions.map((q) => {
       return q.id === question.id ? { ...question } : { ...q };
     });

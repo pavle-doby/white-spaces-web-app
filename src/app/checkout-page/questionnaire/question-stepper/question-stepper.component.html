@@ -4,6 +4,7 @@
     class="question-stepper__step"
     [ngClass]="step.ngClassObj"
     fxLayoutAlign="center center"
+    (click)="this.selectStep(step)"
   >
     <span class="question-stepper__label">
       {{ step.label }}

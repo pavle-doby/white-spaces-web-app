@@ -50,12 +50,23 @@ export class AuthService {
       .subscribe(
         (res) => {
           const userInfo = (res as any).user_info as AppUser;
-
           this.store.dispatch(setUser({ user: userInfo }));
           return this.isAuthenticated.next(true);
         },
         (error) => alert(error.error)
       );
+  }
+
+  public cleanLogin(
+    email: string,
+    password: string
+  ): Observable<{ user_info: AppUser; message: string }> {
+    const params = {
+      email: email,
+      password: password,
+    };
+    const URL = `${API_URL}/api/auth/login`;
+    return this.http.post<{ user_info: AppUser; message: string }>(URL, params);
   }
 
   public logout() {

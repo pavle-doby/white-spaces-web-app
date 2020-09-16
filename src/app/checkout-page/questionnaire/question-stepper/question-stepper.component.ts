@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnDestroy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { QuestionStepper, Step, StepState } from './question-stepper.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
@@ -15,6 +22,9 @@ export class QuestionStepperComponent implements OnInit, OnDestroy {
   @Input()
   public stepper: QuestionStepper;
 
+  @Output()
+  public selectStepEvent: EventEmitter<Step>;
+
   public $questionStepper: Observable<QuestionStepper>;
   public $subQuestionStepper: Subscription;
 
@@ -29,6 +39,8 @@ export class QuestionStepperComponent implements OnInit, OnDestroy {
       (state) => state.checkout.questionStepper
     );
     this.$checkoutState = this.$store.select((state) => state.checkout);
+
+    this.selectStepEvent = new EventEmitter();
   }
 
   ngOnInit(): void {
@@ -53,12 +65,14 @@ export class QuestionStepperComponent implements OnInit, OnDestroy {
           return new Step({ index: i, label: i, state: stepState });
         }
       );
-
-      // console.log(this.steps);
     });
   }
 
   ngOnDestroy(): void {
     if (this.$subQuestionStepper) this.$subQuestionStepper.unsubscribe();
+  }
+
+  public selectStep(step: Step): void {
+    this.selectStepEvent.emit(step);
   }
 }

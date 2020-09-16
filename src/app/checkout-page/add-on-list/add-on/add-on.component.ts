@@ -1,8 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AddOn } from 'src/models/AddOn';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store';
-import { setAddOnIsSelectedCheckout } from 'src/app/store/actions/checkout.action';
 
 const ADD = 'Add';
 const REMOVE = 'Remove';
@@ -27,7 +24,9 @@ export class AddOnComponent implements OnInit {
     this.addRemoveAddOnEvent = new EventEmitter();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.addRemoveLabel = this.addOn.isSelected ? REMOVE : ADD;
+  }
 
   public showDescription(): void {
     this.toShowDescription = true;
@@ -38,8 +37,9 @@ export class AddOnComponent implements OnInit {
   }
 
   public clickOnAddOn(): void {
-    const newAddOn = { ...this.addOn, isSelected: !this.addOn.isSelected };
+    const isSelected = !this.addOn.isSelected;
+    const newAddOn = { ...this.addOn, isSelected: isSelected };
     this.addRemoveAddOnEvent.emit(newAddOn);
-    this.addRemoveLabel = this.addOn.isSelected ? REMOVE : ADD;
+    // this.addRemoveLabel = isSelected ? REMOVE : ADD;
   }
 }
