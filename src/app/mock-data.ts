@@ -1,13 +1,13 @@
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 
-export const MockShoppingCart: ShoppingCart = {
+export let MockShoppingCart: ShoppingCart = {
   id: 7,
   datetime: 'Sun, 13 Sep 2020 14:35:27 GMT',
   state: 'existing',
   user_id: 17,
   line_items: [
     {
-      id: 4,
+      id: 15,
       quantity: 1,
       price: 649.0,
       additional_data: {
@@ -18,84 +18,101 @@ export const MockShoppingCart: ShoppingCart = {
               image_required: false,
               question:
                 'We would like to know a bit more about the building. What year was it built? Can you send us the address, so we can take a look at the neighbourhood? You can also tell us your impression of the area. This is important for us to get the bigger picture!',
+              section: 'general',
             },
             {
               id: 2,
               image_required: false,
               question:
                 'What is the ceiling height in the apartment? Is it the same in all parts?',
+              section: 'general',
             },
             {
               id: 3,
               image_required: false,
               question:
                 'Measure the height of the wall from the floor to the point where the windows begin.',
+              section: 'general',
             },
             {
               id: 4,
               image_required: false,
               question:
                 'Please provide us with the heights of all the windows if they are not included in the floor plan drawing.',
+              section: 'general',
             },
             {
               id: 5,
               image_required: false,
               question:
                 'Do you want to keep the flooring or to change it completely?',
+              section: 'general',
             },
             {
               id: 6,
               image_required: false,
               question:
                 'What aspects of the current layout and space distribution do you like?',
+              section: 'general',
             },
             {
               id: 7,
               image_required: false,
               question:
                 'Do you want to keep something that already exists at all costs? Such as certain walls, positions in the current layout, or maybe you want to skip the bathroom remodelling due to your budget limit. Let us know.',
+              section: 'general',
             },
             {
               id: 8,
               image_required: false,
               question:
                 'What are the things you currently dislike in your apartment?',
+              section: 'general',
             },
             {
               id: 9,
               image_required: false,
               question:
                 'Would you opt for the open space or a more traditional layout? If you want to add any specifics, feel free to do so. For example, you might want a joint dining room and living room but a separate kitchen. It all depends on your needs and dreams.',
+              section: 'general',
             },
             {
               id: 10,
               image_required: false,
               question:
                 'Do we need to predict future room repurposing? For example, we can predict space for a future nursery in one of the existing rooms.',
+              section: 'general',
             },
             {
               id: 11,
               image_required: true,
               question:
                 'Do you need a home office? If so, will the clients visit you there?',
+              images: [
+                'https://whitespace-client-files.s3.amazonaws.com/tiger-wallpaper768d0080-457f-422c-b084-12a80abb8ddd.jpg',
+              ],
+              section: 'general',
             },
             {
               id: 12,
               image_required: true,
               question:
                 'What type of cooling/heating system do you have in the apartment? Please let us know about any specifics that we should be aware of. Such as placement of indoor fan coil units so that we can work around them in best manner possible. You can always, beside the sketches, upload the photos to help us visually.',
+              section: 'general',
             },
             {
               id: 13,
               image_required: true,
               question:
                 'If you have radiators in the apartment, make sure you sketch all of the positions and write the dimensions for each.',
+              section: 'general',
             },
             {
               id: 14,
               image_required: false,
               question:
                 'Please let us know the precise dimensions and the placement of the water heater(s).',
+              section: 'general',
             },
           ],
           bathroom: [
@@ -284,11 +301,6 @@ export const MockShoppingCart: ShoppingCart = {
           ],
         },
         type: 'M',
-        images: [
-          'https://whitespace-client-files.s3.amazonaws.com/batman-city37bd81bf-973e-45d2-89a8-c440a8f27640.jpg',
-          'https://whitespace-client-files.s3.amazonaws.com/universe - Copy (2)e668f09f-9b95-4aa4-93c6-c320cc16ab4a.jpg',
-          'https://whitespace-client-files.s3.amazonaws.com/gold-wallpaper - Copydbce0597-3955-4411-a7fc-fe9f5472bb7b.jpg',
-        ],
       },
       shopping_cart_id: 7,
       product: {
@@ -576,6 +588,53 @@ export const MockShoppingCart: ShoppingCart = {
         quantity: 1,
         price: 649.0,
         category_id: 1,
+        attributes: {},
+      },
+    },
+    {
+      id: 17,
+      quantity: 1,
+      price: 179.0,
+      additional_data: {},
+      shopping_cart_id: 7,
+      product: {
+        id: 4,
+        name: 'lighting',
+        format: {},
+        data: {
+          description: '...',
+        },
+        additional_data: {
+          questions: {
+            general: [
+              {
+                id: 44,
+                image_required: false,
+                question:
+                  'Have you already set up a budget for lighting fixtures? We suggest you think about this beforehand.',
+              },
+              {
+                id: 45,
+                image_required: false,
+                question:
+                  'What kind of lighting do you generally prefer - lamps, sconce lights, chandeliers? Attach direct links or images of the style you would love to have.',
+              },
+              {
+                id: 46,
+                image_required: true,
+                question: 'Would you like to have built-in lighting?',
+              },
+              {
+                id: 47,
+                image_required: false,
+                question: 'Any additional thoughts regarding',
+              },
+            ],
+          },
+        },
+        quantity: 1,
+        price: 179.0,
+        category_id: 2,
         attributes: {},
       },
     },
