@@ -160,7 +160,15 @@
           <span> I agree to </span>
           <a href="#"> Terms of Service</a>
         </div>
-        <button class="review-pay__btn" appGradient>Create order</button>
+        <button
+          class="review-pay__btn"
+          [ngClass]="{ 'review-pay__btn--disabled': !this.iAgreeToTerms }"
+          [disabled]="!this.iAgreeToTerms"
+          appGradient
+          (click)="this.createOrder()"
+        >
+          Create order
+        </button>
       </div>
     </div>
   </div>

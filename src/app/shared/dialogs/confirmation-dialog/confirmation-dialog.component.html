@@ -1,0 +1,17 @@
+<div *ngIf="this.data" fxLayout="column" fxLayoutGap="10px">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+    <h3>
+      {{ this.data.titleLabel }}
+    </h3>
+  </div>
+  <mat-dialog-content class="mat-typography">
+    <p class="conf-dialog__message">
+      {{ this.data.message }}
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="false">Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
+  </mat-dialog-actions>
+</div>
