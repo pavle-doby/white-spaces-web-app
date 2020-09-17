@@ -14,6 +14,7 @@ import { UploadData } from 'src/app/shared/upload/upload.model';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { AdditionalData } from 'src/models/AdditionalData.model';
+import { convertQuestionDTODictionaryToQuestionDTOList } from 'src/app/shared/Utilities';
 
 const INFO = `Feel free to load us with information so that we
 can truly get to know both you and your space
@@ -89,7 +90,7 @@ export class QuestionnaireComponent implements OnInit {
       this.shoppingCart,
       question.product_id
     );
-    const additionalData: AdditionalData = JSON.parse(
+    const additionalData = JSON.parse(
       JSON.stringify(lineItem.product.additional_data)
     );
 
@@ -100,6 +101,10 @@ export class QuestionnaireComponent implements OnInit {
       return q;
     });
 
+    additionalData.questions = convertQuestionDTODictionaryToQuestionDTOList(
+      additionalData.questions
+    );
+
     const productVM: ProductVM = {
       shopping_cart_id: this.shoppingCart.id,
       product_id: question.product_id,
@@ -107,6 +112,8 @@ export class QuestionnaireComponent implements OnInit {
       quantity: 1,
       additional_data: additionalData,
     };
+
+    console.log(JSON.stringify(productVM));
 
     this.checkoutService
       .updateProduct(productVM)
@@ -174,6 +181,8 @@ export class QuestionnaireComponent implements OnInit {
           .updateProduct(productVM)
           .toPromise()
           .then((newShoppingCart) => {
+            console.log({ newShoppingCart });
+
             this.$store.dispatch(
               setShoppingCartCheckout({ shoppingCart: newShoppingCart })
             );
