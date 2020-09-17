@@ -39,8 +39,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subNavbarState = this.navbarState$.subscribe((navbarState) => {
-      console.log('Evo mee');
-
       this.changeNavbarState(navbarState.selectedButton);
     });
   }
