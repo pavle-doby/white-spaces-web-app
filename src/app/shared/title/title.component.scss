@@ -1,6 +1,8 @@
 //TODO: Set proper size
 $normal-size: 4.167vw;
 $big-size: 8vw;
+$normal-size--mobile: 40px;
+$big-size--mobile: 50px;
 
 .ws-title {
   background-size: 100%;
@@ -15,19 +17,35 @@ $big-size: 8vw;
 
 .title-text--normal {
   font-size: $normal-size;
+  @media only screen and(max-width:959px) {
+    font-size: $normal-size--mobile;
+    line-height: $big-size--mobile;
+  }
 }
 
 .title-text--normal-bold {
   font-size: $normal-size;
   font-weight: 800;
+  @media only screen and(max-width:959px) {
+    font-size: $big-size--mobile;
+    line-height: $big-size--mobile;
+  }
 }
 
 .title-text--big {
   font-size: $big-size;
+  @media only screen and(max-width:959px) {
+    font-size: $big-size--mobile;
+    line-height: $big-size--mobile;
+  }
 }
 
 .title-text--big-bold {
   font-size: $big-size;
   font-weight: 800;
   line-height: 12vh;
+  @media only screen and(max-width:959px) {
+    font-size: $big-size--mobile;
+    line-height: $big-size--mobile;
+  }
 }

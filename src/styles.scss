@@ -22,6 +22,11 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  @media only screen and (max-width: 960px) {
+    overflow-y: visible;
+    overflow-x: hidden;
+    height: 100%;
+  }
   * {
     font-family: "Roboto", sans-serif;
   }

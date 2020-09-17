@@ -28,6 +28,9 @@
     rgba(217, 183, 197, 1) 50%,
     rgba(15, 13, 59, 1) 100%
   );
+  @media only screen and(max-width:959px) {
+    display: none;
+  }
 }
 
 .footer__main-message {

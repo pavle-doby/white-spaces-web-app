@@ -1,13 +1,16 @@
 <div
   class="belive-in__container"
   fxLayout="row"
+  fxLayout.lt-md="column"
   fxLayoutAlign="center start"
   fxFlex
 >
   <section
     class="belive-in__section belive-in__divider--right"
     fxLayout="column"
-    fxLayoutAlign="start end"
+    fxLayout.lt-md="row"
+    fxLayoutGap.lt-md="10px"
+    fxLayoutAlign.lt-md="start center"
     fxLayoutGap=".26vw"
   >
     <app-title
@@ -32,6 +35,7 @@
     fxLayoutAlign="start start"
     fxLayoutGap=".26vw"
     fxFlex="30"
+    fxFlex.lt-md="100"
   >
     <app-opening-label
       *ngFor="let item of this.openingLabelsArray"

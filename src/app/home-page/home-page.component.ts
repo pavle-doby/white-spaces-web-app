@@ -1,8 +1,12 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { NavBtnsInitStateObj } from '../shared/navbar/navbar.content';
 import { Observable } from 'rxjs';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { map, shareReplay } from 'rxjs/operators';
+import {
+  BreakpointObserver,
+  Breakpoints,
+  MediaMatcher,
+} from '@angular/cdk/layout';
+import { map, shareReplay, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home-page',
@@ -11,25 +15,38 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
+  matcher: MediaQueryList;
+  isMobile: boolean = false;
+  // isHandset$: Observable<boolean> = this.breakpointObserver
+  //   .observe([Breakpoints.Handset, Breakpoints.HandsetPortrait])
+  //   .pipe(
+  //     tap((result) => console.log(result)),
+  //     map((result) => result.matches),
+  //     shareReplay()
+  //   );
 
-  constructor(
-    private window: Window,
-    private breakpointObserver: BreakpointObserver
-  ) {
-    this.isHandset$.subscribe((res) => {
-      if (res) {
-        this.window.document.body.style.width = '100vw';
-        this.window.document.body.style.height = '500vh';
-      } else {
-        this.window.document.body.style.width = '500vw';
-      }
+  constructor(private window: Window, private mediaMatcher: MediaMatcher) {
+    if (window.innerWidth >= 959) {
+      this.window.document.body.style.width = '500vw';
+      this.isMobile = false;
+    } else {
+      this.window.document.body.style.width = '100vw';
+      this.isMobile = true;
+    }
+    this.matcher = this.mediaMatcher.matchMedia('(max-width: 959px)');
+    this.matcher.addListener((event) => {
+      console.log(event.matches);
+      this.window.document.body.style.width = event.matches ? '100vw' : '500vw';
     });
+    // this.isHandset$.subscribe((res) => {
+    //   console.log(res);
+
+    //   if (res) {
+    //     this.window.document.body.style.width = '100vw';
+    //   } else {
+    //     this.window.document.body.style.width = '500vw';
+    //   }
+    // });
     //this.window.document.body.style.width = `${100 * 5}vw`;
   }
 
