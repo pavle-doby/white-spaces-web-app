@@ -5,7 +5,16 @@
 }
 
 .sidenav {
-  width: 200px;
+}
+
+.navbar-ss__nav-list a {
+  color: white;
+  font-size: 11vw;
+}
+
+.navbar-ss__sidenav-header {
+  padding: 16px;
+  color: white;
 }
 
 .mat-toolbar.mat-primary {

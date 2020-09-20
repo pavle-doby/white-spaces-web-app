@@ -9,6 +9,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LogoModule } from '../logo/logo.module';
+import { GradientDirectiveModule } from '../directives/gradient.directive.module';
+import { RouterModule } from '@angular/router';
 
 const MaterialModules = [
   MatToolbarModule,
@@ -26,6 +28,8 @@ const MaterialModules = [
     LayoutModule,
     FlexLayoutModule,
     LogoModule,
+    GradientDirectiveModule,
+    RouterModule,
   ],
   exports: [NavbarSmallSrceenComponent],
 })

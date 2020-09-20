@@ -3,4 +3,8 @@ export enum MainRouterPaths {
   BLOG = 'blog',
   CHECKOUT = 'checkout',
   LOGIN = 'login',
+  PACKAGES = 'packages',
+  FQAS = 'fqas',
+  ABOUT = 'about',
+  CONTACT = 'contact',
 }
