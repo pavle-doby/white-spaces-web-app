@@ -1,4 +1,10 @@
-<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".52vw">
+<div
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  fxLayoutGap=".52vw"
+  fxHide.lt-md
+  *ngIf="!(this.isHandset$ | async)"
+>
   <div fxFlex="17"></div>
   <div
     fxLayout="column"
@@ -6,9 +12,7 @@
     fxLayoutGap=".52vw"
   >
     <div fxLayout="row" fxLayoutAlign="start center" fxFill>
-      <span class="sc-contact__title app__text-shadow">
-        CONTACT US
-      </span>
+      <span class="sc-contact__title app__text-shadow"> CONTACT US </span>
     </div>
     <div fxLayout="row" fxLayoutAlign="start start">
       <!-- Form -->
@@ -53,9 +57,9 @@
           <textarea class="sc-contact__textarea" rows="6"></textarea>
         </div>
 
-        <div class="app__btn" fxLayoutAlign="center center">
+        <button class="app__btn" fxLayoutAlign="center center">
           <span>SEND</span>
-        </div>
+        </button>
       </div>
       <!-- Our info -->
       <div
@@ -98,4 +102,84 @@
     </div>
   </div>
   <div fxFlex="17"></div>
+</div>
+<div
+  *ngIf="this.isHandset$ | async"
+  class="sc-contact--lt-md"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  fxLayoutGap="30px"
+  appGradient
+>
+  <div class="sc-contact__title--lt-md width-100">CONTACT US</div>
+
+  <div
+    class="sc-contact__form--lt-md width-100"
+    fxLayout="column"
+    fxLayoutAlign="start center"
+    fxLayoutGap="15px"
+  >
+    <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
+      <label class="sc-contact__label--lt-md width-100" for="">Name*</label>
+      <input class="sc-contact__input--lt-md width-100" type="text" />
+    </div>
+    <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
+      <label class="sc-contact__label--lt-md width-100" for="">E-mail*</label>
+      <input class="sc-contact__input--lt-md width-100" type="text" />
+    </div>
+    <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
+      <label class="sc-contact__label--lt-md width-100" for="">City*</label>
+      <input class="sc-contact__input--lt-md width-100" type="text" />
+    </div>
+    <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
+      <label class="sc-contact__label--lt-md width-100" for="">Phone*</label>
+      <input class="sc-contact__input--lt-md width-100" type="text" />
+    </div>
+    <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
+      <label class="sc-contact__label--lt-md width-100" for="">Text*</label>
+      <textarea
+        class="sc-contact__input--lt-md width-100"
+        name="text"
+        rows="5"
+      ></textarea>
+    </div>
+    <div class="width-100" fxLayout="row" fxLayoutAlign="start start">
+      <button class="sc-contact__btn--lt-md" fxLayoutAlign="center center">
+        <span>SEND</span>
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="sc-contact__info-section--lt-md width-100"
+    fxLayout="column"
+    fxLayoutAlign="start start"
+    fxLayoutGap="15px"
+  >
+    <div class="sc-contact__name--lt-md app__text-shadow">
+      White Spaces Redesign
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+      <div class="sc-contact__info--lt-md">Pantelejska 25</div>
+      <div class="sc-contact__info--lt-md">18000 Niš</div>
+      <div class="sc-contact__info--lt-md">Serbia</div>
+    </div>
+
+    <div class="sc-contact__info--lt-md">+381 63 123-456</div>
+    <div class="sc-contact__info--lt-md">
+      <div>We would love to connect with you</div>
+      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+        <span>PI</span>
+        <span>LI</span>
+        <span>FB</span>
+        <span>ING</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
+    <div>Privacy Policy // Terms of Service</div>
+    <div>Copyright 2020 © White Space Redesign</div>
+  </div>
 </div>

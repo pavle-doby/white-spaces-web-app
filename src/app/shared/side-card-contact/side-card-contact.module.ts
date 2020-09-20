@@ -3,10 +3,16 @@ import { CommonModule } from '@angular/common';
 import { SideCardContactComponent } from './side-card-contact.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SideCardModule } from '../side-card/side-card.module';
+import { GradientDirectiveModule } from '../directives/gradient.directive.module';
 
 @NgModule({
   declarations: [SideCardContactComponent],
-  imports: [CommonModule, SideCardModule, FlexLayoutModule],
+  imports: [
+    CommonModule,
+    SideCardModule,
+    FlexLayoutModule,
+    GradientDirectiveModule,
+  ],
   exports: [SideCardContactComponent],
 })
 export class SideCardContactModule {}

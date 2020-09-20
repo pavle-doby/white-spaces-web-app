@@ -69,3 +69,42 @@ $section-side-margin: 2.3vw;
   font-size: 0.76vw;
   font-weight: 300;
 }
+
+.sc-contact--lt-md {
+  color: white;
+  padding: 20px;
+  padding-top: 490px;
+  min-height: 100vh;
+  // padding-top: 326px;
+}
+
+.sc-contact__title--lt-md {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.sc-contact__label--lt-md {
+  font-weight: 300;
+}
+
+.sc-contact__input--lt-md {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  min-height: 40px;
+  font-size: 20px;
+}
+
+.sc-contact__btn--lt-md {
+  font-size: 18px;
+  padding-top: 5px;
+  font-weight: 300;
+  background: transparent;
+  color: white;
+  width: 120px;
+  border: 0.5px solid white;
+}
+
+.sc-contact__name--lt-md {
+  font-size: 32px;
+}
