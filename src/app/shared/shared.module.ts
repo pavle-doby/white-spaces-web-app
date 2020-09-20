@@ -20,6 +20,8 @@ import { UploadGridModule } from './upload-grid/upload-grid.module';
 import { UploadGridComponent } from './upload-grid/upload-grid.component';
 import { ConfirmationDialogModule } from './dialogs/confirmation-dialog/confirmation-dialog.module';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
+import { NavbarSmallSrceenComponent } from './navbar-small-srceen/navbar-small-srceen.component';
+import { NavbarSmallSrceenModule } from './navbar-small-srceen/navbar-small-srceen.module';
 
 @NgModule({
   declarations: [],
@@ -35,6 +37,7 @@ import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confi
     SideCardFqaModule,
     UploadGridModule,
     ConfirmationDialogModule,
+    NavbarSmallSrceenModule,
   ],
   exports: [
     FooterComponent,
@@ -47,6 +50,7 @@ import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confi
     SideCardFqaComponent,
     UploadGridComponent,
     ConfirmationDialogComponent,
+    NavbarSmallSrceenComponent,
   ],
 })
 export class SharedModule {}
