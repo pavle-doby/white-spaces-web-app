@@ -1,7 +1,11 @@
 @import "../../../styles-colors.scss";
 
 .sc-packages {
-  height: 100%;
+  color: white;
+}
+
+.sc-packages__content--lt-md {
+  margin-top: 1050px;
 }
 
 .sc-packages__title {
@@ -9,17 +13,31 @@
   font-weight: 800;
 
   margin-top: 3%;
+  text-align: center;
+}
+.sc-packages__title--lt-md {
+  font-size: 40px;
+  font-weight: 800;
+  color: white;
 }
 
 .sc-packages__subtitle {
   font-size: 1.3vw;
   font-weight: 600;
+  text-align: center;
+}
+.sc-packages__subtitle--lt-md {
+  font-size: 25px;
 }
 
 .sc-packages__subtitle-decs {
   font-size: 0.9vw;
   width: 60%;
   text-align: center;
+}
+.sc-packages__subtitle-decs--lt-md {
+  font-size: 15px;
+  width: 100%;
 }
 
 .packages-out-box__description {
@@ -28,8 +46,16 @@
 
   white-space: pre-line;
 }
+.packages-out-box__description--lt-md {
+  font-size: 15px;
+  text-align: center;
+}
 
 .packages-out-box__desc--imp {
   font-size: 2vh;
   font-weight: 500;
+}
+.packages-out-box__desc--imp-lt-md {
+  font-size: 25px;
+  text-align: center;
 }
