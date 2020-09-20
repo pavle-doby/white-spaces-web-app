@@ -2,6 +2,9 @@
 
 .belive-in__container {
   width: 65vw;
+  @media (max-width: 960px) {
+    width: 80vw;
+  }
 }
 
 .belive-in__section {
@@ -10,6 +13,9 @@
 
 .belive-in__divider--right {
   border-right: 1px solid black;
+  @media (max-width: 960px) {
+    border: none;
+  }
 }
 
 .belive-in__section-labels {

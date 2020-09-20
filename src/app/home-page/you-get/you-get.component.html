@@ -1,11 +1,27 @@
-<div class="you-get__container" fxLayout="column" fxLayoutAlign="start center">
-  <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="2vw">
+<div
+  class="you-get__container"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  fxLayoutAlign.lt-md="center center"
+>
+  <div
+    fxLayout="column"
+    fxLayoutAlign="start start"
+    fxLayoutAlign.lt-md="center center"
+    fxLayoutGap="2vw"
+  >
     <app-title
       [text]="this.youGetTitle.text"
       [gradient]="this.youGetTitle.gradient"
       [size]="this.youGetTitle.size"
     ></app-title>
-    <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="2vw">
+    <div
+      fxLayout="row"
+      fxLayout.lt-md="column"
+      fxLayoutAlign="start end"
+      fxLayoutAlign.lt-md="center center"
+      fxLayoutGap="2vw"
+    >
       <img
         class="you-get__img"
         src="@app/../assets/images/home/what-you-get 0.jpg"
@@ -15,7 +31,9 @@
         class="you-get__content-height"
         fxLayout="column"
         fxLayoutAlign="space-between start"
+        fxLayoutAlign.lt-md="center center"
         fxFlex="45"
+        fxFlex.lt-md="100"
       >
         <div class="you-get__labels-container">
           <app-opening-label

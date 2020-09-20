@@ -19,6 +19,9 @@
   right: 0;
   position: absolute;
   z-index: -1;
+  @media only screen and (max-width: 959px) {
+    background-size: 90%;
+  }
 }
 
 .home__slogan-container {
@@ -28,6 +31,11 @@
   > span {
     font-size: 1.4vw;
     letter-spacing: 0.1vw;
+    @media only screen and(max-width:959px) {
+      font-size: 25px;
+      //letter-spacing: 12px;
+      line-height: 40px;
+    }
   }
 }
 
@@ -36,4 +44,7 @@
   display: block;
   margin-bottom: 1.565vw;
   margin-top: 3.125vw;
+  @media only screen and(max-width:959px) {
+    width: auto;
+  }
 }

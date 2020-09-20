@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AdminService } from 'src/app/services/admin.service';
 @Component({
   selector: 'app-admin-order-dialog',
   templateUrl: './admin-order-dialog.component.html',
@@ -8,9 +9,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class AdminOrderDialogComponent implements OnInit {
   public data: any;
   public statusArray: any = [
-    { value: 0, viewValue: 'Not Accepted' },
-    { value: 1, viewValue: 'In Progress' },
-    { value: 2, viewValue: 'Finished' },
+    { value: 'declined', viewValue: 'Not Accepted' },
+    { value: 'approved', viewValue: 'In Progress' },
+    { value: 'completed', viewValue: 'Finished' },
+    { value: 'new', viewValue: 'New' },
+
   ];
 
   public onProjectMock: any = [
@@ -19,6 +22,7 @@ export class AdminOrderDialogComponent implements OnInit {
   ];
   constructor(
     private dialogRef: MatDialogRef<AdminOrderDialogComponent>,
+    private adminService:AdminService,
     @Inject(MAT_DIALOG_DATA) data
   ) {
     this.data = data;
@@ -27,6 +31,11 @@ export class AdminOrderDialogComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  public handleSelect(value){
+    console.log(value);
+    this.adminService.editOrder(this.data.id,0,value).subscribe((res)=>res,err=>console.error(err))
+  
+  }
   public save() {
     this.dialogRef.close(this.data);
   }

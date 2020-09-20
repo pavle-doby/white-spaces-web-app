@@ -15,13 +15,15 @@ export class ParallaxDirective {
   scroll: any;
 
   constructor(private element: ElementRef) {
-    this.element.nativeElement.style.transitionDuration = '.5s';
-    this.scroll = fromEvent<any>(window, 'wheel')
-      .pipe(debounce(() => interval(100)))
-      .subscribe((event) => {
-        this.startLeft = this.element.nativeElement.offsetLeft;
-        if (window.scrollX > this.startLeft - this.screenWidth / 2)
-          this.element.nativeElement.style.transform = `translateX(${event.wheelDelta}px)`;
-      });
+    if (this.screenWidth >= 959) {
+      this.element.nativeElement.style.transitionDuration = '.5s';
+      this.scroll = fromEvent<any>(window, 'wheel')
+        .pipe(debounce(() => interval(100)))
+        .subscribe((event) => {
+          this.startLeft = this.element.nativeElement.offsetLeft;
+          if (window.scrollX > this.startLeft - this.screenWidth / 2)
+            this.element.nativeElement.style.transform = `translateX(${event.wheelDelta}px)`;
+        });
+    }
   }
 }

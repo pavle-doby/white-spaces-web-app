@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 const STATUS_MAP = {
-  0: { text: 'Not Accepted', class: 'status-table__red' },
-  1: { text: 'In Progress', class: 'status-table__yellow' },
-  2: { text: 'Finished', class: 'status-table__green' },
+  'declined': { text: 'Not Accepted', class: 'status-table__red' },
+  'approved': { text: 'In Progress', class: 'status-table__blue' },
+  'completed': { text: 'Finished', class: 'status-table__green' },
+  'new':{ text: 'New', class: 'status-table__yellow' }
 };
 
 @Component({

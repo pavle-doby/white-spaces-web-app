@@ -5,6 +5,7 @@ import { MatTable } from '@angular/material/table';
 import {
   AdminOrdersDataSource,
   AdminOrdersItem,
+  ORDERS_MOCK,
 } from './admin-orders-datasource';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminOrderDialogComponent } from './admin-order-dialog/admin-order-dialog.component';
@@ -18,7 +19,7 @@ import { AdminService } from 'src/app/services/admin.service';
 export class AdminOrdersComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<AdminOrdersItem>;
+  @ViewChild(MatTable) table: MatTable<any>;
   dataSource: AdminOrdersDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
@@ -53,11 +54,31 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
       this.table.dataSource = this.dataSource;
     });
   }
-  ngOnInit() {}
+  ngOnInit() {
+    const data = ORDERS_MOCK.map((element) => {
+      return {
+        id: element.id,
+        customer: '',
+        date: new Date(element.datetime).toLocaleString(),
+        orderValue: '€' + element.line_items[0].price,
+        status: element.state,
+        onProject: '',
+        orderDetails: element.line_items[0],
+      };
+    });
+    console.log(data);
+    this.dataSource = new AdminOrdersDataSource(data);
+  }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.table.dataSource = this.dataSource;
+  }
 
   public openDialog(order: any): void {
+    console.log(order);
+
     const dialogRef = this.dialog.open(AdminOrderDialogComponent, {
       data: order,
     });

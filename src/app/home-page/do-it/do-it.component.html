@@ -1,4 +1,9 @@
-<div class="do-it__container" fxLayout="column" fxLayoutAlign="start center">
+<div
+  class="do-it__container"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  fxLayoutAlign.lt-md="start center"
+>
   <app-title
     [gradient]="this.gradient"
     [text]="this.doItTitle.text"
@@ -7,7 +12,9 @@
   <div
     class="do-it__content-container"
     fxLayout="row"
+    fxLayout.lt-md="column"
     fxLayoutAlign="center center"
+    fxLayoutAlign.lt-md="start center"
     fxFill
   >
     <div
@@ -28,16 +35,18 @@
     <div
       class="do-it__video-container do-it__content-height"
       fxLayout="column"
+      fxLayout.lt-md="row"
       fxLayoutAlign="end end"
       fxFlex="35"
+      fxFlex.lt-md="100"
     >
       <div class="iframe-container">
-        <iframe
-          src="https://www.youtube.com/embed/qu577tNp1hA"
-          frameborder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+        <video autoplay>
+          <source
+            src="../../../assets/coverr-landscape-in-algarve-portugal-2813.mp4"
+            type="video/mp4"
+          />
+        </video>
       </div>
     </div>
   </div>

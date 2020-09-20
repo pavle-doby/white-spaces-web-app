@@ -7,7 +7,7 @@
     (click)="this.closeNavbarCard()"
   >
     <router-outlet></router-outlet>
-    <app-footer></app-footer>
+    <app-footer *ngIf="this.footerActive"></app-footer>
   </div>
   <div
     *ngIf="this.ShowCheckoutPage"
@@ -20,9 +20,9 @@
     <app-checkout-page>
       <router-outlet name="checkoutSteps"></router-outlet>
     </app-checkout-page>
-    <app-footer class="app__footer--checkout"></app-footer>
+    <app-footer class="app__footer--checkout" *ngIf="this.footerActive"></app-footer>
   </div>
-  <app-navbar></app-navbar>
+  <app-navbar *ngIf="!(this.isHandset$ | async)"></app-navbar>
 </div>
 
 <ng-template #admin>

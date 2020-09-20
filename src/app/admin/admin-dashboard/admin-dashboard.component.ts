@@ -34,9 +34,9 @@ export class AdminDashboardComponent {
     );
   }
 
-  public get isDashboard() {
-    return this.router.url === '/admin';
-  }
+  // public get isDashboard() {
+  //   return this.router.url === '/admin';
+  // }
 
   public logOut(): void {
     this.authService.logout();

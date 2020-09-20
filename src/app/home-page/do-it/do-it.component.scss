@@ -3,6 +3,9 @@
 .do-it__container {
   width: $page-width;
   //TODO: Set size with variables
+  @media only screen and(max-width:959px) {
+    width: 80vw;
+  }
   min-height: 50vh;
   p {
     font-size: 0.833vw;
@@ -19,6 +22,11 @@
 .do-it__content-height {
   //TODO: Set size with variables
   min-height: 40vh !important;
+  p {
+    @media only screen and(max-width:959px) {
+      font-size: 14px;
+    }
+  }
 }
 
 .do-it__content-container {

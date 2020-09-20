@@ -1,8 +1,11 @@
 <div
   class="works"
   fxLayout="row"
+  fxLayout.lt-md="column"
   fxLayoutAlign="center center"
+  fxLayoutAlign.lt-md="center end"
   fxLayoutGap="5vw"
+  fxLayoutGap.lt-md="20px"
 >
   <div fxLayout="column" fxLayoutAlign="center end">
     <app-title
@@ -16,7 +19,14 @@
       [gradient]="this.gradient"
     ></app-title>
   </div>
-  <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="2vw">
+  <div
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutAlign="space-around center"
+    fxLayoutAlign.lt-md="start start"
+    fxLayoutGap="2vw"
+    fxLayoutGap.lt-md="15px"
+  >
     <div *ngFor="let imageDescription of this.imageDescriptionArray">
       <app-image-description
         [image]="imageDescription.image"
