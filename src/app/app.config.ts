@@ -12,3 +12,5 @@ export enum ConfirmationDilogType {
   WARNING = 'warning',
   DANGER = 'error',
 }
+
+export const CONFIRMATION_DIALOG_WIDTH = '500px';

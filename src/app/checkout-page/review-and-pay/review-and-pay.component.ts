@@ -16,8 +16,7 @@ import {
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { ProgressState, Step } from 'src/models/CheckoutProgress.model';
-
-const DIALOG_WIDTH = '500px';
+import { CONFIRMATION_DIALOG_WIDTH } from 'src/app/app.config';
 
 @Component({
   selector: 'app-review-and-pay',
@@ -168,7 +167,7 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
   public createOrder(): void {
     if (this.isAllDone) {
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-        width: DIALOG_WIDTH,
+        width: CONFIRMATION_DIALOG_WIDTH,
         disableClose: true,
         data: new ConfirmationDialogData({
           titleLabel: 'Confrimation dialog',
@@ -194,7 +193,7 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
       });
     } else {
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-        width: DIALOG_WIDTH,
+        width: CONFIRMATION_DIALOG_WIDTH,
         disableClose: true,
         data: new ConfirmationDialogData({
           titleLabel: 'Information dialog',

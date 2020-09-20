@@ -102,6 +102,13 @@ body {
   border: 0.5px solid black;
 }
 
+.checkout__btn--rose {
+  @extend .basic__btn;
+  background-color: rosybrown;
+  color: white;
+  border: 0.5px solid rosybrown;
+}
+
 .table-container {
   min-width: 60vw;
   margin-top: 5vh;
