@@ -11,9 +11,13 @@ import { MatDialog } from '@angular/material/dialog';
 import {
   ConfirmationDialogComponent,
   ConfirmationDialogData,
+  ConfirmationDialogType,
 } from 'src/app/shared/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
+import { ProgressState, Step } from 'src/models/CheckoutProgress.model';
+
+const DIALOG_WIDTH = '500px';
 
 @Component({
   selector: 'app-review-and-pay',
@@ -23,9 +27,11 @@ import { ShoppingCart } from 'src/models/ShoppingCart.model';
 export class ReviewAndPayComponent implements OnInit, OnDestroy {
   public user$: Observable<AppUser>;
   public subUser: Subscription;
+
   public checkout$: Observable<CheckoutState>;
   public subChekout: Subscription;
 
+  public isAllDone: boolean;
   public shoppingCart: ShoppingCart;
 
   public projectInfo: InfoPriceLabelInputs;
@@ -126,6 +132,12 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
         }),
       ];
 
+      const steps: Step[] = Object.values(checkoutState.progressState);
+      const uncomplitedSteps = steps.filter((step) =>
+        step.isRequired ? step.state !== ProgressState.DONE : false
+      );
+      this.isAllDone = !uncomplitedSteps.length;
+
       this.addOnInfo.infoPriceList = checkoutState.addOnList
         .filter((addOn) => addOn.isSelected)
         .map((addOn) => {
@@ -154,28 +166,42 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
   }
 
   public createOrder(): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: new ConfirmationDialogData({
-        titleLabel: 'Confrimation dialog',
-        message: 'Are you sure you want to make this order?',
-      }),
-    });
+    if (this.isAllDone) {
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        width: DIALOG_WIDTH,
+        disableClose: true,
+        data: new ConfirmationDialogData({
+          titleLabel: 'Confrimation dialog',
+          message: 'Are you sure you want to make this order?',
+        }),
+      });
 
-    this.dialogSub = dialogRef.afterClosed().subscribe((res) => {
-      if (!res) {
-        return;
-      }
+      this.dialogSub = dialogRef.afterClosed().subscribe((res) => {
+        if (!res) {
+          return;
+        }
 
-      this.checkoutService
-        .createOrder(this.shoppingCart.id)
-        .toPromise()
-        .then((res) => {
-          alert('Congratulations! U made your order successfully! :D');
-        })
-        .catch((err) => {
-          console.error(err);
-          alert(err.message);
-        });
-    });
+        this.checkoutService
+          .createOrder(this.shoppingCart.id)
+          .toPromise()
+          .then((res) => {
+            alert('Congratulations! U made your order successfully! :D');
+          })
+          .catch((err) => {
+            console.error(err);
+            alert(err.message);
+          });
+      });
+    } else {
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        width: DIALOG_WIDTH,
+        disableClose: true,
+        data: new ConfirmationDialogData({
+          titleLabel: 'Information dialog',
+          message: `You haven't completed all steps. Make sure you answered all questions.`,
+          type: ConfirmationDialogType.INFO,
+        }),
+      });
+    }
   }
 }

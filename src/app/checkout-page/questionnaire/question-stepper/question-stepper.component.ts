@@ -62,7 +62,7 @@ export class QuestionStepperComponent implements OnInit, OnDestroy {
             stepState = StepState.UNCOMPLITED;
           }
 
-          return new Step({ index: i, label: i, state: stepState });
+          return new Step({ index: i, label: i + 1, state: stepState });
         }
       );
     });

@@ -44,7 +44,7 @@ export class CheckoutService {
 
   public updateProduct(productVM: ProductVM): Observable<ShoppingCart> {
     const URL = `${API_URL}/shopping-cart/update-product`;
-    // return of(MockShoppingCart);
+    return of(MockShoppingCart);
     return this.http.post<ShoppingCart>(URL, { ...productVM });
   }
 

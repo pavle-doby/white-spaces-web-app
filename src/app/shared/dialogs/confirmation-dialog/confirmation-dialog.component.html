@@ -10,8 +10,15 @@
       {{ this.data.message }}
     </p>
   </mat-dialog-content>
-  <mat-dialog-actions align="end">
-    <button mat-button [mat-dialog-close]="false">Cancel</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
+  <mat-dialog-actions *ngIf="this.isTypeInfo" align="end">
+    <button mat-stroked-button [mat-dialog-close]="true" cdkFocusInitial>
+      Ok
+    </button>
+  </mat-dialog-actions>
+  <mat-dialog-actions *ngIf="!this.isTypeInfo" align="end">
+    <button mat-stroked-button [mat-dialog-close]="false">Cancel</button>
+    <button mat-stroked-button [mat-dialog-close]="true" cdkFocusInitial>
+      Yes
+    </button>
   </mat-dialog-actions>
 </div>
