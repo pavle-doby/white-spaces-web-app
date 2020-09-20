@@ -9,7 +9,6 @@ import {
   checkoutSelectPackage,
   setInfoCheckout,
   setFloorPlanCheckout,
-  setSpacePhotosCheckout,
   setSpacePhotosURLsCheckout,
   setAddOnIsSelectedCheckout,
   updateQuestionCheckout,
@@ -34,6 +33,11 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { FloorPlan } from 'src/models/FloorPlan.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { SideCadrPackage } from 'src/app/shared/side-card-packages/SideCardPackage';
+import {
+  CheckoutProgress,
+  ProgressState,
+  Step,
+} from 'src/models/CheckoutProgress.model';
 
 export interface CheckoutState {
   packageBox?: PackagesBox; // Jedan paket koji je u side kartici
@@ -48,6 +52,7 @@ export interface CheckoutState {
   tabbarButtons: TabbarButton[];
   questionStepper: QuestionStepper;
   shoppingCart: ShoppingCart;
+  progressState: CheckoutProgress;
 }
 
 const initState: CheckoutState = {
@@ -69,6 +74,40 @@ const initState: CheckoutState = {
     indexCurrent: 0,
   }),
   shoppingCart: null,
+  //TODO: Change on proper actions
+  progressState: new CheckoutProgress({
+    floorPlan: new Step({
+      name: 'floorPlan',
+      isRequired: true,
+      state: LocalStorageService.Instance.FloorPlan
+        ? ProgressState.DONE
+        : ProgressState.TODO,
+    }),
+    spacePhotos: new Step({
+      name: 'spacePhotos',
+      isRequired: true,
+      state: LocalStorageService.Instance.SpacePhotosUrls?.length
+        ? ProgressState.DONE
+        : ProgressState.TODO,
+    }),
+    addOns: new Step({
+      name: 'addOns',
+      isRequired: false,
+      state: LocalStorageService.Instance?.AddOnList?.find(
+        (addon) => addon.isSelected
+      )
+        ? ProgressState.DONE
+        : ProgressState.TODO,
+    }),
+    questions: new Step({
+      name: 'questions',
+      isRequired: true,
+      state: ProgressState.TODO,
+      total: LocalStorageService.Instance.Questions?.length,
+      finshed: LocalStorageService.Instance.Questions?.filter((q) => q.isAnswerd)
+        .length,
+    }),
+  }),
 };
 
 const reducer = createReducer(
@@ -89,22 +128,59 @@ const reducer = createReducer(
   }),
   on(setFloorPlanCheckout, (state, { floorPlan }) => {
     LocalStorageService.Instance.FloorPlan = floorPlan;
-    return { ...state, floorPlan: floorPlan };
-  }),
-  on(setSpacePhotosCheckout, (state, { files }) => {
-    return { ...state, spacePhotos: files };
+    return {
+      ...state,
+      floorPlan: floorPlan,
+      progressState: {
+        ...state.progressState,
+        floorPlan: {
+          ...state.progressState.floorPlan,
+          state: ProgressState.DONE,
+        },
+      },
+    };
   }),
   on(setSpacePhotosURLsCheckout, (state, { filesURLs }) => {
     LocalStorageService.Instance.SpacePhotosUrls = filesURLs;
-    return { ...state, spacePhotosURLs: filesURLs };
+    return {
+      ...state,
+      spacePhotosURLs: filesURLs,
+      progressState: {
+        ...state.progressState,
+        spacePhotos: {
+          ...state.progressState.spacePhotos,
+          state: ProgressState.DONE,
+        },
+      },
+    };
   }),
   on(addSpacePhotoURLCheckout, (state, { fileURL }) => {
     const newUrls = [...state.spacePhotosURLs, fileURL];
     LocalStorageService.Instance.SpacePhotosUrls = newUrls;
-    return { ...state, spacePhotosURLs: newUrls };
+    return {
+      ...state,
+      spacePhotosURLs: newUrls,
+      progressState: {
+        ...state.progressState,
+        spacePhotos: {
+          ...state.progressState.spacePhotos,
+          state: ProgressState.DONE,
+        },
+      },
+    };
   }),
   on(clearSpacePhotosURLsCheckout, (state) => {
-    return { ...state, spacePhotosURLs: [] };
+    return {
+      ...state,
+      spacePhotosURLs: [],
+      progressState: {
+        ...state.progressState,
+        spacePhotos: {
+          ...state.progressState.spacePhotos,
+          state: ProgressState.TODO,
+        },
+      },
+    };
   }),
   on(setAddOnIsSelectedCheckout, (state, { addOn, isSelected }) => {
     if (isSelected) {
@@ -127,6 +203,17 @@ const reducer = createReducer(
         rangeStart: 0,
         rangeEnd: 15,
         numberOfRangeToShow: 16,
+      },
+      progressState: {
+        ...state.progressState,
+        addOns: {
+          ...state.progressState.addOns,
+          state: LocalStorageService.Instance.AddOnList.find(
+            (addOn) => addOn.isSelected
+          )
+            ? ProgressState.DONE
+            : ProgressState.TODO,
+        },
       },
     };
   }),
@@ -164,9 +251,25 @@ const reducer = createReducer(
     const newQuestions = state.questions.map((q) => {
       return q.id === question.id ? { ...question } : { ...q };
     });
+
     LocalStorageService.Instance.Questions = newQuestions;
 
-    return { ...state, questions: newQuestions };
+    let finished = state.progressState.questions.finshed;
+    finished += question.isAnswerd ? 1 : -1;
+    let total = state.progressState.questions.total;
+
+    return {
+      ...state,
+      questions: newQuestions,
+      progressState: {
+        ...state.progressState,
+        questions: {
+          ...state.progressState.questions,
+          finshed: finished,
+          state: finished === total ? ProgressState.DONE : ProgressState.TODO,
+        },
+      },
+    };
   }),
   on(setCurrentIndexCheckout, (state, { currentIndex }) => {
     let newRangeStart = state.questionStepper.rangeStart;

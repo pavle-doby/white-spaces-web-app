@@ -19,6 +19,8 @@ import { async } from '@angular/core/testing';
 import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { closeNavbarCard } from 'src/app/store/actions/navbar.actions';
+import { EVERY_PACKAGE_INCLUDES } from './side-card-packages.content';
 
 @Component({
   selector: 'app-side-card-packages',
@@ -29,6 +31,7 @@ export class SideCardPackagesComponent implements OnInit {
   public packages: SideCadrPackage[] = [];
   public checkoutState$: Observable<CheckoutState>;
   public selectedPackageBox$: Observable<PackagesBox>;
+  public everyPackageIncludes: string[] = EVERY_PACKAGE_INCLUDES;
 
   constructor(
     private readonly $store: Store<AppState>,
@@ -67,6 +70,7 @@ export class SideCardPackagesComponent implements OnInit {
   }
 
   public onSelectEvent(box: PackagesBox): void {
+    this.$store.dispatch(closeNavbarCard());
     this.$store.dispatch(checkoutSelectPackage({ packageBox: box }));
     this.$store.dispatch(setQuestionsCheckout({ questions: box.questions }));
     this.$store.dispatch(
@@ -87,6 +91,7 @@ export class SideCardPackagesComponent implements OnInit {
   }
 
   public onContinueEvent(): void {
+    this.$store.dispatch(closeNavbarCard());
     this.router.navigateByUrl(
       `/${MainRouterPaths.LOGIN}?login=${LoginParam.LOGIN}`
     );

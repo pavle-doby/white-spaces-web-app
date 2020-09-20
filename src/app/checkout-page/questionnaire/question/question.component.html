@@ -12,5 +12,6 @@
     rows="6"
     [(ngModel)]="this.answer"
     (focusout)="this.onFocusOut()"
+    (keyup.enter)="this.onFocusOut()"
   ></textarea>
 </div>

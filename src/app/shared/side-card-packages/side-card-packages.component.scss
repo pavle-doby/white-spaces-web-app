@@ -12,19 +12,24 @@
 }
 
 .sc-packages__subtitle {
-  font-size: 1.1vw;
-  font-weight: 500;
+  font-size: 1.3vw;
+  font-weight: 600;
 }
 
 .sc-packages__subtitle-decs {
   font-size: 0.9vw;
   width: 60%;
+  text-align: center;
 }
 
 .packages-out-box__description {
-  font-size: 0.7vw;
-  font-weight: 400;
+  font-size: 0.8vw;
+  font-weight: 300;
 
-  text-align: left;
   white-space: pre-line;
+}
+
+.packages-out-box__desc--imp {
+  font-size: 2vh;
+  font-weight: 500;
 }

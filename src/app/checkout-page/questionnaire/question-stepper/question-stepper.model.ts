@@ -34,7 +34,7 @@ export class Step {
 
   constructor(obj: Step) {
     this.index = obj.index;
-    this.label = this.label ?? this.index;
+    this.label = obj.label ?? this.index;
     this.state = obj.state ?? StepState.UNCOMPLITED;
     const classObj = {};
     classObj[`question-stepper__step--${this.state}`] = true;

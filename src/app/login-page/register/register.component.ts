@@ -5,7 +5,13 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { LoginParam } from 'src/app/app.config';
+import { CONFIRMATION_DIALOG_WIDTH, LoginParam } from 'src/app/app.config';
+import { MatDialog } from '@angular/material/dialog';
+import {
+  ConfirmationDialogComponent,
+  ConfirmationDialogData,
+  ConfirmationDialogType,
+} from 'src/app/shared/dialogs/confirmation-dialog/confirmation-dialog.component';
 
 const debunceTimeMs = 333;
 
@@ -40,7 +46,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly dialog: MatDialog
   ) {
     this.userVM = new UserVM({
       first_name: '',
@@ -55,6 +62,16 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dialog.open(ConfirmationDialogComponent, {
+      width: CONFIRMATION_DIALOG_WIDTH,
+      disableClose: false,
+      data: new ConfirmationDialogData({
+        titleLabel: 'Notice',
+        message: `Please note that at this point \n we only work on apartment renovation projects.\n Unfortunatelly at this moment any other type\n of project will be denied and fuly refunded.`,
+        type: ConfirmationDialogType.INFO,
+      }),
+    });
+
     this.isFirstNameValid$
       .pipe(debounceTime(debunceTimeMs), distinctUntilChanged())
       .subscribe(() => {
@@ -128,7 +145,15 @@ export class RegisterComponent implements OnInit {
         this.router.navigateByUrl(
           `/${MainRouterPaths.LOGIN}?login=${LoginParam.LOGIN}`
         );
-        alert('Verification link is send to your email.');
+        this.dialog.open(ConfirmationDialogComponent, {
+          width: CONFIRMATION_DIALOG_WIDTH,
+          disableClose: false,
+          data: new ConfirmationDialogData({
+            titleLabel: 'Registration',
+            message: `We’ve sent a verification mail your way.\n Please check your inbox and click on the link we provided\n in order to finish the registration process.`,
+            type: ConfirmationDialogType.INFO,
+          }),
+        });
       })
       .catch((err) => {
         console.error({ err });

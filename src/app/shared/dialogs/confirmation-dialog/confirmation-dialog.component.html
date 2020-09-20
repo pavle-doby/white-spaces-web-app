@@ -1,17 +1,36 @@
-<div *ngIf="this.data" fxLayout="column" fxLayoutGap="10px">
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-    <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-    <h3>
+<div
+  *ngIf="this.data"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  fxLayoutGap="10px"
+>
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <h2>
       {{ this.data.titleLabel }}
-    </h3>
+    </h2>
   </div>
-  <mat-dialog-content class="mat-typography">
-    <p class="conf-dialog__message">
-      {{ this.data.message }}
-    </p>
+  <mat-dialog-content
+    class="conf-dialog__message"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+  >
+    {{ this.data.message }}
   </mat-dialog-content>
-  <mat-dialog-actions align="end">
-    <button mat-button [mat-dialog-close]="false">Cancel</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
+  <mat-dialog-actions *ngIf="this.isTypeInfo" align="center">
+    <button class="checkout__btn--rose" [mat-dialog-close]="true">
+      Ok, got it
+    </button>
+  </mat-dialog-actions>
+  <mat-dialog-actions *ngIf="!this.isTypeInfo" align="center">
+    <button class="checkout__btn--rose" [mat-dialog-close]="false">
+      Cancel
+    </button>
+    <button
+      class="checkout__btn--rose"
+      [mat-dialog-close]="true"
+      cdkFocusInitial
+    >
+      Yes
+    </button>
   </mat-dialog-actions>
 </div>

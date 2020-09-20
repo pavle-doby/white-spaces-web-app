@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { NavBtnsInitStateObj } from '../shared/navbar/navbar.content';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store';
 
 @Component({
   selector: 'app-home-page',
@@ -8,15 +9,11 @@ import { NavBtnsInitStateObj } from '../shared/navbar/navbar.content';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  constructor(private window: Window) {
+  constructor(private window: Window, private readonly store: Store<AppState>) {
     this.window.document.body.style.width = `${100 * 5}vw`;
   }
 
   ngOnInit(): void {}
-
-  public onClick(): void {
-    console.log('Implement service or state to close side-card');
-  }
 
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {

@@ -3,6 +3,9 @@ import { fromEvent, interval } from 'rxjs';
 import { debounce } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
+import { Store } from '@ngrx/store';
+import { AppState } from './store';
+import { closeNavbarCard } from './store/actions/navbar.actions';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +22,11 @@ export class AppComponent {
   public get ShowCheckoutPage(): boolean {
     return this.router.url.includes(MainRouterPaths.CHECKOUT);
   }
-  constructor(private readonly window: Window, private router: Router) {
+  constructor(
+    private readonly window: Window,
+    private readonly router: Router,
+    private readonly store: Store<AppState>
+  ) {
     this.router.events.subscribe((route) => {
       this.isAdmin = this.router.url.includes('admin');
     });
@@ -32,5 +39,9 @@ export class AppComponent {
           behavior: 'smooth',
         })
       );
+  }
+
+  public closeNavbarCard(): void {
+    this.store.dispatch(closeNavbarCard());
   }
 }

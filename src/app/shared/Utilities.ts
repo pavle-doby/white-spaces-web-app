@@ -38,3 +38,15 @@ export const convertQuestionsDTOListToQuestionsList = (
 
   return buffQuestions;
 };
+
+export const convertQuestionDTODictionaryToQuestionDTOList = (
+  questionDTOList: Record<string, QuestionDTO[]>
+): QuestionDTO[] => {
+  let buffQuestions: QuestionDTO[] = [];
+
+  Object.values(questionDTOList).forEach((list) => {
+    buffQuestions = [...buffQuestions, ...list];
+  });
+
+  return buffQuestions;
+};

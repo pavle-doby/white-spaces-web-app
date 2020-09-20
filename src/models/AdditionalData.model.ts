@@ -6,3 +6,10 @@ export interface AdditionalData {
   floor_plan?: string; // For Package
   images?: string[]; // For Package
 }
+
+export interface AdditionalDataLineItem {
+  questions?: QuestionDTO[];
+  type?: string; // For Package
+  floor_plan?: string; // For Package
+  images?: string[]; // For Package
+}

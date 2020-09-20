@@ -22,11 +22,6 @@ export const setFloorPlanCheckout = createAction(
   props<{ floorPlan: FloorPlan }>()
 );
 
-export const setSpacePhotosCheckout = createAction(
-  '[CHECKOUT] SET_SPACE_PHOTOS',
-  props<{ files: FileList }>()
-);
-
 export const setSpacePhotosURLsCheckout = createAction(
   '[CHECKOUT] SET_SPACE_PHOTOS_URLS',
   props<{ filesURLs: string[] }>()
