@@ -5,23 +5,23 @@
   fxLayoutGap=".52vw"
   appGradient
 >
-  <div fxFlex="17"></div>
-  <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="3%" fxFlex>
+  <div fxFlex="12"></div>
+  <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="3%" fxFlex>
     <div
       class="sc-packages__header"
       fxLayout="column"
-      fxLayoutAlign="start start"
-      fxLayoutGap=".26vw"
+      fxLayoutAlign="start center"
+      fxLayoutGap=".46vw"
     >
       <span class="sc-packages__title app__text-shadow">
         FIND THE RIGHT PACKAGE
       </span>
-      <span class="sc-packages__subtitle">
-        TELL US, HOW BIG IS YOUR PLACE?
-      </span>
       <span class="sc-packages__subtitle-decs">
         We specialize in <b>APARTMENT AND LOFT</b> renovation projects and our
         core packages are based on the size of your place.
+      </span>
+      <span class="sc-packages__subtitle">
+        TELL US, HOW BIG IS YOUR PLACE?
       </span>
     </div>
     <div
@@ -32,37 +32,46 @@
     >
       <app-side-card-packages-box
         *ngFor="let package of this.packages"
+        [isSelected]="package.box?.id === (selectedPackageBox$ | async)?.id"
         [package]="package"
         (selectEvent)="this.onSelectEvent($event)"
+        (continueEvent)="this.onContinueEvent()"
       >
       </app-side-card-packages-box>
     </div>
-    <div class="packages-out-box__description">
-      All packages provide <b>professional architectural</b> solutions based on
-      the space potential and your needs.
-      <br />
-      EVERY PACKAGE INCLUDES:
-      <br />
-      The original floor plan drawing <br />
-      New redesigned floor plan <br />
-      A furniture layout plan <br />
-      Redesigned floor plan with detailed measurements <br />
-      A floor plan with furniture dimensions <br />
-      A demolition and reconstruction plan <br />
-      Project description
-      <br />
-      + BONUS ITEMS
-      <br />
-      In total, you will get <b>8 different files</b> within our basic package
-      (add-ons not included).
-      <br />
-      The basic package covers the expenses for AutoCAD files, too.
-      <br />
-      HOW LONG DOES IT TAKE?
-      <br />
-      From the moment you place an order and confirm payment, it takes
-      <b>10-16 business days</b> to deliver the final project.
-      <br />
+    <div
+      class="packages-out-box__description"
+      fxLayout="column"
+      fxLayoutAlign="start center"
+      fxLayoutGap="0.5vh"
+    >
+      <div>
+        All packages provide <b>professional architectural</b> solutions based
+        on the space potential and your needs.
+      </div>
+      <div class="packages-out-box__desc--imp">EVERY PACKAGE INCLUDES:</div>
+      <div>
+        The original floor plan drawing // New redesigned floor plan // A
+        furniture layout plan //
+      </div>
+      <div>
+        Redesigned floor plan with detailed measurements // A floor plan wirh
+        furniture dimensions //
+      </div>
+      <div>A demolition and reconstruction plan // Project description</div>
+      <div class="packages-out-box__desc--imp">+ BONUS ITEMS</div>
+      <div>
+        In total, you will get <b>8 different files</b> within our basic package
+        (add-ons not included).
+      </div>
+      <div>
+        <i>The basic package covers the expenses for AutoCAD files, too.</i>
+      </div>
+      <div class="packages-out-box__desc--imp">HOW LONG DOES IT TAKE?</div>
+      <div>
+        From the moment you place an order and confirm payment, it takes
+        <b>10-16 business days</b> to deliver the final project.
+      </div>
     </div>
   </div>
   <div fxFlex="10"></div>

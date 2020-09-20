@@ -107,6 +107,13 @@ body {
   border: 0.5px solid black;
 }
 
+.checkout__btn--rose {
+  @extend .basic__btn;
+  background-color: rosybrown;
+  color: white;
+  border: 0.5px solid rosybrown;
+}
+
 .table-container {
   min-width: 60vw;
   margin-top: 5vh;
@@ -139,4 +146,8 @@ body {
 
 .app__text-shadow {
   text-shadow: $shadow-h-len $shadow-v-len $shadow-blur-radius $text-shadow;
+}
+
+.app__uppercase {
+  text-transform: uppercase;
 }

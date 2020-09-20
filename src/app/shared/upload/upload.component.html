@@ -11,16 +11,23 @@
     {{ this.data?.info }}
   </div>
   <div fxLayout="column" fxLayoutAlign="start center">
-    <button appGradient class="checkout__btn" (click)="onUpload()">
+    <button
+      appGradient
+      class="checkout__btn"
+      [ngClass]="{ app__uppercase: this.data.uppercaseButtonText }"
+      (click)="onUpload()"
+    >
       Upload
     </button>
     <input
       type="file"
       #fileUpload23
-      [multiple]="this.data.isMultiple"
-      [accept]="this.data.supportedFileTypes"
+      [multiple]="this.data?.isMultiple"
+      [accept]="this.data?.supportedFileTypes"
       style="display: none"
     />
-    <span class="upload__info"> You can upload: {{ this.data.limit }} </span>
+    <span *ngIf="this.data?.bottomInfo" class="upload__info">
+      {{ this.data.bottomInfo }}
+    </span>
   </div>
 </div>

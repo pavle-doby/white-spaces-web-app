@@ -4,6 +4,14 @@ import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
+import { setUser } from 'src/app/store/actions/user.actions';
+import { MatDialog } from '@angular/material/dialog';
+import { CONFIRMATION_DIALOG_WIDTH } from 'src/app/app.config';
+import {
+  ConfirmationDialogComponent,
+  ConfirmationDialogData,
+  ConfirmationDialogType,
+} from 'src/app/shared/dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +30,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly authService: AuthService,
-    private readonly store: Store<AppState>
+    private readonly store: Store<AppState>,
+    private readonly dialog: MatDialog
   ) {}
 
   ngOnInit(): void {}
@@ -39,11 +48,28 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.authService.login(this.email, this.password);
-    this.authService.isAuthenticated.subscribe((heIs) => {
-      if (heIs) {
+    this.authService
+      .cleanLogin(this.email, this.password)
+      .toPromise()
+      .then((res) => {
+        this.store.dispatch(setUser({ user: res.user_info }));
+        if (!res.user_info.verified) {
+          this.dialog.open(ConfirmationDialogComponent, {
+            width: CONFIRMATION_DIALOG_WIDTH,
+            disableClose: false,
+            data: new ConfirmationDialogData({
+              titleLabel: 'Registration',
+              message: `We’ve sent a verification mail your way.\n Please check your inbox and click on the link we provided\n in order to finish the registration process.`,
+              type: ConfirmationDialogType.INFO,
+            }),
+          });
+          return;
+        }
+
         this.router.navigateByUrl(`/${MainRouterPaths.CHECKOUT}`);
-      }
-    });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 }

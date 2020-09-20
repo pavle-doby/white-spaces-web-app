@@ -18,6 +18,8 @@ import { SideCardPackagesComponent } from './side-card-packages/side-card-packag
 import { SideCardFqaComponent } from './side-card-fqa/side-card-fqa.component';
 import { UploadGridModule } from './upload-grid/upload-grid.module';
 import { UploadGridComponent } from './upload-grid/upload-grid.component';
+import { ConfirmationDialogModule } from './dialogs/confirmation-dialog/confirmation-dialog.module';
+import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [],
@@ -32,6 +34,7 @@ import { UploadGridComponent } from './upload-grid/upload-grid.component';
     SideCardPackagesModule,
     SideCardFqaModule,
     UploadGridModule,
+    ConfirmationDialogModule,
   ],
   exports: [
     FooterComponent,
@@ -43,6 +46,7 @@ import { UploadGridComponent } from './upload-grid/upload-grid.component';
     SideCardPackagesComponent,
     SideCardFqaComponent,
     UploadGridComponent,
+    ConfirmationDialogComponent,
   ],
 })
 export class SharedModule {}

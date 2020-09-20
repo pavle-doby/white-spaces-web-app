@@ -4,6 +4,8 @@ import { AddOn } from 'src/models/AddOn';
 import { Question } from 'src/models/Question.model';
 import { FloorPlan } from 'src/models/FloorPlan.model';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
+import { SideCadrPackage } from 'src/app/shared/side-card-packages/SideCardPackage';
+import { ShoppingCart } from 'src/models/ShoppingCart.model';
 
 export const checkoutSelectPackage = createAction(
   '[CHECKOUT] SELECT_PACKAGE',
@@ -18,11 +20,6 @@ export const setInfoCheckout = createAction(
 export const setFloorPlanCheckout = createAction(
   '[CHECKOUT] SET_FLOOT_PLAN',
   props<{ floorPlan: FloorPlan }>()
-);
-
-export const setSpacePhotosCheckout = createAction(
-  '[CHECKOUT] SET_SPACE_PHOTOS',
-  props<{ files: FileList }>()
 );
 
 export const setSpacePhotosURLsCheckout = createAction(
@@ -50,7 +47,7 @@ export const setAddOnListCheckout = createAction(
   props<{ addOnList: AddOn[] }>()
 );
 
-export const setAnswerCheckout = createAction(
+export const updateQuestionCheckout = createAction(
   '[CHECKOUT] SET_ANSWER',
   props<{ question: Question }>()
 );
@@ -73,4 +70,19 @@ export const setQuestionStepperCheckout = createAction(
 export const setCurrentIndexCheckout = createAction(
   '[CHECKOUT] SET_CURRENT_INDEX',
   props<{ currentIndex: number }>()
+);
+
+export const setAllPackagesCheckout = createAction(
+  '[CHECKOUT] SET_ALL_PACKAGES',
+  props<{ packages: SideCadrPackage[] }>()
+);
+
+export const clearAllPackagesCheckout = createAction(
+  '[CHECKOUT] CLEAR_ALL_PACKAGES',
+  props()
+);
+
+export const setShoppingCartCheckout = createAction(
+  '[CHECKOUT] SET_SHOPPING_CART',
+  props<{ shoppingCart: ShoppingCart }>()
 );

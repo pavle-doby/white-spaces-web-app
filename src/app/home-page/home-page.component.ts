@@ -7,6 +7,8 @@ import {
   MediaMatcher,
 } from '@angular/cdk/layout';
 import { map, shareReplay, tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store';
 
 @Component({
   selector: 'app-home-page',
@@ -25,7 +27,11 @@ export class HomePageComponent implements OnInit {
   //     shareReplay()
   //   );
 
-  constructor(private window: Window, private mediaMatcher: MediaMatcher) {
+  constructor(
+    private window: Window,
+    private mediaMatcher: MediaMatcher,
+    private readonly store: Store<AppState>
+  ) {
     if (window.innerWidth >= 959) {
       this.window.document.body.style.width = '500vw';
       this.isMobile = false;
@@ -52,20 +58,16 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public onClick(): void {
-    console.log('Implement service or state to close side-card');
-  }
-
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
     switch (event.key) {
       case 'ArrowRight': {
-        console.log('ArrowRight');
+        console.log('ArrowRight - dodaj skrol');
 
         break;
       }
       case 'ArrowLeft': {
-        console.log('ArrowLeft');
+        console.log('ArrowLeft - dodaj skrol');
 
         break;
       }

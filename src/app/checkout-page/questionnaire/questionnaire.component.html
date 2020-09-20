@@ -4,19 +4,27 @@
   fxLayoutAlign="center center"
   fxLayoutGap="2vh"
 >
-  <app-question-stepper></app-question-stepper>
+  <app-question-stepper
+    (selectStepEvent)="this.moveQuestionTo($event.index)"
+  ></app-question-stepper>
+
   <app-question
     [question]="this.questions[this.toShowIndex]"
     (changeAnswerEvent)="this.onChangeAnswer($event)"
   >
   </app-question>
-  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="1vw">
+  <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="1vw">
     <button
       class="checkout__btn--invert questionnaire__btn"
       (click)="this.moveQuestionTo(this.toShowIndex - 1)"
     >
       PREVIOUS
     </button>
+    <app-upload
+      *ngIf="this.questions[this.toShowIndex].image_required"
+      [data]="this.uploadData"
+      (uploadEvent)="this.onUploadEvent($event)"
+    ></app-upload>
     <button
       appGradient
       class="checkout__btn questionnaire__btn"

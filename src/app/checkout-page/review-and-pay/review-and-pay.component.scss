@@ -17,8 +17,9 @@ h1 {
 }
 
 .review-pay__left-header {
-  padding: 10px 20px;
+  padding: 0px 20px;
   min-height: 80px;
+  margin-bottom: 20px;
 }
 
 .review-pay__right-header {
@@ -36,6 +37,11 @@ h1 {
   padding: 5px 50px;
   border: none;
   cursor: pointer;
+}
+
+.review-pay__btn--disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 app-info-price-label {

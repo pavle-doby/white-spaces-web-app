@@ -16,19 +16,37 @@ export const range = (start: number, end: number): number[] => {
 };
 
 export const convertQuestionsDTOListToQuestionsList = (
-  questionDTOList: Record<string, QuestionDTO[]>
+  questionDTOList: Record<string, QuestionDTO[]>,
+  product: { id: number }
 ): Question[] => {
-  let buffQuestionsDTO: QuestionDTO[] = [];
+  let buffQuestions: Question[] = [];
 
-  Object.values(questionDTOList).forEach((questions) => {
-    buffQuestionsDTO = [...buffQuestionsDTO, ...questions];
+  Object.keys(questionDTOList).forEach((key) => {
+    buffQuestions = [
+      ...buffQuestions,
+      ...questionDTOList[key].map((question) => {
+        return new Question({
+          id: question.id,
+          product_id: product.id,
+          question: question.question,
+          image_required: question.image_required,
+          section: key,
+        });
+      }),
+    ];
   });
 
-  return buffQuestionsDTO.map((question) => {
-    return new Question({
-      id: question.id,
-      question: question.question,
-      image_required: question.image_required,
-    });
+  return buffQuestions;
+};
+
+export const convertQuestionDTODictionaryToQuestionDTOList = (
+  questionDTOList: Record<string, QuestionDTO[]>
+): QuestionDTO[] => {
+  let buffQuestions: QuestionDTO[] = [];
+
+  Object.values(questionDTOList).forEach((list) => {
+    buffQuestions = [...buffQuestions, ...list];
   });
+
+  return buffQuestions;
 };

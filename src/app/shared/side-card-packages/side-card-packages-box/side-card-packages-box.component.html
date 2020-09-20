@@ -2,8 +2,12 @@
   <div
     *ngIf="this.package"
     class="sc-packages-box__container"
+    [ngClass]="{
+      'sc-packages-box__border-2px': this.isSelected,
+      'app__box-shadow': this.isSelected
+    }"
     fxLayout="column"
-    fxLayoutAlign="space-around center"
+    fxLayoutAlign="space-between center"
     fxLayoutGap=".52vw"
   >
     <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -19,11 +23,20 @@
     </div>
 
     <div
-      fxLayoutAlign="center center"
+      *ngIf="!this.isSelected"
       class="packages-box__select"
+      fxLayoutAlign="center center"
       (click)="this.selectPackage(this.package?.box)"
     >
       SELECT
+    </div>
+    <div
+      *ngIf="this.isSelected"
+      class="packages-box__continue"
+      fxLayoutAlign="center center"
+      (click)="this.continue()"
+    >
+      CONTINUE
     </div>
   </div>
 

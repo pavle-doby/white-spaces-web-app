@@ -10,14 +10,13 @@ export enum PackageType {
 }
 
 export class PackagesBox {
-  public id: any;
-
   constructor(
     public name: string,
     public price: number,
     public description: string,
     public type: PackageType,
-    public questions: Question[] = []
+    public questions: Question[] = [],
+    public id?: any
   ) {}
 }
 
@@ -29,19 +28,26 @@ export class PackagesBox {
 export class SideCardPackagesBoxComponent implements OnInit {
   @Input()
   public package: SideCadrPackage;
+  @Input()
+  public isSelected?: boolean = false;
 
   @Output()
   public selectEvent: EventEmitter<PackagesBox>;
-
-  public isPackageSelected: boolean = false;
+  @Output()
+  public continueEvent: EventEmitter<void>;
 
   constructor() {
     this.selectEvent = new EventEmitter();
+    this.continueEvent = new EventEmitter();
   }
 
   ngOnInit(): void {}
 
   public selectPackage(box: PackagesBox): void {
     this.selectEvent.emit(box);
+  }
+
+  public continue(): void {
+    this.continueEvent.emit();
   }
 }

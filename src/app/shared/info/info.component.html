@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0.55vw">
-  <div class="info__info">
+  <div *ngIf="this.info" class="info__info">
     {{ this.info }}
   </div>
   <div
