@@ -9,7 +9,10 @@
 >
   <div fxFlex="12"></div>
   <div
-    [ngClass.lt-md]="{ 'sc-packages__content--lt-md': true }"
+    [ngClass.lt-md]="{
+      'sc-packages__content--lt-md': true,
+      'container__padding--lt-md': true
+    }"
     fxLayout="column"
     fxLayoutAlign="start center"
     fxLayoutGap="3%"

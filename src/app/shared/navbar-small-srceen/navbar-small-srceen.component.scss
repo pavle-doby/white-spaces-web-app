@@ -7,6 +7,10 @@
 .sidenav {
 }
 
+.navbar-ss__ng-content {
+  margin-top: 50px;
+}
+
 .navbar-ss__nav-list a {
   color: white;
   font-size: 11vw;
@@ -23,10 +27,21 @@
   z-index: 1;
 }
 
+.navbar-ss__mat-toolbar-inner {
+  height: 60px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
 .navbar-ss__mat-toolbar {
+  height: 56px;
   position: fixed;
   top: 0;
   z-index: 1;
+  padding: 0;
+  // overflow: hidden;
 
-  background-color: inherit;
+  // background-color: darkblue;
+  // border: none;
+  // border: 1px solid transparent;
 }
