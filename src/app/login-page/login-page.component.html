@@ -1,8 +1,10 @@
 <div
   class="login-page"
+  [ngClass.lt-md]="{ 'container__padding--lt-md': true }"
   fxLayout="column"
   fxLayoutAlign="start center"
   fxLayoutGap="2vw"
+  fxLayoutGap.lt-md="15px"
 >
   <app-logo class="login-page__logo"></app-logo>
   <div
@@ -10,12 +12,13 @@
     fxLayout="column"
     fxLayoutAlign="start start"
     fxLayoutGap="1vw"
+    fxLayoutGap.lt-md="15px"
   >
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
-      <div class="cursor-pointer" (click)="this.showRegisterTab()">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <button class="basic__btn" (click)="this.showRegisterTab()">
         Register
-      </div>
-      <span>//</span>
+      </button>
+      <span class="login-page__tab-divider">//</span>
       <button class="checkout__btn" (click)="this.showLoginTab()">
         Log in
       </button>

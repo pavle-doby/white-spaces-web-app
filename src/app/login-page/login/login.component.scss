@@ -1,9 +1,5 @@
 $form-width: 30vw;
 
-.login__form {
-  width: $form-width;
-}
-
 .login__input-label {
   font-size: 12px;
   font-weight: 300;
@@ -11,6 +7,10 @@ $form-width: 30vw;
 
 .login__form-width {
   width: $form-width;
+
+  @media screen and (max-width: 960px) {
+    width: 300px;
+  }
 }
 
 .login__form-width--name-label {
@@ -23,6 +23,10 @@ $form-width: 30vw;
   color: black;
   padding: 0.2vw;
   width: 100%;
+
+  @media screen and (max-width: 960px) {
+    padding: 5px;
+  }
 }
 
 .login__input--error {
