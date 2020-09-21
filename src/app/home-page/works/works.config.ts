@@ -8,11 +8,11 @@ export const WORKS_DESCRIPTION_ARRAY = [
   'Review & pay',
 ];
 export const WORKS_IMAGES_ARRAY = [
-  '../../../../assets/images/uploadFloorPlan.png',
-  '../../../assets/images/uploadPhotos.png',
-  '../../../assets/images/fillOutQuestionaire.png',
-  '../../../assets/images/addOns.png',
-  '../../../assets/images/reviewPay.png',
+  'assets/images/uploadFloorPlan.png',
+  'assets/images/uploadPhotos.png',
+  'assets/images/fillOutQuestionaire.png',
+  'assets/images/addOns.png',
+  'assets/images/reviewPay.png',
 ];
 
 export interface IImageDescription {
@@ -25,26 +25,26 @@ export const WORKS_IMAGE_DESCRIPTION: IImageDescription[] = [
   {
     number: 1,
     description: 'Upload floor \n plan',
-    image: '../../../assets/images/home/uploadFloorPlan.png',
+    image: 'assets/images/home/uploadFloorPlan.png',
   },
   {
     number: 2,
     description: 'Upload \n photos',
-    image: '../../../assets/images/home/uploadPhotos.png',
+    image: 'assets/images/home/uploadPhotos.png',
   },
   {
     number: 3,
     description: 'Fill out \n questionnaire',
-    image: '../../../assets/images/home/fillOutQuestionaire.png',
+    image: 'assets/images/home/fillOutQuestionaire.png',
   },
   {
     number: 4,
     description: 'Add \n ons',
-    image: '../../../assets/images/home/addOns.png',
+    image: 'assets/images/home/addOns.png',
   },
   {
     number: 5,
     description: 'Review \n & pay',
-    image: '../../../assets/images/home/reviewPay.png',
+    image: 'assets/images/home/reviewPay.png',
   },
 ];
