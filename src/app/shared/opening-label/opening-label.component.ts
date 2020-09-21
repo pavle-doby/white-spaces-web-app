@@ -21,6 +21,8 @@ export class OpeningLabelComponent implements OnInit {
   public description: string;
   @Input()
   public toShowDescription: boolean;
+  @Input()
+  public toShowOnClick: boolean = false;
 
   @Output()
   public showDescEvent: EventEmitter<boolean>;
@@ -39,16 +41,35 @@ export class OpeningLabelComponent implements OnInit {
   ngOnInit(): void {}
 
   public showDescription(): void {
+    if (this.toShowOnClick) {
+      return;
+    }
+
     this.toShowDescription = true;
-    
+
     this.showDescEvent.emit(true);
     this.stateChangesEvent.emit(true);
   }
 
   public hideDescription(): void {
+    if (this.toShowOnClick) {
+      return;
+    }
+
     this.toShowDescription = false;
 
     this.hideDescEvent.emit(false);
     this.stateChangesEvent.emit(false);
+  }
+
+  public onClick(): void {
+    if (!this.toShowOnClick) {
+      return;
+    }
+
+    this.toShowDescription = true;
+
+    this.showDescEvent.emit(true);
+    this.stateChangesEvent.emit(true);
   }
 }
