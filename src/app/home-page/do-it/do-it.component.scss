@@ -5,6 +5,7 @@
   //TODO: Set size with variables
   @media only screen and(max-width:959px) {
     width: 80vw;
+    padding-bottom: 10vw;
   }
   min-height: 50vh;
   p {
@@ -14,6 +15,9 @@
 
 .do-it__video-container {
   padding-top: 10%;
+  @media only screen and(max-width:959px) {
+    padding-top: 0px;
+  }
 }
 
 .do-it__container--p {
@@ -22,6 +26,9 @@
 .do-it__content-height {
   //TODO: Set size with variables
   min-height: 40vh !important;
+  @media only screen and(max-width:959px) {
+    min-height: 0px !important;
+  }
   p {
     @media only screen and(max-width:959px) {
       font-size: 14px;

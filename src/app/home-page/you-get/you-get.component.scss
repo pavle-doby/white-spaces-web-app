@@ -2,6 +2,16 @@
 
 .you-get__container {
   width: $page-width;
+  @media only screen and(max-width:959px) {
+    width: 80vw;
+  }
+
+  app-opening-label {
+    @media only screen and(max-width:959px) {
+      font-size: 20px;
+      letter-spacing: 2px;
+    }
+  }
 }
 
 .you-get__content-height {
@@ -17,6 +27,9 @@
   height: auto;
   object-fit: cover;
 
+  @media only screen and(max-width:959px) {
+    width: 80vw;
+  }
   &:hover {
     cursor: pointer;
   }
@@ -24,4 +37,18 @@
 
 .you-get__labels-container {
   width: 30vw;
+  @media only screen and(max-width:959px) {
+    width: 80vw;
+  }
+}
+
+.you-get__labels--download {
+  @media only screen and(max-width:959px) {
+    width: 80vw;
+    padding: 10px;
+    border: 1px solid black;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 60px;
+  }
 }
