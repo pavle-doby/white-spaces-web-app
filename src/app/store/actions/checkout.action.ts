@@ -8,6 +8,11 @@ import { SideCadrPackage } from 'src/app/shared/side-card-packages/SideCardPacka
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { TabbarButton } from 'src/app/shared/tabbar/tabbar.content';
 
+export const setInitStateChekcout = createAction(
+  '[CHECKOUT] SET_INIT_STATE',
+  props()
+);
+
 export const checkoutSelectPackage = createAction(
   '[CHECKOUT] SELECT_PACKAGE',
   props<{ packageBox: PackagesBox }>()

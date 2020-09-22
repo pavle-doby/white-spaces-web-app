@@ -23,6 +23,7 @@ import {
   setShoppingCartCheckout,
   selectTabbarButtonCheckout,
   setTabbarStateCheckout,
+  setInitStateChekcout,
 } from '../actions/checkout.action';
 import {
   TabbarButton,
@@ -127,6 +128,9 @@ const getInitState = (): CheckoutState => {
 
 const reducer = createReducer(
   getInitState(),
+  on(setInitStateChekcout, (state) => {
+    return { ...getInitState() };
+  }),
   on(setShoppingCartCheckout, (state, { shoppingCart }) => {
     LocalStorageService.Instance.ShoppingCart = shoppingCart;
     return { ...state, shoppingCart: shoppingCart };
