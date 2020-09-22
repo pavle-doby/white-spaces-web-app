@@ -7,6 +7,7 @@ import {
   setCurrentIndexCheckout,
   setShoppingCartCheckout,
   selectTabbarButtonCheckout,
+  setQuestionsFromStorageChekcout,
 } from 'src/app/store/actions/checkout.action';
 import { Observable, Subscription } from 'rxjs';
 import { Question } from 'src/models/Question.model';
@@ -74,6 +75,7 @@ export class QuestionnaireComponent implements OnInit {
   ngOnDestroy(): void {
     if (this.$subQuestions) this.$subQuestions.unsubscribe();
     if (this.$subShoppingCartState) this.$subShoppingCartState.unsubscribe();
+    this.$store.dispatch(setQuestionsFromStorageChekcout({}));
   }
 
   ngOnInit(): void {

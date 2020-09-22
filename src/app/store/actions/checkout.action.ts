@@ -13,6 +13,11 @@ export const setInitStateChekcout = createAction(
   props()
 );
 
+export const setQuestionsFromStorageChekcout = createAction(
+  '[CHECKOUT] SET_QUESTIONS_FROM_STORAGE',
+  props()
+);
+
 export const checkoutSelectPackage = createAction(
   '[CHECKOUT] SELECT_PACKAGE',
   props<{ packageBox: PackagesBox }>()

@@ -33,3 +33,6 @@ Marka Jovanovica 20 duzi deo
 
 0) Lepsi modal (odvoji cancel i yes u modal)
 1) Brisi Local Storage kad napravi order
+
+* Sacuvaj da je korisnik u registracji i redirektuj ga na Login
+* Neki bug sa update-ovanjm question-a

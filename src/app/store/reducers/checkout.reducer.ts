@@ -24,6 +24,7 @@ import {
   selectTabbarButtonCheckout,
   setTabbarStateCheckout,
   setInitStateChekcout,
+  setQuestionsFromStorageChekcout,
 } from '../actions/checkout.action';
 import {
   TabbarButton,
@@ -336,6 +337,9 @@ const reducer = createReducer(
       },
       tabbarButtons: newTabbarState,
     };
+  }),
+  on(setQuestionsFromStorageChekcout, (state) => {
+    return { ...state, questions: LocalStorageService.Instance.Questions };
   }),
   on(setCurrentIndexCheckout, (state, { currentIndex }) => {
     let newRangeStart = state.questionStepper.rangeStart;
