@@ -33,7 +33,7 @@ export class CheckoutService {
 
   public getShoppingCart(): Observable<ShoppingCart> {
     const URL = `${API_URL}/shopping-cart/get-shopping-cart`;
-    // return of(MockShoppingCart);
+    return of(MockShoppingCart);
     return this.http.get<ShoppingCart>(URL, {});
   }
 
