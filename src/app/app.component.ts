@@ -42,13 +42,15 @@ export class AppComponent {
     });
     this.scroll = fromEvent<any>(window, 'wheel')
       .pipe(debounce(() => interval()))
-      .subscribe((event) =>
+      .subscribe((event) => {
+        // console.log('scroll', event.wheelDelta);
+
         this.window.scrollBy({
-          left: event.wheelDelta * 0.5,
+          left: event.wheelDelta,
           top: 0,
           //behavior: 'smooth',
-        })
-      );
+        });
+      });
   }
 
   public closeNavbarCard(): void {

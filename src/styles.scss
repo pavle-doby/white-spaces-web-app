@@ -137,6 +137,9 @@ body {
 /* Scrollbar tweaks */
 ::-webkit-scrollbar {
   width: 0.26vw;
+  @media screen and (max-width: 960px) {
+    width: 6px;
+  }
 }
 
 ::-webkit-scrollbar-track {
@@ -145,6 +148,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: lightgrey;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

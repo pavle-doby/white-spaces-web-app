@@ -8,7 +8,7 @@ $grey-color: rgb(230, 230, 230);
 .sc-about__label-big {
   font-weight: 300;
   font-size: $font-size-big;
-  color: $grey-color;
+  color: $color-gray-9;
 
   @media only screen and (max-width: 960px) {
     font-size: $font-size-big--lt-md;

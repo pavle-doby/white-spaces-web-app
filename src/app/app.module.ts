@@ -40,9 +40,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
       },
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-    }),
+    // ServiceWorkerModule.register('ngsw-worker.js', {
+    //   enabled: environment.production,
+    // }),
     OpeningLabelModule,
     MatDialogModule,
     CheckoutPageModule,

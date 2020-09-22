@@ -33,52 +33,12 @@
     >
       <a
         mat-list-item
-        [routerLink]="this.homeLink"
+        *ngFor="let linkText of linkAndTextList"
+        (click)="this.navigateByUrl(linkText.link)"
         (click)="drawer.toggle()"
-        aria-label="home"
+        aria-label="link in navigation"
       >
-        Home
-      </a>
-      <a
-        mat-list-item
-        [routerLink]="this.packagesLink"
-        (click)="drawer.toggle()"
-        aria-label="packages"
-      >
-        Packages
-      </a>
-
-      <a
-        mat-list-item
-        [routerLink]="this.fqasLink"
-        (click)="drawer.toggle()"
-        aria-label="fqas"
-      >
-        FAQ’S
-      </a>
-      <a
-        mat-list-item
-        [routerLink]="this.blogLink"
-        (click)="drawer.toggle()"
-        aria-label="blog"
-      >
-        Blog
-      </a>
-      <a
-        mat-list-item
-        [routerLink]="this.aboutLink"
-        (click)="drawer.toggle()"
-        aria-label="about"
-      >
-        About
-      </a>
-      <a
-        mat-list-item
-        [routerLink]="this.contactLink"
-        (click)="drawer.toggle()"
-        aria-label="contact"
-      >
-        Contact
+        {{ linkText.text }}
       </a>
     </mat-nav-list>
   </mat-sidenav>

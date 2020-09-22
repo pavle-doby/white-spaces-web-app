@@ -9,7 +9,8 @@
 
 .home__container::after {
   content: "";
-  background: url("src/assets/images/home/HomeBackground.png") no-repeat center;
+  background: url("https://whitespace-client-files.s3.amazonaws.com/HomeBackground.040ce4df01ac9dc4caaa5bf1f6a4-3a3e-428d-9403-2c4f7cb214a4.png")
+    no-repeat center;
   background-size: 50%;
   opacity: 0.1;
   top: 5vh;

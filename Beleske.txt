@@ -28,3 +28,8 @@
 
 
 Marka Jovanovica 20 duzi deo
+
+* Kad napravi order:
+
+0) Lepsi modal (odvoji cancel i yes u modal)
+1) Brisi Local Storage kad napravi order
