@@ -8,6 +8,7 @@ import {
   setAddOnIsSelectedCheckout,
   setAddOnListCheckout,
   setShoppingCartCheckout,
+  selectTabbarButtonCheckout,
 } from 'src/app/store/actions/checkout.action';
 import { AddOn } from 'src/models/AddOn';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
@@ -15,6 +16,7 @@ import { convertQuestionsDTOListToQuestionsList } from 'src/app/shared/Utilities
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { ProductVM } from 'src/models/ProductVM.model';
+import { TabbarText } from 'src/models/TabbarText.model';
 
 const INFO = `If you feel like you want more you can easily
 customise you package & add extra plans and drawings.`;
@@ -41,6 +43,9 @@ export class AddOnListComponent implements OnInit {
     this.$checkoutState = this.$store.select((state) => state.checkout);
     this.$store.dispatch(
       setInfoCheckout({ info: INFO, description: [INFO_DESC] })
+    );
+    this.$store.dispatch(
+      selectTabbarButtonCheckout({ btnText: TabbarText.ADD_ONS })
     );
   }
 

@@ -1,9 +1,14 @@
 <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1vw">
-  <div
-    class="tabbat__button"
-    *ngFor="let tabbarBtn of this.tabbarButtons"
-    [routerLink]="tabbarBtn.routerLinkArray"
-  >
-    {{ tabbarBtn.text }}
-  </div>
+  <span class="tabbat__button" *ngFor="let tabbarBtn of this.tabbarButtons">
+    <a
+      [routerLink]="tabbarBtn.routerLinkArray"
+      class="tabbat__button a__text-decoration--none"
+      [ngClass]="{
+        'tabbat__button--complited': tabbarBtn.isCompleted,
+        'tabbat__button--selected': tabbarBtn.isSelected
+      }"
+    >
+      {{ tabbarBtn.text }}
+    </a>
+  </span>
 </div>

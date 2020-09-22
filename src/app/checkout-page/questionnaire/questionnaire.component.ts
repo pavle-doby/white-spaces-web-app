@@ -6,6 +6,7 @@ import {
   updateQuestionCheckout,
   setCurrentIndexCheckout,
   setShoppingCartCheckout,
+  selectTabbarButtonCheckout,
 } from 'src/app/store/actions/checkout.action';
 import { Observable, Subscription } from 'rxjs';
 import { Question } from 'src/models/Question.model';
@@ -15,6 +16,7 @@ import { ProductVM } from 'src/models/ProductVM.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { AdditionalData } from 'src/models/AdditionalData.model';
 import { convertQuestionDTODictionaryToQuestionDTOList } from 'src/app/shared/Utilities';
+import { TabbarText } from 'src/models/TabbarText.model';
 
 const INFO = `Feel free to load us with information so that we
 can truly get to know both you and your space
@@ -55,6 +57,10 @@ export class QuestionnaireComponent implements OnInit {
 
     this.$store.dispatch(
       setInfoCheckout({ info: INFO, description: [INFO_DESC] })
+    );
+
+    this.$store.dispatch(
+      selectTabbarButtonCheckout({ btnText: TabbarText.QUESTIONNARIE })
     );
 
     this.uploadData = new UploadData({

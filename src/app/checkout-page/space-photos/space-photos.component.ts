@@ -6,6 +6,7 @@ import {
   addSpacePhotoURLCheckout,
   clearSpacePhotosURLsCheckout,
   setShoppingCartCheckout,
+  selectTabbarButtonCheckout,
 } from 'src/app/store/actions/checkout.action';
 import { UploadData } from 'src/app/shared/upload/upload.model';
 import { Observable, Subscription } from 'rxjs';
@@ -13,6 +14,7 @@ import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
+import { TabbarText } from 'src/models/TabbarText.model';
 
 const INFO = `Please upload photos of your space.`;
 
@@ -29,7 +31,7 @@ export const SUPPERTED_FILES = '.jpg, .jpeg, .png ';
 export class SpacePhotosComponent implements OnInit, OnDestroy {
   public $checkoutState: Observable<CheckoutState>;
   public subChekcoutState: Subscription;
-  
+
   public shoppingCart: ShoppingCart;
   public uploadConfigData: UploadData;
 
@@ -39,6 +41,9 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
   ) {
     this.$store.dispatch(
       setInfoCheckout({ info: INFO, description: [INFO_DESC_0] })
+    );
+    this.$store.dispatch(
+      selectTabbarButtonCheckout({ btnText: TabbarText.SPACE_PHOTOS })
     );
     this.$checkoutState = this.$store.select((state) => state.checkout);
 

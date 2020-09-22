@@ -166,3 +166,23 @@ body {
 .container__padding--lt-md {
   padding: 25px 30px 25px 30px;
 }
+
+.a__text-decoration--none {
+  text-decoration: none;
+
+  &:active {
+    text-decoration: none;
+  }
+  &:focus {
+    text-decoration: none;
+  }
+  &:focus-within {
+    text-decoration: none;
+  }
+  &:hover {
+    text-decoration: none;
+  }
+  &:visited {
+    text-decoration: none;
+  }
+}

@@ -1,5 +1,7 @@
 import { Question } from 'src/models/Question.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
+import { TabbarText } from 'src/models/TabbarText.model';
+import { TabbarButton } from './tabbar/tabbar.content';
 
 /**
  * Generates arraye with ragne values for start to end
@@ -49,4 +51,16 @@ export const convertQuestionDTODictionaryToQuestionDTOList = (
   });
 
   return buffQuestions;
+};
+
+export const updateTabbarBtnComplitedState = (
+  tabbarBtnList: TabbarButton[],
+  btnText: TabbarText,
+  isComplited: boolean = true
+): TabbarButton[] => {
+  return tabbarBtnList.map((btn: TabbarButton) => {
+    return btn.text === btnText
+      ? { ...btn, isCompleted: isComplited }
+      : { ...btn };
+  });
 };

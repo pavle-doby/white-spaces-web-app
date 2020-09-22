@@ -1,7 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AppState } from 'src/app/store';
 import { Store } from '@ngrx/store';
-import { setInfoCheckout } from 'src/app/store/actions/checkout.action';
+import {
+  selectTabbarButtonCheckout,
+  setInfoCheckout,
+} from 'src/app/store/actions/checkout.action';
 import { InfoPrice } from 'src/models/InfoPrice.model';
 import { InfoPriceLabelInputs } from 'src/app/shared/info-price-label/info-price-label.component';
 import { Observable, Subject, Subscription } from 'rxjs';
@@ -17,6 +20,7 @@ import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { ProgressState, Step } from 'src/models/CheckoutProgress.model';
 import { CONFIRMATION_DIALOG_WIDTH } from 'src/app/app.config';
+import { TabbarText } from 'src/models/TabbarText.model';
 
 @Component({
   selector: 'app-review-and-pay',
@@ -86,6 +90,9 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
     });
 
     this.$store.dispatch(setInfoCheckout({ info: '', description: [] }));
+    this.$store.dispatch(
+      selectTabbarButtonCheckout({ btnText: TabbarText.REVIEW_PAY })
+    );
     this.user$ = this.$store.select((state) => state.user?.user);
     this.checkout$ = this.$store.select((state) => state.checkout);
   }

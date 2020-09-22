@@ -6,6 +6,7 @@ import { FloorPlan } from 'src/models/FloorPlan.model';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
 import { SideCadrPackage } from 'src/app/shared/side-card-packages/SideCardPackage';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
+import { TabbarButton } from 'src/app/shared/tabbar/tabbar.content';
 
 export const checkoutSelectPackage = createAction(
   '[CHECKOUT] SELECT_PACKAGE',
@@ -15,6 +16,16 @@ export const checkoutSelectPackage = createAction(
 export const setInfoCheckout = createAction(
   '[CHECKOUT] SET_INFO',
   props<{ info: string; description: string[] }>()
+);
+
+export const selectTabbarButtonCheckout = createAction(
+  '[CHECKOUT] SELECT_TABBAR_BUTTON',
+  props<{ btnText: string }>()
+);
+
+export const setTabbarStateCheckout = createAction(
+  '[CHECKOUT] SET_TABBAR_STATE',
+  props<{ buttons: TabbarButton[] }>()
 );
 
 export const setFloorPlanCheckout = createAction(

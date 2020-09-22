@@ -21,6 +21,8 @@ import {
   setQuestionsCheckout,
   setAllPackagesCheckout,
   setShoppingCartCheckout,
+  selectTabbarButtonCheckout,
+  setTabbarStateCheckout,
 } from '../actions/checkout.action';
 import {
   TabbarButton,
@@ -38,6 +40,8 @@ import {
   ProgressState,
   Step,
 } from 'src/models/CheckoutProgress.model';
+import { updateTabbarBtnComplitedState } from 'src/app/shared/Utilities';
+import { TabbarText } from 'src/models/TabbarText.model';
 
 export interface CheckoutState {
   packageBox?: PackagesBox; // Jedan paket koji je u side kartici
@@ -55,66 +59,90 @@ export interface CheckoutState {
   progressState: CheckoutProgress;
 }
 
-const initState: CheckoutState = {
-  packageBox: LocalStorageService.Instance.Package,
-  allPackageCards: [],
-  info: 'Welcome to your renovation project!',
-  infoDesc: [''],
-  floorPlan: LocalStorageService.Instance.FloorPlan,
-  spacePhotos: null,
-  spacePhotosURLs: LocalStorageService.Instance.SpacePhotosUrls ?? [],
-  addOnList: LocalStorageService.Instance.AddOnList ?? [],
-  questions: LocalStorageService.Instance.Questions ?? [],
-  tabbarButtons: getTabbarContnet(),
-  questionStepper: new QuestionStepper({
-    rangeStart: 0,
-    rangeEnd: 15,
-    numberOfRangeToShow: 16,
-    numberOfSteps: LocalStorageService.Instance.Questions?.length ?? 16,
-    indexCurrent: 0,
-  }),
-  shoppingCart: null,
-  //TODO: Change on proper actions
-  progressState: new CheckoutProgress({
-    floorPlan: new Step({
-      name: 'floorPlan',
-      isRequired: true,
-      state: LocalStorageService.Instance.FloorPlan
-        ? ProgressState.DONE
-        : ProgressState.TODO,
+const getInitState = (): CheckoutState => {
+  let initState: CheckoutState = {
+    packageBox: LocalStorageService.Instance.Package,
+    allPackageCards: [],
+    info: 'Welcome to your renovation project!',
+    infoDesc: [''],
+    floorPlan: LocalStorageService.Instance.FloorPlan,
+    spacePhotos: null,
+    spacePhotosURLs: LocalStorageService.Instance.SpacePhotosUrls ?? [],
+    addOnList: LocalStorageService.Instance.AddOnList ?? [],
+    questions: LocalStorageService.Instance.Questions ?? [],
+    tabbarButtons: getTabbarContnet(),
+    questionStepper: new QuestionStepper({
+      rangeStart: 0,
+      rangeEnd: 15,
+      numberOfRangeToShow: 16,
+      numberOfSteps: LocalStorageService.Instance.Questions?.length ?? 16,
+      indexCurrent: 0,
     }),
-    spacePhotos: new Step({
-      name: 'spacePhotos',
-      isRequired: true,
-      state: LocalStorageService.Instance.SpacePhotosUrls?.length
-        ? ProgressState.DONE
-        : ProgressState.TODO,
+    shoppingCart: null,
+    //TODO: Change on proper actions
+    progressState: new CheckoutProgress({
+      floorPlan: new Step({
+        name: TabbarText.FLOOR_PLAN,
+        isRequired: true,
+        state: LocalStorageService.Instance.FloorPlan
+          ? ProgressState.DONE
+          : ProgressState.TODO,
+      }),
+      spacePhotos: new Step({
+        name: TabbarText.SPACE_PHOTOS,
+        isRequired: true,
+        state: LocalStorageService.Instance.SpacePhotosUrls?.length
+          ? ProgressState.DONE
+          : ProgressState.TODO,
+      }),
+      addOns: new Step({
+        name: TabbarText.ADD_ONS,
+        isRequired: false,
+        state: LocalStorageService.Instance?.AddOnList?.find(
+          (addon) => addon.isSelected
+        )
+          ? ProgressState.DONE
+          : ProgressState.TODO,
+      }),
+      questions: new Step({
+        name: TabbarText.QUESTIONNARIE,
+        isRequired: true,
+        state: ProgressState.TODO,
+        total: LocalStorageService.Instance.Questions?.length,
+        finshed: LocalStorageService.Instance.Questions?.filter(
+          (q) => q.isAnswerd
+        ).length,
+      }),
     }),
-    addOns: new Step({
-      name: 'addOns',
-      isRequired: false,
-      state: LocalStorageService.Instance?.AddOnList?.find(
-        (addon) => addon.isSelected
-      )
-        ? ProgressState.DONE
-        : ProgressState.TODO,
-    }),
-    questions: new Step({
-      name: 'questions',
-      isRequired: true,
-      state: ProgressState.TODO,
-      total: LocalStorageService.Instance.Questions?.length,
-      finshed: LocalStorageService.Instance.Questions?.filter((q) => q.isAnswerd)
-        .length,
-    }),
-  }),
+  };
+
+  const stepList: Step[] = Object.values(initState.progressState);
+  const newTabbarState = initState.tabbarButtons.map((btn) => {
+    const step = stepList.find((step) => step.name === btn.text);
+    return { ...btn, isCompleted: step?.state === ProgressState.DONE };
+  });
+  initState.tabbarButtons = newTabbarState;
+  return initState;
 };
 
 const reducer = createReducer(
-  initState,
+  getInitState(),
   on(setShoppingCartCheckout, (state, { shoppingCart }) => {
     LocalStorageService.Instance.ShoppingCart = shoppingCart;
     return { ...state, shoppingCart: shoppingCart };
+  }),
+  on(setTabbarStateCheckout, (state, { buttons }) => {
+    return { ...state, tabbarButtons: buttons };
+  }),
+  on(selectTabbarButtonCheckout, (state, { btnText: tabbarBtnText }) => {
+    const newTabbarState: TabbarButton[] = state.tabbarButtons.map(
+      (btn: TabbarButton) => {
+        return btn.text === tabbarBtnText
+          ? { ...btn, isSelected: true }
+          : { ...btn, isSelected: false };
+      }
+    );
+    return { ...state, tabbarButtons: newTabbarState };
   }),
   on(setAllPackagesCheckout, (state, { packages }) => {
     return { ...state, allPackageCards: packages };
@@ -128,6 +156,10 @@ const reducer = createReducer(
   }),
   on(setFloorPlanCheckout, (state, { floorPlan }) => {
     LocalStorageService.Instance.FloorPlan = floorPlan;
+    const newTabbarState = updateTabbarBtnComplitedState(
+      state.tabbarButtons,
+      TabbarText.FLOOR_PLAN
+    );
     return {
       ...state,
       floorPlan: floorPlan,
@@ -138,10 +170,15 @@ const reducer = createReducer(
           state: ProgressState.DONE,
         },
       },
+      tabbarButtons: newTabbarState,
     };
   }),
   on(setSpacePhotosURLsCheckout, (state, { filesURLs }) => {
     LocalStorageService.Instance.SpacePhotosUrls = filesURLs;
+    const newTabbarState = updateTabbarBtnComplitedState(
+      state.tabbarButtons,
+      TabbarText.SPACE_PHOTOS
+    );
     return {
       ...state,
       spacePhotosURLs: filesURLs,
@@ -152,11 +189,16 @@ const reducer = createReducer(
           state: ProgressState.DONE,
         },
       },
+      tabbarButtons: newTabbarState,
     };
   }),
   on(addSpacePhotoURLCheckout, (state, { fileURL }) => {
     const newUrls = [...state.spacePhotosURLs, fileURL];
     LocalStorageService.Instance.SpacePhotosUrls = newUrls;
+    const newTabbarState = updateTabbarBtnComplitedState(
+      state.tabbarButtons,
+      TabbarText.SPACE_PHOTOS
+    );
     return {
       ...state,
       spacePhotosURLs: newUrls,
@@ -167,9 +209,16 @@ const reducer = createReducer(
           state: ProgressState.DONE,
         },
       },
+      tabbarButtons: newTabbarState,
     };
   }),
   on(clearSpacePhotosURLsCheckout, (state) => {
+    LocalStorageService.Instance.SpacePhotosUrls = [];
+    const newTabbarState = updateTabbarBtnComplitedState(
+      state.tabbarButtons,
+      TabbarText.SPACE_PHOTOS,
+      false
+    );
     return {
       ...state,
       spacePhotosURLs: [],
@@ -180,6 +229,7 @@ const reducer = createReducer(
           state: ProgressState.TODO,
         },
       },
+      tabbarButtons: newTabbarState,
     };
   }),
   on(setAddOnIsSelectedCheckout, (state, { addOn, isSelected }) => {
@@ -190,8 +240,12 @@ const reducer = createReducer(
         (q) => !addOn.questions.find((addOnQ) => addOnQ.id === q.id)
       );
     }
-
+    const newTabbarState = updateTabbarBtnComplitedState(
+      state.tabbarButtons,
+      TabbarText.ADD_ONS
+    );
     LocalStorageService.Instance.chageAddOnState(addOn, isSelected);
+
     return {
       ...state,
       addOnList: LocalStorageService.Instance.AddOnList,
@@ -215,6 +269,7 @@ const reducer = createReducer(
             : ProgressState.TODO,
         },
       },
+      tabbarButtons: newTabbarState,
     };
   }),
   on(setAddOnListCheckout, (state, { addOnList }) => {
@@ -258,6 +313,12 @@ const reducer = createReducer(
     finished += question.isAnswerd ? 1 : -1;
     let total = state.progressState.questions.total;
 
+    const newTabbarState = updateTabbarBtnComplitedState(
+      state.tabbarButtons,
+      TabbarText.QUESTIONNARIE,
+      total === finished
+    );
+
     return {
       ...state,
       questions: newQuestions,
@@ -269,6 +330,7 @@ const reducer = createReducer(
           state: finished === total ? ProgressState.DONE : ProgressState.TODO,
         },
       },
+      tabbarButtons: newTabbarState,
     };
   }),
   on(setCurrentIndexCheckout, (state, { currentIndex }) => {
@@ -295,6 +357,9 @@ const reducer = createReducer(
   })
 );
 
-export default function (state: CheckoutState = initState, action: Action) {
+export default function (
+  state: CheckoutState = getInitState(),
+  action: Action
+) {
   return reducer(state, action);
 }
