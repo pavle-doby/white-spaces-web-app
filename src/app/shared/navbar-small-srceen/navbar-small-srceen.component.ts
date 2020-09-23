@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
@@ -18,7 +18,8 @@ export class NavbarSmallSrceenComponent {
   public blogLink: string = `/${MainRouterPaths.BLOG}`;
   public aboutLink: string = `/${MainRouterPaths.ABOUT}`;
   public contactLink: string = `/${MainRouterPaths.CONTACT}`;
-
+  public matcher:MediaQueryList;
+  public isMobile:boolean=false;
   public linkAndTextList: LinkText[] = [
     new LinkText({ link: this.homeLink, text: 'Home' }),
     new LinkText({ link: this.packagesLink, text: 'Packages' }),
@@ -37,8 +38,16 @@ export class NavbarSmallSrceenComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private readonly router: Router
-  ) {}
+    private readonly router: Router,
+    private mediaMatcher:MediaMatcher
+  ) {
+    this.isMobile = window.innerWidth<=959;
+    this.matcher = this.mediaMatcher.matchMedia('(max-width: 959px)');
+    this.matcher.addListener((event) => {
+      console.log(event.matches);
+      this.isMobile = event.matches;
+    });
+  }
 
   public navigateByUrl(link: string): void {
     this.router.navigateByUrl(link);

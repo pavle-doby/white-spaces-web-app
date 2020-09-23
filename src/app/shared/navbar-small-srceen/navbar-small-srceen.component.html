@@ -4,9 +4,9 @@
     #drawer
     class="sidenav width-100"
     fixedInViewport
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false"
+    [attr.role]="this.isMobile ? 'dialog' : 'navigation'"
+    [mode]="this.isMobile ? 'over' : 'side'"
+    [opened]="this.isMobile === false"
     position="end"
   >
     <div
@@ -20,7 +20,7 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async"
+        *ngIf="this.isMobile"
       >
         <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
       </button>
@@ -56,7 +56,7 @@
           aria-label="Toggle sidenav"
           mat-icon-button
           (click)="drawer.toggle()"
-          *ngIf="isHandset$ | async"
+          *ngIf="this.isMobile"
         >
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>

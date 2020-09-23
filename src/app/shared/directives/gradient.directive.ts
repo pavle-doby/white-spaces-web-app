@@ -3,7 +3,7 @@ import {
   ElementRef,
   HostListener,
   Renderer2,
-  Input,
+  Input, AfterViewInit
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
@@ -14,7 +14,7 @@ import { DOCUMENT } from '@angular/common';
     { provide: Document, useValue: document },
   ],
 })
-export class GradientDirective {
+export class GradientDirective implements AfterViewInit {
   @Input() calculateByHeight: boolean = false;
   @Input() letters: boolean = true;
   private documentWidth: number; //ceo width gradient 0 do 1
@@ -33,10 +33,15 @@ export class GradientDirective {
     this.innerWidth = this.window.innerWidth;
     this.documentWidth =
       this.window.document.body.offsetWidth - this.window.innerWidth;
-    this.window.scrollBy(1, 0);
+    this.window.scrollBy(1, 1);
     this.pageXOffset = this.window.pageXOffset;
     this.currentPosition = this.pageXOffset + this.window.innerWidth;
     this.calculateRelativeGradient();
+    console.log([this.pageXOffset,this.currentPosition]);
+    
+  }
+  ngAfterViewInit(){
+    this.initialGradient();
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -46,6 +51,11 @@ export class GradientDirective {
     this.calculateRelativeGradient();
   }
 
+  private initialGradient(){
+    this.pageXOffset = this.window.pageXOffset;
+    this.currentPosition = this.pageXOffset + this.window.innerWidth;
+    this.calculateRelativeGradient();
+  }
   private calculateRelativeGradient() {
     this.calculateFirstHalfGradient();
   }
@@ -56,8 +66,6 @@ export class GradientDirective {
     this.elementDim = this.calculateByHeight
       ? this.element.nativeElement.offsetHeight
       : this.element.nativeElement.offsetWidth;
-    const nula = 0;
-    const full = this.documentWidth / 2;
     let newStartRGB = [];
     let newEndRGB = [];
     let gradientStartRGB = [242, 232, 220];
@@ -153,25 +161,4 @@ export class GradientDirective {
     // Procentualna pozicija kraja elementa: x = (this.currentPos*100)/this.width/2
     // isti princip racunanja rgb
   }
-
-  private calculateSecondHalfGradient() {}
-
-  private calculateBothHalvesGradient() {}
-
-  // ngOnInit() {
-  //   //console.log(this.element);
-  // }
 }
-
-// background: linear-gradient(
-//   90deg,
-//   rgba(242, 232, 220, 1) 0%,
-//   rgba(217, 183, 197, 1) 50%,
-//   rgba(15, 13, 59, 1) 100%
-// );
-
-// window.addEventListener('scroll', () => {
-//   const y = 1 + (window.scrollY || window.pageYOffset) / 150
-//   const [r, g, b] = [red/y, green/y, blue/y].map(Math.round)
-//   section1.style.backgroundColor = `rgb(${r}, ${g}, ${b})`
-// })
