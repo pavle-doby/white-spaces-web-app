@@ -14,13 +14,13 @@ export class CheckoutStepsRouterLink {
 export class TabbarButton {
   public text: string;
   public isSelected?: boolean = false;
-  public isComplete?: boolean = false;
+  public isCompleted?: boolean = false;
   public routerLinkArray: { outlets: { checkoutSteps: CheckoutPaths[] } }[];
 
   constructor(obj: TabbarButton) {
     this.text = obj.text;
     this.isSelected = !!obj.isSelected;
-    this.isComplete = !!obj.isComplete;
+    this.isCompleted = !!obj.isCompleted;
     this.routerLinkArray = obj.routerLinkArray;
   }
 }

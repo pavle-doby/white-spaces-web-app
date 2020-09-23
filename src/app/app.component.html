@@ -1,4 +1,4 @@
-<div *ngIf="!this.isAdmin; else admin">
+<ng-template #mainRouterOutlet>
   <div
     *ngIf="!this.ShowCheckoutPage"
     fxLayout="column"
@@ -9,6 +9,16 @@
     <router-outlet></router-outlet>
     <app-footer *ngIf="this.footerActive"></app-footer>
   </div>
+</ng-template>
+
+<div *ngIf="!this.isAdmin; else admin" (wheel)="this.onMouseWheel($event)">
+  <app-navbar-small-srceen *ngIf="this.isHandset$ | async">
+    <ng-container *ngTemplateOutlet="mainRouterOutlet"></ng-container>
+  </app-navbar-small-srceen>
+  <div *ngIf="!(this.isHandset$ | async)">
+    <ng-container *ngTemplateOutlet="mainRouterOutlet"></ng-container>
+  </div>
+
   <div
     *ngIf="this.ShowCheckoutPage"
     class="height-100vh"
@@ -20,7 +30,10 @@
     <app-checkout-page>
       <router-outlet name="checkoutSteps"></router-outlet>
     </app-checkout-page>
-    <app-footer class="app__footer--checkout" *ngIf="this.footerActive"></app-footer>
+    <app-footer
+      class="app__footer--checkout"
+      *ngIf="this.footerActive"
+    ></app-footer>
   </div>
   <app-navbar *ngIf="!(this.isHandset$ | async)"></app-navbar>
 </div>

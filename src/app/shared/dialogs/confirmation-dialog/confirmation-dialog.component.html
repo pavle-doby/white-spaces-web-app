@@ -17,16 +17,28 @@
     {{ this.data.message }}
   </mat-dialog-content>
   <mat-dialog-actions *ngIf="this.isTypeInfo" align="center">
-    <button class="checkout__btn--rose" [mat-dialog-close]="true">
+    <button
+      class="checkout__btn--rose conf-dialog__btn-width"
+      [mat-dialog-close]="true"
+    >
       Ok, got it
     </button>
   </mat-dialog-actions>
-  <mat-dialog-actions *ngIf="!this.isTypeInfo" align="center">
-    <button class="checkout__btn--rose" [mat-dialog-close]="false">
+  <mat-dialog-actions
+    *ngIf="!this.isTypeInfo"
+    class="width-100"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px"
+  >
+    <button
+      class="checkout__btn--invert conf-dialog__btn-width"
+      [mat-dialog-close]="false"
+    >
       Cancel
     </button>
     <button
-      class="checkout__btn--rose"
+      class="checkout__btn--rose conf-dialog__btn-width"
       [mat-dialog-close]="true"
       cdkFocusInitial
     >

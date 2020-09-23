@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FQAContentObj, FQALabels } from './FQA';
 import { OpeningLabel } from '../opening-label/OpeningLabel';
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-side-card-fqa',
@@ -12,10 +15,17 @@ export class SideCardFqaComponent implements OnInit {
   public contentList: OpeningLabel[];
   public selectedNavLabel: FQALabels;
 
-  constructor() {
+  public isHandset$: Observable<boolean>;
+
+  constructor(private breakpointObserver: BreakpointObserver) {
     this.navLabels = Object.keys(FQAContentObj) as FQALabels[];
     this.selectedNavLabel = this.navLabels[0];
     this.contentList = FQAContentObj[this.selectedNavLabel].slice();
+
+    this.isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+      map((result) => result.matches),
+      shareReplay()
+    );
   }
 
   ngOnInit(): void {}

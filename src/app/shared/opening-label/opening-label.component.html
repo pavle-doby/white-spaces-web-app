@@ -1,11 +1,12 @@
 <div
+  class="opening-label__container"
   fxLayout="column"
   fxLayoutAlign="start start"
   fxLayoutGap=".52vw"
   fxFlex
   (mouseenter)="this.showDescription()"
   (mouseleave)="this.hideDescription()"
-  class="opening-label__container"
+  (click)="this.onClick()"
 >
   <div class="opening-label__title">
     {{ this.label }}

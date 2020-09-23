@@ -8,10 +8,15 @@ $form-width: 30vw;
 
 .login__form {
   width: $form-width;
+  @media screen and (max-width: 960px) {
+    width: 300px;
+  }
 }
 
 .login-page {
   height: calc(90vh);
-  //TODO: Make this work...
-  // height: calc(100vh - #{$footer-height});
+}
+
+.login-page__tab-divider {
+  margin-right: 16px;
 }

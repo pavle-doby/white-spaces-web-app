@@ -54,10 +54,10 @@ export class QuestionStepperComponent implements OnInit, OnDestroy {
         (i): Step => {
           let stepState;
 
-          if (questions[i].isAnswerd) {
-            stepState = StepState.COMPLETED;
-          } else if (this.stepper.indexCurrent === i) {
+          if (this.stepper.indexCurrent === i) {
             stepState = StepState.CURRENT;
+          } else if (questions[i].isAnswerd) {
+            stepState = StepState.COMPLETED;
           } else {
             stepState = StepState.UNCOMPLITED;
           }

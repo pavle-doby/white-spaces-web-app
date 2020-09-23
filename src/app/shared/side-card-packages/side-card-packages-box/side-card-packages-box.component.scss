@@ -4,10 +4,14 @@ $sc-packages-width: 11vw;
 
 .sc-packages-box__container {
   width: $sc-packages-width;
-  height: 12vw;
+  min-height: 12vw;
   border: 1px solid white;
 
   text-align: center;
+}
+.sc-packages-box__container--lt-md {
+  min-height: 230px;
+  width: 210px;
 }
 
 .packages-box__type {
@@ -15,16 +19,26 @@ $sc-packages-width: 11vw;
   font-size: 1.1vw;
   font-weight: 400;
 }
+.packages-box__type--lt-md {
+  font-size: 20px;
+}
 
 .packages-box__price {
   font-size: 1.9vw;
   font-weight: 700;
+}
+.packages-box__price--lt-md {
+  font-size: 35px;
 }
 
 .packages-box__description {
   font-size: 0.8vw;
   font-weight: 300;
   width: 90%;
+  min-height: 45px;
+}
+.packages-box__description--lt-md {
+  font-size: 15px;
 }
 
 .packages-box__select {
@@ -39,6 +53,9 @@ $sc-packages-width: 11vw;
   border: 1px solid white;
   cursor: pointer !important;
 }
+.packages-box__select--lt-md {
+  font-size: 15px;
+}
 
 .packages-box__continue {
   width: 90%;
@@ -51,6 +68,9 @@ $sc-packages-width: 11vw;
 
   border: 2px solid white;
   cursor: pointer !important;
+}
+.packages-box__continue--lt-md {
+  font-size: 20px;
 }
 
 .packages-out-box__conatainer {

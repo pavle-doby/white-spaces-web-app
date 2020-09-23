@@ -8,10 +8,10 @@
     {{ this.question.question }}
   </span>
   <textarea
+    #questionTextarea
     class="question__textarea"
-    rows="6"
+    rows="4"
     [(ngModel)]="this.answer"
     (focusout)="this.onFocusOut()"
-    (keyup.enter)="this.onFocusOut()"
   ></textarea>
 </div>

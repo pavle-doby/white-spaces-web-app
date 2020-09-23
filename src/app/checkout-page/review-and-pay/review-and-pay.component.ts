@@ -1,7 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AppState } from 'src/app/store';
 import { Store } from '@ngrx/store';
-import { setInfoCheckout } from 'src/app/store/actions/checkout.action';
+import {
+  selectTabbarButtonCheckout,
+  setInfoCheckout,
+  setInitStateChekcout,
+} from 'src/app/store/actions/checkout.action';
 import { InfoPrice } from 'src/models/InfoPrice.model';
 import { InfoPriceLabelInputs } from 'src/app/shared/info-price-label/info-price-label.component';
 import { Observable, Subject, Subscription } from 'rxjs';
@@ -17,6 +21,10 @@ import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { ProgressState, Step } from 'src/models/CheckoutProgress.model';
 import { CONFIRMATION_DIALOG_WIDTH } from 'src/app/app.config';
+import { TabbarText } from 'src/models/TabbarText.model';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { Router } from '@angular/router';
+import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 
 @Component({
   selector: 'app-review-and-pay',
@@ -62,8 +70,9 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly $store: Store<AppState>,
-    public readonly dialog: MatDialog,
-    public readonly checkoutService: CheckoutService
+    private readonly dialog: MatDialog,
+    private readonly checkoutService: CheckoutService,
+    private readonly router: Router
   ) {
     this.isFullNameValid$ = new Subject();
     this.isAddressValid$ = new Subject();
@@ -86,6 +95,9 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
     });
 
     this.$store.dispatch(setInfoCheckout({ info: '', description: [] }));
+    this.$store.dispatch(
+      selectTabbarButtonCheckout({ btnText: TabbarText.REVIEW_PAY })
+    );
     this.user$ = this.$store.select((state) => state.user?.user);
     this.checkout$ = this.$store.select((state) => state.checkout);
   }
@@ -146,8 +158,8 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
       const total = [
         ...this.addOnInfo.infoPriceList.map((infoPrice) => infoPrice.price),
         ...this.packageInfo.infoPriceList.map((infoPrice) => infoPrice.price),
-      ].reduce((prev, curent) => {
-        return prev + curent;
+      ].reduce((prev, current) => {
+        return prev + current;
       });
 
       this.totalInfo.infoPriceList = [new InfoPrice({ price: total })];
@@ -184,7 +196,18 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
           .createOrder(this.shoppingCart.id)
           .toPromise()
           .then((res) => {
-            alert('Congratulations! U made your order successfully! :D');
+            LocalStorageService.Instance.clearCheckoutState();
+            this.$store.dispatch(setInitStateChekcout({}));
+            this.router.navigateByUrl(`/${MainRouterPaths.HOME}`);
+            const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+              width: CONFIRMATION_DIALOG_WIDTH,
+              disableClose: true,
+              data: new ConfirmationDialogData({
+                titleLabel: 'Information dialog',
+                message: `Congratulations! U made your order successfully! :D`,
+                type: ConfirmationDialogType.INFO,
+              }),
+            });
           })
           .catch((err) => {
             console.error(err);

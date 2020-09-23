@@ -1,3 +1,5 @@
+@import "src/styles-colors.scss";
+
 .question-stepper__step {
   width: 2.5vw;
   height: 2.5vw;
@@ -19,12 +21,12 @@
 
 //If you change name of this class, change also class Step.
 .question-stepper__step--current {
-  border: 0.1042vw solid #010153;
-  color: #010153;
+  border: 0.1042vw solid $color-selected;
+  color: $color-selected;
 }
 
 //If you change name of this class, change also class Step.
 .question-stepper__step--complited {
-  border: 0.1042vw solid rosybrown;
-  color: rosybrown;
+  border: 0.1042vw solid $color-complited;
+  color: $color-complited;
 }

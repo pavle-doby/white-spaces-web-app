@@ -28,6 +28,15 @@ export class LocalStorageService {
 
   private constructor() {}
 
+  public clearCheckoutState(): void {
+    this.AddOnList = [];
+    this.FloorPlan = null;
+    this.Package = null;
+    this.Questions = [];
+    this.ShoppingCart = null;
+    this.SpacePhotosUrls = [];
+  }
+
   public static get Instance(): LocalStorageService {
     return this._instance ?? (this._instance = new LocalStorageService());
   }
@@ -72,9 +81,11 @@ export class LocalStorageService {
     this.storage.setItem(LocalStorageKey.QUESTIONS, JSON.stringify(questions));
   }
 
-  public appendQuestions(questions: Question[]): void {
+  public appendQuestions(questions: Question[], toFront: boolean = true): void {
     const oldQuestions = this.Questions ?? [];
-    const newQuestions = [...oldQuestions, ...questions];
+    const newQuestions = toFront
+      ? [...questions, ...oldQuestions]
+      : [...oldQuestions, ...questions];
     this.storage.setItem(
       LocalStorageKey.QUESTIONS,
       JSON.stringify(newQuestions)
