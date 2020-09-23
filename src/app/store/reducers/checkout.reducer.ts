@@ -243,12 +243,16 @@ const reducer = createReducer(
         (q) => !addOn.questions.find((addOnQ) => addOnQ.id === q.id)
       );
     }
+
+    LocalStorageService.Instance.chageAddOnState(addOn, isSelected);
+    const isOneSelected = !!LocalStorageService.Instance.AddOnList.find(
+      (addOn) => addOn.isSelected
+    );
     let newTabbarState = updateTabbarBtnComplitedState(
       state.tabbarButtons,
       TabbarText.ADD_ONS,
-      isSelected
+      isOneSelected
     );
-    LocalStorageService.Instance.chageAddOnState(addOn, isSelected);
 
     const newQuestions = LocalStorageService.Instance.Questions;
 
