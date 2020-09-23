@@ -40,15 +40,12 @@ export class AppComponent {
       this.footerActive = route instanceof NavigationEnd || this.footerActive;
       this.isAdmin = this.router.url.includes('admin');
     });
-    this.scroll = fromEvent<any>(window, 'wheel')
-      .pipe(debounce(() => interval()))
-      .subscribe((event) =>
-        this.window.scrollBy({
-          left: event.wheelDelta * 0.5,
-          top: 0,
-          //behavior: 'smooth',
-        })
-      );
+  }
+
+  public onMouseWheel($event: WheelEvent): void {
+    const x = $event.deltaX || $event.deltaY;
+    const y = 0;
+    this.window.scrollBy(x, y);
   }
 
   public closeNavbarCard(): void {

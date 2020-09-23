@@ -5,6 +5,7 @@ import {
   setInfoCheckout,
   setFloorPlanCheckout,
   setShoppingCartCheckout,
+  selectTabbarButtonCheckout,
 } from 'src/app/store/actions/checkout.action';
 import { UploadData } from 'src/app/shared/upload/upload.model';
 import { Observable, Subscription } from 'rxjs';
@@ -13,6 +14,7 @@ import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 import { FloorPlan } from 'src/models/FloorPlan.model';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
+import { TabbarText } from 'src/models/TabbarText.model';
 
 const INFO = 'Welcome to your renovation project!';
 
@@ -36,6 +38,9 @@ export class FloorPalnUploadComponent implements OnInit {
     private readonly checkoutService: CheckoutService
   ) {
     this.$store.dispatch(setInfoCheckout({ info: INFO, description: [] }));
+    this.$store.dispatch(
+      selectTabbarButtonCheckout({ btnText: TabbarText.FLOOR_PLAN })
+    );
     this.$chekcoutState = this.$store.select((state) => state.checkout);
 
     this.uploadData = new UploadData({
@@ -73,6 +78,8 @@ export class FloorPalnUploadComponent implements OnInit {
             floor_plan: linkObj.link,
           },
         };
+
+        console.log({ linkObj });
 
         this.checkoutService
           .updateProduct(productVM)

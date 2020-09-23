@@ -7,6 +7,7 @@ import { QuestionnaireComponent } from './questionnaire/questionnaire.component'
 import { SpacePhotosComponent } from './space-photos/space-photos.component';
 import { ReviewAndPayComponent } from './review-and-pay/review-and-pay.component';
 import { AddOnListComponent } from './add-on-list/add-on-list.component';
+import { TabbarText } from 'src/models/TabbarText.model';
 
 export const CHECKOUT_ROUTER_OUTLET = 'checkoutSteps';
 
@@ -20,11 +21,11 @@ export enum CheckoutPaths {
 
 //Changing order of this Map will change order of tabbar display
 export const CHECKOUT_PATHS_TO_LABEL_MAP = {
-  'floor-plan': 'Floor plan //',
-  'space-photos': 'Space Photos //',
-  'add-on-list': 'Add ons //',
-  questionnarie: 'Questionnarie //',
-  'review-and-pay': 'Review & Pay',
+  'floor-plan': TabbarText.FLOOR_PLAN,
+  'space-photos': TabbarText.SPACE_PHOTOS,
+  'add-on-list': TabbarText.ADD_ONS,
+  questionnarie: TabbarText.QUESTIONNARIE,
+  'review-and-pay': TabbarText.REVIEW_PAY,
 };
 
 const routes: Routes = [

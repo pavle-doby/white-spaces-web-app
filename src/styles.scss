@@ -91,6 +91,13 @@ body {
   text-align: center;
   font-size: 16px;
   border: none;
+  background-color: inherit;
+
+  @media screen and (max-width: 960px) {
+    padding-left: 16px;
+    padding-right: 16px;
+    min-height: 30px;
+  }
 }
 
 .checkout__btn {
@@ -130,6 +137,9 @@ body {
 /* Scrollbar tweaks */
 ::-webkit-scrollbar {
   width: 0.26vw;
+  @media screen and (max-width: 960px) {
+    width: 6px;
+  }
 }
 
 ::-webkit-scrollbar-track {
@@ -138,6 +148,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: lightgrey;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -150,4 +161,28 @@ body {
 
 .app__uppercase {
   text-transform: uppercase;
+}
+
+.container__padding--lt-md {
+  padding: 25px 30px 25px 30px;
+}
+
+.a__text-decoration--none {
+  text-decoration: none;
+
+  &:active {
+    text-decoration: none;
+  }
+  &:focus {
+    text-decoration: none;
+  }
+  &:focus-within {
+    text-decoration: none;
+  }
+  &:hover {
+    text-decoration: none;
+  }
+  &:visited {
+    text-decoration: none;
+  }
 }

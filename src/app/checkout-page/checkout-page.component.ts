@@ -9,6 +9,7 @@ import { setShoppingCartCheckout } from '../store/actions/checkout.action';
 import { LocalStorageService } from '../services/local-storage.service';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { PackagesBox } from '../shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
+import { ProgressState, Step } from 'src/models/CheckoutProgress.model';
 
 @Component({
   selector: 'app-checkout-page',
@@ -32,8 +33,8 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
-    this.subCheckoutState = this.$checkoutState.subscribe((checkoutState) => {
-      this.package = checkoutState.packageBox;
+    this.subCheckoutState = this.$checkoutState.subscribe((ckState) => {
+      this.package = ckState.packageBox;
     });
 
     try {

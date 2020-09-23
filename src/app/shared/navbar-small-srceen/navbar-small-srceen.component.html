@@ -1,0 +1,69 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    appGradient
+    #drawer
+    class="sidenav width-100"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+    position="end"
+  >
+    <div
+      class="navbar-ss__sidenav-header"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+    >
+      <app-logo></app-logo>
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
+      </button>
+    </div>
+
+    <mat-nav-list
+      class="navbar-ss__nav-list"
+      fxLayout="column"
+      fxLayoutGap="10px"
+    >
+      <a
+        mat-list-item
+        *ngFor="let linkText of linkAndTextList"
+        (click)="this.navigateByUrl(linkText.link)"
+        (click)="drawer.toggle()"
+        aria-label="link in navigation"
+      >
+        {{ linkText.text }}
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="navbar-ss__mat-toolbar" fxLayout="row">
+      <div
+        appGradient
+        class="navbar-ss__mat-toolbar-inner width-100"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+      >
+        <app-logo></app-logo>
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async"
+        >
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+    <div class="navbar-ss__ng-content">
+      <ng-content></ng-content>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

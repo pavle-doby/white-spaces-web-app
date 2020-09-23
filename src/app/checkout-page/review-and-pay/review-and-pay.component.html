@@ -6,8 +6,8 @@
       fxLayoutAlign="starat start"
     >
       <div class="review-pay__left-header">
-        <h1>Order summary</h1>
-        <span>
+        <h2>Order summary</h2>
+        <span class="review-pay__title-desc">
           Here is short summary of your order. You will receive full invoice via
           mail after the purchase is complete.
         </span>
@@ -67,17 +67,17 @@
       fxLayoutGap="10px"
     >
       <div class="review-pay__right-header">
-        <h1>Payment details</h1>
-        <span>
+        <h2>Payment details</h2>
+        <span class="review-pay__title-desc">
           Please note that the value of your order will be charged to your card
           instantly
         </span>
       </div>
       <div
-        class="width-100"
+        class="review-pay__right-body width-100"
         fxLayout="column"
         fxLayoutAlign="start start"
-        fxLayoutGap="20px"
+        fxLayoutGap="10px"
       >
         <div
           class="width-100"
@@ -95,7 +95,7 @@
             {{ !this.isFullNameValid ? this.requiredErorrMessage : "" }}
           </span>
           <input
-            class="review-pay__input width-100"
+            class="review-pay__input"
             [disabled]="true"
             [ngClass]="{ 'review-pay__input--error': !this.isFullNameValid }"
             type="text"
@@ -119,7 +119,7 @@
             {{ !this.isAddressValid ? this.requiredErorrMessage : "" }}
           </span>
           <input
-            class="review-pay__input width-100"
+            class="review-pay__input"
             [disabled]="true"
             [ngClass]="{ 'review-pay__input--error': !this.isAddressValid }"
             type="text"
@@ -143,7 +143,7 @@
             {{ !this.isEmailValid ? this.requiredErorrMessage : "" }}
           </span>
           <input
-            class="review-pay__input width-100"
+            class="review-pay__input"
             [disabled]="true"
             [ngClass]="{ 'review-pay__input--error': !this.isEmailValid }"
             type="text"

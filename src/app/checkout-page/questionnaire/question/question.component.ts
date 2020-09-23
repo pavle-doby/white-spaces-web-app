@@ -14,11 +14,9 @@ import { Question } from 'src/models/Question.model';
   styleUrls: ['./question.component.scss'],
 })
 export class QuestionComponent implements OnInit {
-  @Input()
-  public question: Question;
+  @Input() public question: Question;
 
-  @Output()
-  public changeAnswerEvent: EventEmitter<Question>;
+  @Output() public changeAnswerEvent: EventEmitter<Question>;
 
   public answer: string;
 

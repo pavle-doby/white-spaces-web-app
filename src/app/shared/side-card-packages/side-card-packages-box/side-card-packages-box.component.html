@@ -6,18 +6,28 @@
       'sc-packages-box__border-2px': this.isSelected,
       'app__box-shadow': this.isSelected
     }"
+    [ngClass.lt-md]="{ 'sc-packages-box__container--lt-md': true }"
     fxLayout="column"
     fxLayoutAlign="space-between center"
     fxLayoutGap=".52vw"
   >
     <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <span class="packages-box__type">
+      <span
+        class="packages-box__type"
+        [ngClass.lt-md]="{ 'packages-box__type--lt-md': true }"
+      >
         {{ this.package?.box?.name }}
       </span>
-      <span class="packages-box__price app__text-shadow">
+      <span
+        class="packages-box__price app__text-shadow"
+        [ngClass.lt-md]="{ 'packages-box__price--lt-md': true }"
+      >
         ${{ this.package?.box?.price }}
       </span>
-      <span class="packages-box__description">
+      <span
+        class="packages-box__description"
+        [ngClass.lt-md]="{ 'packages-box__description--lt-md': true }"
+      >
         {{ this.package?.box?.description }}
       </span>
     </div>
@@ -25,6 +35,7 @@
     <div
       *ngIf="!this.isSelected"
       class="packages-box__select"
+      [ngClass.lt-md]="{ 'packages-box__select--lt-md': true }"
       fxLayoutAlign="center center"
       (click)="this.selectPackage(this.package?.box)"
     >
@@ -33,6 +44,7 @@
     <div
       *ngIf="this.isSelected"
       class="packages-box__continue"
+      [ngClass.lt-md]="{ 'packages-box__continue--lt-md': true }"
       fxLayoutAlign="center center"
       (click)="this.continue()"
     >

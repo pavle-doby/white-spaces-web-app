@@ -1,0 +1,47 @@
+@import "src/styles-colors.scss";
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+}
+
+.navbar-ss__ng-content {
+  margin-top: 50px;
+}
+
+.navbar-ss__nav-list a {
+  color: white;
+  font-size: 50px;
+}
+
+.navbar-ss__sidenav-header {
+  padding: 16px;
+  color: white;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.navbar-ss__mat-toolbar-inner {
+  height: 60px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.navbar-ss__mat-toolbar {
+  height: 56px;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  padding: 0;
+  // overflow: hidden;
+
+  // background-color: darkblue;
+  // border: none;
+  // border: 1px solid transparent;
+}

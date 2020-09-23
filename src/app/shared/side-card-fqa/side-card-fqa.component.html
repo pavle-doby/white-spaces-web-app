@@ -1,10 +1,16 @@
 <div
+  appGradient
   class="sc-fqa__container"
   fxLayout="row"
   fxLayoutAlign="start start"
   fxLayoutGap="3.125vw"
 >
-  <div fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="1.041vw">
+  <div
+    class="sc-fqa__nav"
+    fxLayout="column"
+    fxLayoutAlign="start end"
+    fxLayoutGap="1.041vw"
+  >
     <div
       *ngFor="let label of this.navLabels"
       class="sc-fqa__nav-label cursor-pointer"
@@ -27,6 +33,7 @@
       [label]="content.label"
       [description]="content.description"
       [toShowDescription]="content.isOpen"
+      [toShowOnClick]="this.isHandset$ | async"
       (stateChangesEvent)="this.onStatusChange($event, i)"
     ></app-opening-label>
   </div>

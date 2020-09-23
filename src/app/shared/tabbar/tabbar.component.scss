@@ -1,3 +1,18 @@
+@import "src/styles-colors.scss";
+
 .tabbat__button {
   cursor: pointer;
+  font-size: 20px;
+  color: $color-gray-5;
+  font-weight: 300;
+}
+
+.tabbat__button--complited {
+  font-weight: 400;
+  color: $color-complited;
+}
+
+.tabbat__button--selected {
+  font-weight: 400;
+  color: $color-selected;
 }
