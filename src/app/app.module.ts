@@ -39,10 +39,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
         strictActionImmutability: true,
       },
     }),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
-    // ServiceWorkerModule.register('ngsw-worker.js', {
-    //   enabled: environment.production,
-    // }),
+    StoreDevtoolsModule.instrument(),
+    // !environment.production ? StoreDevtoolsModule.instrument() : [],
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
     OpeningLabelModule,
     MatDialogModule,
     CheckoutPageModule,

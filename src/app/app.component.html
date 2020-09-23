@@ -11,7 +11,7 @@
   </div>
 </ng-template>
 
-<div *ngIf="!this.isAdmin; else admin">
+<div *ngIf="!this.isAdmin; else admin" (wheel)="this.onMouseWheel($event)">
   <app-navbar-small-srceen *ngIf="this.isHandset$ | async">
     <ng-container *ngTemplateOutlet="mainRouterOutlet"></ng-container>
   </app-navbar-small-srceen>

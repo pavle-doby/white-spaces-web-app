@@ -158,8 +158,8 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
       const total = [
         ...this.addOnInfo.infoPriceList.map((infoPrice) => infoPrice.price),
         ...this.packageInfo.infoPriceList.map((infoPrice) => infoPrice.price),
-      ].reduce((prev, curent) => {
-        return prev + curent;
+      ].reduce((prev, current) => {
+        return prev + current;
       });
 
       this.totalInfo.infoPriceList = [new InfoPrice({ price: total })];

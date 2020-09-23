@@ -16,7 +16,6 @@ import {
   addSpacePhotoURLCheckout,
   clearSpacePhotosURLsCheckout,
   setAddOnListCheckout,
-  appendQuestionsCheckout,
   setQuestionStepperCheckout,
   setQuestionsCheckout,
   setAllPackagesCheckout,
@@ -24,7 +23,6 @@ import {
   selectTabbarButtonCheckout,
   setTabbarStateCheckout,
   setInitStateChekcout,
-  setQuestionsFromStorageChekcout,
 } from '../actions/checkout.action';
 import {
   TabbarButton,
@@ -245,11 +243,28 @@ const reducer = createReducer(
         (q) => !addOn.questions.find((addOnQ) => addOnQ.id === q.id)
       );
     }
-    const newTabbarState = updateTabbarBtnComplitedState(
+    let newTabbarState = updateTabbarBtnComplitedState(
       state.tabbarButtons,
-      TabbarText.ADD_ONS
+      TabbarText.ADD_ONS,
+      isSelected
     );
     LocalStorageService.Instance.chageAddOnState(addOn, isSelected);
+
+    const newQuestions = LocalStorageService.Instance.Questions;
+
+    let finished = newQuestions
+      .map((q): number => (q.isAnswerd ? 1 : 0))
+      .reduce((prev, curr) => {
+        return prev + curr;
+      });
+
+    let total = newQuestions.length;
+
+    newTabbarState = updateTabbarBtnComplitedState(
+      newTabbarState,
+      TabbarText.QUESTIONNARIE,
+      total === finished
+    );
 
     return {
       ...state,
@@ -273,6 +288,11 @@ const reducer = createReducer(
             ? ProgressState.DONE
             : ProgressState.TODO,
         },
+        questions: {
+          ...state.progressState.questions,
+          total: total,
+          finshed: finished,
+        },
       },
       tabbarButtons: newTabbarState,
     };
@@ -293,17 +313,6 @@ const reducer = createReducer(
       },
     };
   }),
-  on(appendQuestionsCheckout, (state, { questions }) => {
-    LocalStorageService.Instance.appendQuestions(questions);
-    return {
-      ...state,
-      questions: [...state.questions, ...questions],
-      questionStepper: {
-        ...state.questionStepper,
-        numberOfSteps: questions.length,
-      },
-    };
-  }),
   on(setQuestionStepperCheckout, (state, { questionStepper }) => {
     return { ...state, questionStepper: questionStepper };
   }),
@@ -314,9 +323,12 @@ const reducer = createReducer(
 
     LocalStorageService.Instance.Questions = newQuestions;
 
-    let finished = state.progressState.questions.finshed;
-    finished += question.isAnswerd ? 1 : -1;
-    let total = state.progressState.questions.total;
+    let finished = newQuestions
+      .map((q): number => (q.isAnswerd ? 1 : 0))
+      .reduce((prev, curr) => {
+        return prev + curr;
+      });
+    let total = newQuestions.length;
 
     const newTabbarState = updateTabbarBtnComplitedState(
       state.tabbarButtons,
@@ -332,14 +344,12 @@ const reducer = createReducer(
         questions: {
           ...state.progressState.questions,
           finshed: finished,
+          total: total,
           state: finished === total ? ProgressState.DONE : ProgressState.TODO,
         },
       },
       tabbarButtons: newTabbarState,
     };
-  }),
-  on(setQuestionsFromStorageChekcout, (state) => {
-    return { ...state, questions: LocalStorageService.Instance.Questions };
   }),
   on(setCurrentIndexCheckout, (state, { currentIndex }) => {
     let newRangeStart = state.questionStepper.rangeStart;
