@@ -30,6 +30,9 @@
   );
   @media only screen and(max-width:959px) {
     display: none;
+    position: absolute;
+    top: 420vh;
+    height: 5vh;
   }
 }
 
@@ -41,6 +44,15 @@
   position: fixed;
   left: 37.5vw;
   bottom: 1.5vh;
+  @media only screen and(max-width:959px) {
+    left: 0;
+    font-size: 18px;
+    text-align: center;
+    width: 100%;
+    position: unset;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
 }
 
 .footer__scroll-container {
@@ -56,4 +68,8 @@
 
 .footer__content {
   position: fixed;
+  @media only screen and(max-width:959px) {
+    position: unset;
+    height: 100%;
+  }
 }
