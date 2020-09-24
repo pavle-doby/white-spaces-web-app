@@ -15,18 +15,18 @@
 
 //If you change name of this class, change also class Step.
 .question-stepper__step--uncomplited {
-  border: 0.1042vw solid grey;
+  border: 2px solid grey;
   color: grey;
 }
 
 //If you change name of this class, change also class Step.
 .question-stepper__step--current {
-  border: 0.1042vw solid $color-selected;
+  border: 2px solid $color-selected;
   color: $color-selected;
 }
 
 //If you change name of this class, change also class Step.
 .question-stepper__step--complited {
-  border: 0.1042vw solid $color-complited;
+  border: 2px solid $color-complited;
   color: $color-complited;
 }

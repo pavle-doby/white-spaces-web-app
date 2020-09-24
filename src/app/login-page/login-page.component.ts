@@ -33,11 +33,11 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subUser = this.user$.subscribe((user) => {
-      if (!!user && user.verified) {
-        this.router.navigateByUrl(`/checkout(checkoutSteps:floor-plan)`);
-      }
-    });
+    // this.subUser = this.user$.subscribe((user) => {
+    //   if (!!user && user.verified) {
+    //     this.router.navigateByUrl(`/checkout(checkoutSteps:floor-plan)`);
+    //   }
+    // });
 
     this.activeRoute.queryParams.subscribe((params) => {
       const { login } = params;

@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { Observable, Subscription } from 'rxjs';
 import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
-import { range } from 'src/app/shared/Utilities';
+import { isQuestionFullyAnswerd, range } from 'src/app/shared/Utilities';
 
 @Component({
   selector: 'app-question-stepper',
@@ -56,7 +56,7 @@ export class QuestionStepperComponent implements OnInit, OnDestroy {
 
           if (this.stepper.indexCurrent === i) {
             stepState = StepState.CURRENT;
-          } else if (questions[i].isAnswerd) {
+          } else if (isQuestionFullyAnswerd(questions[i])) {
             stepState = StepState.COMPLETED;
           } else {
             stepState = StepState.UNCOMPLITED;
