@@ -17,6 +17,7 @@ import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { TabbarText } from 'src/models/TabbarText.model';
 import { formatQuestionDictToList } from 'src/app/shared/Utilities';
 import { Question } from 'src/models/Question.model';
+import { QuestionDTO } from 'src/models/QuestionDTO.model';
 
 const INFO = 'Welcome to your renovation project!';
 
@@ -79,9 +80,9 @@ export class FloorPalnUploadComponent implements OnInit {
           additional_data: {
             ...lineItem.additional_data,
             floor_plan: linkObj.link,
-            questions: this.questions.filter(
-              (q) => q.product_id === lineItem.product.id
-            ),
+            questions: this.questions
+              .filter((q) => q.product_id === lineItem.product.id)
+              .map((q) => new QuestionDTO(q)),
           },
         };
 

@@ -66,7 +66,9 @@ export const updateTabbarBtnComplitedState = (
 };
 
 export const calculateFinishedQuestions = (questions: Question[]): number => {
-  return questions.filter((q) => isQuestionFullyAnswerd(q)).length;
+  return questions && questions.length
+    ? questions.filter((q) => isQuestionFullyAnswerd(q)).length
+    : 0;
 };
 
 export const isQuestionFullyAnswerd = (question: Question): boolean => {
@@ -82,4 +84,3 @@ export const getClientWidthPX = (): number => {
     window.innerWidth || 0
   );
 };
-

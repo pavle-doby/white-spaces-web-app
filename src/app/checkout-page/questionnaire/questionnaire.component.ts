@@ -17,6 +17,7 @@ import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { AdditionalDataLineItem } from 'src/models/AdditionalData.model';
 import { formatQuestionDictToList } from 'src/app/shared/Utilities';
 import { TabbarText } from 'src/models/TabbarText.model';
+import { QuestionDTO } from 'src/models/QuestionDTO.model';
 
 const INFO = `Feel free to load us with information so that we
 can truly get to know both you and your space
@@ -109,7 +110,7 @@ export class QuestionnaireComponent implements OnInit {
       line_item_id: lineItem.id,
       additional_data: {
         ...lineItem.additional_data,
-        questions: newQuestions,
+        questions: newQuestions.map((q) => new QuestionDTO(q)),
       },
       quantity: 1,
     };
@@ -177,7 +178,7 @@ export class QuestionnaireComponent implements OnInit {
           line_item_id: lineItem.id,
           additional_data: {
             ...lineItem.additional_data,
-            questions: newQuestions,
+            questions: newQuestions.map((q) => new QuestionDTO(q)),
           },
           quantity: 1,
         };

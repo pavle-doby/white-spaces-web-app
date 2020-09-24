@@ -16,6 +16,7 @@ import { ProductVM } from 'src/models/ProductVM.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { Question } from 'src/models/Question.model';
 import { TabbarText } from 'src/models/TabbarText.model';
+import { QuestionDTO } from 'src/models/QuestionDTO.model';
 
 const INFO = `Please upload photos of your space.`;
 
@@ -102,9 +103,9 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
             additional_data: {
               ...lineItem.additional_data,
               images: fileLinks,
-              questions: this.questions.filter(
-                (q) => q.product_id === lineItem.product.id
-              ),
+              questions: this.questions
+                .filter((q) => q.product_id === lineItem.product.id)
+                .map((q) => new QuestionDTO(q)),
             },
           };
 

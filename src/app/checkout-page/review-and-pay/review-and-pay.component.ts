@@ -201,7 +201,7 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
           .createOrder(this.shoppingCart.id)
           .toPromise()
           .then((res) => {
-            LocalStorageService.Instance.clearCheckoutState();
+            LocalStorageService.Instance.storage.clear();
             this.$store.dispatch(setInitStateChekcout({}));
             this.router.navigateByUrl(`/${MainRouterPaths.HOME}`);
             const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
