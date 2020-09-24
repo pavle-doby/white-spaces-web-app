@@ -4,6 +4,8 @@ import { OpeningLabel } from '../opening-label/OpeningLabel';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { BREAKING_POINT_PX } from 'src/app/app.config';
+import { getClientWidthPX } from '../Utilities';
 
 @Component({
   selector: 'app-side-card-fqa',
@@ -15,20 +17,17 @@ export class SideCardFqaComponent implements OnInit {
   public contentList: OpeningLabel[];
   public selectedNavLabel: FQALabels;
 
-  public isHandset$: Observable<boolean>;
+  public isHandset: boolean;
 
   constructor(private breakpointObserver: BreakpointObserver) {
     this.navLabels = Object.keys(FQAContentObj) as FQALabels[];
     this.selectedNavLabel = this.navLabels[0];
     this.contentList = FQAContentObj[this.selectedNavLabel].slice();
-
-    this.isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isHandset = BREAKING_POINT_PX > getClientWidthPX();
+  }
 
   public selectContent(label: FQALabels): void {
     this.selectedNavLabel = label;

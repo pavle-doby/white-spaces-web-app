@@ -41,7 +41,7 @@ export const convertQuestionsDTOListToQuestionsList = (
   return buffQuestions;
 };
 
-export const convertQuestionDTODictionaryToQuestionDTOList = (
+export const formatQuestionDictToList = (
   questionDTOList: Record<string, QuestionDTO[]>
 ): QuestionDTO[] => {
   let buffQuestions: QuestionDTO[] = [];
@@ -63,4 +63,24 @@ export const updateTabbarBtnComplitedState = (
       ? { ...btn, isCompleted: isComplited }
       : { ...btn };
   });
+};
+
+export const calculateFinishedQuestions = (questions: Question[]): number => {
+  return questions && questions.length
+    ? questions.filter((q) => isQuestionFullyAnswerd(q)).length
+    : 0;
+};
+
+export const isQuestionFullyAnswerd = (question: Question): boolean => {
+  return (
+    question.isAnswerd &&
+    (question.image_required ? !!question.images?.length : true)
+  );
+};
+
+export const getClientWidthPX = (): number => {
+  return Math.max(
+    document.documentElement.clientWidth || 0,
+    window.innerWidth || 0
+  );
 };

@@ -42,9 +42,16 @@ export class ShoppingCart {
     let newShoppingCart: ShoppingCart = JSON.parse(
       JSON.stringify(shoppingCart)
     );
+
     newShoppingCart.line_items = newShoppingCart.line_items.filter(
-      (lineItem) => lineItem.id !== lineItemId
+      (lineItem) => {
+        console.log(lineItem.id);
+        console.log(lineItemId);
+        return lineItem.id !== lineItemId;
+      }
     );
+
+    console.log(newShoppingCart.line_items);
     return newShoppingCart;
   }
 }

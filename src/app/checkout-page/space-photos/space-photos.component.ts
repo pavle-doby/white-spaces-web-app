@@ -14,7 +14,9 @@ import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
+import { Question } from 'src/models/Question.model';
 import { TabbarText } from 'src/models/TabbarText.model';
+import { QuestionDTO } from 'src/models/QuestionDTO.model';
 
 const INFO = `Please upload photos of your space.`;
 
@@ -33,6 +35,7 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
   public subChekcoutState: Subscription;
 
   public shoppingCart: ShoppingCart;
+  public questions: Question[];
   public uploadConfigData: UploadData;
 
   constructor(
@@ -56,6 +59,7 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subChekcoutState = this.$checkoutState.subscribe((ckState) => {
       this.shoppingCart = ckState.shoppingCart;
+      this.questions = ckState.questions;
     });
   }
 
@@ -70,10 +74,9 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
     }
 
     //#region For shopping cart update I
-    const packageLineItem = ShoppingCart.getPackageLineItem(this.shoppingCart);
-    const packageProduct = packageLineItem.product;
+    const lineItem = ShoppingCart.getPackageLineItem(this.shoppingCart);
 
-    if (!packageProduct) {
+    if (!lineItem.product) {
       alert('Select package');
       return;
     }
@@ -95,15 +98,18 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
           //#region For shopping cart update II
           const productVM: ProductVM = {
             shopping_cart_id: this.shoppingCart.id,
-            line_item_id: packageLineItem.id,
+            line_item_id: lineItem.id,
             quantity: 1,
             additional_data: {
-              ...packageProduct.additional_data,
-              images: fileLinks, //Change Additional data update
+              ...lineItem.additional_data,
+              images: fileLinks,
+              questions: this.questions
+                .filter((q) => q.product_id === lineItem.product.id)
+                .map((q) => new QuestionDTO(q)),
             },
           };
 
-          // console.log(`${JSON.stringify(productVM)}\n\n\n`);
+          console.log('Space photos', { productVM });
 
           this.chekcoutService
             .updateProduct(productVM)

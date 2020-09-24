@@ -15,6 +15,9 @@ import { FloorPlan } from 'src/models/FloorPlan.model';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { TabbarText } from 'src/models/TabbarText.model';
+import { formatQuestionDictToList } from 'src/app/shared/Utilities';
+import { Question } from 'src/models/Question.model';
+import { QuestionDTO } from 'src/models/QuestionDTO.model';
 
 const INFO = 'Welcome to your renovation project!';
 
@@ -32,6 +35,7 @@ export class FloorPalnUploadComponent implements OnInit {
   public subChekcoutState: Subscription;
 
   public shoppingCart: ShoppingCart;
+  public questions: Question[];
 
   constructor(
     private readonly $store: Store<AppState>,
@@ -53,14 +57,14 @@ export class FloorPalnUploadComponent implements OnInit {
   ngOnInit(): void {
     this.subChekcoutState = this.$chekcoutState.subscribe((ckState) => {
       this.shoppingCart = ckState.shoppingCart;
+      this.questions = ckState.questions;
     });
   }
 
   public onUploadEvent(files: FileList): void {
-    const packageLineItem = ShoppingCart.getPackageLineItem(this.shoppingCart);
-    const packageProduct = packageLineItem.product;
+    const lineItem = ShoppingCart.getPackageLineItem(this.shoppingCart);
 
-    if (!packageProduct) {
+    if (!lineItem.product) {
       alert('Select package');
       return;
     }
@@ -71,15 +75,18 @@ export class FloorPalnUploadComponent implements OnInit {
       .then((linkObj) => {
         const productVM: ProductVM = {
           shopping_cart_id: this.shoppingCart.id,
-          line_item_id: packageLineItem.id,
+          line_item_id: lineItem.id,
           quantity: 1,
           additional_data: {
-            ...packageProduct.additional_data,
+            ...lineItem.additional_data,
             floor_plan: linkObj.link,
+            questions: this.questions
+              .filter((q) => q.product_id === lineItem.product.id)
+              .map((q) => new QuestionDTO(q)),
           },
         };
 
-        console.log({ linkObj });
+        console.log('Floor plan upload', { productVM });
 
         this.checkoutService
           .updateProduct(productVM)

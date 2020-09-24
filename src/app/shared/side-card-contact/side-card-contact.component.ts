@@ -2,6 +2,8 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { BREAKING_POINT_PX } from 'src/app/app.config';
+import { getClientWidthPX } from '../Utilities';
 
 @Component({
   selector: 'app-side-card-contact',
@@ -9,13 +11,10 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['./side-card-contact.component.scss'],
 })
 export class SideCardContactComponent implements OnInit {
-  public isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
+  public isHandset: boolean;
   constructor(private breakpointObserver: BreakpointObserver) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isHandset = BREAKING_POINT_PX > getClientWidthPX();
+  }
 }

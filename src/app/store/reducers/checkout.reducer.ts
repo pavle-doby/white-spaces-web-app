@@ -40,7 +40,10 @@ import {
   ProgressState,
   Step,
 } from 'src/models/CheckoutProgress.model';
-import { updateTabbarBtnComplitedState } from 'src/app/shared/Utilities';
+import {
+  calculateFinishedQuestions,
+  updateTabbarBtnComplitedState,
+} from 'src/app/shared/Utilities';
 import { TabbarText } from 'src/models/TabbarText.model';
 
 export interface CheckoutState {
@@ -107,11 +110,11 @@ const getInitState = (): CheckoutState => {
       questions: new Step({
         name: TabbarText.QUESTIONNARIE,
         isRequired: true,
-        state: ProgressState.TODO,
+        state: ProgressState.TODO, // will be set properly in constructor
         total: LocalStorageService.Instance.Questions?.length,
-        finshed: LocalStorageService.Instance.Questions?.filter(
-          (q) => q.isAnswerd
-        ).length,
+        finshed: calculateFinishedQuestions(
+          LocalStorageService.Instance.Questions
+        ),
       }),
     }),
   };
@@ -132,6 +135,7 @@ const reducer = createReducer(
   }),
   on(setShoppingCartCheckout, (state, { shoppingCart }) => {
     LocalStorageService.Instance.ShoppingCart = shoppingCart;
+    console.log('From BE', { shoppingCart });
     return { ...state, shoppingCart: shoppingCart };
   }),
   on(setTabbarStateCheckout, (state, { buttons }) => {
@@ -248,6 +252,7 @@ const reducer = createReducer(
     const isOneSelected = !!LocalStorageService.Instance.AddOnList.find(
       (addOn) => addOn.isSelected
     );
+
     let newTabbarState = updateTabbarBtnComplitedState(
       state.tabbarButtons,
       TabbarText.ADD_ONS,
@@ -256,18 +261,14 @@ const reducer = createReducer(
 
     const newQuestions = LocalStorageService.Instance.Questions;
 
-    let finished = newQuestions
-      .map((q): number => (q.isAnswerd ? 1 : 0))
-      .reduce((prev, curr) => {
-        return prev + curr;
-      });
-
+    let finished = calculateFinishedQuestions(newQuestions);
     let total = newQuestions.length;
+    let isDone = total === finished;
 
     newTabbarState = updateTabbarBtnComplitedState(
       newTabbarState,
       TabbarText.QUESTIONNARIE,
-      total === finished
+      isDone
     );
 
     return {
@@ -296,6 +297,7 @@ const reducer = createReducer(
           ...state.progressState.questions,
           total: total,
           finshed: finished,
+          state: isDone ? ProgressState.DONE : ProgressState.TODO,
         },
       },
       tabbarButtons: newTabbarState,
@@ -303,10 +305,25 @@ const reducer = createReducer(
   }),
   on(setAddOnListCheckout, (state, { addOnList }) => {
     LocalStorageService.Instance.AddOnList = addOnList;
-    return { ...state, addOnList: addOnList };
+    const newTabbarState = updateTabbarBtnComplitedState(
+      state.tabbarButtons,
+      TabbarText.ADD_ONS,
+      !!addOnList.find((addOn) => addOn.isSelected)
+    );
+    return { ...state, addOnList: addOnList, tabbarButtons: newTabbarState };
   }),
   on(setQuestionsCheckout, (state, { questions }) => {
     LocalStorageService.Instance.Questions = questions;
+
+    const finished = calculateFinishedQuestions(questions);
+    const total = questions.length;
+    const isDone = finished === total;
+    const newTabbarState = updateTabbarBtnComplitedState(
+      state.tabbarButtons,
+      TabbarText.QUESTIONNARIE,
+      isDone
+    );
+
     return {
       ...state,
       questions: questions,
@@ -315,6 +332,16 @@ const reducer = createReducer(
         numberOfSteps: questions.length,
         indexCurrent: 0,
       },
+      progressState: {
+        ...state.progressState,
+        questions: {
+          ...state.progressState.questions,
+          finshed: finished,
+          total: total,
+          state: isDone ? ProgressState.DONE : ProgressState.TODO,
+        },
+      },
+      tabbarButtons: newTabbarState,
     };
   }),
   on(setQuestionStepperCheckout, (state, { questionStepper }) => {
@@ -327,17 +354,14 @@ const reducer = createReducer(
 
     LocalStorageService.Instance.Questions = newQuestions;
 
-    let finished = newQuestions
-      .map((q): number => (q.isAnswerd ? 1 : 0))
-      .reduce((prev, curr) => {
-        return prev + curr;
-      });
+    let finished = calculateFinishedQuestions(newQuestions);
     let total = newQuestions.length;
+    const isDone = total === finished;
 
     const newTabbarState = updateTabbarBtnComplitedState(
       state.tabbarButtons,
       TabbarText.QUESTIONNARIE,
-      total === finished
+      isDone
     );
 
     return {
@@ -349,7 +373,7 @@ const reducer = createReducer(
           ...state.progressState.questions,
           finshed: finished,
           total: total,
-          state: finished === total ? ProgressState.DONE : ProgressState.TODO,
+          state: isDone ? ProgressState.DONE : ProgressState.TODO,
         },
       },
       tabbarButtons: newTabbarState,

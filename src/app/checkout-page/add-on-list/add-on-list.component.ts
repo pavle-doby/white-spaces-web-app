@@ -117,7 +117,7 @@ export class AddOnListComponent implements OnInit {
         this.shoppingCart,
         addOn.id
       );
-      console.log(addOnLineItem.id);
+      console.log('Addon id:', addOnLineItem.id);
 
       this.checkoutService
         .deleteProduct(addOnLineItem.id)
@@ -125,7 +125,7 @@ export class AddOnListComponent implements OnInit {
         .then((message) => {
           const newShoppingCart = ShoppingCart.deleteLineItem(
             this.shoppingCart,
-            addOn.id
+            addOnLineItem.id
           );
           this.$store.dispatch(
             setShoppingCartCheckout({ shoppingCart: newShoppingCart })
@@ -139,6 +139,22 @@ export class AddOnListComponent implements OnInit {
           alert(message);
         })
         .catch((err) => {
+          if (err.status === 200) {
+            const newShoppingCart = ShoppingCart.deleteLineItem(
+              this.shoppingCart,
+              addOnLineItem.id
+            );
+            this.$store.dispatch(
+              setShoppingCartCheckout({ shoppingCart: newShoppingCart })
+            );
+            this.$store.dispatch(
+              setAddOnIsSelectedCheckout({
+                addOn: addOn,
+                isSelected: addOn.isSelected,
+              })
+            );
+            return;
+          }
           console.error(err);
           alert(err.message);
         });

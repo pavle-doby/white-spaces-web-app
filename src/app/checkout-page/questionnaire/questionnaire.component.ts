@@ -14,9 +14,10 @@ import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 import { UploadData } from 'src/app/shared/upload/upload.model';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
-import { AdditionalData } from 'src/models/AdditionalData.model';
-import { convertQuestionDTODictionaryToQuestionDTOList } from 'src/app/shared/Utilities';
+import { AdditionalDataLineItem } from 'src/models/AdditionalData.model';
+import { formatQuestionDictToList } from 'src/app/shared/Utilities';
 import { TabbarText } from 'src/models/TabbarText.model';
+import { QuestionDTO } from 'src/models/QuestionDTO.model';
 
 const INFO = `Feel free to load us with information so that we
 can truly get to know both you and your space
@@ -96,37 +97,30 @@ export class QuestionnaireComponent implements OnInit {
       this.shoppingCart,
       question.product_id
     );
-    const additionalData = JSON.parse(
-      JSON.stringify(lineItem.product.additional_data)
-    );
 
-    let sectionQuestions = additionalData.questions[question.section];
-    sectionQuestions = sectionQuestions.map((q) => {
-      q.answer = q.id === question.id ? question.answer : q.answer;
-      q.section = question.section;
-      return q;
-    });
-
-    additionalData.questions = convertQuestionDTODictionaryToQuestionDTOList(
-      additionalData.questions
-    );
+    const newQuestions: Question[] = JSON.parse(JSON.stringify(this.questions))
+      .filter((q) => q.product_id === lineItem.product.id)
+      .map((q) => {
+        return q.id === question.id ? { ...question } : { ...q };
+      });
 
     const productVM: ProductVM = {
       shopping_cart_id: this.shoppingCart.id,
       product_id: question.product_id,
       line_item_id: lineItem.id,
+      additional_data: {
+        ...lineItem.additional_data,
+        questions: newQuestions.map((q) => new QuestionDTO(q)),
+      },
       quantity: 1,
-      additional_data: additionalData,
     };
 
-    // console.log(JSON.stringify(productVM));
+    console.log('Q - answer', { productVM });
 
     this.checkoutService
       .updateProduct(productVM)
       .toPromise()
       .then((newShoppingCart) => {
-        // console.log('edit pitanja i updateQuestionCheckout', { question });
-
         this.$store.dispatch(
           setShoppingCartCheckout({ shoppingCart: newShoppingCart })
         );
@@ -166,34 +160,40 @@ export class QuestionnaireComponent implements OnInit {
           this.shoppingCart,
           newQuestion.product_id
         );
-        const additionalData: AdditionalData = JSON.parse(
+        const additionalData = JSON.parse(
           JSON.stringify(lineItem.product.additional_data)
         );
 
-        let sectionQuestions = additionalData.questions[newQuestion.section];
-        sectionQuestions = sectionQuestions.map((q) => {
-          q.images = q.id === newQuestion.id ? newQuestion.images : q.images;
-          q.section = newQuestion.section;
-          return q;
-        });
+        const newQuestions: Question[] = JSON.parse(
+          JSON.stringify(this.questions)
+        )
+          .filter((q) => q.product_id === lineItem.product.id)
+          .map((q) => {
+            return q.id === newQuestion.id ? { ...newQuestion } : { ...q };
+          });
 
         const productVM: ProductVM = {
           shopping_cart_id: this.shoppingCart.id,
           product_id: newQuestion.product_id,
           line_item_id: lineItem.id,
+          additional_data: {
+            ...lineItem.additional_data,
+            questions: newQuestions.map((q) => new QuestionDTO(q)),
+          },
           quantity: 1,
-          additional_data: additionalData,
         };
+
+        console.log('Q - upload', { productVM });
 
         this.checkoutService
           .updateProduct(productVM)
           .toPromise()
           .then((newShoppingCart) => {
-            console.log({ newShoppingCart });
-
             this.$store.dispatch(
               setShoppingCartCheckout({ shoppingCart: newShoppingCart })
             );
+            console.log('Pogledaj state');
+
             this.$store.dispatch(
               updateQuestionCheckout({ question: { ...newQuestion } })
             );

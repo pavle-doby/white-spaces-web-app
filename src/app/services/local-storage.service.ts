@@ -28,15 +28,6 @@ export class LocalStorageService {
 
   private constructor() {}
 
-  public clearCheckoutState(): void {
-    this.AddOnList = [];
-    this.FloorPlan = null;
-    this.Package = null;
-    this.Questions = [];
-    this.ShoppingCart = null;
-    this.SpacePhotosUrls = [];
-  }
-
   public static get Instance(): LocalStorageService {
     return this._instance ?? (this._instance = new LocalStorageService());
   }
