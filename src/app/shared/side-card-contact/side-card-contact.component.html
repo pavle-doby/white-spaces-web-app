@@ -3,7 +3,7 @@
   fxLayoutAlign="center center"
   fxLayoutGap=".52vw"
   fxHide.lt-md
-  *ngIf="!(this.isHandset$ | async)"
+  *ngIf="!this.isHandset"
 >
   <div fxFlex="17"></div>
   <div
@@ -104,7 +104,7 @@
   <div fxFlex="17"></div>
 </div>
 <div
-  *ngIf="this.isHandset$ | async"
+  *ngIf="this.isHandset"
   class="sc-contact--lt-md container__padding--lt-md"
   fxLayout="column"
   fxLayoutAlign="start center"

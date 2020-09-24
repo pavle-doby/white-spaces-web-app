@@ -36,3 +36,5 @@ Marka Jovanovica 20 duzi deo
 
 * Sacuvaj da je korisnik u registracji i redirektuj ga na Login
 * Neki bug sa update-ovanjm question-a
+
+Neko ne poklapanje u id-ijevima.... 

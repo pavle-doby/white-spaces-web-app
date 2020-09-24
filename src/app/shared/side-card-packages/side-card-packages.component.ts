@@ -12,9 +12,9 @@ import {
 import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
-import { LoginParam } from 'src/app/app.config';
+import { BREAKING_POINT_PX, LoginParam } from 'src/app/app.config';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
-import { convertQuestionsDTOListToQuestionsList } from '../Utilities';
+import { convertQuestionsDTOListToQuestionsList, getClientWidthPX } from '../Utilities';
 import { async } from '@angular/core/testing';
 import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
 import { Observable } from 'rxjs';
@@ -32,6 +32,7 @@ export class SideCardPackagesComponent implements OnInit {
   public checkoutState$: Observable<CheckoutState>;
   public selectedPackageBox$: Observable<PackagesBox>;
   public everyPackageIncludes: string[] = EVERY_PACKAGE_INCLUDES;
+  public isHandset: boolean;
 
   constructor(
     private readonly $store: Store<AppState>,
@@ -45,6 +46,8 @@ export class SideCardPackagesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isHandset = BREAKING_POINT_PX > getClientWidthPX();
+    
     this.CheckOutService.getAllPackages().subscribe(async (allPackages) => {
       LocalStorageService.Instance.PackageCategroyId = allPackages?.length
         ? allPackages[0].category_id

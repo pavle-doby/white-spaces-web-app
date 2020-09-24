@@ -1,119 +1,127 @@
-<div
-  class="height-100 sc-packages"
-  fxLayout="row"
-  fxLayout.lt-md="column"
-  fxLayoutAlign="start center"
-  fxLayoutGap=".52vw"
-  fxLayoutGap.lt-md="0"
-  appGradient
->
-  <div fxFlex="12"></div>
+<ng-template #sideCardPackages>
   <div
-    [ngClass.lt-md]="{
-      'sc-packages__content--lt-md': true,
-      'container__padding--lt-md': true
-    }"
-    fxLayout="column"
+    class="height-100 sc-packages"
+    fxLayout="row"
+    fxLayout.lt-md="column"
     fxLayoutAlign="start center"
-    fxLayoutGap="3%"
-    fxLayoutGap.lt-md="30px"
-    fxFlex
+    fxLayoutGap=".52vw"
+    fxLayoutGap.lt-md="0"
   >
+    <div fxFlex="12"></div>
     <div
-      class="sc-packages__header"
+      [ngClass.lt-md]="{
+        'sc-packages__content--lt-md': true,
+        'container__padding--lt-md': true
+      }"
       fxLayout="column"
       fxLayoutAlign="start center"
-      fxLayoutGap=".46vw"
-      fxLayoutGap.lt-md="15px"
+      fxLayoutGap="3%"
+      fxLayoutGap.lt-md="30px"
+      fxFlex
     >
-      <span
-        class="sc-packages__title app__text-shadow"
-        [ngClass.lt-md]="{ 'sc-packages__title--lt-md': true }"
+      <div
+        class="sc-packages__header"
+        fxLayout="column"
+        fxLayoutAlign="start center"
+        fxLayoutGap=".46vw"
+        fxLayoutGap.lt-md="15px"
       >
-        FIND THE RIGHT PACKAGE
-      </span>
-      <span
-        class="sc-packages__subtitle-decs"
-        [ngClass.lt-md]="{ 'sc-packages__subtitle-decs--lt-md': true }"
-      >
-        We specialize in <b>APARTMENT AND LOFT</b> renovation projects and our
-        core packages are based on the size of your place.
-      </span>
-      <span
-        class="sc-packages__subtitle"
-        [ngClass.lt-md]="{ 'sc-packages__subtitle--lt-md': true }"
-      >
-        TELL US, HOW BIG IS YOUR PLACE?
-      </span>
-    </div>
-    <div
-      class="sc-pakages__body"
-      fxLayout="row"
-      fxLayoutAlign="space-between center"
-      fxLayoutGap="1.041vw"
-      fxLayout.lt-md="column"
-      fxLayoutGap.lt-md="20px"
-    >
-      <app-side-card-packages-box
-        *ngFor="let package of this.packages"
-        [isSelected]="package.box?.id === (selectedPackageBox$ | async)?.id"
-        [package]="package"
-        (selectEvent)="this.onSelectEvent($event)"
-        (continueEvent)="this.onContinueEvent()"
-      >
-      </app-side-card-packages-box>
-    </div>
-    <div
-      class="packages-out-box__description"
-      fxLayout="column"
-      fxLayoutAlign="start center"
-      fxLayoutGap="0.5vh"
-      fxLayoutGap.lt-md="15px"
-      [ngClass.lt-md]="{ 'packages-out-box__description--lt-md': true }"
-    >
-      <div>
-        All packages provide <b>professional architectural</b> solutions based
-        on the space potential and your needs.
+        <span
+          class="sc-packages__title app__text-shadow"
+          [ngClass.lt-md]="{ 'sc-packages__title--lt-md': true }"
+        >
+          FIND THE RIGHT PACKAGE
+        </span>
+        <span
+          class="sc-packages__subtitle-decs"
+          [ngClass.lt-md]="{ 'sc-packages__subtitle-decs--lt-md': true }"
+        >
+          We specialize in <b>APARTMENT AND LOFT</b> renovation projects and our
+          core packages are based on the size of your place.
+        </span>
+        <span
+          class="sc-packages__subtitle"
+          [ngClass.lt-md]="{ 'sc-packages__subtitle--lt-md': true }"
+        >
+          TELL US, HOW BIG IS YOUR PLACE?
+        </span>
       </div>
       <div
-        class="packages-out-box__desc--imp"
-        [ngClass.lt-md]="{ 'packages-out-box__desc--imp-lt-md': true }"
+        class="sc-pakages__body"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+        fxLayoutGap="1.041vw"
+        fxLayout.lt-md="column"
+        fxLayoutGap.lt-md="20px"
       >
-        EVERY PACKAGE INCLUDES:
-      </div>
-      <div>
-        The original floor plan drawing // New redesigned floor plan // A
-        furniture layout plan //
-      </div>
-      <div>
-        Redesigned floor plan with detailed measurements // A floor plan wirh
-        furniture dimensions //
-      </div>
-      <div>A demolition and reconstruction plan // Project description</div>
-      <div
-        class="packages-out-box__desc--imp"
-        [ngClass.lt-md]="{ 'packages-out-box__desc--imp-lt-md': true }"
-      >
-        + BONUS ITEMS
-      </div>
-      <div>
-        In total, you will get <b>8 different files</b> within our basic package
-        (add-ons not included).
-      </div>
-      <div>
-        <i>The basic package covers the expenses for AutoCAD files, too.</i>
+        <app-side-card-packages-box
+          *ngFor="let package of this.packages"
+          [isSelected]="package.box?.id === (selectedPackageBox$ | async)?.id"
+          [package]="package"
+          (selectEvent)="this.onSelectEvent($event)"
+          (continueEvent)="this.onContinueEvent()"
+        >
+        </app-side-card-packages-box>
       </div>
       <div
-        class="packages-out-box__desc--imp"
-        [ngClass.lt-md]="{ 'packages-out-box__desc--imp-lt-md': true }"
+        class="packages-out-box__description"
+        fxLayout="column"
+        fxLayoutAlign="start center"
+        fxLayoutGap="0.5vh"
+        fxLayoutGap.lt-md="15px"
+        [ngClass.lt-md]="{ 'packages-out-box__description--lt-md': true }"
       >
-        HOW LONG DOES IT TAKE?
-      </div>
-      <div>
-        From the moment you place an order and confirm payment, it takes
-        <b>10-16 business days</b> to deliver the final project.
+        <div>
+          All packages provide <b>professional architectural</b> solutions based
+          on the space potential and your needs.
+        </div>
+        <div
+          class="packages-out-box__desc--imp"
+          [ngClass.lt-md]="{ 'packages-out-box__desc--imp-lt-md': true }"
+        >
+          EVERY PACKAGE INCLUDES:
+        </div>
+        <div>
+          The original floor plan drawing // New redesigned floor plan // A
+          furniture layout plan //
+        </div>
+        <div>
+          Redesigned floor plan with detailed measurements // A floor plan wirh
+          furniture dimensions //
+        </div>
+        <div>A demolition and reconstruction plan // Project description</div>
+        <div
+          class="packages-out-box__desc--imp"
+          [ngClass.lt-md]="{ 'packages-out-box__desc--imp-lt-md': true }"
+        >
+          + BONUS ITEMS
+        </div>
+        <div>
+          In total, you will get <b>8 different files</b> within our basic
+          package (add-ons not included).
+        </div>
+        <div>
+          <i>The basic package covers the expenses for AutoCAD files, too.</i>
+        </div>
+        <div
+          class="packages-out-box__desc--imp"
+          [ngClass.lt-md]="{ 'packages-out-box__desc--imp-lt-md': true }"
+        >
+          HOW LONG DOES IT TAKE?
+        </div>
+        <div>
+          From the moment you place an order and confirm payment, it takes
+          <b>10-16 business days</b> to deliver the final project.
+        </div>
       </div>
     </div>
+    <div fxFlex="10"></div>
   </div>
-  <div fxFlex="10"></div>
+</ng-template>
+
+<div *ngIf="this.isHandset" appGradient>
+  <ng-container *ngTemplateOutlet="sideCardPackages"></ng-container>
+</div>
+<div *ngIf="!this.isHandset">
+  <ng-container *ngTemplateOutlet="sideCardPackages"></ng-container>
 </div>

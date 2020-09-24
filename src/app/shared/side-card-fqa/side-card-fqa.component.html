@@ -1,40 +1,48 @@
-<div
-  appGradient
-  class="sc-fqa__container"
-  fxLayout="row"
-  fxLayoutAlign="start start"
-  fxLayoutGap="3.125vw"
->
+<ng-template #sideCardFQA>
   <div
-    class="sc-fqa__nav"
-    fxLayout="column"
-    fxLayoutAlign="start end"
-    fxLayoutGap="1.041vw"
+    class="sc-fqa__container"
+    fxLayout="row"
+    fxLayoutAlign="start start"
+    fxLayoutGap="3.125vw"
   >
     <div
-      *ngFor="let label of this.navLabels"
-      class="sc-fqa__nav-label cursor-pointer"
-      [ngClass]="{
-        'sc-fqa__nav-label--selected': label === this.selectedNavLabel
-      }"
-      (click)="this.selectContent(label)"
+      class="sc-fqa__nav"
+      fxLayout="column"
+      fxLayoutAlign="start end"
+      fxLayoutGap="1.041vw"
     >
-      {{ label }}
+      <div
+        *ngFor="let label of this.navLabels"
+        class="sc-fqa__nav-label cursor-pointer"
+        [ngClass]="{
+          'sc-fqa__nav-label--selected': label === this.selectedNavLabel
+        }"
+        (click)="this.selectContent(label)"
+      >
+        {{ label }}
+      </div>
+    </div>
+    <div
+      class="sc-fqa__content"
+      fxLayout="column"
+      fxLayoutAlign="start start"
+      fxLayoutGap=".52vw"
+    >
+      <app-opening-label
+        *ngFor="let content of this.contentList; index as i"
+        [label]="content.label"
+        [description]="content.description"
+        [toShowDescription]="content.isOpen"
+        [toShowOnClick]="this.isHandset"
+        (stateChangesEvent)="this.onStatusChange($event, i)"
+      ></app-opening-label>
     </div>
   </div>
-  <div
-    class="sc-fqa__content"
-    fxLayout="column"
-    fxLayoutAlign="start start"
-    fxLayoutGap=".52vw"
-  >
-    <app-opening-label
-      *ngFor="let content of this.contentList; index as i"
-      [label]="content.label"
-      [description]="content.description"
-      [toShowDescription]="content.isOpen"
-      [toShowOnClick]="this.isHandset$ | async"
-      (stateChangesEvent)="this.onStatusChange($event, i)"
-    ></app-opening-label>
-  </div>
+</ng-template>
+
+<div *ngIf="this.isHandset" appGradient>
+  <ng-container *ngTemplateOutlet="sideCardFQA"></ng-container>
+</div>
+<div *ngIf="!this.isHandset">
+  <ng-container *ngTemplateOutlet="sideCardFQA"></ng-container>
 </div>

@@ -75,3 +75,11 @@ export const isQuestionFullyAnswerd = (question: Question): boolean => {
     (question.image_required ? !!question.images?.length : true)
   );
 };
+
+export const getClientWidthPX = (): number => {
+  return Math.max(
+    document.documentElement.clientWidth || 0,
+    window.innerWidth || 0
+  );
+};
+

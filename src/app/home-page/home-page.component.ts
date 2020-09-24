@@ -9,6 +9,7 @@ import {
 import { map, shareReplay, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store';
+import { MEDIA_QUERY_WIDTH } from '../app.config';
 
 @Component({
   selector: 'app-home-page',
@@ -39,7 +40,7 @@ export class HomePageComponent implements OnInit {
       this.window.document.body.style.width = '100vw';
       this.isMobile = true;
     }
-    this.matcher = this.mediaMatcher.matchMedia('(max-width: 959px)');
+    this.matcher = this.mediaMatcher.matchMedia(MEDIA_QUERY_WIDTH);
     this.matcher.addListener((event) => {
       console.log(event.matches);
       this.window.document.body.style.width = event.matches ? '100vw' : '500vw';
