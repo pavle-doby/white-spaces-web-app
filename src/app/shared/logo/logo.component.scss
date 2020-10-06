@@ -1,6 +1,19 @@
 .logo__img {
   width: 16vw;
+  transition: all 0.25s ease-in-out;
   @media only screen and(max-width:959px) {
     width: 150px;
+    filter: invert(99%) sepia(99%) saturate(3%) hue-rotate(123deg)
+      brightness(106%) contrast(100%);
+  }
+  &--fixed {
+    position: fixed;
+    top: 5vh;
+    left: 5vw;
+    transform: scale(0.75, 0.75);
+  }
+  &--normal {
+    position: relative;
+    top: -5vh;
   }
 }

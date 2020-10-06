@@ -12,8 +12,6 @@ export class BlogPageComponent implements OnInit {
   public ready: boolean = false;
   constructor(private window: Window, private adminService: AdminService) {
     this.window.document.body.style.width = 'auto';
-    //this.window.document.body.style.overflowY = 'scroll';
-
     this.adminService.getAllBlogs().subscribe((res) => {
       console.log(res);
 
@@ -23,7 +21,7 @@ export class BlogPageComponent implements OnInit {
           id: element.id,
           title: element.additional_data.blog_title,
           text: element.text,
-          date: element.creation_date,
+          date: new Date(element.creation_date).toLocaleDateString(),
         };
         let orientation = index % 2 === 0;
         if (orientation)

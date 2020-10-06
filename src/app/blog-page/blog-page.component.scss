@@ -1,4 +1,9 @@
 .blog-page {
   padding: 4vw;
   height: 95vh;
+  @media only screen and(max-width:959px) {
+    height: auto;
+    justify-content: center;
+    margin: 30px 0px;
+  }
 }
