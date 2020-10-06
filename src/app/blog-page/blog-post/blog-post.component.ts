@@ -28,7 +28,6 @@ export class BlogPostComponent implements OnInit, OnDestroy {
     this.matcher = this.mediaMatcher.matchMedia(MEDIA_QUERY_WIDTH);
     this.matcher.addListener((event) => {
       this.isMobile = event.matches;
-      console.log(event.matches);
     });
   }
 

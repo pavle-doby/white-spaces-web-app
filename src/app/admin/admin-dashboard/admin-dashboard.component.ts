@@ -23,7 +23,6 @@ export class AdminDashboardComponent {
     private router: Router,
     private authService: AuthService
   ) {
-    console.log(this.router);
     this.router.navigate(['admin/orders']);
   }
 

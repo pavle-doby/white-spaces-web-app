@@ -2,11 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import {
-  AdminOrdersDataSource,
-  AdminOrdersItem,
-  ORDERS_MOCK,
-} from './admin-orders-datasource';
+import { AdminOrdersDataSource } from './admin-orders-datasource';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminOrderDialogComponent } from './admin-order-dialog/admin-order-dialog.component';
 import { AdminService } from 'src/app/services/admin.service';
@@ -41,8 +37,8 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
         return {
           id: element.id,
           customer: '',
-          date: element.datetime,
-          orderValue: element.line_items[0].price,
+          date: new Date(element.datetime).toLocaleString(),
+          orderValue: '€' + element.line_items[0].price,
           status: element.state,
           onProject: '',
           orderDetails: element.line_items[0],
@@ -54,21 +50,7 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
       this.table.dataSource = this.dataSource;
     });
   }
-  ngOnInit() {
-    const data = ORDERS_MOCK.map((element) => {
-      return {
-        id: element.id,
-        customer: '',
-        date: new Date(element.datetime).toLocaleString(),
-        orderValue: '€' + element.line_items[0].price,
-        status: element.state,
-        onProject: '',
-        orderDetails: element.line_items[0],
-      };
-    });
-    console.log(data);
-    this.dataSource = new AdminOrdersDataSource(data);
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
@@ -77,8 +59,6 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
   }
 
   public openDialog(order: any): void {
-    console.log(order);
-
     const dialogRef = this.dialog.open(AdminOrderDialogComponent, {
       data: order,
     });

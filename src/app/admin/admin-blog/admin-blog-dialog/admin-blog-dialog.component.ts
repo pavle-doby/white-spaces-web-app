@@ -83,9 +83,7 @@ export class AdminBlogDialogComponent implements OnInit {
     this.selectedAdmin = value;
   }
   //{{HOST}}/api/file/upload
-  public onReady($event) {
-    console.log($event, 'lmao');
-  }
+  public onReady($event) {}
   public save() {
     this.dialogRef.close({
       html: this.editorData,

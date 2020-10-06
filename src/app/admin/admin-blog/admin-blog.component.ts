@@ -29,7 +29,6 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
     private route: ActivatedRoute
   ) {
     this.adminService.getAllBlogs().subscribe((res) => {
-      console.log(res);
       res = [...res];
 
       const data = res.map((element) => {
@@ -54,8 +53,6 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
   ngAfterViewInit() {}
 
   public openDialog(order?: any): void {
-    console.log(order);
-
     const dialogRef = this.dialog.open(AdminBlogDialogComponent, {
       data: order,
       width: '40vw',
@@ -65,7 +62,6 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
         .editBlog(order.id, result.html, result.creator, result.title)
         .subscribe((res) => {
           this.reload();
-          console.log(res);
         });
     });
   }
@@ -86,7 +82,6 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
         .postBlog(result.html, result.creator, result.title)
         .subscribe((res) => {
           this.reload();
-          console.log(res);
         });
     });
   }

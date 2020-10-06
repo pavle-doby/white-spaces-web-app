@@ -24,7 +24,6 @@ export class AdminCustomersComponent implements AfterViewInit, OnInit {
 
   constructor(private adminService: AdminService) {
     this.adminService.getAllCustomers().subscribe((res) => {
-      console.log(res);
       res = [...res];
       const data = res.map((element) => {
         return {
