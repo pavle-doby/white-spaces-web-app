@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store';
 
 @Component({
   selector: 'app-admin-login',
@@ -16,9 +18,9 @@ export class AdminLoginComponent implements OnInit {
   private returnUrl: string;
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private readonly store: Store<AppState>,
+    private readonly router: Router
   ) {}
   ngOnInit() {
     this.form = this.fb.group({
@@ -34,6 +36,15 @@ export class AdminLoginComponent implements OnInit {
         const username = this.form.get('username').value;
         const password = this.form.get('password').value;
         await this.authService.login(username, password);
+        this.store
+          .select((state) => state.user.user.role)
+          .subscribe((res) => {
+            if (res !== 'admin') {
+              this.loginInvalid = true;
+            } else {
+              this.router.navigate(['admin/orders']);
+            }
+          });
       } catch (err) {
         this.loginInvalid = true;
       }

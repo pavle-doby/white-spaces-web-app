@@ -13,17 +13,34 @@ export class ParallaxDirective {
   startLeft: number;
   ratio: number = 0;
   scroll: any;
+  currentDelta: number = 0;
 
   constructor(private element: ElementRef) {
     if (this.screenWidth >= 959) {
-      this.element.nativeElement.style.transitionDuration = '.5s';
+      this.element.nativeElement.style.transitionDuration = '.33s';
       this.scroll = fromEvent<any>(window, 'wheel')
-        .pipe(debounce(() => interval(100)))
+        .pipe(debounce(() => interval(50)))
         .subscribe((event) => {
+          if (window.scrollX > this.startLeft - this.screenWidth / 2) {
+            if (!this.currentDelta) {
+              this.currentDelta = event.wheelDelta;
+            } else if (
+              (this.currentDelta > 0 && event.wheelDelta > 0) ||
+              (this.currentDelta < 0 && event.wheelDelta < 0)
+            ) {
+              this.currentDelta += event.wheelDelta;
+            } else {
+              this.element.nativeElement.style.transform = `translateX(${0}px)`;
+              this.currentDelta = event.wheelDelta;
+            }
+          }
           this.startLeft = this.element.nativeElement.offsetLeft;
-          if (window.scrollX > this.startLeft - this.screenWidth / 2)
-            this.element.nativeElement.style.transform = `translateX(${event.wheelDelta}px)`;
+          if (window.scrollX > this.startLeft - this.screenWidth / 2.5)
+            this.element.nativeElement.style.transform = `translateX(${
+              -this.currentDelta / 10
+            }px)`;
         });
     }
+    return;
   }
 }

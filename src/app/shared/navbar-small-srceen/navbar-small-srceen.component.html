@@ -22,7 +22,9 @@
         (click)="drawer.toggle()"
         *ngIf="isHandset$ | async"
       >
-        <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
+        <mat-icon class="navbar-toggle" aria-label="Side nav toggle icon"
+          >close</mat-icon
+        >
       </button>
     </div>
 
@@ -58,7 +60,9 @@
           (click)="drawer.toggle()"
           *ngIf="isHandset$ | async"
         >
-          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          <mat-icon class="navbar-toggle" aria-label="Side nav toggle icon"
+            >menu</mat-icon
+          >
         </button>
       </div>
     </mat-toolbar>

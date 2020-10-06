@@ -7,9 +7,27 @@
   h3 {
     font-weight: 500;
     font-size: 1.25vw;
+    @media only screen and(max-width:969px) {
+      font-size: 20px;
+    }
   }
   p {
     font-weight: 300;
     line-height: 1.302vw;
+    @media only screen and(max-width:969px) {
+      font-size: 14px;
+      line-height: 20px;
+      margin-bottom: 15px;
+    }
+  }
+  @media only screen and(max-width:969px) {
+    width: 40vw;
+  }
+
+  .blog-post__date {
+    font-size: 0.8vw;
+    @media only screen and(max-width:969px) {
+      font-size: 16px;
+    }
   }
 }
