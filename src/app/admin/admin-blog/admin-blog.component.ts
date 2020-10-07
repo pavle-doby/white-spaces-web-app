@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AdminBlogDialogComponent } from './admin-blog-dialog/admin-blog-dialog.component';
 import { AdminService } from 'src/app/services/admin.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-blog',
@@ -60,7 +61,10 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.adminService
         .editBlog(order.id, result.html, result.creator, result.title)
-        .subscribe((res) => {
+        .pipe(first())
+        .subscribe(() => {
+          console.log('reload edit');
+
           this.reload();
         });
     });
@@ -80,7 +84,10 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.adminService
         .postBlog(result.html, result.creator, result.title)
-        .subscribe((res) => {
+        .pipe(first())
+        .subscribe(() => {
+          console.log('reload');
+
           this.reload();
         });
     });
