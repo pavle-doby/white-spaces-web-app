@@ -58,8 +58,8 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
     const dialogRef = this.dialog.open(AdminOrderDialogComponent, {
       data: order,
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+    dialogRef.afterClosed().subscribe(() => {
+      window.location.reload();
     });
   }
 }
