@@ -1306,7 +1306,17 @@ export class AdminOrdersDataSource extends DataSource<AdminOrdersItem> {
         case 'name':
           return compare(a.customer, b.customer, isAsc);
         case 'id':
-          return compare(+a.id, +b.id, isAsc);
+          return compare(a.id, b.id, isAsc);
+        case 'date':
+          return compare(+a.date, +b.date, isAsc);
+        case 'orderValue':
+          return compare(a.orderValue, b.orderValue, isAsc);
+        case 'status':
+          return compare(+a.status, +b.status, isAsc);
+        case 'onProject':
+          return compare(+a.onProject, +b.onProject, isAsc);
+        case 'orderDetails':
+          return compare(+a.orderDetails, +b.orderDetails, isAsc);
         default:
           return 0;
       }

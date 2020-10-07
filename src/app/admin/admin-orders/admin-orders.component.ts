@@ -52,11 +52,7 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
   }
   ngOnInit() {}
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
-  }
+  ngAfterViewInit() {}
 
   public openDialog(order: any): void {
     const dialogRef = this.dialog.open(AdminOrderDialogComponent, {

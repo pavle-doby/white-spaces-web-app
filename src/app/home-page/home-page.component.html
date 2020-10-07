@@ -12,16 +12,20 @@
   <app-works></app-works>
   <app-you-get></app-you-get>
 </div>
+<div></div>
 <img
   fxHide.lt-md
   src="assets/images/home/we.png"
   class="home-page__img home-page__img--we"
+  appParallax
+  [ratio]="this.parallaxRatio"
 />
 
 <img
   fxHide.lt-md
   src="assets/images/home/how.png"
   appParallax
+  [ratio]="this.parallaxRatio"
   class="home-page__img home-page__img--how"
 />
 
@@ -29,5 +33,6 @@
   fxHide.lt-md
   src="assets/images/home/what.png"
   appParallax
+  [ratio]="this.parallaxRatio"
   class="home-page__img home-page__img--what"
 />

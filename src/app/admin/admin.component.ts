@@ -12,7 +12,7 @@ export class AdminComponent implements OnInit {
     this.window.document.body.style.width = '100vw';
     this.window.document.body.style.overflowY = 'scroll';
     this.authService.isAuthenticated.subscribe(
-      (isLoggedIn) => (this.isLoggedIn = isLoggedIn)
+      (isLoggedIn) => (this.isLoggedIn = isLoggedIn && this.authService.isAdmin)
     );
   }
 

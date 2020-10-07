@@ -41,8 +41,5 @@ export class AdminCustomersComponent implements AfterViewInit, OnInit {
   }
   ngOnInit() {}
 
-  ngAfterViewInit() {
-    // console.log(this.table.dataSource);
-    // this.table.dataSource = this.dataSource;
-  }
+  ngAfterViewInit() {}
 }
