@@ -23,7 +23,7 @@ export class AdminDashboardComponent {
     private router: Router,
     private authService: AuthService
   ) {
-    this.router.navigate(['admin/orders']);
+    if (this.router.url === '/admin') this.router.navigate(['admin/orders']);
   }
 
   public get headerName() {

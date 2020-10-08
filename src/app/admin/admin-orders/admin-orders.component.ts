@@ -6,6 +6,7 @@ import { AdminOrdersDataSource } from './admin-orders-datasource';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminOrderDialogComponent } from './admin-order-dialog/admin-order-dialog.component';
 import { AdminService } from 'src/app/services/admin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-orders',
@@ -30,7 +31,11 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
   ];
   public data: any;
 
-  constructor(public dialog: MatDialog, private adminService: AdminService) {
+  constructor(
+    public dialog: MatDialog,
+    private adminService: AdminService,
+    private router: Router
+  ) {
     this.adminService.getAllOrders().subscribe((res) => {
       res = [...res];
       const data = res.map((element) => {
@@ -59,7 +64,12 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
       data: order,
     });
     dialogRef.afterClosed().subscribe(() => {
-      window.location.reload();
+      this.reload('/admin/orders');
     });
+  }
+
+  async reload(url: string): Promise<boolean> {
+    await this.router.navigateByUrl('/', { skipLocationChange: true });
+    return this.router.navigateByUrl(url);
   }
 }
