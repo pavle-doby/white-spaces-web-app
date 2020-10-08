@@ -5,6 +5,12 @@
   fxLayoutGap="3vw"
   *ngIf="this.ready"
 >
+  <app-logo
+    fxLayout="row"
+    fxHide.lt-md
+    fxLayoutAlign="center center"
+  ></app-logo>
+
   <div
     fxLayout="row"
     fxLayout.lt-md="column"

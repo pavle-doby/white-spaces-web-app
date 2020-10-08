@@ -24,11 +24,13 @@ export class LogoComponent implements OnInit {
   isMobile: boolean = false;
   viewPort: number;
   isFixed: boolean = false;
+  isMainPage: boolean = true;
   @ViewChild('logo') logoRef: ElementRef;
   constructor(
     private readonly router: Router,
     private mediaMatcher: MediaMatcher
   ) {
+    this.isMainPage = this.router.url === '/' || this.router.url === '/home';
     this.matcher = this.mediaMatcher.matchMedia(MEDIA_QUERY_WIDTH);
     this.matcher.addListener((event) => {
       this.isMobile = event.matches;
@@ -48,6 +50,8 @@ export class LogoComponent implements OnInit {
   ngOnInit(): void {}
 
   public goHome(): void {
-    this.router.navigateByUrl(`/${MainRouterPaths.HOME}`);
+    !this.isMainPage
+      ? this.router.navigateByUrl(`/${MainRouterPaths.HOME}`)
+      : window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
   }
 }
