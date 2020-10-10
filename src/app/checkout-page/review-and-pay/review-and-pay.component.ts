@@ -25,6 +25,7 @@ import { TabbarText } from 'src/models/TabbarText.model';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
+import { CheckoutPaths } from '../checkout-paths';
 
 @Component({
   selector: 'app-review-and-pay',
@@ -203,16 +204,7 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
           .then((res) => {
             LocalStorageService.Instance.storage.clear();
             this.$store.dispatch(setInitStateChekcout({}));
-            this.router.navigateByUrl(`/${MainRouterPaths.HOME}`);
-            const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-              width: CONFIRMATION_DIALOG_WIDTH,
-              disableClose: true,
-              data: new ConfirmationDialogData({
-                titleLabel: 'Information dialog',
-                message: `Congratulations! U made your order successfully! :D`,
-                type: ConfirmationDialogType.INFO,
-              }),
-            });
+            this.router.navigateByUrl(`/${CheckoutPaths.THANK_YOU}`);
           })
           .catch((err) => {
             console.error(err);

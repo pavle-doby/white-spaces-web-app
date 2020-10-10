@@ -9,17 +9,9 @@ import { ReviewAndPayComponent } from './review-and-pay/review-and-pay.component
 import { AddOnListComponent } from './add-on-list/add-on-list.component';
 import { TabbarText } from 'src/models/TabbarText.model';
 import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
+import { CheckoutPaths } from './checkout-paths';
 
 export const CHECKOUT_ROUTER_OUTLET = 'checkoutSteps';
-
-export enum CheckoutPaths {
-  FLOOR_PLAN = 'floor-plan',
-  SPACE_PHOTOS = 'space-photos',
-  ADD_ON_LIST = 'add-on-list',
-  QUESTIONNARIE = 'questionnarie',
-  REVIEW_AND_PAY = 'review-and-pay',
-  THANK_YOU = 'thank-you',
-}
 
 //Changing order of this Map will change order of tabbar display
 export const CHECKOUT_PATHS_TO_LABEL_MAP = {
