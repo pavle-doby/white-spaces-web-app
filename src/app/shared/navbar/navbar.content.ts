@@ -1,15 +1,15 @@
 export enum NavbarButtons {
   CONTACT = 'CONTACT',
-  BLOG = 'BLOG',
   ABOUT = 'ABOUT',
+  BLOG = 'BLOG',
   FQAS = "FQA'S",
   PACKAGES = 'PACKAGES',
 }
 
 export const NavbarButtonsArray = [
   NavbarButtons.CONTACT,
-  NavbarButtons.BLOG,
   NavbarButtons.ABOUT,
+  NavbarButtons.BLOG,
   NavbarButtons.FQAS,
   NavbarButtons.PACKAGES,
 ];

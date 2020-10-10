@@ -8,6 +8,7 @@ import { SpacePhotosComponent } from './space-photos/space-photos.component';
 import { ReviewAndPayComponent } from './review-and-pay/review-and-pay.component';
 import { AddOnListComponent } from './add-on-list/add-on-list.component';
 import { TabbarText } from 'src/models/TabbarText.model';
+import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
 
 export const CHECKOUT_ROUTER_OUTLET = 'checkoutSteps';
 
@@ -17,6 +18,7 @@ export enum CheckoutPaths {
   ADD_ON_LIST = 'add-on-list',
   QUESTIONNARIE = 'questionnarie',
   REVIEW_AND_PAY = 'review-and-pay',
+  THANK_YOU = 'thank-you',
 }
 
 //Changing order of this Map will change order of tabbar display
@@ -59,6 +61,10 @@ const routes: Routes = [
     path: CheckoutPaths.REVIEW_AND_PAY,
     component: ReviewAndPayComponent,
     outlet: CHECKOUT_ROUTER_OUTLET,
+  },
+  {
+    path: CheckoutPaths.THANK_YOU,
+    component: ThankYouPageComponent,
   },
 ];
 
