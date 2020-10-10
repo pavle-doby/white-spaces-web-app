@@ -3,4 +3,9 @@
   src="assets/images/home/logo.png"
   alt="Website Logo"
   (click)="this.goHome()"
+  #logo
+  [ngClass]="{
+    'logo__img--fixed': this.isFixed,
+    'logo__img--normal': !this.isFixed
+  }"
 />

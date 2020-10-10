@@ -13,6 +13,7 @@ export class BlogDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data
   ) {
     this.data = data;
+    console.log(this.data);
   }
 
   ngOnInit(): void {}

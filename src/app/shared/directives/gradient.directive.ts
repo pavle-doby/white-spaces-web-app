@@ -4,6 +4,7 @@ import {
   HostListener,
   Renderer2,
   Input,
+  OnInit,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
@@ -14,7 +15,7 @@ import { DOCUMENT } from '@angular/common';
     { provide: Document, useValue: document },
   ],
 })
-export class GradientDirective {
+export class GradientDirective implements OnInit {
   @Input() calculateByHeight: boolean = false;
   @Input() letters: boolean = true;
   private documentWidth: number; //ceo width gradient 0 do 1
@@ -33,12 +34,15 @@ export class GradientDirective {
     this.innerWidth = this.window.innerWidth;
     this.documentWidth =
       this.window.document.body.offsetWidth - this.window.innerWidth;
-    this.window.scrollBy(1, 0);
+    this.window.scroll();
     this.pageXOffset = this.window.pageXOffset;
     this.currentPosition = this.pageXOffset + this.window.innerWidth;
-    this.calculateRelativeGradient();
   }
 
+  ngOnInit() {
+    this.window.scrollBy(1, 1);
+    this.calculateRelativeGradient();
+  }
   @HostListener('window:scroll', ['$event'])
   onWindowScroll($event) {
     this.pageXOffset = this.window.pageXOffset;

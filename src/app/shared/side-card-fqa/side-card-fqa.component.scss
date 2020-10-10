@@ -4,6 +4,14 @@
     min-height: 100vh;
     color: white;
   }
+  &--big-faq {
+    position: absolute;
+    left: 40%;
+    top: 60%;
+    font-size: 16vw;
+    font-weight: 800;
+    opacity: 0.15;
+  }
 }
 
 .sc-fqa__nav-label {

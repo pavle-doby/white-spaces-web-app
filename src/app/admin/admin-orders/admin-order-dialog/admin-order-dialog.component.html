@@ -27,7 +27,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Status</mat-label>
         <mat-select (selectionChange)="this.handleSelect($event.value)">
-          <mat-option *ngFor="let status of statusArray" [value]="status.value" >
+          <mat-option *ngFor="let status of statusArray" [value]="status.value">
             {{ status.viewValue }}
           </mat-option>
         </mat-select>
@@ -93,6 +93,7 @@
                   *ngFor="let img of question.images"
                   src="{{ img }}"
                   alt=""
+                  class="admin-orders__img"
                 />
               </div>
             </div>

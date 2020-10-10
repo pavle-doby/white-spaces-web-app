@@ -45,3 +45,10 @@
   // border: none;
   // border: 1px solid transparent;
 }
+
+.navbar-toggle {
+  @media only screen and(max-width:959px) {
+    fill: white !important;
+    color: white;
+  }
+}

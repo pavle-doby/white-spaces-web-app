@@ -6,6 +6,7 @@ import { AdminBlogDataSource, AdminBlogItem } from './admin-blog-datasource';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminBlogDialogComponent } from './admin-blog-dialog/admin-blog-dialog.component';
 import { AdminService } from 'src/app/services/admin.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-admin-blog',
@@ -21,7 +22,12 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'topic', 'date', 'viewBlog'];
 
-  constructor(public dialog: MatDialog, private adminService: AdminService) {
+  constructor(
+    public dialog: MatDialog,
+    private adminService: AdminService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.adminService.getAllBlogs().subscribe((res) => {
       console.log(res);
       res = [...res];
@@ -57,8 +63,17 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.adminService
         .editBlog(order.id, result.html, result.creator, result.title)
-        .subscribe((res) => console.log(res));
+        .subscribe((res) => {
+          this.reload();
+          console.log(res);
+        });
     });
+  }
+
+  private reload(): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['./'], { relativeTo: this.route });
   }
 
   public createBlogDialog(): void {
@@ -69,7 +84,10 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.adminService
         .postBlog(result.html, result.creator, result.title)
-        .subscribe((res) => console.log(res));
+        .subscribe((res) => {
+          this.reload();
+          console.log(res);
+        });
     });
   }
 }

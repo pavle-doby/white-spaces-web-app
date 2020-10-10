@@ -24,6 +24,7 @@ export class AdminDashboardComponent {
     private authService: AuthService
   ) {
     console.log(this.router);
+    this.router.navigate(['admin/orders']);
   }
 
   public get headerName() {
@@ -40,5 +41,6 @@ export class AdminDashboardComponent {
 
   public logOut(): void {
     this.authService.logout();
+    this.router.navigate(['/admin']);
   }
 }

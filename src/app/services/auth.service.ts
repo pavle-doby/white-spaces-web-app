@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { UserVM, AppUser } from 'src/models/User.model';
+import { UserVM, AppUser, UserRole } from 'src/models/User.model';
 import { API_URL } from '../app.config';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store';
@@ -15,7 +15,8 @@ import { setUser } from '../store/actions/user.actions';
   providedIn: 'root',
 })
 export class AuthService {
-  public isAuthenticated = new BehaviorSubject<boolean>(true); //set for true for testing purposes
+  public isAuthenticated = new BehaviorSubject<boolean>(false); //set for true for testing purposes
+  public isAdmin: boolean = false;
   constructor(
     private readonly router: Router,
     private readonly http: HttpClient,
@@ -25,7 +26,7 @@ export class AuthService {
       (res) => {
         this.isAuthenticated.next(true);
       },
-      (error) => this.isAuthenticated.next(true)
+      (error) => this.isAuthenticated.next(false)
     );
   }
 
@@ -50,6 +51,7 @@ export class AuthService {
       .subscribe(
         (res) => {
           const userInfo = (res as any).user_info as AppUser;
+          this.isAdmin = userInfo.role === 'admin';
           this.store.dispatch(setUser({ user: userInfo }));
           return this.isAuthenticated.next(true);
         },
@@ -71,6 +73,7 @@ export class AuthService {
 
   public logout() {
     this.isAuthenticated.next(false);
+    this.isAdmin = false;
   }
 
   public registerUser(

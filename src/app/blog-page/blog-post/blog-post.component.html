@@ -3,10 +3,17 @@
   fxLayout="column"
   fxLayoutAlign="center stretch"
   fxLayoutGap=".78125vw"
+  fxLayoutGap.lt-md="15px"
 >
-  <h3>
-    {{ this.title }}
-  </h3>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <h3>
+      {{ this.title }}
+    </h3>
+    <span class="blog-post__date">
+      {{ this.date }}
+    </span>
+  </div>
+
   <p>
     {{ this.textPlaceholder }}
   </p>

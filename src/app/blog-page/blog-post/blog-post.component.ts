@@ -3,6 +3,8 @@ import { BLOG_POST_MAX_TEXT_LENGTH } from './blog-post.config';
 import { MatDialog } from '@angular/material/dialog';
 import { BlogDialogComponent } from '../blog-dialog/blog-dialog.component';
 import { Subscription } from 'rxjs';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { MEDIA_QUERY_WIDTH } from 'src/app/app.config';
 
 @Component({
   selector: 'app-blog-post',
@@ -11,13 +13,24 @@ import { Subscription } from 'rxjs';
 })
 export class BlogPostComponent implements OnInit, OnDestroy {
   @Input() title: string = 'test';
-  @Input() text: string =
-    'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam recusandae dolores libero perspiciatis iusto quod quasi optio repudiandae aspernatur fugiat necessitatibus velit nobis, autem facilis.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam recusandae dolores libero perspiciatis iusto quod quasi optio repudiandae aspernatur fugiat necessitatibus velit nobis, autem facilis.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam recusandae dolores libero perspiciatis iusto quod quasi optio repudiandae aspernatur fugiat necessitatibus velit nobis, autem facilis.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam recusandae dolores libero perspiciatis iusto quod quasi optio repudiandae aspernatur fugiat necessitatibus velit nobis, autem facilis.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam recusandae dolores libero perspiciatis iusto quod quasi optio repudiandae aspernatur fugiat necessitatibus velit nobis, autem facilis.';
-  @Input() attachment: string = '';
+  @Input() text: string = '';
+  @Input() date: string = '';
+  matcher: MediaQueryList;
+  isMobile: boolean = false;
 
   private $subOpenDialog: Subscription;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    private window: Window,
+    public dialog: MatDialog,
+    private mediaMatcher: MediaMatcher
+  ) {
+    this.matcher = this.mediaMatcher.matchMedia(MEDIA_QUERY_WIDTH);
+    this.matcher.addListener((event) => {
+      this.isMobile = event.matches;
+      console.log(event.matches);
+    });
+  }
 
   ngOnInit(): void {}
 
@@ -39,7 +52,6 @@ export class BlogPostComponent implements OnInit, OnDestroy {
   public openDialog(): void {
     const dialogRef = this.dialog.open(BlogDialogComponent, {
       data: { title: this.title, text: this.text },
-      width: '40vw',
     });
 
     this.$subOpenDialog = dialogRef.afterClosed().subscribe((result) => {
