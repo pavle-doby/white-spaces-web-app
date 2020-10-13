@@ -8,11 +8,6 @@
   fxLayoutGap.lt-md="15px"
 >
   <span class="image-description--number">{{ this.number }}</span>
-  <img
-    width="100px"
-    height="100px"
-    src="{{ this.image }}"
-    alt="{{ this.description }}"
-  />
+  <img width="65px" height="65px" [src]="this.image" [alt]="this.description" />
   <span class="image-description--description">{{ this.description }}</span>
 </div>
