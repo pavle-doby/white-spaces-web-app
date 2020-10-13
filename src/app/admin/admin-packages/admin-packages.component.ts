@@ -25,7 +25,6 @@ export class AdminPackagesComponent implements OnInit {
 
   constructor(private adminService: AdminService) {
     this.adminService.getAllPackages().subscribe((res) => {
-      console.log(res);
       this.packages = res;
       this.questionnaireRooms = Object.getOwnPropertyNames(
         this.packages[0].additional_data.questions
@@ -43,7 +42,6 @@ export class AdminPackagesComponent implements OnInit {
       });
     });
     this.adminService.getAllAddons().subscribe((res) => {
-      console.log(res);
       this.addOns = res;
     });
   }

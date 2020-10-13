@@ -6,7 +6,7 @@ import { AdminBlogDataSource, AdminBlogItem } from './admin-blog-datasource';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminBlogDialogComponent } from './admin-blog-dialog/admin-blog-dialog.component';
 import { AdminService } from 'src/app/services/admin.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-blog',
@@ -25,11 +25,9 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
   constructor(
     public dialog: MatDialog,
     private adminService: AdminService,
-    private router: Router,
-    private route: ActivatedRoute
+    public router: Router
   ) {
     this.adminService.getAllBlogs().subscribe((res) => {
-      console.log(res);
       res = [...res];
 
       const data = res.map((element) => {
@@ -54,8 +52,6 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
   ngAfterViewInit() {}
 
   public openDialog(order?: any): void {
-    console.log(order);
-
     const dialogRef = this.dialog.open(AdminBlogDialogComponent, {
       data: order,
       width: '40vw',
@@ -63,17 +59,10 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.adminService
         .editBlog(order.id, result.html, result.creator, result.title)
-        .subscribe((res) => {
-          this.reload();
-          console.log(res);
+        .subscribe(() => {
+          this.reload('/admin/blog');
         });
     });
-  }
-
-  private reload(): void {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['./'], { relativeTo: this.route });
   }
 
   public createBlogDialog(): void {
@@ -84,10 +73,14 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.adminService
         .postBlog(result.html, result.creator, result.title)
-        .subscribe((res) => {
-          this.reload();
-          console.log(res);
+        .subscribe(() => {
+          this.reload('/admin/blog');
         });
     });
+  }
+
+  async reload(url: string): Promise<boolean> {
+    await this.router.navigateByUrl('/', { skipLocationChange: true });
+    return this.router.navigateByUrl(url);
   }
 }

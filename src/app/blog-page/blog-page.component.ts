@@ -13,8 +13,6 @@ export class BlogPageComponent implements OnInit {
   constructor(private window: Window, private adminService: AdminService) {
     this.window.document.body.style.width = 'auto';
     this.adminService.getAllBlogs().subscribe((res) => {
-      console.log(res);
-
       const data = [...res];
       data.forEach((element, index) => {
         let elementData = {
@@ -29,7 +27,6 @@ export class BlogPageComponent implements OnInit {
         else this.bottomBlogPosts = [...this.bottomBlogPosts, elementData];
       });
       this.ready = true;
-      console.log(this.topBlogPosts, this.bottomBlogPosts);
     });
   }
 

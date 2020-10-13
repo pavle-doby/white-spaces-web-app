@@ -6,7 +6,7 @@ import { debounce } from 'rxjs/operators';
   selector: '[appParallax]',
 })
 export class ParallaxDirective {
-  @Input('ratio') parallaxRatio: number = 50;
+  @Input('ratio') parallaxRatio: number = 12;
   currentLeft: number;
   previousScrollX: number;
   screenWidth: number = window.innerWidth;
@@ -35,9 +35,9 @@ export class ParallaxDirective {
             }
           }
           this.startLeft = this.element.nativeElement.offsetLeft;
-          if (window.scrollX > this.startLeft - this.screenWidth / 2.5)
+          if (window.scrollX > this.startLeft - this.screenWidth / 2)
             this.element.nativeElement.style.transform = `translateX(${
-              -this.currentDelta / 10
+              -this.currentDelta / this.parallaxRatio
             }px)`;
         });
     }

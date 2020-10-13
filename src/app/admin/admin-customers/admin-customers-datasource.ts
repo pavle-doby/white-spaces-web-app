@@ -141,10 +141,12 @@ export class AdminCustomersDataSource extends DataSource<AdminCustomersItem> {
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
-        case 'name':
-          return compare(a.customerName, b.customerName, isAsc);
-        case 'id':
+        case 'customerName':
+          return compare(+a.customerName, +b.customerName, isAsc);
+        case 'customerId':
           return compare(+a.customerId, +b.customerId, isAsc);
+        case 'email':
+          return compare(+a.email, +b.email, isAsc);
         default:
           return 0;
       }

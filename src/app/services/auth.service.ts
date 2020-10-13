@@ -16,7 +16,7 @@ import { setUser } from '../store/actions/user.actions';
 })
 export class AuthService {
   public isAuthenticated = new BehaviorSubject<boolean>(false); //set for true for testing purposes
-  public isAdmin: boolean = false;
+  public isAdmin: boolean = localStorage.getItem('isAdmin') == 'true' || false;
   constructor(
     private readonly router: Router,
     private readonly http: HttpClient,
@@ -52,6 +52,7 @@ export class AuthService {
         (res) => {
           const userInfo = (res as any).user_info as AppUser;
           this.isAdmin = userInfo.role === 'admin';
+          localStorage.setItem('isAdmin', new Boolean(this.isAdmin).toString());
           this.store.dispatch(setUser({ user: userInfo }));
           return this.isAuthenticated.next(true);
         },
@@ -73,7 +74,7 @@ export class AuthService {
 
   public logout() {
     this.isAuthenticated.next(false);
-    this.isAdmin = false;
+    localStorage.setItem('isAdmin', 'false');
   }
 
   public registerUser(
