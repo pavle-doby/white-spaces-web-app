@@ -18,11 +18,11 @@ import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { TabbarText } from 'src/models/TabbarText.model';
 
-const INFO = `If you feel like you want more you can easily
-customise you package & add extra plans and drawings.`;
+const INFO = `Feel like you’re not getting enough? 
+Customize your package easily with extra plans and drawings.`;
 
-const INFO_DESC = `Please note that adding extra plans will require additional
-engagement and time for finishing project.`;
+const INFO_DESC = `Please note that adding an extra plan will require additional 
+engagement and time for finishing the project.`;
 
 @Component({
   selector: 'app-add-on-list',

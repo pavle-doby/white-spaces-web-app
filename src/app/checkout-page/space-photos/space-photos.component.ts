@@ -21,7 +21,7 @@ import { QuestionDTO } from 'src/models/QuestionDTO.model';
 const INFO = `Please upload photos of your space.`;
 
 const INFO_DESC_0 = `Take photos from as many different angles as possible.
-  Take photos in different periods during the day so that we can feel the space and light changes.`;
+Take photos in different periods during the day so that we can feel the light changes within the rooms.`;
 
 export const SUPPERTED_FILES = '.jpg, .jpeg, .png ';
 

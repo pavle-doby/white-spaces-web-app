@@ -26,6 +26,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { CheckoutPaths } from '../checkout-paths';
+import { firstToUpperCase } from 'src/app/shared/Utilities';
 
 @Component({
   selector: 'app-review-and-pay',
@@ -52,6 +53,7 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
   public address: string;
   public email: string;
   public iAgreeToTerms: boolean = false;
+  public iAgreeToDesign: boolean = false;
 
   public isFullNameValid$: Subject<string>;
   public isAddressValid$: Subject<string>;
@@ -115,14 +117,15 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
     });
 
     this.subUser = this.user$.subscribe((user) => {
-      const firstName = user.first_name;
+      const lastName = firstToUpperCase(user.last_name);
+      const firstName = firstToUpperCase(user.first_name);
       const firstNameLength = user.first_name.length;
       const firstNameLabel =
         firstName[firstNameLength - 1] === ' '
           ? firstName.slice(0, firstNameLength - 1)
           : firstName;
 
-      this.fullName = `${user.first_name} ${user.last_name}`;
+      this.fullName = `${firstName} ${lastName}`;
       this.email = user.email;
       this.address = user.address;
 
@@ -130,7 +133,7 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
         new InfoPrice({ info: `${firstNameLabel}'s apartment renovation` }),
       ];
       this.customerInfo.infoPriceList = [
-        new InfoPrice({ info: `${user.first_name} ${user.last_name}` }),
+        new InfoPrice({ info: `${firstName} ${lastName}` }),
       ];
     });
 
@@ -139,7 +142,7 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
 
       this.packageInfo.infoPriceList = [
         new InfoPrice({
-          info: checkoutState.packageBox.name,
+          info: firstToUpperCase(checkoutState.packageBox.name),
           price: checkoutState.packageBox.price,
         }),
       ];

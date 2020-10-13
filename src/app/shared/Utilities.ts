@@ -84,3 +84,7 @@ export const getClientWidthPX = (): number => {
     window.innerWidth || 0
   );
 };
+
+export const firstToUpperCase = (str: string): string => {
+  return str.slice(0, 1).toUpperCase() + str.slice(1).toLowerCase();
+};

@@ -39,7 +39,7 @@
         class="login__input-label"
         [ngClass]="{ 'login__input-label--error': !this.isLastNameValid }"
       >
-        Surname*
+        Last Name*
         {{ !this.isLastNameValid ? this.requiredErorrMessage : "" }}
       </span>
       <input
@@ -72,7 +72,7 @@
       class="login__input-label"
       [ngClass]="{ 'login__input-label--error': !this.isEmailValid }"
     >
-      E-Mail*
+      E-mail*
       {{ !this.isEmailValid ? this.requiredErorrMessage : "" }}
     </span>
     <input
@@ -125,6 +125,6 @@
     />
   </div>
   <button class="checkout__btn" (click)="this.submitRegistration()">
-    Confirm
+    Register 
   </button>
 </div>
