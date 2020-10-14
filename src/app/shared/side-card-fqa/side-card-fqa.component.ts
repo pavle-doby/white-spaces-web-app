@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FQAContentObj, FQALabels } from './FQA';
 import { OpeningLabel } from '../opening-label/OpeningLabel';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { BREAKING_POINT_PX } from 'src/app/app.config';
 import { getClientWidthPX } from '../Utilities';
 

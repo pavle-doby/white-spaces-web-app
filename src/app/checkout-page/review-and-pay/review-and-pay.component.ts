@@ -70,6 +70,7 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
   public requiredErorrMessage: string = 'required';
 
   private dialogSub: Subscription;
+  private dialogInvoiceSub: Subscription;
 
   constructor(
     private readonly $store: Store<AppState>,
@@ -177,6 +178,7 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.dialogSub) this.dialogSub.unsubscribe();
+    if (this.dialogInvoiceSub) this.dialogInvoiceSub.unsubscribe();
 
     this.subChekout.unsubscribe();
     this.subUser.unsubscribe();
@@ -207,7 +209,20 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
           .then((res) => {
             LocalStorageService.Instance.storage.clear();
             this.$store.dispatch(setInitStateChekcout({}));
-            this.router.navigateByUrl(`/${CheckoutPaths.THANK_YOU}`);
+            const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+              width: CONFIRMATION_DIALOG_WIDTH,
+              disableClose: true,
+              data: new ConfirmationDialogData({
+                titleLabel: 'Information dialog',
+                message: `The document with the invoice is on your way!
+                Please check your email!`,
+                type: ConfirmationDialogType.INFO,
+              }),
+            });
+
+            this.dialogInvoiceSub = dialogRef.afterClosed().subscribe(() => {
+              this.router.navigateByUrl(`/${CheckoutPaths.THANK_YOU}`);
+            });
           })
           .catch((err) => {
             console.error(err);

@@ -24,27 +24,27 @@ export interface IImageDescription {
 export const WORKS_IMAGE_DESCRIPTION: IImageDescription[] = [
   {
     number: 1,
-    description: 'Upload \n floor plan',
+    description: '//UPLOAD \n FLOOR PLAN',
     image: 'assets/images/home/uploadFloorPlan.png',
   },
   {
     number: 2,
-    description: 'Upload \n photos',
+    description: '//UPLOAD \n PHOTOS',
     image: 'assets/images/home/uploadPhotos.png',
   },
   {
     number: 3,
-    description: 'Add \n ons',
+    description: '//OPTIONAL \n ADD-ONS',
     image: 'assets/images/home/addOns.png',
   },
   {
     number: 4,
-    description: 'Fill out \n questionnaire',
+    description: '//FILL OUT THE \n QUESTIONNAIRE',
     image: 'assets/images/home/fillOutQuestionaire.png',
   },
   {
     number: 5,
-    description: 'Review \n & pay',
+    description: '//REVIEW & \n PAY',
     image: 'assets/images/home/reviewPay.png',
   },
 ];

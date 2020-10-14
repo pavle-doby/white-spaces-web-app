@@ -24,11 +24,15 @@
     fxLayout.lt-md="column"
     fxLayoutAlign="space-around center"
     fxLayoutAlign.lt-md="start start"
-    fxLayoutGap="2vw"
+    fxLayoutGap=".5vw"
     fxLayoutGap.lt-md="15px"
   >
-    <div *ngFor="let imageDescription of this.imageDescriptionArray">
+    <div
+      class="works__image-desc"
+      *ngFor="let imageDescription of this.imageDescriptionArray"
+    >
       <app-image-description
+        class="width-100"
         [image]="imageDescription.image"
         [number]="imageDescription.number"
         [description]="imageDescription.description"
