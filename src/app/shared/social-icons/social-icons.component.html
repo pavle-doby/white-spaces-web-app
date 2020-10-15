@@ -1,4 +1,8 @@
-<div fxLayout="row" fxLayoutAlign="start center" class="social-icons">
+<div
+  [ngClass]="{ 'social-icons--white': this.whiteIcons }"
+  fxLayout="row"
+  fxLayoutAlign="start center"
+>
   <a href="/">
     <img
       src="assets/icons/social media/facebook-icon.svg"

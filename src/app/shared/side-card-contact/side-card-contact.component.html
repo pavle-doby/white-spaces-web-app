@@ -5,11 +5,11 @@
   fxHide.lt-md
   *ngIf="!this.isHandset"
 >
-  <div fxFlex="17"></div>
+  <div fxFlex="12"></div>
   <div
     fxLayout="column"
     fxLayoutAlign="space-between center"
-    fxLayoutGap=".52vw"
+    fxLayoutGap=".12vw"
   >
     <div fxLayout="row" fxLayoutAlign="start center" fxFill>
       <span class="sc-contact__title app__text-shadow"> CONTACT US </span>
@@ -117,32 +117,41 @@
       </div>
       <!-- Our info -->
       <div
-        class="sc-contact__info"
+        class="sc-contact__info width-100"
         fxLayout="column"
         fxLayoutAlign="start start"
         fxLayoutGap="2.2vh"
       >
         <span class="sc-contact__logo">Logo</span>
-        <span class="sc-contact__name app__text-shadow"
-          >White Spaces Redesign</span
-        >
         <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap=".1vw">
-          <span class="sc-contact__location">Pantelejska 25</span>
-          <span class="sc-contact__location">18000 Niš</span>
-          <span class="sc-contact__location">Serbia</span>
+          <span class="sc-contact__name app__text-shadow">
+            White Space Renovation
+          </span>
+          <span class="sc-contact__location"> Architectural Studio </span>
+          <span class="sc-contact__location"> Serbia</span>
         </div>
-        <span class="sc-contact__number">+381 63 123-456</span>
 
         <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap=".1vw">
-          <span class="sc-contact__msg"
-            >We would like to conntect with you</span
-          >
-          <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap=".26vw">
-            <span>PI</span>
-            <span>LI</span>
-            <span>FB</span>
-            <span>IG</span>
-          </div>
+          <span class="sc-contact__location">
+            TIN (Tax identification number): 112124944
+          </span>
+          <span class="sc-contact__location">
+            CRN (Company registration number): 65890810
+          </span>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap=".1vw">
+          <span class="sc-contact__location">
+            You can contact us via Viber or WhatsApp
+          </span>
+          <span class="sc-contact__location"> +381694044114 </span>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap=".1vw">
+          <span class="sc-contact__msg">
+            We would love to connect with you
+          </span>
+          <app-social-icons [whiteIcons]="true"></app-social-icons>
         </div>
       </div>
     </div>
@@ -152,10 +161,10 @@
       fxLayoutAlign="space-between center"
     >
       <span>Privacy Policy // Terms of service</span>
-      <span>Copyright 2020 © White Space Redesign</span>
+      <span>White Space Renovation c 2020. All Rights Reserved.</span>
     </div>
   </div>
-  <div fxFlex="17"></div>
+  <div fxFlex="12"></div>
 </div>
 <div
   *ngIf="this.isHandset"
@@ -266,30 +275,38 @@
     fxLayoutAlign="start start"
     fxLayoutGap="15px"
   >
-    <div class="sc-contact__name--lt-md app__text-shadow">
-      White Spaces Redesign
-    </div>
-
     <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
-      <div class="sc-contact__info--lt-md">Pantelejska 25</div>
-      <div class="sc-contact__info--lt-md">18000 Niš</div>
+      <div class="sc-contact__name--lt-md app__text-shadow">
+        White Space Renovation
+      </div>
+      <div class="sc-contact__info--lt-md">Architectural Studio</div>
       <div class="sc-contact__info--lt-md">Serbia</div>
     </div>
 
-    <div class="sc-contact__info--lt-md">+381 63 123-456</div>
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+      <div class="sc-contact__info--lt-md">
+        TIN (Tax identification number): 112124944
+      </div>
+      <div class="sc-contact__info--lt-md">
+        CRN (Company registration number): 65890810
+      </div>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+      <div class="sc-contact__info--lt-md">
+        You can contact us via Viber or WhatsApp
+      </div>
+      <div class="sc-contact__info--lt-md">+381694044114</div>
+    </div>
+
     <div class="sc-contact__info--lt-md">
       <div>We would love to connect with you</div>
-      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-        <span>PI</span>
-        <span>LI</span>
-        <span>FB</span>
-        <span>ING</span>
-      </div>
+      <app-social-icons [whiteIcons]="true"></app-social-icons>
     </div>
   </div>
 
   <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
     <div>Privacy Policy // Terms of Service</div>
-    <div>Copyright 2020 © White Space Redesign</div>
+    <div>White Space Renovation c 2020. All Rights Reserved.</div>
   </div>
 </div>

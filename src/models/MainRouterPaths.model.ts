@@ -7,4 +7,5 @@ export enum MainRouterPaths {
   FQAS = 'fqas',
   ABOUT = 'about',
   CONTACT = 'contact',
+  THANK_YOU = 'thankyou',
 }
