@@ -146,7 +146,7 @@ body {
 ::-webkit-scrollbar {
   width: 0.26vw;
   @media screen and (max-width: 960px) {
-    width: 6px;
+    width: 0px;
   }
 }
 
