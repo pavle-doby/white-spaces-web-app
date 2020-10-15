@@ -10,7 +10,7 @@
       class="login__input-label"
       [ngClass]="{ 'login__input-label--error': !this.isEmailValid }"
     >
-      E-Mail*
+      E-mail*
       {{ !this.isEmailValid ? this.requiredErorrMessage : "" }}
     </span>
     <input class="login__input" type="email" [(ngModel)]="this.email" />
@@ -27,5 +27,5 @@
     </span>
     <input class="login__input" type="password" [(ngModel)]="this.password" />
   </div>
-  <button class="checkout__btn" (click)="this.logInUser()">Confirm</button>
+  <button class="checkout__btn" (click)="this.logInUser()">Log in</button>
 </div>

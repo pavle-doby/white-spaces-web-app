@@ -20,11 +20,11 @@ import { TabbarText } from 'src/models/TabbarText.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
 
 const INFO = `Feel free to load us with information so that we
-can truly get to know both you and your space
-and extend its pontential to maximum.`;
+can truly get to know you and your space. 
+Tell us the details so we can extend its potential to the maximum.`;
 
-const INFO_DESC = `Note that providing us with lots of information will lead
-to complete understanding of your needs and 100% project success`;
+const INFO_DESC = `Your satisfaction with the end result has to do with the amount of information you share about your apartment with us. 
+You can ensure that your project is a resounding success by making us understand your needs!`;
 
 const IMAGE_IS_REQUIRED = 'Image is required.';
 

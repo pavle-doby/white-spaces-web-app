@@ -1,7 +1,5 @@
-import {
-  CheckoutPaths,
-  CHECKOUT_PATHS_TO_LABEL_MAP,
-} from 'src/app/checkout-page/checkout-page-routing.module';
+import { CHECKOUT_PATHS_TO_LABEL_MAP } from 'src/app/checkout-page/checkout-page-routing.module';
+import { CheckoutPaths } from 'src/app/checkout-page/checkout-paths';
 
 export class CheckoutStepsRouterLink {
   public static produce(

@@ -8,8 +8,8 @@
       <div class="review-pay__left-header">
         <h2>Order summary</h2>
         <span class="review-pay__title-desc">
-          Here is short summary of your order. You will receive full invoice via
-          mail after the purchase is complete.
+          Here is a short summary of your order. You will receive the full
+          invoice via email after the purchase is complete.
         </span>
       </div>
       <div
@@ -68,9 +68,9 @@
     >
       <div class="review-pay__right-header">
         <h2>Payment details</h2>
-        <span class="review-pay__title-desc">
+        <span class="review-pay__title-desc--white">
           Please note that the value of your order will be charged to your card
-          instantly
+          instantly.
         </span>
       </div>
       <div
@@ -157,13 +157,34 @@
             name="iAgreeToTerms"
             [(ngModel)]="this.iAgreeToTerms"
           />
-          <span> I agree to </span>
-          <a href="#"> Terms of Service</a>
+          <span>
+            I understand and will comply with the
+            <a href="#"> Terms of Service</a> and the
+            <a href="#"> Privacy Policy</a>
+          </span>
+        </div>
+        <div
+          fxLayout="row"
+          fxLayoutAlign="start start"
+          fxLayoutGap="timer_10px"
+        >
+          <input
+            type="checkbox"
+            name="iAgreeToTermsOfDesign"
+            [(ngModel)]="this.iAgreeToDesign"
+          />
+          <span>
+            I am informed and I understand that the final product is a design
+            project.
+          </span>
         </div>
         <button
           class="review-pay__btn"
-          [ngClass]="{ 'review-pay__btn--disabled': !this.iAgreeToTerms }"
-          [disabled]="!this.iAgreeToTerms"
+          [ngClass]="{
+            'review-pay__btn--disabled':
+              !this.iAgreeToTerms || !this.iAgreeToDesign
+          }"
+          [disabled]="!this.iAgreeToTerms || !this.iAgreeToDesign"
           appGradient
           (click)="this.createOrder()"
         >

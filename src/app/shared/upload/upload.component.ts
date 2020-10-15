@@ -43,10 +43,11 @@ export class UploadComponent implements OnInit, OnDestroy {
 
     this.data.info =
       this.data.info ??
-      `Make sure that file is in any of the following formats\n ${this.data.supportedFileTypes}`;
+      `Make sure that the file is in the following formats\n ${this.data.supportedFileTypes}`;
 
     this.data.bottomInfo =
-      this.data.bottomInfo ?? `You can upload: ${this.data.limit}`;
+      this.data.bottomInfo ??
+      `The limit is ${this.data.limit} photo${this.data.limit > 1 ? 's' : ''}`;
   }
 
   ngAfterViewInit(): void {

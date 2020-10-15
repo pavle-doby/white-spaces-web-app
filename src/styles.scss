@@ -77,8 +77,11 @@ body {
 }
 
 .app__btn {
-  width: calc(#{$navbar-width} * 0.2);
+  min-width: calc(#{$navbar-width} * 0.2);
   height: $btn-height;
+
+  background-color: transparent;
+  color: white;
 
   border: 0.5px solid white;
 
@@ -91,6 +94,12 @@ body {
   &:active {
     border-style: none;
   }
+}
+
+.app__btn--invert {
+  @extend .app__btn;
+  color: black;
+  border: 0.5px solid black;
 }
 
 .basic__btn {
@@ -193,4 +202,9 @@ body {
   &:visited {
     text-decoration: none;
   }
+}
+
+.label--error {
+  color: red;
+  transition: all 1s ease;
 }

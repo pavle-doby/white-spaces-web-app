@@ -15,11 +15,11 @@ import { FloorPlan } from 'src/models/FloorPlan.model';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { TabbarText } from 'src/models/TabbarText.model';
-import { formatQuestionDictToList } from 'src/app/shared/Utilities';
 import { Question } from 'src/models/Question.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
+import { firstToUpperCase } from 'src/app/shared/Utilities';
 
-const INFO = 'Welcome to your renovation project!';
+const INFO = 'welcome to your renovation project!';
 
 @Component({
   selector: 'app-floor-paln-upload',
@@ -34,6 +34,9 @@ export class FloorPalnUploadComponent implements OnInit {
   public $chekcoutState: Observable<CheckoutState>;
   public subChekcoutState: Subscription;
 
+  public $userName: Observable<string>;
+  public subUserName: Subscription;
+
   public shoppingCart: ShoppingCart;
   public questions: Question[];
 
@@ -45,11 +48,15 @@ export class FloorPalnUploadComponent implements OnInit {
     this.$store.dispatch(
       selectTabbarButtonCheckout({ btnText: TabbarText.FLOOR_PLAN })
     );
+
     this.$chekcoutState = this.$store.select((state) => state.checkout);
+    this.$userName = this.$store.select(
+      (state) => state.user?.user?.first_name
+    );
 
     this.uploadData = new UploadData({
       limit: 1,
-      message: 'Please upload your existing floor plan',
+      message: 'Please upload your existing floor plan.',
     });
     this.successMsg = 'You successfully uploaded your file!';
   }
@@ -58,6 +65,12 @@ export class FloorPalnUploadComponent implements OnInit {
     this.subChekcoutState = this.$chekcoutState.subscribe((ckState) => {
       this.shoppingCart = ckState.shoppingCart;
       this.questions = ckState.questions;
+    });
+    this.subUserName = this.$userName.subscribe((name) => {
+      const _name = firstToUpperCase(name);
+      this.$store.dispatch(
+        setInfoCheckout({ info: `${_name}, ${INFO}`, description: [] })
+      );
     });
   }
 

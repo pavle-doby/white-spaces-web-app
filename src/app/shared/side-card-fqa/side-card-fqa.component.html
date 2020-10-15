@@ -10,6 +10,7 @@
       fxLayout="column"
       fxLayoutAlign="start end"
       fxLayoutGap="1.041vw"
+      fxFlex="15%"
     >
       <div
         *ngFor="let label of this.navLabels"
@@ -25,17 +26,27 @@
     <div
       class="sc-fqa__content"
       fxLayout="column"
-      fxLayoutAlign="start start"
+      fxLayoutAlign="space-between start"
       fxLayoutGap=".52vw"
+      fxFlex
     >
-      <app-opening-label
-        *ngFor="let content of this.contentList; index as i"
-        [label]="content.label"
-        [description]="content.description"
-        [toShowDescription]="content.isOpen"
-        [toShowOnClick]="this.isHandset"
-        (stateChangesEvent)="this.onStatusChange($event, i)"
-      ></app-opening-label>
+      <div
+        class="width-100"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap=".52px"
+      >
+        <app-opening-label
+          class="width-100"
+          *ngFor="let content of this.contentList; index as i"
+          [label]="content.label"
+          [description]="content.description"
+          [toShowDescription]="content.isOpen"
+          [toShowOnClick]="this.isHandset"
+          (stateChangesEvent)="this.onStatusChange($event, i)"
+        ></app-opening-label>
+      </div>
+      <span>Still need help? Contact us via hi@whitespacerenovation.com</span>
     </div>
   </div>
   <div *ngIf="!this.isHandset" class="sc-fqa__container--big-faq">FAQ's</div>
