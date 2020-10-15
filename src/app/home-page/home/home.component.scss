@@ -6,7 +6,7 @@
   display: block;
   position: relative;
 
-  &--human {
+  &--personal {
     animation: fadeIn ease-in 0.5s forwards;
     -webkit-animation: fadeIn ease-in 0.5s forwards;
     opacity: 0;
@@ -26,25 +26,21 @@
     -webkit-animation-delay: 1s;
     opacity: 0;
   }
-  &--private {
-    animation: fadeIn ease-in 0.5s forwards;
-    -webkit-animation: fadeIn ease-in 0.5s forwards;
-    animation-delay: 1.5s;
-    -webkit-animation-delay: 1.5s;
-    opacity: 0;
+  @media only screen and (max-width: 959px) {
+    height: 100vh;
   }
 }
 
 .home__container::after {
   content: "";
-  background: url("https://whitespace-client-files.s3.amazonaws.com/HomeBackground.040ce4df01ac9dc4caaa5bf1f6a4-3a3e-428d-9403-2c4f7cb214a4.png")
-    no-repeat center;
-  background-size: 50%;
-  opacity: 0.1;
-  top: 5vh;
+  background: url("../../../assets/images/home/HomeBackground.png") no-repeat
+    center;
+  background-size: 35%;
+  opacity: 0.75;
+  top: 25vh;
   left: 0;
   bottom: 0;
-  right: 0;
+  right: 4vw;
   position: absolute;
   z-index: -1;
   @media only screen and (max-width: 959px) {
@@ -57,13 +53,12 @@
 //     <span class="home__container--balanced">Balanced.</span>
 //     <span class="home__container--private">Private.</span>
 .home__slogan-container {
-  margin-top: 25vh;
-  margin-bottom: 20vh;
-  line-height: 2.35vw;
+  padding-bottom: 55vh;
+  line-height: 2vw;
 
   > span {
-    font-size: 1.4vw;
-    letter-spacing: 0.1vw;
+    font-size: 1.2vw;
+    letter-spacing: 0.2vw;
 
     @media only screen and(max-width:959px) {
       font-size: 25px;
@@ -74,9 +69,8 @@
 }
 
 .home__logo {
-  width: 15%;
+  width: 13%;
   display: block;
-  margin-bottom: 1.565vw;
   margin-top: 3.125vw;
   @media only screen and(max-width:959px) {
     width: auto;
