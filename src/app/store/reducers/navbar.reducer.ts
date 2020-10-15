@@ -7,7 +7,7 @@ export interface NavbarState {
 }
 
 const initState: NavbarState = {
-  selectedButton: null,
+  selectedButton: NavbarButtons.ABOUT,
 };
 
 const reducer = createReducer(
