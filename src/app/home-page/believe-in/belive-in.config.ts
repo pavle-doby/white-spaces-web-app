@@ -15,33 +15,21 @@ further beautifying. `,
   new OpeningLabel(
     `funcionality`,
     `No matter the size of the space you own you deserve home that is
-  working for you and not against you. By this we mean that there is
-  no need to compromise between function and beauty. We will solve
-  functionality of your floor plan and give you base for all
-  further beautifying. `
+  working for you and not against you.`
   ),
   new OpeningLabel(
     `personal space`,
     `No matter the size of the space you own you deserve home that is
-  working for you and not against you. By this we mean that there is
-  no need to compromise between function and beauty. `
+  working for you and not against you. `
   ),
   new OpeningLabel(
     `balance`,
     `No matter the size of the space you own you deserve home that is
-  working for you and not against you. By this we mean that there is
-  no need to compromise between function and beauty. We will solve
-  functionality of your floor plan and give you base for all
-  further beautifying. `
+  working for you and not against you.`
   ),
   new OpeningLabel(
     `sustainability`,
     `No matter the size of the space you own you deserve home that is
-  working for you and not against you. By this we mean that there is
-  no need to compromise between function and beauty. We will solve
-  functionality of your floor plan and give you base for all
-  further beautifying.  We will solve
-  functionality of your floor plan and give you base for all
-  further beautifying. `
+  working for you and not against you. `
   ),
 ];
