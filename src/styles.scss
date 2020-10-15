@@ -203,3 +203,8 @@ body {
     text-decoration: none;
   }
 }
+
+.label--error {
+  color: red;
+  transition: all 1s ease;
+}

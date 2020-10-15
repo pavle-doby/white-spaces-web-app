@@ -29,12 +29,32 @@
           fxLayoutAlign="space-between center"
         >
           <div fxLayout="column" fxLayoutAlign="start start">
-            <span class="sc-contact__input-label">Name*</span>
-            <input class="sc-contact__grid-input" type="text" />
+            <span
+              class="sc-contact__input-label"
+              [ngClass]="{ 'label--error': !this.isNameValid }"
+            >
+              Name*
+            </span>
+            <input
+              class="sc-contact__grid-input"
+              type="text"
+              [(ngModel)]="this.name"
+              (input)="this.$isNameValid.next($event.target.value)"
+            />
           </div>
           <div fxLayout="column" fxLayoutAlign="start start">
-            <span class="sc-contact__input-label">City*</span>
-            <input class="sc-contact__grid-input" type="text" />
+            <span
+              class="sc-contact__input-label"
+              [ngClass]="{ 'label--error': !this.isCityValid }"
+            >
+              City*
+            </span>
+            <input
+              class="sc-contact__grid-input"
+              type="text"
+              [(ngModel)]="this.city"
+              (input)="this.$isCityValid.next($event.target.value)"
+            />
           </div>
         </div>
         <div
@@ -43,21 +63,55 @@
           fxLayoutAlign="space-between center"
         >
           <div fxLayout="column" fxLayoutAlign="start start">
-            <span class="sc-contact__input-label">Mail*</span>
-            <input class="sc-contact__grid-input" type="text" />
+            <span
+              class="sc-contact__input-label"
+              [ngClass]="{ 'label--error': !this.isMailValid }"
+            >
+              E-mail*
+            </span>
+            <input
+              class="sc-contact__grid-input"
+              type="email"
+              [(ngModel)]="this.mail"
+              (input)="this.$isMailValid.next($event.target.value)"
+            />
           </div>
           <div fxLayout="column" fxLayoutAlign="start start">
-            <span class="sc-contact__input-label">Phone*</span>
-            <input class="sc-contact__grid-input" type="text" />
+            <span
+              class="sc-contact__input-label"
+              [ngClass]="{ 'label--error': !this.isPhoneValid }"
+            >
+              Phone*
+            </span>
+            <input
+              class="sc-contact__grid-input"
+              type="text"
+              [(ngModel)]="this.phone"
+              (input)="this.$isPhoneValid.next($event.target.value)"
+            />
           </div>
         </div>
         <!-- first section (grid input) end -->
         <div fxLayout="column" fxLayoutAlign="start start">
-          <span class="sc-contact__input-label">Text*</span>
-          <textarea class="sc-contact__textarea" rows="6"></textarea>
+          <span
+            class="sc-contact__input-label"
+            [ngClass]="{ 'label--error': !this.isTextValid }"
+          >
+            Text*
+          </span>
+          <textarea
+            class="sc-contact__textarea"
+            rows="6"
+            [(ngModel)]="this.text"
+            (input)="this.$isTextValid.next($event.target.value)"
+          ></textarea>
         </div>
 
-        <button class="app__btn" fxLayoutAlign="center center">
+        <button
+          class="app__btn"
+          fxLayoutAlign="center center"
+          (click)="this.send()"
+        >
           <span>SEND</span>
         </button>
       </div>
@@ -120,31 +174,87 @@
     fxLayoutGap="15px"
   >
     <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
-      <label class="sc-contact__label--lt-md width-100" for="">Name*</label>
-      <input class="sc-contact__input--lt-md width-100" type="text" />
+      <label
+        class="sc-contact__label--lt-md width-100"
+        [ngClass]="{ 'label--error': !this.isNameValid }"
+        for=""
+      >
+        Name*
+      </label>
+      <input
+        class="sc-contact__input--lt-md width-100"
+        type="text"
+        [(ngModel)]="this.name"
+        (input)="this.$isNameValid.next($event.target.value)"
+      />
     </div>
     <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
-      <label class="sc-contact__label--lt-md width-100" for="">E-mail*</label>
-      <input class="sc-contact__input--lt-md width-100" type="text" />
+      <label
+        class="sc-contact__label--lt-md width-100"
+        for=""
+        [ngClass]="{ 'label--error': !this.isCityValid }"
+      >
+        City*
+      </label>
+      <input
+        class="sc-contact__input--lt-md width-100"
+        type="text"
+        [(ngModel)]="this.city"
+        (input)="this.$isCityValid.next($event.target.value)"
+      />
     </div>
     <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
-      <label class="sc-contact__label--lt-md width-100" for="">City*</label>
-      <input class="sc-contact__input--lt-md width-100" type="text" />
+      <label
+        class="sc-contact__label--lt-md width-100"
+        for=""
+        [ngClass]="{ 'label--error': !this.isMailValid }"
+      >
+        E-mail*
+      </label>
+      <input
+        class="sc-contact__input--lt-md width-100"
+        type="text"
+        [(ngModel)]="this.mail"
+        (input)="this.$isMailValid.next($event.target.value)"
+      />
     </div>
     <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
-      <label class="sc-contact__label--lt-md width-100" for="">Phone*</label>
-      <input class="sc-contact__input--lt-md width-100" type="text" />
+      <label
+        class="sc-contact__label--lt-md width-100"
+        for=""
+        [ngClass]="{ 'label--error': !this.isPhoneValid }"
+      >
+        Phone*
+      </label>
+      <input
+        class="sc-contact__input--lt-md width-100"
+        type="text"
+        [(ngModel)]="this.phone"
+        (input)="this.$isPhoneValid.next($event.target.value)"
+      />
     </div>
     <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
-      <label class="sc-contact__label--lt-md width-100" for="">Text*</label>
+      <label
+        class="sc-contact__label--lt-md width-100"
+        for=""
+        [ngClass]="{ 'label--error': !this.isTextValid }"
+      >
+        Text*
+      </label>
       <textarea
         class="sc-contact__input--lt-md width-100"
         name="text"
         rows="5"
+        [(ngModel)]="this.text"
+        (input)="this.$isTextValid.next($event.target.value)"
       ></textarea>
     </div>
     <div class="width-100" fxLayout="row" fxLayoutAlign="start start">
-      <button class="sc-contact__btn--lt-md" fxLayoutAlign="center center">
+      <button
+        class="sc-contact__btn--lt-md"
+        fxLayoutAlign="center center"
+        (click)="this.send()"
+      >
         <span>SEND</span>
       </button>
     </div>
