@@ -55,6 +55,11 @@ const routes: Routes = [
     path: MainRouterPaths.CONTACT,
     component: SideCardContactComponent,
   },
+  {
+    path: '**',
+    loadChildren: () =>
+      import('./home-page/home-page.module').then((m) => m.HomePageModule),
+  },
 ];
 
 @NgModule({

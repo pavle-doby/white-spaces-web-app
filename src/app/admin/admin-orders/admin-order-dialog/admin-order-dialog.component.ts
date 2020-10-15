@@ -13,7 +13,6 @@ export class AdminOrderDialogComponent implements OnInit {
     { value: 'approved', viewValue: 'In Progress' },
     { value: 'completed', viewValue: 'Finished' },
     { value: 'new', viewValue: 'New' },
-
   ];
 
   public onProjectMock: any = [
@@ -22,19 +21,19 @@ export class AdminOrderDialogComponent implements OnInit {
   ];
   constructor(
     private dialogRef: MatDialogRef<AdminOrderDialogComponent>,
-    private adminService:AdminService,
+    private adminService: AdminService,
     @Inject(MAT_DIALOG_DATA) data
   ) {
     this.data = data;
-    console.log(data);
   }
 
   ngOnInit(): void {}
 
-  public handleSelect(value){
-    console.log(value);
-    this.adminService.editOrder(this.data.id,0,value).subscribe((res)=>res,err=>console.error(err))
-  
+  public handleSelect(value) {
+    this.adminService.editOrder(this.data.id, 0, value).subscribe(
+      (res) => res,
+      (err) => console.error(err)
+    );
   }
   public save() {
     this.dialogRef.close(this.data);

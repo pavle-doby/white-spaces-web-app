@@ -117,7 +117,6 @@ export class AddOnListComponent implements OnInit {
         this.shoppingCart,
         addOn.id
       );
-      console.log('Addon id:', addOnLineItem.id);
 
       this.checkoutService
         .deleteProduct(addOnLineItem.id)
