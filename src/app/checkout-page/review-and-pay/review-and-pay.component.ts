@@ -221,7 +221,7 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
             });
 
             this.dialogInvoiceSub = dialogRef.afterClosed().subscribe(() => {
-              this.router.navigateByUrl(`/${CheckoutPaths.THANK_YOU}`);
+              this.router.navigateByUrl(`/${MainRouterPaths.THANK_YOU}`);
             });
           })
           .catch((err) => {

@@ -1,6 +1,13 @@
-.social-icons {
-  a {
-    text-decoration: none;
-    margin-right: 0.78125vw;
+@import "src/styles.scss";
+
+.social-icons--white {
+  img {
+    filter: invert(99%) sepia(99%) saturate(3%) hue-rotate(123deg)
+      brightness(106%) contrast(100%);
   }
+}
+
+a {
+  @extend .a__text-decoration--none;
+  margin-right: 0.78125vw;
 }

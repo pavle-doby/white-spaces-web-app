@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
+import { ThankYouPageComponent } from './checkout-page/thank-you-page/thank-you-page.component';
 import { SideCardAboutComponent } from './shared/side-card-about/side-card-about.component';
 import { SideCardContactComponent } from './shared/side-card-contact/side-card-contact.component';
 import { SideCardFqaComponent } from './shared/side-card-fqa/side-card-fqa.component';
@@ -54,6 +55,10 @@ const routes: Routes = [
   {
     path: MainRouterPaths.CONTACT,
     component: SideCardContactComponent,
+  },
+  {
+    path: MainRouterPaths.THANK_YOU,
+    component: ThankYouPageComponent,
   },
   {
     path: '**',

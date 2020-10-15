@@ -8,7 +8,6 @@ import { SpacePhotosComponent } from './space-photos/space-photos.component';
 import { ReviewAndPayComponent } from './review-and-pay/review-and-pay.component';
 import { AddOnListComponent } from './add-on-list/add-on-list.component';
 import { TabbarText } from 'src/models/TabbarText.model';
-import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
 import { CheckoutPaths } from './checkout-paths';
 
 export const CHECKOUT_ROUTER_OUTLET = 'checkoutSteps';
@@ -54,10 +53,7 @@ const routes: Routes = [
     component: ReviewAndPayComponent,
     outlet: CHECKOUT_ROUTER_OUTLET,
   },
-  {
-    path: CheckoutPaths.THANK_YOU,
-    component: ThankYouPageComponent,
-  },
+
 ];
 
 @NgModule({

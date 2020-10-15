@@ -2,7 +2,7 @@
   appGradient
   class="thank-you-page"
   fxLayout="column"
-  fxLayoutAlign="space-between center"
+  fxLayoutAlign="space-around center"
 >
   <app-logo></app-logo>
   <div fxLayout="column" fxLayoutAlign="start center">
@@ -29,9 +29,7 @@
       fxLayoutAlign="center center"
       fxLayoutGap="10px"
     >
-      <span>FB</span>
-      <span>P</span>
-      <span>Ins</span>
+      <app-social-icons [whiteIcons]="true"></app-social-icons>
     </div>
   </div>
 </div>
