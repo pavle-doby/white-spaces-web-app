@@ -2,7 +2,7 @@ export enum NavbarButtons {
   CONTACT = 'CONTACT',
   ABOUT = 'ABOUT',
   BLOG = 'BLOG',
-  FQAS = "FQA'S",
+  FQAS = "FAQ'S",
   PACKAGES = 'PACKAGES',
 }
 
