@@ -25,7 +25,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public navBtnsStateObj: Record<NavbarButtons, boolean>;
   public selectedButton: NavbarButtons;
 
+  
+  public readonly PACKAGES = NavbarButtons.PACKAGES;
   public readonly FQAS = NavbarButtons.FQAS;
+  public readonly BLOG = NavbarButtons.BLOG;
+  public readonly ABOUT = NavbarButtons.ABOUT;
+  public readonly CONTACT = NavbarButtons.CONTACT;
+
 
   constructor(
     private readonly router: Router,

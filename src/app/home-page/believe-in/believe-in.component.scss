@@ -2,6 +2,8 @@
 
 .belive-in__container {
   width: 65vw;
+  min-height: 400px;
+
   @media (max-width: 960px) {
     width: 80vw;
     padding-bottom: 20vw;
