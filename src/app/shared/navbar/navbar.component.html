@@ -1,3 +1,5 @@
+<ng-template #navButton> </ng-template>
+
 <div
   class="navbar__container"
   fxLayout="row"
@@ -6,17 +8,48 @@
 >
   <button
     appGradient
-    *ngFor="let navBtn of this.navbarButtonsArray"
     class="navbar__btn cursor-pointer"
-    [ngClass]="{
-      'navbar__button--inactive': navBtn !== this.selectedButton,
-      'navbar__button--active': navBtn === this.selectedButton
-    }"
-    fxLayoutAlign="center center"
-    (click)="this.onNavButtonClick(navBtn)"
+    (click)="this.onNavButtonClick(CONTACT)"
     [calculateByHeight]="true"
   >
-    <span>{{ navBtn }}</span>
+    <span>
+      {{ CONTACT }}
+    </span>
+  </button>
+  <button
+    class="navbar__btn navbar__button--basic cursor-pointer"
+    (click)="this.onNavButtonClick(ABOUT)"
+  >
+    <span>
+      {{ ABOUT }}
+    </span>
+  </button>
+  <button
+    class="navbar__btn navbar__button--basic cursor-pointer"
+    (click)="this.onNavButtonClick(BLOG)"
+  >
+    <span>
+      {{ BLOG }}
+    </span>
+  </button>
+  <button
+    class="navbar__btn navbar__button--basic cursor-pointer"
+    (click)="this.onNavButtonClick(FQAS)"
+  >
+    <span>
+      {{ FQAS }}
+    </span>
+  </button>
+
+  <button
+    appGradient
+    class="navbar__btn cursor-pointer"
+    (click)="this.onNavButtonClick(PACKAGES)"
+    [calculateByHeight]="true"
+  >
+    <span>
+      {{ PACKAGES }}
+    </span>
   </button>
 </div>
 
