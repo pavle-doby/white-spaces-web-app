@@ -17,7 +17,11 @@
             <br />
             <mat-form-field appearance="outline">
               <mat-label>Price</mat-label>
-              <input matInput formControlName="smallPrice" />
+              <input
+                matInput
+                formControlName="smallPrice"
+                (ngModelChange)="save($event)"
+              />
             </mat-form-field>
             <br />
             <mat-form-field appearance="outline">
@@ -36,7 +40,11 @@
             <br />
             <mat-form-field appearance="outline">
               <mat-label>Price</mat-label>
-              <input matInput formControlName="mediumPrice" />
+              <input
+                matInput
+                formControlName="mediumPrice"
+                (ngModelChange)="save($event)"
+              />
             </mat-form-field>
             <br />
             <mat-form-field appearance="outline">
@@ -55,7 +63,11 @@
             <br />
             <mat-form-field appearance="outline">
               <mat-label>Price</mat-label>
-              <input matInput formControlName="largePrice" />
+              <input
+                matInput
+                formControlName="largePrice"
+                (ngModelChange)="save($event)"
+              />
             </mat-form-field>
             <br />
             <mat-form-field appearance="outline">

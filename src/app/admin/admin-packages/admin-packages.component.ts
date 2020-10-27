@@ -12,15 +12,15 @@ export class AdminPackagesComponent implements OnInit {
   public questionnaireRooms: string[] = [];
   public addOns = [];
   public form: FormGroup = new FormGroup({
-    smallName: new FormControl(''),
-    smallPrice: new FormControl(''),
-    smallDescription: new FormControl(''),
-    mediumName: new FormControl(''),
-    mediumPrice: new FormControl(''),
-    mediumDescription: new FormControl(''),
-    largeName: new FormControl(''),
-    largePrice: new FormControl(''),
-    largeDescription: new FormControl(''),
+    smallName: new FormControl({ value: '', disabled: true }),
+    smallPrice: new FormControl({ value: '', disabled: false }),
+    smallDescription: new FormControl({ value: '', disabled: true }),
+    mediumName: new FormControl({ value: '', disabled: true }),
+    mediumPrice: new FormControl({ value: '', disabled: false }),
+    mediumDescription: new FormControl({ value: '', disabled: true }),
+    largeName: new FormControl({ value: '', disabled: true }),
+    largePrice: new FormControl({ value: '', disabled: false }),
+    largeDescription: new FormControl({ value: '', disabled: true }),
   });
 
   constructor(private adminService: AdminService) {
@@ -47,4 +47,8 @@ export class AdminPackagesComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  save($event: any) {
+    //console.log($event);
+  }
 }

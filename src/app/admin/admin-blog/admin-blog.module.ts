@@ -13,6 +13,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { AdminBlogDeleteDialogComponent } from './admin-blog-delete-dialog/admin-blog-delete-dialog.component';
+import { AdminBlogDeleteDialogModule } from './admin-blog-delete-dialog/admin-blog-delete-dialog.module';
 
 @NgModule({
   declarations: [AdminBlogComponent, AdminBlogDialogComponent],
@@ -29,8 +32,14 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     MatInputModule,
     MatCardModule,
+    MatIconModule,
+    AdminBlogDeleteDialogModule,
   ],
   exports: [AdminBlogComponent],
-  entryComponents: [AdminBlogDialogComponent, CKEditorComponent],
+  entryComponents: [
+    AdminBlogDialogComponent,
+    CKEditorComponent,
+    AdminBlogDeleteDialogComponent,
+  ],
 })
 export class AdminBlogModule {}

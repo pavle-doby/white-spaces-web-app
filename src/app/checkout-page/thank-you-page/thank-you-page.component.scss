@@ -3,6 +3,30 @@
   color: white;
   text-align: center;
   height: 95vh;
+  background: rgb(242, 232, 220);
+  background: -moz-linear-gradient(
+    90deg,
+    rgba(242, 232, 220, 1) 0%,
+    rgba(217, 183, 197, 1) 50%,
+    rgba(15, 13, 59, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(242, 232, 220, 1) 0%,
+    rgba(217, 183, 197, 1) 50%,
+    rgba(15, 13, 59, 1) 100%
+  );
+  background: linear-gradient(
+    90deg,
+    rgba(242, 232, 220, 1) 0%,
+    rgba(217, 183, 197, 1) 50%,
+    rgba(15, 13, 59, 1) 100%
+  );
+
+  app-logo {
+    filter: invert(99%) sepia(99%) saturate(3%) hue-rotate(123deg)
+      brightness(106%) contrast(100%);
+  }
 }
 
 .thank-you__text--big {
