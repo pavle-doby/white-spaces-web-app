@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FOOTER_MAIN_MESSAGE } from './footer.config';
-import { Router } from '@angular/router';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-footer',
@@ -9,10 +10,20 @@ import { Router } from '@angular/router';
 })
 export class FooterComponent implements OnInit {
   public title: string = FOOTER_MAIN_MESSAGE;
-  public showScrollMessage: boolean = false;
+  public showScrollOnRoutes = ['/', '/home', '/blog'];
+  public showScrollMessage: boolean = this.showScroll(this.router.url);
   constructor(private router: Router) {
-    this.showScrollMessage = this.router.url === '/';
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((val) => {
+        this.showScrollMessage = this.showScroll(this.router.url);
+      });
   }
 
-  ngOnInit(): void {}
+  showScroll(string: string): boolean {
+    return this.showScrollOnRoutes.includes(string);
+  }
+  ngOnInit(): void {
+    console.log('init');
+  }
 }

@@ -1,10 +1,7 @@
 @import "../../../styles.scss";
 
 .you-get__container {
-  width: $page-width;
-  @media only screen and(max-width:959px) {
-    width: 80vw;
-  }
+  width: 80vw;
 
   app-opening-label {
     @media only screen and(max-width:959px) {
