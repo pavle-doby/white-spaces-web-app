@@ -70,6 +70,14 @@ export class AdminService {
     );
   }
 
+  public deleteBlog(id: number): Observable<any> {
+    return this.http.delete(
+      `${API_URL}/blog/${id}/delete`,
+
+      { withCredentials: true }
+    );
+  }
+
   public getAllAdmins(): Observable<any> {
     return this.http.get(`${API_URL}/api/auth/admins`, {
       withCredentials: true,

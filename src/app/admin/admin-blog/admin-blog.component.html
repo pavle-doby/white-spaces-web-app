@@ -34,6 +34,19 @@
         Edit Blog
       </td>
     </ng-container>
+    <ng-container matColumnDef="deleteBlog">
+      <th mat-header-cell *matHeaderCellDef mat-header></th>
+      <td
+        class="table-dialog"
+        mat-cell
+        *matCellDef="let row"
+        (click)="deleteDialogBlog(row)"
+      >
+        <mat-icon aria-hidden="false" aria-label="Example home icon"
+          >delete</mat-icon
+        >
+      </td>
+    </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

@@ -11,23 +11,24 @@
     }
   }
 
-  h3 {
-    font-weight: 300;
-    line-height: 1.302vw;
-    font-size: 1vw;
-    letter-spacing: 0.1vw;
-  }
-  p {
-    line-height: 1.3vw;
-    font-weight: 300;
-    font-size: 1vw;
+  @media only screen and(min-width:959px) {
+    h3 {
+      font-weight: 300;
+      line-height: 1.302vw;
+      font-size: 1vw;
+      letter-spacing: 0.1vw;
+    }
+    p {
+      line-height: 1.3vw;
+      font-weight: 300;
+      font-size: 1vw;
+    }
   }
 
   @media only screen and(max-width:959px) {
     width: 100%;
-    figure,
-    img {
-      max-width: 100px !important;
+    figure > img {
+      width: 80vw !important;
     }
   }
 }

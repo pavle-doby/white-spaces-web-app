@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AdminBlogDialogComponent } from './admin-blog-dialog/admin-blog-dialog.component';
 import { AdminService } from 'src/app/services/admin.service';
 import { Router } from '@angular/router';
+import { AdminBlogDeleteDialogComponent } from './admin-blog-delete-dialog/admin-blog-delete-dialog.component';
 
 @Component({
   selector: 'app-admin-blog',
@@ -20,7 +21,7 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
   dataSource: AdminBlogDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'topic', 'date', 'viewBlog'];
+  displayedColumns = ['id', 'topic', 'date', 'viewBlog', 'deleteBlog'];
 
   constructor(
     public dialog: MatDialog,
@@ -38,6 +39,7 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
           date: element.creation_date,
           attachment: '',
           viewBlog: element.text,
+          deleteBlog: element.id,
         };
       });
 
@@ -76,6 +78,18 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
         .subscribe(() => {
           this.reload('/admin/blog');
         });
+    });
+  }
+
+  public deleteDialogBlog(order?: any): void {
+    const dialogRef = this.dialog.open(AdminBlogDeleteDialogComponent, {
+      data: order,
+      width: '20vw',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.adminService.deleteBlog(result.id).subscribe(() => {
+        this.reload('/admin/blog');
+      });
     });
   }
 
