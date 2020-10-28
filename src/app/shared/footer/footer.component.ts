@@ -23,7 +23,5 @@ export class FooterComponent implements OnInit {
   showScroll(string: string): boolean {
     return this.showScrollOnRoutes.includes(string);
   }
-  ngOnInit(): void {
-    console.log('init');
-  }
+  ngOnInit(): void {}
 }
