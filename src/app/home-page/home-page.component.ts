@@ -35,7 +35,7 @@ export class HomePageComponent implements OnInit {
     private readonly store: Store<AppState>
   ) {
     if (window.innerWidth >= 959) {
-      this.window.document.body.style.width = '500vw';
+      this.window.document.body.style.width = '450vw';
       this.isMobile = false;
     } else {
       this.window.document.body.style.width = '100vw';
@@ -44,7 +44,7 @@ export class HomePageComponent implements OnInit {
     this.matcher = this.mediaMatcher.matchMedia(MEDIA_QUERY_WIDTH);
     this.matcher.addListener((event) => {
       console.log(event.matches);
-      this.window.document.body.style.width = event.matches ? '100vw' : '500vw';
+      this.window.document.body.style.width = event.matches ? '100vw' : '450vw';
     });
     // this.isHandset$.subscribe((res) => {
     //   console.log(res);
