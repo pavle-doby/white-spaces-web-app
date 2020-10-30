@@ -10,13 +10,7 @@ export const PROJECT_CONTENT = [
     'Do you provide interior design services as well?',
     `Our goal is to provide you with a healthy and functional base that you can upgrade further. That means – we reorganize, repurpose and suggest improved layouts according to apartment potential and your preferences, of course. At the moment, however, we do not offer interior design services.
 
-Still, there is something we can do for you in that field. We listed a few platforms and apps that can come in handy. 
-     
-  - Houzz app for Android users lets you browse interior design photos for inspiration, buy products, hire professional help, and much more! You can also download Houzz app in the App Store.
-
-  - If you prefer online platforms, we suggest Modsy (treba ulinkati ime sa vebsajtom They are budget-friendly and offer a clean UI. Get a 3D redesign with furniture made by famous retailers!
-
-  - For clients with a higher price range in search of a home design website, we offer Decorist. They match you with an architect to help you redecorate.
+Still, there is something we can do for you in that field. We listed a few platforms and apps that can come in handy. Houzz app for Android users lets you browse interior design photos for inspiration, buy products, hire professional help, and much more! You can also download Houzz app in the App Store. If you prefer online platforms, we suggest Modsy. They are budget-friendly and offer a clean UI. Get a 3D redesign with furniture made by famous retailers! For clients with a higher price range in search of a home design website, we offer Decorist. They match you with an architect to help you redecorate.
   `
   ),
   new OpeningLabel(
@@ -82,10 +76,9 @@ export const ADDONS_CONTENT = [
   new OpeningLabel(
     'Do I need add-ons besides the basic package?',
     `Once you take care of the lighting, kitchen, and storage room, the renovation process is nearly done. Since these add-ons wrap up the whole project, we always encourage you to think about them. The last step would be the furniture selection and adding a few finishing touches. 
-Plus, closet plans drawings are sometimes crucial for small apartments because they can maximize the space.
+    Plus, closet plans drawings are sometimes crucial for small apartments because they can maximize the space.
 
-If you need to know more about the additional plans, please contact us via email 
-hi@whitespacerenovation.com. We will be more than happy to help!
+    If you need to know more about the additional plans, please contact us via email hi@whitespacerenovation.com.  We will be more than happy to help!
     `
   ),
 ];
@@ -105,19 +98,18 @@ export const TIMING_CONTENT = [
 export const FILES_AND_PROGRAMS_CONTENT = [
   new OpeningLabel(
     'What if I don’t have the blueprints of my apartment?',
-    `
-We must have your original floor plan drawing to get started. The blueprints are essential for many reasons
+    `We must have your original floor plan drawing to get started. The blueprints are essential for many reasons
 If you do not own the blueprints, we suggest you use an app or an online platform to help you draw one. If you don’t feel confident to use apps and platforms, you can draw the floor plan yourself. Most of the work comes down to measuring your apartment – walls and floors etc.
 
 If you opt for platforms, we suggest the Magicplan.app. The interface is clear and user-friendly. You only need to write the correct dimensions. And you can get the blueprint in no time.
-    
+
 Feel free to contact us directly via hi@whitespacerenovation.com and we will walk you through the required steps and take it from there once you purchase the package.
 `,
     true
   ),
   new OpeningLabel(
     'Do photos need to be in certain file format?',
-    `Yes. Please make sure that all photos are in .jpg, .jpeg or png. file format`
+    `Yes. Please make sure that all photos are in .jpg, .jpeg or .png file format.`
   ),
   new OpeningLabel(
     'Which document format will I receive in the final project?',
@@ -143,24 +135,15 @@ export const PRICING_AND_CANCELATION_POLICY_CONTENT = [
     'How can I delete the account if I no longer want the services?',
     'You can delete the account at any moment by sending an email at clients@whitespacerenovation.com and your data will no longer be in the system. In the following 48 hours, you will receive the confirmation email.'
   ),
-  new OpeningLabel(
-    'Which documents I receive within the final project?',
-    `No matter the size of the space you own you deserve home that is working for you and
-            not against you. By this we mean that there is no need to compromise between function
-            and beauty. We will solve functionality of your floor plan and give you base for all
-            further beautifying. `
-  ),
 ];
 
 export const WHITE_SPACE_RENOVATION_CONTENT = [
   new OpeningLabel(
     'How is White Space Renovation different from other architectural online services?',
-    `
-Our methodology is above all human-oriented. Our approach differs because we ask crucial questions and examine the answers from the psychological perspective.
+    `Our methodology is above all human-oriented. Our approach differs because we ask crucial questions and examine the answers from the psychological perspective.
 
-Here at White Space Renovation, we believe that every apartment has the potential to be your dream home. We believe in sustainability and beauty of creating the new out of the old. We think that everyone deserves a chance to work with a professional architect and build a stimulating space, both energizing and relaxing.
-Our secret is keeping the client satisfied when it comes to converting any place into the best version of itself.  We’re keeping it personal, right?
-    `,
+    Here at White Space Renovation, we believe that every apartment has the potential to be your dream home. We believe in sustainability and beauty of creating the new out of the old. We think that everyone deserves a chance to work with a professional architect and build a stimulating space, both energizing and relaxing. 
+    Our secret is keeping the client satisfied when it comes to converting any place into the best version of itself.  We’re keeping it personal, right?`,
     true
   ),
   new OpeningLabel(

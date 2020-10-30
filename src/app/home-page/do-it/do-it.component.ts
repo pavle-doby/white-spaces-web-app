@@ -24,8 +24,8 @@ export class DoItComponent implements OnInit {
     this.doItTitle = new AppTitle(DO_IT_TITLE, null, TitleSize.BIG_BOLD);
     this.paragraphs = [
       { text: DO_IT_PARAGRAPH_1, isBold: false },
-      { text: DO_IT_PARAGRAPH_2, isBold: false },
-      { text: DO_IT_PARAGRAPH_3, isBold: true },
+      { text: DO_IT_PARAGRAPH_2, isBold: true },
+      { text: DO_IT_PARAGRAPH_3, isBold: false },
     ];
   }
 
