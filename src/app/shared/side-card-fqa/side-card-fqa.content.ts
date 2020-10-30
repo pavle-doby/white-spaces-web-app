@@ -8,8 +8,7 @@ export const PROJECT_CONTENT = [
   ),
   new OpeningLabel(
     'Do you provide interior design services as well?',
-    `
-Our goal is to provide you with a healthy and functional base that you can upgrade further. That means – we reorganize, repurpose and suggest improved layouts according to apartment potential and your preferences, of course. At the moment, however, we do not offer interior design services.
+    `Our goal is to provide you with a healthy and functional base that you can upgrade further. That means – we reorganize, repurpose and suggest improved layouts according to apartment potential and your preferences, of course. At the moment, however, we do not offer interior design services.
 
 Still, there is something we can do for you in that field. We listed a few platforms and apps that can come in handy. 
      
@@ -17,8 +16,8 @@ Still, there is something we can do for you in that field. We listed a few platf
 
   - If you prefer online platforms, we suggest Modsy (treba ulinkati ime sa vebsajtom They are budget-friendly and offer a clean UI. Get a 3D redesign with furniture made by famous retailers!
 
-  - For clients with a higher price range in search of a home design website, we offer Decorist. They match you with an architect to help you redecorate.  
-     `
+  - For clients with a higher price range in search of a home design website, we offer Decorist. They match you with an architect to help you redecorate.
+  `
   ),
   new OpeningLabel(
     'Do you work on the exterior design as well?',
