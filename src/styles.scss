@@ -27,9 +27,11 @@ body {
     overflow-x: hidden;
     //height: 420vh;
   }
+
   * {
     font-family: "Roboto", sans-serif;
   }
+
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -61,7 +63,7 @@ body {
   width: 100%;
   padding-bottom: 56.25%;
   height: 0;
-  @media only screen and(max-width:959px) {
+  @media only screen and(max-width: 959px) {
     padding-bottom: 0px;
     height: 80vw;
     width: 80vw;
@@ -75,7 +77,7 @@ body {
   width: 100%;
   height: 100%;
   max-height: 15.625vw;
-  @media only screen and(max-width:959px) {
+  @media only screen and(max-width: 959px) {
     max-height: 80vw;
   }
 }
@@ -95,6 +97,7 @@ body {
   &:hover {
     cursor: pointer;
   }
+
   &:active {
     border-style: none;
   }
@@ -123,9 +126,9 @@ body {
 
 .checkout__btn {
   @extend .basic__btn;
-  background-color: rgb(27, 0, 105);
+  background-color: $color-primary-btn;
   color: white;
-  border: 0.5px solid #1b0069;
+  border: 0.5px solid $color-primary-btn;
 }
 
 .checkout__btn--invert {
@@ -151,10 +154,12 @@ body {
   cursor: pointer;
   font-weight: 500;
   transition: color 0.2s ease;
+
   &:hover {
     color: #4051b5;
   }
 }
+
 /* Scrollbar tweaks */
 ::-webkit-scrollbar {
   width: 0.26vw;
@@ -194,15 +199,19 @@ body {
   &:active {
     text-decoration: none;
   }
+
   &:focus {
     text-decoration: none;
   }
+
   &:focus-within {
     text-decoration: none;
   }
+
   &:hover {
     text-decoration: none;
   }
+
   &:visited {
     text-decoration: none;
   }

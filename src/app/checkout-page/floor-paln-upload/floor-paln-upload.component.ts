@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store';
+import {Component, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {AppState} from 'src/app/store';
 import {
   setInfoCheckout,
   setFloorPlanCheckout,
   setShoppingCartCheckout,
   selectTabbarButtonCheckout,
 } from 'src/app/store/actions/checkout.action';
-import { UploadData } from 'src/app/shared/upload/upload.model';
-import { Observable, Subscription } from 'rxjs';
-import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
-import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
-import { FloorPlan } from 'src/models/FloorPlan.model';
-import { ProductVM } from 'src/models/ProductVM.model';
-import { ShoppingCart } from 'src/models/ShoppingCart.model';
-import { TabbarText } from 'src/models/TabbarText.model';
-import { Question } from 'src/models/Question.model';
-import { QuestionDTO } from 'src/models/QuestionDTO.model';
-import { firstToUpperCase } from 'src/app/shared/Utilities';
+import {UploadData} from 'src/app/shared/upload/upload.model';
+import {Observable, Subscription} from 'rxjs';
+import {CheckoutState} from 'src/app/store/reducers/checkout.reducer';
+import {CheckoutService} from 'src/app/services/checkout.service.ts.service';
+import {FloorPlan} from 'src/models/FloorPlan.model';
+import {ProductVM} from 'src/models/ProductVM.model';
+import {ShoppingCart} from 'src/models/ShoppingCart.model';
+import {TabbarText} from 'src/models/TabbarText.model';
+import {Question} from 'src/models/Question.model';
+import {QuestionDTO} from 'src/models/QuestionDTO.model';
+import {firstToUpperCase} from 'src/app/shared/Utilities';
 
 const INFO = 'welcome to your renovation project!';
 
@@ -44,9 +44,9 @@ export class FloorPalnUploadComponent implements OnInit {
     private readonly $store: Store<AppState>,
     private readonly checkoutService: CheckoutService
   ) {
-    this.$store.dispatch(setInfoCheckout({ info: INFO, description: [] }));
+    this.$store.dispatch(setInfoCheckout({info: INFO, description: []}));
     this.$store.dispatch(
-      selectTabbarButtonCheckout({ btnText: TabbarText.FLOOR_PLAN })
+      selectTabbarButtonCheckout({btnText: TabbarText.FLOOR_PLAN})
     );
 
     this.$chekcoutState = this.$store.select((state) => state.checkout);
@@ -57,6 +57,7 @@ export class FloorPalnUploadComponent implements OnInit {
     this.uploadData = new UploadData({
       limit: 1,
       message: 'Please upload your existing floor plan.',
+      bottomInfo: ''
     });
     this.successMsg = 'You successfully uploaded your file!';
   }
@@ -69,7 +70,7 @@ export class FloorPalnUploadComponent implements OnInit {
     this.subUserName = this.$userName.subscribe((name) => {
       const _name = firstToUpperCase(name);
       this.$store.dispatch(
-        setInfoCheckout({ info: `${_name}, ${INFO}`, description: [] })
+        setInfoCheckout({info: `${_name}, ${INFO}`, description: []})
       );
     });
   }
@@ -99,14 +100,14 @@ export class FloorPalnUploadComponent implements OnInit {
           },
         };
 
-        console.log('Floor plan upload', { productVM });
+        console.log('Floor plan upload', {productVM});
 
         this.checkoutService
           .updateProduct(productVM)
           .toPromise()
           .then((newShoppingCart) => {
             this.$store.dispatch(
-              setShoppingCartCheckout({ shoppingCart: newShoppingCart })
+              setShoppingCartCheckout({shoppingCart: newShoppingCart})
             );
             this.$store.dispatch(
               setFloorPlanCheckout({

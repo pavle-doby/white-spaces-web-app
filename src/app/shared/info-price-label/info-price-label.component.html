@@ -21,10 +21,11 @@
         {{ infoPrice.info }}
       </span>
       <span
+        *ngIf="infoPrice.price"
         class="info-price-label__price"
         [ngClass]="{ 'info-price-label--bold': this.isPriceBold }"
       >
-        {{ infoPrice.price ? "$" : "" }}{{ infoPrice.price }}
+        {{this.currency}}{{infoPrice.price}}
       </span>
     </div>
   </div>

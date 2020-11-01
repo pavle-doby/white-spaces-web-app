@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SideCadrPackage } from '../SideCardPackage';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
 import { Question } from 'src/models/Question.model';
+import { CURRENCY } from 'src/app/app.config';
 
 export enum PackageType {
   SMALL = 'S',
@@ -35,6 +36,8 @@ export class SideCardPackagesBoxComponent implements OnInit {
   public selectEvent: EventEmitter<PackagesBox>;
   @Output()
   public continueEvent: EventEmitter<void>;
+
+  public readonly currency = CURRENCY;
 
   constructor() {
     this.selectEvent = new EventEmitter();

@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.dialog.open(ConfirmationDialogComponent, {
       width: CONFIRMATION_DIALOG_WIDTH,
-      disableClose: false,
+      disableClose: true,
       data: new ConfirmationDialogData({
         titleLabel: 'Notice',
         message: `Please note that at this point \n we only work on apartment renovation projects.\n Unfortunatelly at this moment any other type\n of project will be denied and fuly refunded.`,
@@ -147,7 +147,7 @@ export class RegisterComponent implements OnInit {
         );
         this.dialog.open(ConfirmationDialogComponent, {
           width: CONFIRMATION_DIALOG_WIDTH,
-          disableClose: false,
+          disableClose: true,
           data: new ConfirmationDialogData({
             titleLabel: 'Registration',
             message: `We’ve sent a verification mail your way.\n Please check your inbox and click on the link we provided\n in order to finish the registration process.`,

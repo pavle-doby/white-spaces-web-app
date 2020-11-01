@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { InfoPrice } from '../../../models/InfoPrice.model';
+import {Component, OnInit, Input} from '@angular/core';
+import {InfoPrice} from '../../../models/InfoPrice.model';
+import {CURRENCY} from "../../app.config";
 
 export class InfoPriceLabelInputs {
   public label: string;
@@ -26,7 +27,11 @@ export class InfoPriceLabelComponent implements OnInit {
   @Input()
   public isPriceBold: boolean = false;
 
-  constructor() {}
+  public readonly currency = CURRENCY;
 
-  ngOnInit(): void {}
+  constructor() {
+  }
+
+  ngOnInit(): void {
+  }
 }

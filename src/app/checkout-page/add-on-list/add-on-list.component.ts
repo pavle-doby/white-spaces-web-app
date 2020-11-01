@@ -18,10 +18,10 @@ import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { TabbarText } from 'src/models/TabbarText.model';
 
-const INFO = `Feel like you’re not getting enough? 
+const INFO = `Feel like you’re not getting enough?
 Customize your package easily with extra plans and drawings.`;
 
-const INFO_DESC = `Please note that adding an extra plan will require additional 
+const INFO_DESC = `Please note that adding an extra plan will require additional
 engagement and time for finishing the project.`;
 
 @Component({
@@ -63,26 +63,32 @@ export class AddOnListComponent implements OnInit {
           LocalStorageService.Instance.AddOnCategroyId = addOnList?.length
             ? addOnList[0].category_id
             : null;
-          this.addOnList = addOnList.map((addOnDTO) => {
-            const questions = convertQuestionsDTOListToQuestionsList(
-              addOnDTO.additional_data.questions,
-              addOnDTO
-            );
-            return new AddOn({
-              id: addOnDTO.id,
-              name: addOnDTO.name,
-              description: addOnDTO.data?.description,
-              price: addOnDTO.price,
-              isSelected: false,
-              questions: questions,
-            });
-          });
+          this.addOnList = addOnList
+            .map((addOnDTO) => {
+              const questions = convertQuestionsDTOListToQuestionsList(
+                addOnDTO.additional_data.questions,
+                addOnDTO
+              );
+              return new AddOn({
+                id: addOnDTO.id,
+                name: addOnDTO.name,
+                description: addOnDTO.data?.description,
+                price: addOnDTO.price,
+                isSelected: false,
+                questions,
+              });
+            })
+            .sort(this.compareAddOns);
 
           this.$store.dispatch(
             setAddOnListCheckout({ addOnList: this.addOnList })
           );
         });
     }
+  }
+
+  public compareAddOns(a: AddOn, b: AddOn): number {
+    return a.name.localeCompare(b.name);
   }
 
   public onAddRemoveAddOn(addOn: AddOn): void {

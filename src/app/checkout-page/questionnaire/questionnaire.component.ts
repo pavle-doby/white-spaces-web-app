@@ -146,6 +146,8 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   public onUploadEvent(fileList: FileList): void {
+    console.log({fileList});
+    
     this.checkoutService
       .uploadFile(fileList[0])
       .toPromise()

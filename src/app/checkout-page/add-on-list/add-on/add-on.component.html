@@ -16,7 +16,9 @@
       <span class="add-on__label">
         {{ this.addOn.name }}
       </span>
-      <span class="add-on__label"> ${{ this.addOn.price }} </span>
+      <span class="add-on__label">
+        {{ this.currency }}{{ this.addOn.price }}
+      </span>
     </div>
     <div
       *ngIf="this.toShowDescription"
@@ -29,16 +31,11 @@
   </div>
   <div fxLayout="column" fxLayoutAlign="start start">
     <button
-      *ngIf="this.addOn.isSelected"
-      appGradient
-      class="checkout__btn"
-      (click)="this.clickOnAddOn()"
-    >
-      {{ this.addRemoveLabel }}
-    </button>
-    <button
-      *ngIf="!this.addOn.isSelected"
-      class="checkout__btn--invert"
+      class="add-on__btn"
+      [ngClass]="{
+        checkout__btn: this.addOn.isSelected,
+        'checkout__btn--invert': !this.addOn.isSelected
+      }"
       (click)="this.clickOnAddOn()"
     >
       {{ this.addRemoveLabel }}
