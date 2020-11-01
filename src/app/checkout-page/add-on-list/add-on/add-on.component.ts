@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AddOn } from 'src/models/AddOn';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {AddOn} from 'src/models/AddOn';
+import {CURRENCY} from "../../../app.config";
 
 const ADD = 'Add';
-const REMOVE = 'Remove';
+const REMOVE = 'Added';
 
 @Component({
   selector: 'app-add-on',
@@ -19,6 +20,7 @@ export class AddOnComponent implements OnInit {
   public addRemoveAddOnEvent: EventEmitter<AddOn>;
 
   public addRemoveLabel: string = ADD;
+  public readonly currency = CURRENCY;
 
   constructor() {
     this.addRemoveAddOnEvent = new EventEmitter();
@@ -38,8 +40,8 @@ export class AddOnComponent implements OnInit {
 
   public clickOnAddOn(): void {
     const isSelected = !this.addOn.isSelected;
-    const newAddOn = { ...this.addOn, isSelected: isSelected };
+    const newAddOn = {...this.addOn, isSelected};
     this.addRemoveAddOnEvent.emit(newAddOn);
-    // this.addRemoveLabel = isSelected ? REMOVE : ADD;
+    this.addRemoveLabel = isSelected ? REMOVE : ADD;
   }
 }

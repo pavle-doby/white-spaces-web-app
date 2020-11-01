@@ -2,10 +2,20 @@
   *ngIf="this.$checkoutState | async"
   class="checkout-page"
   fxLayout="column"
-  fxLayoutAlign="start center"
+  fxLayoutAlign="center center"
   fxLayoutGap="2.5vw"
 >
-  <app-logo></app-logo>
+  <a
+    class="a__text-decoration--none cursor-pointer"
+    href="/home"
+  >
+    <img
+      class="app__logo"
+      src="assets/images/home/logo.png"
+      alt="Website Logo"
+    >
+  </a>
+
   <app-tabbar></app-tabbar>
   <app-info
     [info]="(this.$checkoutState | async).info"

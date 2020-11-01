@@ -18,10 +18,10 @@ import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { TabbarText } from 'src/models/TabbarText.model';
 
-const INFO = `Feel like you’re not getting enough? 
+const INFO = `Feel like you’re not getting enough?
 Customize your package easily with extra plans and drawings.`;
 
-const INFO_DESC = `Please note that adding an extra plan will require additional 
+const INFO_DESC = `Please note that adding an extra plan will require additional
 engagement and time for finishing the project.`;
 
 @Component({
@@ -74,7 +74,7 @@ export class AddOnListComponent implements OnInit {
               description: addOnDTO.data?.description,
               price: addOnDTO.price,
               isSelected: false,
-              questions: questions,
+              questions,
             });
           });
 
