@@ -1,6 +1,6 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {AddOn} from 'src/models/AddOn';
-import {CURRENCY} from "../../../app.config";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { AddOn } from 'src/models/AddOn';
+import { CURRENCY } from '../../../app.config';
 
 const ADD = 'Add';
 const REMOVE = 'Added';
@@ -27,7 +27,7 @@ export class AddOnComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.addRemoveLabel = this.addOn.isSelected ? REMOVE : ADD;
+    this.addRemoveLabel = this.addOn.isSelected ? REMOVE : ADD;
   }
 
   public showDescription(): void {
@@ -40,8 +40,7 @@ export class AddOnComponent implements OnInit {
 
   public clickOnAddOn(): void {
     const isSelected = !this.addOn.isSelected;
-    const newAddOn = {...this.addOn, isSelected};
+    const newAddOn = { ...this.addOn, isSelected };
     this.addRemoveAddOnEvent.emit(newAddOn);
-    this.addRemoveLabel = isSelected ? REMOVE : ADD;
   }
 }

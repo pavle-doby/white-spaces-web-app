@@ -179,13 +179,12 @@
           </span>
         </div>
         <button
-          class="review-pay__btn"
+          class="review-pay__btn checkout__btn"
           [ngClass]="{
             'review-pay__btn--disabled':
               !this.iAgreeToTerms || !this.iAgreeToDesign
           }"
           [disabled]="!this.iAgreeToTerms || !this.iAgreeToDesign"
-          appGradient
           (click)="this.createOrder()"
         >
           Create order

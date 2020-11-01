@@ -10,24 +10,23 @@
   <div *ngIf="this.data?.info" class="upload__info">
     {{ this.data?.info }}
   </div>
-  <div fxLayout="column" fxLayoutAlign="start center">
+  <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
     <button
-      appGradient
       class="checkout__btn"
       [ngClass]="{ app__uppercase: this.data.uppercaseButtonText }"
       (click)="onUpload()"
     >
       Upload
     </button>
+    <span *ngIf="this.data?.bottomInfo" class="upload__info">
+      {{ this.data.bottomInfo }}
+    </span>
     <input
+      style="display: none"
       type="file"
       #fileUpload23
       [multiple]="this.data?.isMultiple"
       [accept]="this.data?.supportedFileTypes"
-      style="display: none"
     />
-    <span *ngIf="this.data?.bottomInfo" class="upload__info">
-      {{ this.data.bottomInfo }}
-    </span>
   </div>
 </div>
