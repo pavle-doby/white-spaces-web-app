@@ -72,7 +72,7 @@ export class LocalStorageService {
     this.storage.setItem(LocalStorageKey.QUESTIONS, JSON.stringify(questions));
   }
 
-  public appendQuestions(questions: Question[], toFront: boolean = true): void {
+  public appendQuestions(questions: Question[], toFront: boolean = false): void {
     const oldQuestions = this.Questions ?? [];
     const newQuestions = toFront
       ? [...questions, ...oldQuestions]
