@@ -1,6 +1,8 @@
 // export const API_URL = 'http://18.221.175.43';
 export const API_URL = '';
 
+export const MAIL_FOR_CLIENTS = 'clients@whitespacerenovation.com';
+export const DOMAIN_NAME = 'www.whitespacerenoation.com';
 export const CURRENCY = '€';
 
 export enum LoginParam {
@@ -15,6 +17,7 @@ export enum ConfirmationDilogType {
 }
 
 export const CONFIRMATION_DIALOG_WIDTH = '500px';
+export const DOCUMENT_DIALOG_WIDTH = '800px';
 
 export const BREAKING_POINT_PX = 960;
 

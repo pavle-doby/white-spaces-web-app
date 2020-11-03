@@ -16,6 +16,9 @@ $shadow-blur-radius: 0.23vw;
 
 $footer-height: 3vh;
 
+$width-document-dialog: 800px;
+$height-documnet-dialog: 450px;
+
 body {
   height: 100%;
   //width: 500vw;
@@ -49,6 +52,23 @@ body {
 
 .margin-top-minus-15 {
   margin-top: -15px;
+}
+
+.children--no-margins {
+  > * {
+    margin: 0;
+  }
+}
+
+.doucment__dialog {
+  overflow: auto;
+  max-width: $width-document-dialog;
+  height: $height-documnet-dialog;
+}
+
+.doucment__dialog-action {
+  height: 50px;
+  margin-bottom: 10px;
 }
 
 .cursor-pointer {
@@ -143,6 +163,25 @@ body {
   background-color: rosybrown;
   color: white;
   border: 0.5px solid rosybrown;
+}
+
+.text__btn {
+  color: inherit;
+  background-color: transparent;
+
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+
+  &:hover {
+    @extend .app__text-shadow;
+  }
+}
+
+.text__btn--primary {
+  @extend .text__btn;
+  color: $color-primary-btn;
 }
 
 .table-container {

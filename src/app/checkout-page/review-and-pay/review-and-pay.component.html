@@ -159,15 +159,22 @@
           />
           <span>
             I understand and will comply with the
-            <a href="#"> Terms of Service</a> and the
-            <a href="#"> Privacy Policy</a>
+            <button
+              class="text__btn--primary"
+              (click)="this.openTermsAndConditions()"
+            >
+              Terms of Service
+            </button>
+            and the
+            <button
+              class="text__btn--primary"
+              (click)="this.openTermsAndConditions()"
+            >
+              Privacy Policy
+            </button>
           </span>
         </div>
-        <div
-          fxLayout="row"
-          fxLayoutAlign="start start"
-          fxLayoutGap="10px"
-        >
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
           <input
             type="checkbox"
             name="iAgreeToTermsOfDesign"

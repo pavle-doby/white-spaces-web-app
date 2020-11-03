@@ -27,6 +27,8 @@ import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { CheckoutPaths } from '../checkout-paths';
 import { firstToUpperCase } from 'src/app/shared/Utilities';
+import { PrivacyPolicyDialogComponent } from 'src/app/shared/privacy-policy-dialog/privacy-policy-dialog.component';
+import { TermsAndConditionsComponent } from 'src/app/shared/terms-and-conditions/terms-and-conditions.component';
 
 @Component({
   selector: 'app-review-and-pay',
@@ -185,6 +187,14 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
     this.subIsAddressValid.unsubscribe();
     this.subIsEmailValid.unsubscribe();
     this.subIsFullNameValid.unsubscribe();
+  }
+
+  public openPrivacyPolicy(): void {
+    this.dialog.open(PrivacyPolicyDialogComponent);
+  }
+
+  public openTermsAndConditions(): void {
+    this.dialog.open(TermsAndConditionsComponent);
   }
 
   public createOrder(): void {
