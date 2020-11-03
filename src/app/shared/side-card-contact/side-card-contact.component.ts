@@ -1,8 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subject, Subscription } from 'rxjs';
 import { BREAKING_POINT_PX } from 'src/app/app.config';
 import { GlobalService } from 'src/app/services/global.service';
 import { ContactDTO } from 'src/models/ContactDTO.model';
+import {
+  PrivacyPolicyDialogComponent,
+  PrivacyPolicyDialogData,
+} from '../privacy-policy-dialog/privacy-policy-dialog.component';
+import { TermsAndConditionsComponent } from '../terms-and-conditions/terms-and-conditions.component';
 import { getClientWidthPX } from '../Utilities';
 
 @Component({
@@ -37,7 +43,10 @@ export class SideCardContactComponent implements OnInit, OnDestroy {
   public subisPhoneValid: Subscription;
   public subisTextValid: Subscription;
 
-  constructor(private readonly GlobalService: GlobalService) {
+  constructor(
+    private readonly GlobalService: GlobalService,
+    private readonly dialog: MatDialog
+  ) {
     this.$isNameValid = new Subject();
     this.$isCityValid = new Subject();
     this.$isMailValid = new Subject();
@@ -87,6 +96,14 @@ export class SideCardContactComponent implements OnInit, OnDestroy {
       this.isPhoneValid &&
       this.isTextValid
     );
+  }
+
+  public openPrivacyPolicy(): void {
+    this.dialog.open(PrivacyPolicyDialogComponent);
+  }
+
+  public openTermsAndConditions(): void {
+    this.dialog.open(TermsAndConditionsComponent);
   }
 
   public send(): void {

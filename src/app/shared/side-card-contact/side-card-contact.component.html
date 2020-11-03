@@ -122,11 +122,13 @@
         fxLayoutAlign="start start"
         fxLayoutGap="2.2vh"
       >
-        <img class="sc-contact__logo" src="assets/images/home/logo-square.png" alt="Logo"/>
+        <img
+          class="sc-contact__logo"
+          src="assets/images/home/logo-square.png"
+          alt="Logo"
+        />
         <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap=".1vw">
-          <span class="sc-contact__name">
-            White Space Renovation
-          </span>
+          <span class="sc-contact__name"> White Space Renovation </span>
           <span class="sc-contact__location"> Architectural Studio </span>
           <span class="sc-contact__location"> Serbia</span>
         </div>
@@ -160,7 +162,15 @@
       fxLayout="row"
       fxLayoutAlign="space-between center"
     >
-      <span>Privacy Policy // Terms of service</span>
+      <span>
+        <button class="text__btn" (click)="this.openPrivacyPolicy()">
+          Privacy Policy
+        </button>
+        //
+        <button class="text__btn" (click)="this.openTermsAndConditions()">
+          Terms of service
+        </button>
+      </span>
       <span>White Space Renovation c 2020. All Rights Reserved.</span>
     </div>
   </div>
@@ -306,7 +316,15 @@
   </div>
 
   <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
-    <div>Privacy Policy // Terms of Service</div>
+    <span>
+      <button class="text__btn" (click)="this.openPrivacyPolicy()">
+        Privacy Policy
+      </button>
+      //
+      <button class="text__btn" (click)="this.openTermsAndConditions()">
+        Terms of service
+      </button>
+    </span>
     <div>White Space Renovation c 2020. All Rights Reserved.</div>
   </div>
 </div>
