@@ -6,13 +6,17 @@
     *ngFor="let imgSrc of this.images"
   />
 </mat-dialog-content>
-<mat-dialog-actions fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+<mat-dialog-actions
+  fxLayout="row"
+  fxLayoutAlign="end center"
+  fxLayoutGap="10px"
+>
   <button class="app__btn--invert" mat-dialog-close>Close</button>
   <a
     class="a__text-decoration--none"
-    href="#"
+    href="/api/project_example.pdf"
     [mat-dialog-close]="true"
-    cdkFocusInitial
+    download
   >
     <button class="app__btn--invert">Download</button>
   </a>
