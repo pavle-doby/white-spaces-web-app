@@ -30,8 +30,8 @@ export class UploadComponent implements OnInit, OnDestroy {
   @ViewChild('fileUpload23')
   public uploadElement: ElementRef;
 
-  public $upload: Observable<any>;
-  private $subUpload: Subscription;
+  public $change: Observable<any>;
+  private $subChange: Subscription;
 
   constructor() {
     this.uploadEvent = new EventEmitter();
@@ -51,15 +51,16 @@ export class UploadComponent implements OnInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.$upload = fromEvent(this.uploadElement.nativeElement, 'change');
-    this.$subUpload = this.$upload.subscribe((event) => {
-      const files = (event.target as any).files;
+    this.$change = fromEvent(this.uploadElement.nativeElement, 'change');
+    this.$subChange = this.$change.subscribe((event) => {
+      const files = { ...(event.target as any).files };
       this.uploadEvent.emit(files);
+      (event.target as any).value = '';
     });
   }
 
   ngOnDestroy(): void {
-    if (this.$subUpload) this.$subUpload.unsubscribe();
+    if (this.$subChange) this.$subChange.unsubscribe();
   }
 
   public onUpload(): void {
