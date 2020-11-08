@@ -14,8 +14,6 @@ import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 import { UploadData } from 'src/app/shared/upload/upload.model';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
-import { AdditionalDataLineItem } from 'src/models/AdditionalData.model';
-import { formatQuestionDictToList } from 'src/app/shared/Utilities';
 import { TabbarText } from 'src/models/TabbarText.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
 
