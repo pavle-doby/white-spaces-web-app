@@ -35,7 +35,7 @@
     fxLayout="column"
     fxLayoutAlign="start start"
     fxLayoutGap=".26vw"
-    fxFlex="30"
+    fxFlex="50"
     fxFlex.lt-md="100"
   >
     <app-opening-label
@@ -43,6 +43,8 @@
       [label]="item?.label"
       [description]="item?.description"
       [toShowDescription]="item?.isOpen"
+      [hideDebounceTime]="item.hideDebounceTime"
+      [showDebounceTime]="item.showDebounceTime"
     ></app-opening-label>
   </section>
 </div>

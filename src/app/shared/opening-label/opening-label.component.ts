@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Subject, Subscription } from 'rxjs';
+import { debounce, debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-opening-label',
@@ -23,6 +25,10 @@ export class OpeningLabelComponent implements OnInit {
   public toShowDescription: boolean;
   @Input()
   public toShowOnClick: boolean = false;
+  @Input()
+  public showDebounceTime: number = 0;
+  @Input()
+  public hideDebounceTime: number = 0;
 
   @Output()
   public showDescEvent: EventEmitter<boolean>;
@@ -31,14 +37,34 @@ export class OpeningLabelComponent implements OnInit {
   @Output()
   public stateChangesEvent: EventEmitter<boolean>;
 
+  public hideSubject: Subject<void>;
+  public subHideSubject: Subscription;
+
+  public showSubject: Subject<void>;
+  public subShowSubject: Subscription;
+
   constructor() {
     this.toShowDescription = false;
     this.showDescEvent = new EventEmitter();
     this.hideDescEvent = new EventEmitter();
     this.stateChangesEvent = new EventEmitter();
+
+    this.hideSubject = new Subject();
+    this.showSubject = new Subject();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subHideSubject = this.hideSubject
+      .pipe(debounceTime(this.hideDebounceTime))
+      .subscribe(() => {
+        this.hideDescription();
+      });
+    this.subShowSubject = this.showSubject
+      .pipe(debounceTime(this.showDebounceTime))
+      .subscribe(() => {
+        this.showDescription();
+      });
+  }
 
   public showDescription(): void {
     if (this.toShowOnClick) {
