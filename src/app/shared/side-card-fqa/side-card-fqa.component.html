@@ -52,8 +52,53 @@
   <div *ngIf="!this.isHandset" class="sc-fqa__container--big-faq">FAQ's</div>
 </ng-template>
 
+<ng-template #sideCardFQAMobile>
+  <div
+    class="sc-fqa__container"
+    fxLayout="column"
+    fxLayoutAlign="start start"
+    fxLayoutGap="3.125vw"
+  >
+    <div
+      class="sc-fqa__content"
+      fxLayout="column"
+      fxLayoutAlign="space-between start"
+      fxLayoutGap=".52vw"
+    >
+      <div
+        class="width-100"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap=".52px"
+        *ngFor="let label of this.navLabels"
+      >
+        <div
+          class="sc-fqa__nav-label cursor-pointer"
+          [ngClass]="{
+            'sc-fqa__nav-label--selected': label === this.selectedNavLabel
+          }"
+          (click)="this.selectContent(label)"
+        >
+          {{ label }}
+        </div>
+      </div>
+      <app-opening-label
+        class="width-100"
+        *ngFor="let content of this.contentList; index as i"
+        [label]="content.label"
+        [description]="content.description"
+        [toShowDescription]="content.isOpen"
+        [toShowOnClick]="this.isHandset"
+        (stateChangesEvent)="this.onStatusChange($event, i)"
+      ></app-opening-label>
+      <span>Still need help? Contact us via hi@whitespacerenovation.com</span>
+    </div>
+  </div>
+  <div *ngIf="!this.isHandset" class="sc-fqa__container--big-faq">FAQ's</div>
+</ng-template>
+
 <div *ngIf="this.isHandset" appGradient>
-  <ng-container *ngTemplateOutlet="sideCardFQA"></ng-container>
+  <ng-container *ngTemplateOutlet="sideCardFQAMobile"></ng-container>
 </div>
 <div *ngIf="!this.isHandset">
   <ng-container *ngTemplateOutlet="sideCardFQA"></ng-container>
