@@ -7,6 +7,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Store } from '@ngrx/store';
 import { AppState } from './store';
 import { closeNavbarCard } from './store/actions/navbar.actions';
+import { SCROLL_SPEED } from './app.config';
 
 @Component({
   selector: 'app-root',
@@ -44,8 +45,9 @@ export class AppComponent {
 
   public onMouseWheel($event: WheelEvent): void {
     const x = $event.deltaX || $event.deltaY;
+    const direction = x > 0 ? 1 : -1;
     const y = 0;
-    this.window.scrollBy(x, y);
+    this.window.scrollBy(SCROLL_SPEED * direction, y);
   }
 
   public closeNavbarCard(): void {

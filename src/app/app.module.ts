@@ -21,6 +21,7 @@ import { CheckoutPageModule } from './checkout-page/checkout-page.module';
 import { FloorPalnUploadModule } from './checkout-page/floor-paln-upload/floor-paln-upload.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxGoogleAnalyticsModule } from 'ngx-google-analytics';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,6 +40,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
         strictActionImmutability: true,
       },
     }),
+    NgxGoogleAnalyticsModule.forRoot('G-SQVY0QGEL6'),
     StoreDevtoolsModule.instrument(),
     // !environment.production ? StoreDevtoolsModule.instrument() : [],
     ServiceWorkerModule.register('ngsw-worker.js', {
