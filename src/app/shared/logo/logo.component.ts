@@ -50,8 +50,8 @@ export class LogoComponent implements OnInit {
   ngOnInit(): void {}
 
   public goHome(): void {
-    !this.isMainPage
-      ? this.router.navigateByUrl(`/${MainRouterPaths.HOME}`)
-      : window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+    this.isMainPage
+      ? window.scrollTo({ left: 0, top: 0, behavior: 'smooth' })
+      : this.router.navigateByUrl(`/${MainRouterPaths.HOME}`);
   }
 }

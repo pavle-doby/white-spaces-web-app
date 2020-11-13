@@ -10,10 +10,6 @@ $btn-height: 3vh;
 $navbar-width: 80vh;
 $navbar-height: $btn-height;
 
-$shadow-h-len: 0.17vw;
-$shadow-v-len: 0.17vw;
-$shadow-blur-radius: 0.23vw;
-
 $footer-height: 3vh;
 
 $width-document-dialog: 800px;
@@ -118,8 +114,9 @@ body {
     cursor: pointer;
   }
 
-  &:active {
-    border-style: none;
+  @media only screen and(max-width: 959px) {
+    font-size: 14px;
+    min-height: 36px;
   }
 }
 
@@ -220,6 +217,10 @@ body {
   background: $text-shadow;
 }
 
+$shadow-h-len: 0.17vw;
+$shadow-v-len: 0.17vw;
+$shadow-blur-radius: 0.23vw;
+
 .app__text-shadow {
   text-shadow: $shadow-h-len $shadow-v-len $shadow-blur-radius $text-shadow;
 }
@@ -232,7 +233,7 @@ body {
   padding: 25px 30px 25px 30px;
 }
 
-.a__text-decoration--none {
+.app__a--none {
   text-decoration: none;
 
   &:active {
@@ -254,6 +255,10 @@ body {
   &:visited {
     text-decoration: none;
   }
+}
+
+.a__text-decoration--none {
+  @extend .app__a--none;
 }
 
 .label--error {
