@@ -40,7 +40,7 @@ import { NgxGoogleAnalyticsModule } from 'ngx-google-analytics';
         strictActionImmutability: true,
       },
     }),
-    NgxGoogleAnalyticsModule.forRoot('G-SQVY0QGEL6'),
+    NgxGoogleAnalyticsModule.forRoot('G-2RFP944R90'),
     StoreDevtoolsModule.instrument(),
     // !environment.production ? StoreDevtoolsModule.instrument() : [],
     ServiceWorkerModule.register('ngsw-worker.js', {

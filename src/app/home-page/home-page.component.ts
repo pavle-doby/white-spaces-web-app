@@ -20,7 +20,7 @@ import { MEDIA_QUERY_WIDTH } from '../app.config';
 export class HomePageComponent implements OnInit {
   matcher: MediaQueryList;
   isMobile: boolean = false;
-  parallaxRatio: number = 8;
+  parallaxRatio: number = 2;
   // isHandset$: Observable<boolean> = this.breakpointObserver
   //   .observe([Breakpoints.Handset, Breakpoints.HandsetPortrait])
   //   .pipe(
