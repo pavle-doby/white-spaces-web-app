@@ -9,7 +9,7 @@ import { setShoppingCartCheckout } from '../store/actions/checkout.action';
 import { LocalStorageService } from '../services/local-storage.service';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { PackagesBox } from '../shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
-import { ProgressState, Step } from 'src/models/CheckoutProgress.model';
+import { isHandset } from '../shared/Utilities';
 
 @Component({
   selector: 'app-checkout-page',
@@ -21,6 +21,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
   public subCheckoutState: Subscription;
 
   public package: PackagesBox;
+  public isHandset: boolean = isHandset();
 
   constructor(
     private readonly router: Router,

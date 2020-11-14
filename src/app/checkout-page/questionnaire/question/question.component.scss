@@ -1,8 +1,16 @@
 .question__textarea {
   width: 35vw !important;
+
+  @media screen and (max-width: 960px) {
+    width: 280px !important;
+  }
 }
 
 .question__question {
   width: 45vw;
   text-align: center;
+
+  @media screen and (max-width: 960px) {
+    width: 280px;
+  }
 }

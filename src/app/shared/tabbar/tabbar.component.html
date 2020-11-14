@@ -1,8 +1,13 @@
-<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1vw">
+<div
+  *ngIf="!this.isHandset"
+  fxLayout="row"
+  fxLayoutAlign="start start"
+  fxLayoutGap="1vw"
+>
   <span class="tabbat__button" *ngFor="let tabbarBtn of this.tabbarButtons">
     <a
       [routerLink]="tabbarBtn.routerLinkArray"
-      class="tabbat__button a__text-decoration--none"
+      class="tabbat__button app__a--none"
       [ngClass]="{
         'tabbat__button--complited': tabbarBtn.isCompleted,
         'tabbat__button--selected': tabbarBtn.isSelected
@@ -11,4 +16,28 @@
       {{ tabbarBtn.text }}
     </a>
   </span>
+</div>
+<div
+  *ngIf="this.isHandset"
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  fxLayoutGap="10px"
+>
+  <a
+    *ngIf="this.prevButton"
+    [routerLink]="this.prevButton.routerLinkArray"
+    class="tabbat__button app__a--none"
+  >
+    Previous //
+  </a>
+  <span class="tabbat__button app__a--none tabbat__button--selected">
+    {{ this.selectedButton.text }}
+  </span>
+  <a
+    *ngIf="this.nextButton"
+    [routerLink]="this.nextButton.routerLinkArray"
+    class="tabbat__button app__a--none"
+  >
+    Next
+  </a>
 </div>
