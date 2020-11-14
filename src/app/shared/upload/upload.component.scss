@@ -6,9 +6,14 @@
 }
 
 .upload__info {
-  font-size: 1vw;
+  font-size: 0.9vw;
   font-weight: 400;
   white-space: pre-wrap;
   text-align: center;
   color: rgb(178, 178, 178);
+}
+
+.upload__info--bottom {
+  @extend .upload__info;
+  font-size: 0.75vw;
 }

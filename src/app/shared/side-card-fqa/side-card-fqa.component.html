@@ -46,7 +46,15 @@
           (stateChangesEvent)="this.onStatusChange($event, i)"
         ></app-opening-label>
       </div>
-      <span>Still need help? Contact us via hi@whitespacerenovation.com</span>
+      <span class="sc-faqs__mail">
+        Still need help? Contact us via
+        <a
+          class="sc-faqs__mail__a app__a--none"
+          href="mailto:hi@whitespacerenovation.com"
+        >
+          hi@whitespacerenovation.com
+        </a>
+      </span>
     </div>
   </div>
   <div *ngIf="!this.isHandset" class="sc-fqa__container--big-faq">FAQ's</div>
@@ -91,7 +99,15 @@
         [toShowOnClick]="this.isHandset"
         (stateChangesEvent)="this.onStatusChange($event, i)"
       ></app-opening-label>
-      <span>Still need help? Contact us via hi@whitespacerenovation.com</span>
+      <span>
+        Still need help? Contact us via
+        <a
+          class="sc-faqs__mail__a app__a--none"
+          href="mailto:hi@whitespacerenovation.com"
+        >
+          hi@whitespacerenovation.com
+        </a>
+      </span>
     </div>
   </div>
   <div *ngIf="!this.isHandset" class="sc-fqa__container--big-faq">FAQ's</div>
