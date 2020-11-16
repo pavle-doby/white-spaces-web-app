@@ -125,7 +125,7 @@ export class RegisterComponent implements OnInit {
     this.isFirstNameValid = !!first_name;
     this.isLastNameValid = !!last_name;
     this.isEmailValid = !!email;
-    this.isAddressValid = !!address;
+    this.isAddressValid = !this.showAddresInput || !!address;
     this.isPasswordValid = !!password;
     this.isRepeatPasswordValid = !!this.repeatPassword;
 
