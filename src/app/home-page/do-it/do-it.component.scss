@@ -3,10 +3,11 @@
 .do-it__container {
   width: $page-width;
   padding-top: 20vh;
-  //TODO: Set size with variables
+
   @media only screen and(max-width:959px) {
     width: 80vw;
     padding-bottom: 10vw;
+    padding-top: 10vw;
   }
   min-height: 50vh;
   p {

@@ -51,7 +51,12 @@
       />
     </div>
   </div>
-  <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
+  <div
+    *ngIf="this.showAddresInput"
+    class="login__form-width"
+    fxLayout="column"
+    fxLayoutAlign="start start"
+  >
     <span
       class="login__input-label"
       [ngClass]="{ 'login__input-label--error': !this.isAddressValid }"
@@ -125,6 +130,6 @@
     />
   </div>
   <button class="checkout__btn" (click)="this.submitRegistration()">
-    Register 
+    Register
   </button>
 </div>

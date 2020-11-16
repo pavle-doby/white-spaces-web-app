@@ -72,6 +72,11 @@ export class AuthService {
     return this.http.post<{ user_info: AppUser; message: string }>(URL, params);
   }
 
+  public resetPassword(email: string): Observable<{ message: string }> {
+    const URL = `${API_URL}/api/auth/reset-password`;
+    return this.http.post<{ message: string }>(URL, { email });
+  }
+
   public logout() {
     this.isAuthenticated.next(false);
     localStorage.setItem('isAdmin', 'false');

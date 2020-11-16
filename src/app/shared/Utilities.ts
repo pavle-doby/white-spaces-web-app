@@ -72,11 +72,9 @@ export const calculateFinishedQuestions = (questions: Question[]): number => {
     : 0;
 };
 
+// Image is not required...
 export const isQuestionFullyAnswerd = (question: Question): boolean => {
-  return (
-    question.isAnswerd &&
-    (question.image_required ? !!question.images?.length : true)
-  );
+  return question.isAnswerd;
 };
 
 export const getClientWidthPX = (): number => {
