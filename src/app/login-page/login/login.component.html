@@ -27,5 +27,14 @@
     </span>
     <input class="login__input" type="password" [(ngModel)]="this.password" />
   </div>
-  <button class="checkout__btn" (click)="this.logInUser()">Log in</button>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+    <button class="checkout__btn" (click)="this.logInUser()">Log in</button>
+    <button
+      *ngIf="this.loginReqCount > 2"
+      class="basic__btn"
+      (click)="this.resetPassword()"
+    >
+      Reset password
+    </button>
+  </div>
 </div>

@@ -20,12 +20,14 @@ import {
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { ProgressState, Step } from 'src/models/CheckoutProgress.model';
-import { CONFIRMATION_DIALOG_WIDTH } from 'src/app/app.config';
+import {
+  CONFIRMATION_DIALOG_WIDTH,
+  SHOW_ADDRESS_INPUT,
+} from 'src/app/app.config';
 import { TabbarText } from 'src/models/TabbarText.model';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
-import { CheckoutPaths } from '../checkout-paths';
 import { firstToUpperCase } from 'src/app/shared/Utilities';
 import { PrivacyPolicyDialogComponent } from 'src/app/shared/privacy-policy-dialog/privacy-policy-dialog.component';
 import { TermsAndConditionsComponent } from 'src/app/shared/terms-and-conditions/terms-and-conditions.component';
@@ -73,6 +75,8 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
 
   private dialogSub: Subscription;
   private dialogInvoiceSub: Subscription;
+
+  public showAddressInput: boolean = SHOW_ADDRESS_INPUT;
 
   constructor(
     private readonly $store: Store<AppState>,

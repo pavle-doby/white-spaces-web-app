@@ -9,7 +9,9 @@ import { setShoppingCartCheckout } from '../store/actions/checkout.action';
 import { LocalStorageService } from '../services/local-storage.service';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { PackagesBox } from '../shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
-import { ProgressState, Step } from 'src/models/CheckoutProgress.model';
+import { getClientWidthPX } from '../shared/Utilities';
+import { BREAKING_POINT_PX } from '../app.config';
+import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 
 @Component({
   selector: 'app-checkout-page',
@@ -33,6 +35,10 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
+    if (BREAKING_POINT_PX > getClientWidthPX()) {
+      this.router.navigateByUrl(`/${MainRouterPaths.CHECKOUT_MESSAGE}`);
+    }
+
     this.subCheckoutState = this.$checkoutState.subscribe((ckState) => {
       this.package = ckState.packageBox;
     });

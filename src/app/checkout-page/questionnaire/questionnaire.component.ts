@@ -16,6 +16,7 @@ import { ProductVM } from 'src/models/ProductVM.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { TabbarText } from 'src/models/TabbarText.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
+import { QuestionStepper } from './question-stepper/question-stepper.model';
 
 const INFO = `Feel free to load us with information so that we
 can truly get to know you and your space. 
@@ -24,7 +25,7 @@ Tell us the details so we can extend its potential to the maximum.`;
 const INFO_DESC = `Your satisfaction with the end result has to do with the amount of information you share about your apartment with us. 
 You can ensure that your project is a resounding success by making us understand your needs!`;
 
-const IMAGE_IS_REQUIRED = 'Image is required.';
+const UPLOAD_MSG = 'Upload image';
 
 @Component({
   selector: 'app-questionnaire',
@@ -43,6 +44,9 @@ export class QuestionnaireComponent implements OnInit {
   public $subQuestions: Subscription;
   public questions: Question[];
 
+  public $questionStepper: Observable<QuestionStepper>;
+  public $subQuestionStepper: Subscription;
+
   public uploadData: UploadData;
 
   constructor(
@@ -50,6 +54,9 @@ export class QuestionnaireComponent implements OnInit {
     private readonly checkoutService: CheckoutService
   ) {
     this.$questions = this.$store.select((state) => state.checkout.questions);
+    this.$questionStepper = this.$store.select(
+      (state) => state.checkout.questionStepper
+    );
     this.$shoppingCartState = this.$store.select(
       (state) => state.checkout.shoppingCart
     );
@@ -65,14 +72,15 @@ export class QuestionnaireComponent implements OnInit {
     this.uploadData = new UploadData({
       limit: 1,
       info: '',
-      bottomInfo: IMAGE_IS_REQUIRED,
+      bottomInfo: UPLOAD_MSG,
       uppercaseButtonText: true,
     });
   }
 
   ngOnDestroy(): void {
-    if (this.$subQuestions) this.$subQuestions.unsubscribe();
-    if (this.$subShoppingCartState) this.$subShoppingCartState.unsubscribe();
+    this.$subQuestions.unsubscribe();
+    this.$subQuestionStepper.unsubscribe();
+    this.$subShoppingCartState.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -86,6 +94,12 @@ export class QuestionnaireComponent implements OnInit {
       this.questions = questions;
       this.chagneUploadInfo();
     });
+
+    this.$subQuestionStepper = this.$questionStepper.subscribe(
+      (questStepper) => {
+        this.toShowIndex = questStepper.indexCurrent;
+      }
+    );
 
     this.chagneUploadInfo();
   }
@@ -144,8 +158,8 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   public onUploadEvent(fileList: FileList): void {
-    console.log({fileList});
-    
+    console.log({ fileList });
+
     this.checkoutService
       .uploadFile(fileList[0])
       .toPromise()
@@ -208,7 +222,7 @@ export class QuestionnaireComponent implements OnInit {
   private chagneUploadInfo(): void {
     const imageIsUploaded = !!this.questions[this.toShowIndex]?.images?.length;
     this.uploadData.bottomInfo = imageIsUploaded
-      ? this.questions[this.toShowIndex].image_name ?? IMAGE_IS_REQUIRED
-      : IMAGE_IS_REQUIRED;
+      ? this.questions[this.toShowIndex].image_name ?? UPLOAD_MSG
+      : UPLOAD_MSG;
   }
 }
