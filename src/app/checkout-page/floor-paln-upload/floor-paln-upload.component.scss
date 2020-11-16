@@ -2,11 +2,19 @@
 
 .floor-plan-upload__container {
   height: 40vh;
+
+  @media screen and (max-width: 960px) {
+    height: 180px;
+  }
 }
 
 .floor-paln-upload__msg {
   font-size: 2vw;
   color: $color-primary-btn;
+
+  @media screen and (max-width: 960px) {
+    font-size: 20px;
+  }
 }
 
 .floor-plan-upload__file-name {

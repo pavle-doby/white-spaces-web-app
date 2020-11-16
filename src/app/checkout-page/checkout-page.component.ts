@@ -9,8 +9,7 @@ import { setShoppingCartCheckout } from '../store/actions/checkout.action';
 import { LocalStorageService } from '../services/local-storage.service';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { PackagesBox } from '../shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
-import { getClientWidthPX } from '../shared/Utilities';
-import { BREAKING_POINT_PX } from '../app.config';
+import { isHandset } from '../shared/Utilities';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 
 @Component({
@@ -23,6 +22,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
   public subCheckoutState: Subscription;
 
   public package: PackagesBox;
+  public isHandset: boolean = isHandset();
 
   constructor(
     private readonly router: Router,
@@ -35,7 +35,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
-    if (BREAKING_POINT_PX > getClientWidthPX()) {
+    if (this.isHandset) {
       this.router.navigateByUrl(`/${MainRouterPaths.CHECKOUT_MESSAGE}`);
     }
 

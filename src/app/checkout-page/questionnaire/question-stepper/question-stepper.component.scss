@@ -9,10 +9,19 @@ $border-width: 2px;
   border: $border-width solid skyblue;
   color: skyblue;
   cursor: pointer;
+
+  @media screen and (max-width: 960px) {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .question-stepper__label {
   font-size: 0.975vw;
+
+  @media screen and (max-width: 960px) {
+    font-size: 14px;
+  }
 }
 
 //If you change name of this class, change also class Step.

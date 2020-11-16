@@ -5,15 +5,12 @@
   fxLayoutAlign="center center"
   fxLayoutGap="2.5vw"
 >
-  <a
-    class="a__text-decoration--none cursor-pointer"
-    href="/home"
-  >
+  <a *ngIf="!this.isHandset" class="app__a--none cursor-pointer" href="/home">
     <img
       class="app__logo"
       src="assets/images/home/logo.png"
       alt="Website Logo"
-    >
+    />
   </a>
 
   <app-tabbar></app-tabbar>

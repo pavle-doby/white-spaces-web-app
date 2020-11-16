@@ -1,6 +1,7 @@
 import { Question } from 'src/models/Question.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
 import { TabbarText } from 'src/models/TabbarText.model';
+import { BREAKING_POINT_PX } from '../app.config';
 import { TabbarButton } from './tabbar/tabbar.content';
 
 /**
@@ -81,6 +82,12 @@ export const getClientWidthPX = (): number => {
     document.documentElement.clientWidth || 0,
     window.innerWidth || 0
   );
+};
+
+export const isHandset = (
+  breakingPoint: number = BREAKING_POINT_PX
+): boolean => {
+  return breakingPoint > getClientWidthPX();
 };
 
 export const firstToUpperCase = (str: string): string => {

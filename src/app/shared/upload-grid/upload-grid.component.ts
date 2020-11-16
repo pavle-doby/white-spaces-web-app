@@ -13,7 +13,7 @@ export class UploadGridComponent implements OnInit {
   @Input()
   public uploadData: UploadData;
   @Input()
-  public imgURLs: (string | ArrayBuffer)[] = [];
+  public imgURLs: (string | ArrayBuffer)[];
   @Input()
   public files: FileList;
   @Input()

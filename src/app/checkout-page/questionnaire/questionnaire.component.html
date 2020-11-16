@@ -1,8 +1,11 @@
 <div
   *ngIf="this.questions?.length"
+  class="questionnaire"
   fxLayout="column"
   fxLayoutAlign="center center"
+  fxLayoutAlign.lt-md="start center"
   fxLayoutGap="2vh"
+  fxLayoutGap.lt-md="10px"
 >
   <app-question-stepper
     (selectStepEvent)="this.moveQuestionTo($event.index)"

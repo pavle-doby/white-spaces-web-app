@@ -1,7 +1,4 @@
-import {
-  PackageType,
-  PackagesBox,
-} from 'src/app/shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
+import { PackagesBox } from 'src/app/shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
 import { AddOn } from 'src/models/AddOn';
 import { Question } from 'src/models/Question.model';
 import { Action, createReducer, on } from '@ngrx/store';
@@ -42,6 +39,8 @@ import {
 } from 'src/models/CheckoutProgress.model';
 import {
   calculateFinishedQuestions,
+  getClientWidthPX,
+  isHandset,
   updateTabbarBtnComplitedState,
 } from 'src/app/shared/Utilities';
 import { TabbarText } from 'src/models/TabbarText.model';
@@ -76,9 +75,11 @@ const getInitState = (): CheckoutState => {
     tabbarButtons: getTabbarContnet(),
     questionStepper: new QuestionStepper({
       rangeStart: 0,
-      rangeEnd: 15,
-      numberOfRangeToShow: 16,
-      numberOfSteps: LocalStorageService.Instance.Questions?.length ?? 16,
+      rangeEnd: isHandset() ? 4 : 15,
+      numberOfRangeToShow: isHandset() ? 5 : 16,
+      numberOfSteps:
+        LocalStorageService.Instance.Questions?.length ??
+        (isHandset() ? 5 : 16),
       indexCurrent: 0,
     }),
     shoppingCart: null,

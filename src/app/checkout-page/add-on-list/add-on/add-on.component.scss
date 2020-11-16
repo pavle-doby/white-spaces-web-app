@@ -1,7 +1,11 @@
 @import "src/styles-colors.scss";
 
 .add-on {
-  padding: 0.5vw 0 0.5vw 0;
+  padding: 0.5vw 0;
+
+  @media screen and (max-width: 960px) {
+    padding: 5px 0;
+  }
 }
 
 .add-on__btn {
@@ -13,14 +17,27 @@
   &:hover {
     color: $color-gray-5;
   }
+
+  @media screen and (max-width: 960px) {
+    margin-top: 5px;
+  }
 }
 
 .add-on__label {
   font-size: 1.7vw;
   font-weight: 400;
+
+  @media screen and (max-width: 960px) {
+    font-size: 18px;
+  }
 }
 
 .add-on__decription {
   padding: 0 6vw 0 2vw;
   font-size: 1vw;
+
+  @media screen and (max-width: 960px) {
+    font-size: 14px;
+    padding: 0;
+  }
 }
