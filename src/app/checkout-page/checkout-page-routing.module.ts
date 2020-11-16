@@ -53,7 +53,6 @@ const routes: Routes = [
     component: ReviewAndPayComponent,
     outlet: CHECKOUT_ROUTER_OUTLET,
   },
-
 ];
 
 @NgModule({
