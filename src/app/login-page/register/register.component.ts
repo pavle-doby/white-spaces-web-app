@@ -5,7 +5,11 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { CONFIRMATION_DIALOG_WIDTH, LoginParam } from 'src/app/app.config';
+import {
+  CONFIRMATION_DIALOG_WIDTH,
+  LoginParam,
+  SHOW_ADDRESS_INPUT,
+} from 'src/app/app.config';
 import { MatDialog } from '@angular/material/dialog';
 import {
   ConfirmationDialogComponent,
@@ -43,6 +47,8 @@ export class RegisterComponent implements OnInit {
 
   public requiredErorrMessage: string = 'required.';
   public passwordErrorMEssage: string = 'Your passwords are not same.';
+
+  public showAddresInput: boolean = SHOW_ADDRESS_INPUT;
 
   constructor(
     private readonly router: Router,
