@@ -66,7 +66,10 @@ $section-side-margin: 2.3vw;
 }
 
 .sc-contact__logo {
-  max-width: 40px;
+  width: 3vw;
+  @media screen and (max-width: 960px) {
+    width: 70px;
+  }
 }
 
 .sc-contact__input-label {

@@ -8,4 +8,5 @@ export enum MainRouterPaths {
   ABOUT = 'about',
   CONTACT = 'contact',
   THANK_YOU = 'thankyou',
+  CHECKOUT_MESSAGE = 'messageCheckout',
 }

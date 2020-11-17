@@ -1,6 +1,7 @@
 import { Question } from 'src/models/Question.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
 import { TabbarText } from 'src/models/TabbarText.model';
+import { BREAKING_POINT_PX } from '../app.config';
 import { TabbarButton } from './tabbar/tabbar.content';
 
 /**
@@ -71,11 +72,9 @@ export const calculateFinishedQuestions = (questions: Question[]): number => {
     : 0;
 };
 
+// Image is not required...
 export const isQuestionFullyAnswerd = (question: Question): boolean => {
-  return (
-    question.isAnswerd &&
-    (question.image_required ? !!question.images?.length : true)
-  );
+  return question.isAnswerd;
 };
 
 export const getClientWidthPX = (): number => {
@@ -83,6 +82,12 @@ export const getClientWidthPX = (): number => {
     document.documentElement.clientWidth || 0,
     window.innerWidth || 0
   );
+};
+
+export const isHandset = (
+  breakingPoint: number = BREAKING_POINT_PX
+): boolean => {
+  return breakingPoint > getClientWidthPX();
 };
 
 export const firstToUpperCase = (str: string): string => {

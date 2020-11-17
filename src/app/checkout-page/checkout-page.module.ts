@@ -13,6 +13,7 @@ import { LogoModule } from '../shared/logo/logo.module';
 import { TabbarModule } from '../shared/tabbar/tabbar.module';
 import { InfoModule } from '../shared/info/info.module';
 import { AddOnListModule } from './add-on-list/add-on-list.module';
+import { CheckoutMessagePageModule } from '../shared/checkout-message-page/checkout-message-page.module';
 
 @NgModule({
   declarations: [CheckoutPageComponent],
@@ -29,6 +30,7 @@ import { AddOnListModule } from './add-on-list/add-on-list.module';
     LogoModule,
     TabbarModule,
     InfoModule,
+    CheckoutMessagePageModule,
   ],
   exports: [CheckoutPageComponent],
 })

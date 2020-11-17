@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { Router } from '@angular/router';
 import { LinkText } from 'src/models/LinkText.model';
@@ -32,10 +29,7 @@ export class NavbarSmallSrceenComponent implements OnInit {
 
   public isHandset: boolean;
 
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    private readonly router: Router
-  ) {}
+  constructor(private readonly router: Router) {}
 
   ngOnInit(): void {
     this.isHandset = BREAKING_POINT_PX > getClientWidthPX();

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
@@ -12,13 +12,14 @@ import {
   ConfirmationDialogData,
   ConfirmationDialogType,
 } from 'src/app/shared/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   public email: string;
   public password: string;
 
@@ -26,6 +27,10 @@ export class LoginComponent implements OnInit {
   public isPasswordValid: boolean = true;
 
   public requiredErorrMessage: string = 'required.';
+
+  public loginReqCount: number = 0;
+
+  public subDialogClosed: Subscription;
 
   constructor(
     private readonly router: Router,
@@ -35,6 +40,9 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+  ngOnDestroy(): void {
+    if (this.subDialogClosed) this.subDialogClosed.unsubscribe();
+  }
 
   public areInputsValid(): boolean {
     this.isEmailValid = !!this.email;
@@ -56,7 +64,7 @@ export class LoginComponent implements OnInit {
         if (!res.user_info.verified) {
           this.dialog.open(ConfirmationDialogComponent, {
             width: CONFIRMATION_DIALOG_WIDTH,
-            disableClose: false,
+            disableClose: true,
             data: new ConfirmationDialogData({
               titleLabel: 'Registration',
               message: `We’ve sent a verification mail your way.\n Please check your inbox and click on the link we provided\n in order to finish the registration process.`,
@@ -69,7 +77,60 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl(`/${MainRouterPaths.CHECKOUT}`);
       })
       .catch((err) => {
+        this.loginReqCount++;
+        this.dialog.open(ConfirmationDialogComponent, {
+          disableClose: false,
+          data: new ConfirmationDialogData({
+            titleLabel: 'Error',
+            message: err.error,
+            type: ConfirmationDialogType.INFO,
+          }),
+        });
         console.error(err);
       });
+  }
+
+  public resetPassword(): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: CONFIRMATION_DIALOG_WIDTH,
+      data: new ConfirmationDialogData({
+        titleLabel: 'Are you sure?',
+        message: `If you reset your password, a new password will be sent to your email address.`,
+      }),
+    });
+
+    this.subDialogClosed = dialogRef.afterClosed().subscribe((IAmSure) => {
+      if (!IAmSure) {
+        return;
+      }
+
+      this.authService
+        .resetPassword(this.email)
+        .toPromise()
+        .then((res) => {
+          this.loginReqCount = 0;
+          const { message } = res;
+          this.dialog.open(ConfirmationDialogComponent, {
+            width: CONFIRMATION_DIALOG_WIDTH,
+            data: new ConfirmationDialogData({
+              titleLabel: 'Information',
+              message,
+              type: ConfirmationDialogType.INFO,
+            }),
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+          const { error } = err;
+          this.dialog.open(ConfirmationDialogComponent, {
+            width: CONFIRMATION_DIALOG_WIDTH,
+            data: new ConfirmationDialogData({
+              titleLabel: 'Error',
+              message: error,
+              type: ConfirmationDialogType.INFO,
+            }),
+          });
+        });
+    });
   }
 }
