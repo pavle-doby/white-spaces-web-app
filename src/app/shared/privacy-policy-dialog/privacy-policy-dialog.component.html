@@ -4,230 +4,245 @@
   fxLayoutAlign="start center"
   fxLayoutGap="10px"
 >
-  <div class="width-100" fxLayout="row" fxLayoutAlign="end center">
+  <div
+    class="width-100"
+    fxLayout="row"
+    fxLayoutAlign="end center"
+    mat-dialog-title
+  >
     <button mat-icon-button color="basic" [mat-dialog-close]>
       <mat-icon class="icon--small">close</mat-icon>
     </button>
   </div>
-  <div
-    class="width-100 children--no-margins"
-    fxLayout="column"
-    fxLayoutAlign="center center"
-    fxLayoutGap="10px"
-  >
-    <h3>-Privacy policy-</h3>
-    <h5>Last updated on 16th of October 2020</h5>
-  </div>
-  <div
-    class="width-100 children--no-margins"
-    fxLayout="column"
-    fxLayoutAlign="start start"
-    fxLayoutGap="10px"
-  >
-    <h4>Privacy and data protection</h4>
-    <p>
-      On the behalf of Natasa Nikolic PR Architecture Industry White Space
-      Renovation Aleksinac, hereinafter, WSR, we guarantee to protect the data
-      of all our customers, and in no circumstances handle it over to third
-      parties. We gather only the essential customer data needed for operating
-      and informing the users, to provide a high-quality service. Registered
-      users’ data such as the email address can be used for occasional or
-      frequent informing about new services or activities. WSR is responsible
-      for handling and gathering personal data. You can inquire further about
-      information privacy at
-      <a [href]="this.mailHref">
-        {{ this.mail }}
-      </a>
-      .The responsible person for handling the data is Natasa Nikolic.
-    </p>
-    <p>
-      For the reasons above, this is the data we collect from individuals: name
-      and last name, physical address, email address, and phone number; from
-      legal persons: company name, taxpayer identification number (TIN), if
-      there is one, company registration number (CRN), company headquarters
-      address, name and last name of the person representing the legal entity,
-      phone number of the person, email address of the person and the delivery
-      address (in case it differs from the headquarters’ address)
-    </p>
-    <p>
-      We hold on to the data of registered users until the moment the account is
-      deleted on their part.
-    </p>
-    <p>
-      By accepting the privacy policy, and terms and conditions, the customer
-      voluntarily consents to WSR gathering, editing, and holding on to their
-      data. The customer also consents to have their data edited in marketing,
-      research, and other purposes for the improvement and advancement of the
-      services.
-    </p>
-    <p>
-      The customer – individual has the right to demand editing or deleting
-      personal data, the right to object, and limit the use of data from WSR.
-    </p>
-    <p>
-      The customer – individual has the right to appeal to the Information
-      Commissioner's Office for personal data protection if he/she experiences a
-      breach of rights on the part of the company.
-    </p>
+  <mat-dialog-content>
+    <div
+      class="width-100 children--no-margins"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10px"
+    >
+      <h3>-Privacy policy-</h3>
+      <h5>Last updated on 16th of October 2020</h5>
+    </div>
+    <div
+      class="width-100 children--no-margins"
+      fxLayout="column"
+      fxLayoutAlign="start start"
+      fxLayoutGap="10px"
+    >
+      <h4>Privacy and data protection</h4>
+      <p>
+        On the behalf of Natasa Nikolic PR Architecture Industry White Space
+        Renovation Aleksinac, hereinafter, WSR, we guarantee to protect the data
+        of all our customers, and in no circumstances handle it over to third
+        parties. We gather only the essential customer data needed for operating
+        and informing the users, to provide a high-quality service. Registered
+        users’ data such as the email address can be used for occasional or
+        frequent informing about new services or activities. WSR is responsible
+        for handling and gathering personal data. You can inquire further about
+        information privacy at
+        <a [href]="this.mailHref">
+          {{ this.mail }}
+        </a>
+        .The responsible person for handling the data is Natasa Nikolic.
+      </p>
+      <p>
+        For the reasons above, this is the data we collect from individuals:
+        name and last name, physical address, email address, and phone number;
+        from legal persons: company name, taxpayer identification number (TIN),
+        if there is one, company registration number (CRN), company headquarters
+        address, name and last name of the person representing the legal entity,
+        phone number of the person, email address of the person and the delivery
+        address (in case it differs from the headquarters’ address)
+      </p>
+      <p>
+        We hold on to the data of registered users until the moment the account
+        is deleted on their part.
+      </p>
+      <p>
+        By accepting the privacy policy, and terms and conditions, the customer
+        voluntarily consents to WSR gathering, editing, and holding on to their
+        data. The customer also consents to have their data edited in marketing,
+        research, and other purposes for the improvement and advancement of the
+        services.
+      </p>
+      <p>
+        The customer – individual has the right to demand editing or deleting
+        personal data, the right to object, and limit the use of data from WSR.
+      </p>
+      <p>
+        The customer – individual has the right to appeal to the Information
+        Commissioner's Office for personal data protection if he/she experiences
+        a breach of rights on the part of the company.
+      </p>
 
-    <h4>User Registration Method</h4>
-    <p>
-      During the process of signing up, the users choose their username and
-      password that will be used to log in to the website
-      <a href="#">
-        {{ this.domainName }}
-      </a>
-      . The remembered data about a registered customer will be used for
-      processing the order, or occasionally sending notifications about
-      novelties, promotions, discounts, etc. In case the customer wishes to
-      unsubscribe from the mailing list, it is enough to click on the
-      unsubscribe button at the bottom of the email, which is when he/she will
-      be unregistered from the newsletter list.
-    </p>
-    <p>
-      All registered users are responsible for maintaining and confidentiality
-      of the account and passwords.
-    </p>
-    <p>
-      Registered users have the right to delete their account at any moment by
-      sending an email with their personal information at
-      <a [href]="this.mailHref">
-        {{ this.mail }}
-      </a>
-      . In the following 48 hours, they will receive the email confirmation
-      about account removal.
-    </p>
-    <h4>Cookies</h4>
-    <p>
-      Just like most websites, our portal uses ‘cookies’. Cookies are small text
-      files that your internet browser stores on your computer to help identify
-      future visits on websites. Cookies are uniquely assigned to you and they
-      can be read only by the webserver which issued the cookie.
-    </p>
-    <p>
-      The use of cookies is a standard procedure online and most of the browsers
-      have been set to automatically accept all of the cookies. However, you can
-      always decide to stop using them. You can manually delete the cookies or
-      adjust the browser settings to operate with cookies.
-    </p>
-    <p>
-      Our website uses cookies only to provide you with a higher quality
-      interaction with the portal, to statistically analyze the website traffic,
-      and optimize our digital marketing by using Google Analytics and Google
-      Ads.
-    </p>
-    <h4>Website analysis with Google Analytics</h4>
-    <p>
-      We use Google Analytics on our website, the service for web analysis
-      Google Inc. Google Analytics uses cookies that are stored on your computer
-      and that enable the analysis of the website use. The data generated by the
-      cookie about your activity on the website is usually sent to a Google
-      server in Europe (or a member state of the European economic area) to make
-      the IP address anonymous and exclude the personal reference. After the IP
-      address has been made anonymous, the reduced address is transferred and
-      stored on the Google server in the USA. The IP address will be sent
-      directly to the Google server in the USA and reduced there, only in
-      extreme circumstances. This website uses Google Analytics with the
-      extension to anonymously gather IP addresses (the so-called IP masking).
-      On the behalf of our company, Google will use the collected data to
-      examine your use of the website, make reports about the website activity
-      and offer us other various services connected to the use of the website
-    </p>
-    <p>
-      The IP address that your browser is transferring in the context of Google
-      Analytics is not combined with other Google data. You can opt out of the
-      use of cookies by setting the right parameters in your browser.
-    </p>
-    <p>
-      However, we would like to emphasize that in this case, you won’t be able
-      to use all of the services on our website. Furthermore, you can prevent
-      Google from collecting and editing your data generated by cookies that
-      have to do with the website use (including the IP address) by downloading
-      and installing the extension from the link:
-      <a href="http://tools.google.com/dlpage/gaoptout?hl=en">
-        http://tools.google.com/dlpage/gaoptout?hl=en
-      </a>
-      . When you visit this website, a cookie for preventing the data collection
-      becomes active. For more information on data protection in Google
-      Analytics visit:
-      <a href="https://www.google.com/analytics/terms/gb.html">
-        https://www.google.com/analytics/terms/gb.html
-      </a>
-      and
-      <a href="https://support.google.com/analytics/answer/6004245?hl=en">
-        https://support.google.com/analytics/answer/6004245?hl=en
-      </a>
-    </p>
-    <h4>AMAZON WEB SERVICES</h4>
-    <p>
-      WSR uses Amazon web services platform for storing the emails and documents
-      concerning the questionnaire. By accepting the privacy policy of WSR, the
-      customer accepts the privacy policy of the Amazon web service. Find more
-      about the Amazon service privacy policy on the following link
-      <a href="https://aws.amazon.com/privacy/">
-        https://aws.amazon.com/privacy/
-      </a>
-      .
-    </p>
-    <h4>Facebook</h4>
-    <p>
-      We have integrated the access to Facebook social network on our website.
-      We have no information about the content of the data transmission or their
-      use by Facebook. We don’t have insight into your activity on Facebook, nor
-      can we be held accountable for links that have been placed by a third
-      person (that are according to these terms). For more information on how
-      Facebook uses your data, please take a look at Facebook’s privacy policy
-      <a href="https://www.facebook.com/about/privacy/update">
-        https://www.facebook.com/about/privacy/update
-      </a>
-      .
-    </p>
-    <h4>LINKEDIN</h4>
-    <p>
-      We have integrated the access to social network LINKEDIN on our website.
-      We have no information about the content of the data transmission or their
-      use by LINKEDIN. We don’t have insight into your activity on LINKEDIN, nor
-      can we be held accountable for links that have been placed by a third
-      person (that are according to these terms). For more information on how
-      LINKEDIN uses your data, please take a look at their privacy policy
-      <a href="https://www.linkedin.com/legal/privacy-policy">
-        https://www.linkedin.com/legal/privacy-policy
-      </a>
-    </p>
-    <h4>INSTAGRAM</h4>
-    <p>
-      We have integrated the access to social network INSTAGRAM on our website.
-      We have no information about the content of the data transmission or their
-      use by INSTAGRAM. We don’t have insight into your activity on INSTAGRAM,
-      nor can we be held accountable for links that have been placed by a third
-      person (that are according to these terms). For more information on how
-      INSTAGRAM uses your data, please take a look at their privacy policy -
-      <a href="https://help.instagram.com/519522125107875">
-        https://help.instagram.com/519522125107875
-      </a>
-    </p>
-    <h4>PINTEREST</h4>
-    <p>
-      We have integrated the access to social network PINTEREST on our website.
-      We have no information about the content of the data transmission or their
-      use by PINTEREST. We don’t have insight into your activity on PINTEREST,
-      nor can we be held accountable for links that have been placed by a third
-      person (that are according to these terms). For more information on how
-      PINTEREST uses your data, please take a look at their privacy policy
-      <a href="https://www.pinterest.com/_/_/about/privacy/">
-        https://www.pinterest.com/_/_/about/privacy/
-      </a>
-    </p>
-    <h4>Changes of the privacy policy</h4>
-    <p>
-      It is our right to change our privacy policy at any time without notifying
-      and asking for the customers’ consent. Any change of the privacy policy of
-      the website will be posted on this page and is valid from the moment of
-      posting.
-    </p>
-  </div>
+      <h4>User Registration Method</h4>
+      <p>
+        During the process of signing up, the users choose their username and
+        password that will be used to log in to the website
+        <a href="#">
+          {{ this.domainName }}
+        </a>
+        . The remembered data about a registered customer will be used for
+        processing the order, or occasionally sending notifications about
+        novelties, promotions, discounts, etc. In case the customer wishes to
+        unsubscribe from the mailing list, it is enough to click on the
+        unsubscribe button at the bottom of the email, which is when he/she will
+        be unregistered from the newsletter list.
+      </p>
+      <p>
+        All registered users are responsible for maintaining and confidentiality
+        of the account and passwords.
+      </p>
+      <p>
+        Registered users have the right to delete their account at any moment by
+        sending an email with their personal information at
+        <a [href]="this.mailHref">
+          {{ this.mail }}
+        </a>
+        . In the following 48 hours, they will receive the email confirmation
+        about account removal.
+      </p>
+      <h4>Cookies</h4>
+      <p>
+        Just like most websites, our portal uses ‘cookies’. Cookies are small
+        text files that your internet browser stores on your computer to help
+        identify future visits on websites. Cookies are uniquely assigned to you
+        and they can be read only by the webserver which issued the cookie.
+      </p>
+      <p>
+        The use of cookies is a standard procedure online and most of the
+        browsers have been set to automatically accept all of the cookies.
+        However, you can always decide to stop using them. You can manually
+        delete the cookies or adjust the browser settings to operate with
+        cookies.
+      </p>
+      <p>
+        Our website uses cookies only to provide you with a higher quality
+        interaction with the portal, to statistically analyze the website
+        traffic, and optimize our digital marketing by using Google Analytics
+        and Google Ads.
+      </p>
+      <h4>Website analysis with Google Analytics</h4>
+      <p>
+        We use Google Analytics on our website, the service for web analysis
+        Google Inc. Google Analytics uses cookies that are stored on your
+        computer and that enable the analysis of the website use. The data
+        generated by the cookie about your activity on the website is usually
+        sent to a Google server in Europe (or a member state of the European
+        economic area) to make the IP address anonymous and exclude the personal
+        reference. After the IP address has been made anonymous, the reduced
+        address is transferred and stored on the Google server in the USA. The
+        IP address will be sent directly to the Google server in the USA and
+        reduced there, only in extreme circumstances. This website uses Google
+        Analytics with the extension to anonymously gather IP addresses (the
+        so-called IP masking). On the behalf of our company, Google will use the
+        collected data to examine your use of the website, make reports about
+        the website activity and offer us other various services connected to
+        the use of the website
+      </p>
+      <p>
+        The IP address that your browser is transferring in the context of
+        Google Analytics is not combined with other Google data. You can opt out
+        of the use of cookies by setting the right parameters in your browser.
+      </p>
+      <p>
+        However, we would like to emphasize that in this case, you won’t be able
+        to use all of the services on our website. Furthermore, you can prevent
+        Google from collecting and editing your data generated by cookies that
+        have to do with the website use (including the IP address) by
+        downloading and installing the extension from the link:
+        <a href="http://tools.google.com/dlpage/gaoptout?hl=en">
+          http://tools.google.com/dlpage/gaoptout?hl=en
+        </a>
+        . When you visit this website, a cookie for preventing the data
+        collection becomes active. For more information on data protection in
+        Google Analytics visit:
+        <a href="https://www.google.com/analytics/terms/gb.html">
+          https://www.google.com/analytics/terms/gb.html
+        </a>
+        and
+        <a href="https://support.google.com/analytics/answer/6004245?hl=en">
+          https://support.google.com/analytics/answer/6004245?hl=en
+        </a>
+      </p>
+      <h4>AMAZON WEB SERVICES</h4>
+      <p>
+        WSR uses Amazon web services platform for storing the emails and
+        documents concerning the questionnaire. By accepting the privacy policy
+        of WSR, the customer accepts the privacy policy of the Amazon web
+        service. Find more about the Amazon service privacy policy on the
+        following link
+        <a href="https://aws.amazon.com/privacy/">
+          https://aws.amazon.com/privacy/
+        </a>
+        .
+      </p>
+      <h4>Facebook</h4>
+      <p>
+        We have integrated the access to Facebook social network on our website.
+        We have no information about the content of the data transmission or
+        their use by Facebook. We don’t have insight into your activity on
+        Facebook, nor can we be held accountable for links that have been placed
+        by a third person (that are according to these terms). For more
+        information on how Facebook uses your data, please take a look at
+        Facebook’s privacy policy
+        <a href="https://www.facebook.com/about/privacy/update">
+          https://www.facebook.com/about/privacy/update
+        </a>
+        .
+      </p>
+      <h4>LINKEDIN</h4>
+      <p>
+        We have integrated the access to social network LINKEDIN on our website.
+        We have no information about the content of the data transmission or
+        their use by LINKEDIN. We don’t have insight into your activity on
+        LINKEDIN, nor can we be held accountable for links that have been placed
+        by a third person (that are according to these terms). For more
+        information on how LINKEDIN uses your data, please take a look at their
+        privacy policy
+        <a href="https://www.linkedin.com/legal/privacy-policy">
+          https://www.linkedin.com/legal/privacy-policy
+        </a>
+      </p>
+      <h4>INSTAGRAM</h4>
+      <p>
+        We have integrated the access to social network INSTAGRAM on our
+        website. We have no information about the content of the data
+        transmission or their use by INSTAGRAM. We don’t have insight into your
+        activity on INSTAGRAM, nor can we be held accountable for links that
+        have been placed by a third person (that are according to these terms).
+        For more information on how INSTAGRAM uses your data, please take a look
+        at their privacy policy -
+        <a href="https://help.instagram.com/519522125107875">
+          https://help.instagram.com/519522125107875
+        </a>
+      </p>
+      <h4>PINTEREST</h4>
+      <p>
+        We have integrated the access to social network PINTEREST on our
+        website. We have no information about the content of the data
+        transmission or their use by PINTEREST. We don’t have insight into your
+        activity on PINTEREST, nor can we be held accountable for links that
+        have been placed by a third person (that are according to these terms).
+        For more information on how PINTEREST uses your data, please take a look
+        at their privacy policy
+        <a href="https://www.pinterest.com/_/_/about/privacy/">
+          https://www.pinterest.com/_/_/about/privacy/
+        </a>
+      </p>
+      <h4>Changes of the privacy policy</h4>
+      <p>
+        It is our right to change our privacy policy at any time without
+        notifying and asking for the customers’ consent. Any change of the
+        privacy policy of the website will be posted on this page and is valid
+        from the moment of posting.
+      </p>
+    </div>
+  </mat-dialog-content>
+
   <div
-    class="width-100 doucment__dialog-action"
+    class="doucment__dialog-action"
     fxLayout="row"
     fxLayoutAlign="center center"
   >
