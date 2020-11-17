@@ -2,6 +2,9 @@
 
 .you-get__container {
   width: 80vw;
+  @media only screen and(min-width:959px) {
+    margin-left:25vw;
+  }
 
   app-opening-label {
     @media only screen and(max-width:959px) {
