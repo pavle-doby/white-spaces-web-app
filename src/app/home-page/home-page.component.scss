@@ -8,24 +8,24 @@
 .home-page__img {
   position: absolute;
   background-repeat: no-repeat;
-  &--we {
-    height: 39%;
+  &--closer {
+    height: 70%;
     left: 140vw;
     z-index: -1;
-    top: 55vh;
+    top: 50vh;
   }
 
-  &--how {
-    height: 35%;
-    left: 215vw;
+  &--to {
+    height: 85%;
+    left: 230vw;
     z-index: -1;
     top: 0vh;
   }
 
-  &--what {
-    height: 35%;
-    left: 345vw;
+  &--home {
+    height: 80%;
+    left: 320vw;
     z-index: -1;
-    top: 55vh;
+    top: 40vh;
   }
 }
