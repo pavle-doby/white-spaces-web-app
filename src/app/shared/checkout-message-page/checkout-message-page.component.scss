@@ -5,8 +5,12 @@
   height: 95vh;
 }
 
+.checkout-message__content {
+  max-width: 300px;
+}
+
 .checkout-message__text--big {
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 400;
   margin: 0;
 }
@@ -16,5 +20,5 @@
 }
 
 .checkout-message__footer {
-  margin-bottom: 3vh;
+  margin-bottom: 30px;
 }

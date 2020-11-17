@@ -17,6 +17,7 @@ import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { TabbarText } from 'src/models/TabbarText.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
 import { QuestionStepper } from './question-stepper/question-stepper.model';
+import { TooltipPosition } from 'src/models/TooltipPosition.model';
 
 const INFO = `Feel free to load us with information so that we
 can truly get to know you and your space. 
@@ -25,7 +26,9 @@ Tell us the details so we can extend its potential to the maximum.`;
 const INFO_DESC = `Your satisfaction with the end result has to do with the amount of information you share about your apartment with us. 
 You can ensure that your project is a resounding success by making us understand your needs!`;
 
-const UPLOAD_MSG = 'Upload image';
+const UPLOAD_MSG = 'Upload photo';
+const UPLOAD_TOOLTIP_INFO =
+  'You can upload only one photo at the moment. Please, send us the rest of them via email.';
 
 @Component({
   selector: 'app-questionnaire',
@@ -74,6 +77,8 @@ export class QuestionnaireComponent implements OnInit {
       info: '',
       bottomInfo: UPLOAD_MSG,
       uppercaseButtonText: true,
+      tooltipContent: UPLOAD_TOOLTIP_INFO,
+      tooltipPosition: TooltipPosition.RIGHT,
     });
   }
 

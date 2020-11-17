@@ -74,7 +74,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
       );
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      // alert(error.message);
     }
   }
 
