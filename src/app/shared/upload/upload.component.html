@@ -18,9 +18,25 @@
     >
       Upload
     </button>
-    <span *ngIf="this.data?.bottomInfo" class="upload__info--bottom">
-      {{ this.data.bottomInfo }}
-    </span>
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="3px">
+      <span *ngIf="this.data?.bottomInfo" class="upload__info--bottom">
+        {{ this.data.bottomInfo }}
+      </span>
+      <span
+        *ngIf="this.data?.tooltipContent"
+        class="upload__info--tooltip-icon-span"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+      >
+        <mat-icon
+          class="upload__info--tooltip-icon"
+          [matTooltip]="this.data?.tooltipContent"
+          [matTooltipPosition]="this.data?.tooltipPosition"
+        >
+          info
+        </mat-icon>
+      </span>
+    </div>
     <input
       style="display: none"
       type="file"
