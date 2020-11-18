@@ -73,7 +73,7 @@ export class RegisterComponent implements OnInit {
       disableClose: true,
       data: new ConfirmationDialogData({
         titleLabel: 'Notice',
-        message: `Please note that at this point \n we only work on apartment renovation projects.\n Unfortunatelly at this moment any other type\n of project will be denied and fully refunded.`,
+        message: `Please note that at this point \n we only work on apartment renovation projects.\n Unfortunately at this moment any other type\n of project will be denied and fully refunded.`,
         type: ConfirmationDialogType.INFO,
       }),
     });
