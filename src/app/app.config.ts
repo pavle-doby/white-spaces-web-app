@@ -1,5 +1,5 @@
-export const API_URL = 'http://18.221.175.43';
-// export const API_URL = '';
+//export const API_URL = 'http://18.221.175.43';
+export const API_URL = '';
 
 export const MAIL_FOR_CLIENTS = 'clients@whitespacerenovation.com';
 export const DOMAIN_NAME = 'www.whitespacerenoation.com';
