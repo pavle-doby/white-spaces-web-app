@@ -33,8 +33,7 @@
 
 .home__container::after {
   content: "";
-  background:url("src/assets/images/home/HomeBackground.png") no-repeat
-    center;
+  background: url("src/assets/images/home/HomeBackground.png") no-repeat center;
   background-size: 35%;
   opacity: 0.75;
   top: 25vh;

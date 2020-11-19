@@ -7,20 +7,21 @@ import {
   checkoutSelectPackage,
   setQuestionStepperCheckout,
   setQuestionsCheckout,
-  setAllPackagesCheckout,
 } from 'src/app/store/actions/checkout.action';
 import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 import { BREAKING_POINT_PX, LoginParam } from 'src/app/app.config';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
-import { convertQuestionsDTOListToQuestionsList, getClientWidthPX } from '../Utilities';
-import { async } from '@angular/core/testing';
+import {
+  getClientWidthPX,
+} from '../Utilities';
 import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { closeNavbarCard } from 'src/app/store/actions/navbar.actions';
 import { EVERY_PACKAGE_INCLUDES } from './side-card-packages.content';
+import { ShoppingCart } from 'src/models/ShoppingCart.model';
 
 @Component({
   selector: 'app-side-card-packages',
@@ -47,26 +48,14 @@ export class SideCardPackagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.isHandset = BREAKING_POINT_PX > getClientWidthPX();
-    
+
     this.CheckOutService.getAllPackages().subscribe(async (allPackages) => {
       LocalStorageService.Instance.PackageCategroyId = allPackages?.length
         ? allPackages[0].category_id
         : null;
 
       this.packages = allPackages.map((packageDTO) => {
-        const buffQuestions = convertQuestionsDTOListToQuestionsList(
-          packageDTO.additional_data.questions,
-          packageDTO
-        );
-        const box = new PackagesBox(
-          packageDTO.name,
-          packageDTO.price,
-          packageDTO.data.description,
-          packageDTO.additional_data.type,
-          buffQuestions,
-          packageDTO.id
-        );
-
+        const box = ShoppingCart.convertPackageProductToPackageBox(packageDTO);
         return new SideCadrPackage(box, []);
       });
     });

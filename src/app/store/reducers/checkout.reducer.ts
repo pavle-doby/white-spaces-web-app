@@ -63,7 +63,7 @@ export interface CheckoutState {
 
 const getInitState = (): CheckoutState => {
   let initState: CheckoutState = {
-    packageBox: LocalStorageService.Instance.Package,
+    packageBox: null,
     allPackageCards: [],
     info: 'Welcome to your renovation project!',
     infoDesc: [''],
@@ -135,9 +135,17 @@ const reducer = createReducer(
     return { ...getInitState() };
   }),
   on(setShoppingCartCheckout, (state, { shoppingCart }) => {
-    LocalStorageService.Instance.ShoppingCart = shoppingCart;
     console.log('From BE', { shoppingCart });
-    return { ...state, shoppingCart: shoppingCart };
+    const ppPackage = ShoppingCart.getPackageProduct(shoppingCart);
+    const pliPackage = ShoppingCart.getPackageLineItem(shoppingCart);
+    const packageBox = ShoppingCart.convertPackageProductToPackageBox(
+      ppPackage
+    );
+    console.log({ ppPackage });
+    console.log({ pliPackage });
+    console.log({ packageBox });
+
+    return { ...state, shoppingCart, packageBox };
   }),
   on(setTabbarStateCheckout, (state, { buttons }) => {
     return { ...state, tabbarButtons: buttons };
@@ -156,8 +164,7 @@ const reducer = createReducer(
     return { ...state, allPackageCards: packages };
   }),
   on(checkoutSelectPackage, (state, { packageBox }) => {
-    LocalStorageService.Instance.Package = packageBox;
-    return { ...state, packageBox: packageBox };
+    return { ...state, packageBox };
   }),
   on(setInfoCheckout, (state, { info, description }) => {
     return { ...state, info: info, infoDesc: description };
@@ -314,8 +321,6 @@ const reducer = createReducer(
     return { ...state, addOnList: addOnList, tabbarButtons: newTabbarState };
   }),
   on(setQuestionsCheckout, (state, { questions }) => {
-    LocalStorageService.Instance.Questions = questions;
-
     const finished = calculateFinishedQuestions(questions);
     const total = questions.length;
     const isDone = finished === total;
@@ -352,8 +357,6 @@ const reducer = createReducer(
     const newQuestions = state.questions.map((q) => {
       return q.id === question.id ? { ...question } : { ...q };
     });
-
-    LocalStorageService.Instance.Questions = newQuestions;
 
     let finished = calculateFinishedQuestions(newQuestions);
     let total = newQuestions.length;

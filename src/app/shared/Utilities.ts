@@ -4,6 +4,10 @@ import { TabbarText } from 'src/models/TabbarText.model';
 import { BREAKING_POINT_PX } from '../app.config';
 import { TabbarButton } from './tabbar/tabbar.content';
 
+export const clone = (x: Object | Array<any>): Object | Array<any> => {
+  return JSON.parse(JSON.stringify(x));
+};
+
 /**
  * Generates arraye with ragne values for start to end
  * @param {numbet} start value where range starts
@@ -72,7 +76,6 @@ export const calculateFinishedQuestions = (questions: Question[]): number => {
     : 0;
 };
 
-// Image is not required...
 export const isQuestionFullyAnswerd = (question: Question): boolean => {
   return question.isAnswerd;
 };
@@ -92,8 +95,4 @@ export const isHandset = (
 
 export const firstToUpperCase = (str: string): string => {
   return str.slice(0, 1).toUpperCase() + str.slice(1).toLowerCase();
-};
-
-export const clone = <T>(x: Object | Array<any>): T => {
-  return JSON.parse(JSON.stringify(x));
 };

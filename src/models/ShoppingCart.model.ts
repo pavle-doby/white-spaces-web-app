@@ -1,4 +1,6 @@
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { PackagesBox } from 'src/app/shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
+import { convertQuestionsDTOListToQuestionsList } from 'src/app/shared/Utilities';
 import { LineIntem } from './LineItem.model';
 import { Product } from './Product.model';
 
@@ -16,6 +18,24 @@ export class ShoppingCart {
         (prod) =>
           prod.category_id === LocalStorageService.Instance.PackageCategroyId
       );
+  }
+
+  public static convertPackageProductToPackageBox(
+    product: Product
+  ): PackagesBox {
+    const buffQuestions = convertQuestionsDTOListToQuestionsList(
+      product.additional_data.questions,
+      product
+    );
+    const box = new PackagesBox(
+      product.name,
+      product.price,
+      product.data.description,
+      product.additional_data.type,
+      buffQuestions,
+      product.id
+    );
+    return box;
   }
 
   public static getPackageLineItem(shoppingCart: ShoppingCart): LineIntem {

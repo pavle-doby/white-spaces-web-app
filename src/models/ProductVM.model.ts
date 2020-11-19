@@ -1,4 +1,4 @@
-import { AdditionalData, AdditionalDataLineItem } from './AdditionalData.model';
+import { AdditionalDataLineItem } from './AdditionalData.model';
 
 export class ProductVM {
   public shopping_cart_id?: number; // id shopping carta iz prethodnog poziva

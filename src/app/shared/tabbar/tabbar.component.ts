@@ -47,12 +47,6 @@ export class TabbarComponent implements OnInit, OnDestroy {
       this.selectedButton = { ...newTabbarState[selectedIndex] };
       this.prevButton = prevIndex !== null ? newTabbarState[prevIndex] : null;
       this.nextButton = nextIndex ? newTabbarState[nextIndex] : null;
-
-      // if (this.selectedButton.text === TabbarText.QUESTIONNARIE) {
-      //   this.selectedButton.text = 'Questionnaire';
-      // }
-
-      console.log(this);
     });
   }
 

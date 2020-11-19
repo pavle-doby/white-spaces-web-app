@@ -9,14 +9,12 @@ import { PackagesBox } from '../shared/side-card-packages/side-card-packages-box
 export const BEARER = ' Bearer ';
 
 export enum LocalStorageKey {
-  PACKAGE = 'package',
   PACKAGE_CATEGORY_ID = 'PACKAGE_CATEGORY_ID',
   ADDON_CATEGORY_ID = 'ADDON_CATEGORY_ID',
   FLOOR_PLAN = 'floor-plan-link',
   SPACE_PHOTOS_URLS = 'space-photos-urls',
   ADD_ON_LIST = 'add-ons',
   QUESTIONS = 'questions',
-  SHOPPING_CART = 'shopping-cart',
   USER = 'user',
   AUTH_TOKEN = 'auth-token',
 }
@@ -67,16 +65,6 @@ export class LocalStorageService {
     return obj ? new FloorPlan(obj) : null;
   }
 
-  public set ShoppingCart(obj: ShoppingCart) {
-    this.storage.setItem(LocalStorageKey.SHOPPING_CART, JSON.stringify(obj));
-  }
-
-  public get ShoppingCart(): ShoppingCart {
-    return JSON.parse(
-      this.storage.getItem(LocalStorageKey.SHOPPING_CART)
-    ) as ShoppingCart;
-  }
-
   public get Questions(): Question[] {
     return JSON.parse(
       this.storage.getItem(LocalStorageKey.QUESTIONS)
@@ -124,14 +112,6 @@ export class LocalStorageService {
 
   public set User(user: AppUser) {
     this.storage.setItem(LocalStorageKey.USER, JSON.stringify(user));
-  }
-
-  public get Package(): PackagesBox {
-    return JSON.parse(this.storage.getItem(LocalStorageKey.PACKAGE));
-  }
-
-  public set Package(packageBox: PackagesBox) {
-    this.storage.setItem(LocalStorageKey.PACKAGE, JSON.stringify(packageBox));
   }
 
   public get PackageCategroyId(): number {

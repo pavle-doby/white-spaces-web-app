@@ -11,6 +11,7 @@ import { ProductVM } from 'src/models/ProductVM.model';
 import { PackagesBox } from '../shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
 import { isHandset } from '../shared/Utilities';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
+import { ShoppingCart } from 'src/models/ShoppingCart.model';
 
 @Component({
   selector: 'app-checkout-page',
@@ -47,15 +48,9 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
       let shoppingCart = await this.checkoutService
         .getShoppingCart()
         .toPromise();
-      const package_ = shoppingCart.line_items
-        .map((lineItem) => lineItem.product)
-        .find((product) => {
-          return (
-            product.category_id ===
-            LocalStorageService.Instance.PackageCategroyId
-          );
-        });
 
+      const package_ = ShoppingCart.getPackageProduct(shoppingCart); 
+      
       if (!package_) {
         const productVM: ProductVM = {
           shopping_cart_id: shoppingCart.id,
@@ -74,7 +69,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
       );
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      // alert(error.message);
     }
   }
 
