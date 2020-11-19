@@ -49,6 +49,6 @@ export class AdminPackagesComponent implements OnInit {
   ngOnInit(): void {}
 
   save($event: any) {
-    //console.log($event);
+    // 
   }
 }

@@ -52,7 +52,7 @@ export class TabbarComponent implements OnInit, OnDestroy {
       //   this.selectedButton.text = 'Questionnaire';
       // }
 
-      console.log(this);
+       
     });
   }
 

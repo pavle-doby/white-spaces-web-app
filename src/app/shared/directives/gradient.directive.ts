@@ -128,7 +128,7 @@ export class GradientDirective implements OnInit {
       );
     }
 
-    //console.log(newStartRGB, newEndRGB);
+    // 
     // this.element.nativeElement.style.background = `linear-gradient(90deg,
     //      rgba(${242 - newStartRGB[0]}, ${232 - newStartRGB[1]}, ${
     //   220 - newStartRGB[2]
@@ -163,7 +163,7 @@ export class GradientDirective implements OnInit {
   private calculateBothHalvesGradient() {}
 
   // ngOnInit() {
-  //   //console.log(this.element);
+  //   // 
   // }
 }
 

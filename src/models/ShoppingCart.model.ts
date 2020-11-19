@@ -45,13 +45,13 @@ export class ShoppingCart {
 
     newShoppingCart.line_items = newShoppingCart.line_items.filter(
       (lineItem) => {
-        console.log(lineItem.id);
-        console.log(lineItemId);
+         
+         
         return lineItem.id !== lineItemId;
       }
     );
 
-    console.log(newShoppingCart.line_items);
+     
     return newShoppingCart;
   }
 }

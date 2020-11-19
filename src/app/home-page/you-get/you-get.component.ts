@@ -47,6 +47,6 @@ export class YouGetComponent implements OnInit, OnDestroy {
   }
 
   public downloadPackage(): void {
-    console.log('downloadPackage');
+     
   }
 }

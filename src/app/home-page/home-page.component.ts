@@ -43,11 +43,11 @@ export class HomePageComponent implements OnInit {
     }
     this.matcher = this.mediaMatcher.matchMedia(MEDIA_QUERY_WIDTH);
     this.matcher.addListener((event) => {
-      console.log(event.matches);
+       
       this.window.document.body.style.width = event.matches ? '100vw' : '450vw';
     });
     // this.isHandset$.subscribe((res) => {
-    //   console.log(res);
+    //    
 
     //   if (res) {
     //     this.window.document.body.style.width = '100vw';
@@ -64,12 +64,12 @@ export class HomePageComponent implements OnInit {
   onKeyDown(event: KeyboardEvent) {
     switch (event.key) {
       case 'ArrowRight': {
-        console.log('ArrowRight - dodaj skrol');
+         
 
         break;
       }
       case 'ArrowLeft': {
-        console.log('ArrowLeft - dodaj skrol');
+         
 
         break;
       }
