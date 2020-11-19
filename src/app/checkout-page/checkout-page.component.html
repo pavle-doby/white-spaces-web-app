@@ -1,0 +1,24 @@
+<div
+  *ngIf="this.$checkoutState | async"
+  class="checkout-page"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  fxLayoutGap="2.5vw"
+>
+  <a *ngIf="!this.isHandset" class="app__a--none cursor-pointer" href="/home">
+    <img
+      class="app__logo"
+      src="assets/images/home/logo.png"
+      alt="Website Logo"
+    />
+  </a>
+
+  <app-tabbar></app-tabbar>
+  <app-info
+    [info]="(this.$checkoutState | async).info"
+    [description]="(this.$checkoutState | async).infoDesc"
+  ></app-info>
+  <div>
+    <ng-content></ng-content>
+  </div>
+</div>

@@ -1,0 +1,335 @@
+<div
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  fxLayoutGap=".52vw"
+  fxHide.lt-md
+  *ngIf="!this.isHandset"
+>
+  <div fxFlex="12"></div>
+  <div
+    fxLayout="column"
+    fxLayoutAlign="space-between center"
+    fxLayoutGap=".12vw"
+  >
+    <div fxLayout="row" fxLayoutAlign="start center" fxFill>
+      <span class="sc-contact__title app__text-shadow"> CONTACT US </span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start">
+      <!-- Form -->
+      <div
+        class="sc-contact__form"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap=".52vw"
+      >
+        <!-- first section (grid input) -->
+        <div
+          class="sc-contact__form--width"
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+        >
+          <div fxLayout="column" fxLayoutAlign="start start">
+            <span
+              class="sc-contact__input-label"
+              [ngClass]="{ 'label--error': !this.isNameValid }"
+            >
+              Name*
+            </span>
+            <input
+              class="sc-contact__grid-input"
+              type="text"
+              [(ngModel)]="this.name"
+              (input)="this.$isNameValid.next($event.target.value)"
+            />
+          </div>
+          <div fxLayout="column" fxLayoutAlign="start start">
+            <span
+              class="sc-contact__input-label"
+              [ngClass]="{ 'label--error': !this.isCityValid }"
+            >
+              City*
+            </span>
+            <input
+              class="sc-contact__grid-input"
+              type="text"
+              [(ngModel)]="this.city"
+              (input)="this.$isCityValid.next($event.target.value)"
+            />
+          </div>
+        </div>
+        <div
+          class="sc-contact__form--width"
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+        >
+          <div fxLayout="column" fxLayoutAlign="start start">
+            <span
+              class="sc-contact__input-label"
+              [ngClass]="{ 'label--error': !this.isMailValid }"
+            >
+              E-mail*
+            </span>
+            <input
+              class="sc-contact__grid-input"
+              type="email"
+              [(ngModel)]="this.mail"
+              (input)="this.$isMailValid.next($event.target.value)"
+            />
+          </div>
+          <div fxLayout="column" fxLayoutAlign="start start">
+            <span
+              class="sc-contact__input-label"
+              [ngClass]="{ 'label--error': !this.isPhoneValid }"
+            >
+              Phone*
+            </span>
+            <input
+              class="sc-contact__grid-input"
+              type="text"
+              [(ngModel)]="this.phone"
+              (input)="this.$isPhoneValid.next($event.target.value)"
+            />
+          </div>
+        </div>
+        <!-- first section (grid input) end -->
+        <div fxLayout="column" fxLayoutAlign="start start">
+          <span
+            class="sc-contact__input-label"
+            [ngClass]="{ 'label--error': !this.isTextValid }"
+          >
+            Text*
+          </span>
+          <textarea
+            class="sc-contact__textarea"
+            rows="6"
+            [(ngModel)]="this.text"
+            (input)="this.$isTextValid.next($event.target.value)"
+          ></textarea>
+        </div>
+
+        <button
+          class="app__btn"
+          fxLayoutAlign="center center"
+          (click)="this.send()"
+        >
+          <span>SEND</span>
+        </button>
+      </div>
+      <!-- Our info -->
+      <div
+        class="sc-contact__info width-100"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap="2.2vh"
+      >
+        <img
+          class="sc-contact__logo"
+          src="assets/images/home/logo-square.png"
+          alt="Logo"
+        />
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap=".1vw">
+          <span class="sc-contact__name"> White Space Renovation </span>
+          <span class="sc-contact__location"> Architectural Studio </span>
+          <span class="sc-contact__location"> Serbia</span>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap=".1vw">
+          <span class="sc-contact__location">
+            TIN (Tax identification number): 112124944
+          </span>
+          <span class="sc-contact__location">
+            CRN (Company registration number): 65890810
+          </span>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap=".1vw">
+          <span class="sc-contact__location">
+            You can contact us via Viber or WhatsApp
+          </span>
+          <span class="sc-contact__location"> +381694044114 </span>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap=".1vw">
+          <span class="sc-contact__msg">
+            We would love to connect with you
+          </span>
+          <app-social-icons [whiteIcons]="true"></app-social-icons>
+        </div>
+      </div>
+    </div>
+    <div
+      class="sc-contact__footer width-100"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+    >
+      <span>
+        <button class="text__btn" (click)="this.openPrivacyPolicy()">
+          Privacy Policy
+        </button>
+        //
+        <button class="text__btn" (click)="this.openTermsAndConditions()">
+          Terms of service
+        </button>
+      </span>
+      <span>White Space Renovation c 2020. All Rights Reserved.</span>
+    </div>
+  </div>
+  <div fxFlex="12"></div>
+</div>
+<div
+  *ngIf="this.isHandset"
+  class="sc-contact--lt-md container__padding--lt-md"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  fxLayoutGap="30px"
+  appGradient
+>
+  <div class="sc-contact__title--lt-md width-100">CONTACT US</div>
+
+  <div
+    class="sc-contact__form--lt-md width-100"
+    fxLayout="column"
+    fxLayoutAlign="start center"
+    fxLayoutGap="15px"
+  >
+    <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
+      <label
+        class="sc-contact__label--lt-md width-100"
+        [ngClass]="{ 'label--error': !this.isNameValid }"
+        for=""
+      >
+        Name*
+      </label>
+      <input
+        class="sc-contact__input--lt-md width-100"
+        type="text"
+        [(ngModel)]="this.name"
+        (input)="this.$isNameValid.next($event.target.value)"
+      />
+    </div>
+    <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
+      <label
+        class="sc-contact__label--lt-md width-100"
+        for=""
+        [ngClass]="{ 'label--error': !this.isCityValid }"
+      >
+        City*
+      </label>
+      <input
+        class="sc-contact__input--lt-md width-100"
+        type="text"
+        [(ngModel)]="this.city"
+        (input)="this.$isCityValid.next($event.target.value)"
+      />
+    </div>
+    <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
+      <label
+        class="sc-contact__label--lt-md width-100"
+        for=""
+        [ngClass]="{ 'label--error': !this.isMailValid }"
+      >
+        E-mail*
+      </label>
+      <input
+        class="sc-contact__input--lt-md width-100"
+        type="text"
+        [(ngModel)]="this.mail"
+        (input)="this.$isMailValid.next($event.target.value)"
+      />
+    </div>
+    <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
+      <label
+        class="sc-contact__label--lt-md width-100"
+        for=""
+        [ngClass]="{ 'label--error': !this.isPhoneValid }"
+      >
+        Phone*
+      </label>
+      <input
+        class="sc-contact__input--lt-md width-100"
+        type="text"
+        [(ngModel)]="this.phone"
+        (input)="this.$isPhoneValid.next($event.target.value)"
+      />
+    </div>
+    <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
+      <label
+        class="sc-contact__label--lt-md width-100"
+        for=""
+        [ngClass]="{ 'label--error': !this.isTextValid }"
+      >
+        Text*
+      </label>
+      <textarea
+        class="sc-contact__input--lt-md width-100"
+        name="text"
+        rows="5"
+        [(ngModel)]="this.text"
+        (input)="this.$isTextValid.next($event.target.value)"
+      ></textarea>
+    </div>
+    <div class="width-100" fxLayout="row" fxLayoutAlign="start start">
+      <button
+        class="sc-contact__btn--lt-md"
+        fxLayoutAlign="center center"
+        (click)="this.send()"
+      >
+        <span>SEND</span>
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="sc-contact__info-section--lt-md width-100"
+    fxLayout="column"
+    fxLayoutAlign="start start"
+    fxLayoutGap="15px"
+  >
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+      <img
+        class="sc-contact__logo"
+        src="assets/images/home/logo-square.png"
+        alt="Logo"
+      />
+      <div class="sc-contact__name--lt-md app__text-shadow">
+        White Space Renovation
+      </div>
+      <div class="sc-contact__info--lt-md">Architectural Studio</div>
+      <div class="sc-contact__info--lt-md">Serbia</div>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+      <div class="sc-contact__info--lt-md">
+        TIN (Tax identification number): 112124944
+      </div>
+      <div class="sc-contact__info--lt-md">
+        CRN (Company registration number): 65890810
+      </div>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+      <div class="sc-contact__info--lt-md">
+        You can contact us via Viber or WhatsApp
+      </div>
+      <div class="sc-contact__info--lt-md">+381694044114</div>
+    </div>
+
+    <div class="sc-contact__info--lt-md">
+      <div>We would love to connect with you</div>
+      <app-social-icons [whiteIcons]="true"></app-social-icons>
+    </div>
+  </div>
+
+  <div class="width-100" fxLayout="column" fxLayoutAlign="start start">
+    <span>
+      <button class="text__btn" (click)="this.openPrivacyPolicy()">
+        Privacy Policy
+      </button>
+      //
+      <button class="text__btn" (click)="this.openTermsAndConditions()">
+        Terms of service
+      </button>
+    </span>
+    <div>White Space Renovation c 2020. All Rights Reserved.</div>
+  </div>
+</div>

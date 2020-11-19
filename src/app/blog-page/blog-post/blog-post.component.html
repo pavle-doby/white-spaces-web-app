@@ -1,0 +1,25 @@
+<article
+  class="blog-post"
+  fxLayout="column"
+  fxLayoutAlign="center stretch"
+  fxLayoutGap=".78125vw"
+  fxLayoutGap.lt-md="15px"
+>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <h3>
+      {{ this.title }}
+    </h3>
+    <span class="blog-post__date">
+      {{ this.date }}
+    </span>
+  </div>
+
+  <p>
+    {{ this.textPlaceholder }}
+  </p>
+
+  <app-button-monochrome
+    fxFlex="100"
+    (click)="openDialog()"
+  ></app-button-monochrome>
+</article>

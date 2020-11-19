@@ -1,0 +1,83 @@
+<ng-template #sideCardAbout>
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <div
+      class="sc-about__content"
+      fxLayout="row"
+      fxLayoutAlign="start start"
+      fxLayoutGap="3vw"
+      fxLayout.lt-md="column"
+      fxLayoutAlign.lt-md="start center"
+    >
+      <div
+        fxLayout="column"
+        fxLayoutAlign="start end"
+        fxLayoutGap="0.55vh"
+        fxFlex="50"
+        fxLayoutAlign.lt-md="start center"
+      >
+        <span class="sc-about__label-big">WE ARE</span>
+        <span class="sc-about__label-big--bold">PERSONAL</span>
+        <span class="sc-about__label-big--bold">MINDFUL</span>
+        <span class="sc-about__label-big--bold">DEVOTED</span>
+        <span class="sc-about__label-big">OUR SOLUTIONS ARE</span>
+        <span class="sc-about__label-big--bold">TAILORED</span>
+        <span class="sc-about__label-big--bold">VISUAL</span>
+        <span class="sc-about__label-big--bold">SMART</span>
+      </div>
+      <div
+        class="sc-about__p-contrainer"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap="1.3vw"
+        fxFlex="50"
+        fxLayoutGap.lt-md="15px"
+      >
+        <span class="sc-about__title-little">ABOUT US</span>
+        <p class="sc-about__p">
+          White Space Renovation is a young architectural studio comprised of
+          expert individuals who gather around the idea of tailored living. We
+          nurture a pretty straightforward, client-oriented philosophy. One of
+          its core beliefs is that the apartment should reflect your
+          personality, support your habits, and be a haven. Our job in your
+          place isn’t done until you feel comfortable and look forward to coming
+          home every single day!
+        </p>
+        <p class="sc-about__p">
+          We are driven to create a functional, balanced, and healthy base that
+          sets the stage for further redecorating. That is to say, we will
+          organize your apartment step by step and consider every little detail
+          throughout the creative process. We sketch the plans numerous times
+          with different approaches until the floor plan is polished to
+          perfection and suits you exclusively.
+        </p>
+        <p class="sc-about__p">We like to call it - the art of living!</p>
+        <p class="sc-about__p">
+          For more information contact us via
+
+          <a
+            href="mailto:hi@whitespacerenovation.com"
+            class="app__a--none color-inherit app__text-shadow"
+          >
+            e-mail
+          </a>
+
+          or fill in the form on the website. <br />
+          We look forward to hearing from you!
+        </p>
+        <a
+          href="mailto:hi@whitespacerenovation.com"
+          class="sc-about__mail app__a--none"
+        >
+          hi@whitespacerenovation.com
+        </a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<div *ngIf="this.isHandsetMode" appGradient>
+  <ng-container *ngTemplateOutlet="sideCardAbout"></ng-container>
+</div>
+<div *ngIf="!this.isHandsetMode">
+  <ng-container *ngTemplateOutlet="sideCardAbout"></ng-container>
+</div>

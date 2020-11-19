@@ -1,1 +1,42 @@
-<p>works works!</p>
+<div
+  class="works width-100"
+  fxLayout="row"
+  fxLayout.lt-md="column"
+  fxLayoutAlign="center center"
+  fxLayoutAlign.lt-md="center center"
+  fxLayoutGap="5vw"
+  fxLayoutGap.lt-md="20px"
+>
+  <div class="width-100" fxLayout="column" fxLayoutAlign="center end">
+    <app-title
+      [text]="this.worksTitleNormal.text"
+      [size]="this.worksTitleNormal.size"
+      [gradient]="this.gradient"
+    ></app-title>
+    <app-title
+      [text]="this.worksTitleBold.text"
+      [size]="this.worksTitleBold.size"
+      [gradient]="this.gradient"
+    ></app-title>
+  </div>
+  <div
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutAlign="space-around center"
+    fxLayoutAlign.lt-md="start start"
+    fxLayoutGap=".5vw"
+    fxLayoutGap.lt-md="15px"
+  >
+    <div
+      class="works__image-desc"
+      *ngFor="let imageDescription of this.imageDescriptionArray"
+    >
+      <app-image-description
+        class="width-100"
+        [image]="imageDescription.image"
+        [number]="imageDescription.number"
+        [description]="imageDescription.description"
+      ></app-image-description>
+    </div>
+  </div>
+</div>

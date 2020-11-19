@@ -1,0 +1,10 @@
+<div
+  class="space-photos__container"
+  fxLayout="column"
+  fxLayoutAlign="start start"
+>
+  <app-upload-grid
+    (uploadFilesEvent)="this.onUploadFilesEvent($event)"
+    [imgURLs]="(this.$checkoutState | async).spacePhotosURLs"
+  ></app-upload-grid>
+</div>

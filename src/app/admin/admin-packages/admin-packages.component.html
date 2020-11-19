@@ -1,0 +1,142 @@
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Packages">
+    <div>
+      <form
+        [formGroup]="form"
+        class="admin-packages"
+        fxLayout="row"
+        fxLayoutAlign="space-around center"
+        fxLayoutGap="100px"
+      >
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Package Name</mat-label>
+              <input matInput formControlName="smallName" />
+            </mat-form-field>
+            <br />
+            <mat-form-field appearance="outline">
+              <mat-label>Price</mat-label>
+              <input
+                matInput
+                formControlName="smallPrice"
+                (ngModelChange)="save($event)"
+              />
+            </mat-form-field>
+            <br />
+            <mat-form-field appearance="outline">
+              <mat-label>Description</mat-label>
+              <textarea matInput formControlName="smallDescription"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Package Name</mat-label>
+              <input matInput formControlName="mediumName" />
+            </mat-form-field>
+            <br />
+            <mat-form-field appearance="outline">
+              <mat-label>Price</mat-label>
+              <input
+                matInput
+                formControlName="mediumPrice"
+                (ngModelChange)="save($event)"
+              />
+            </mat-form-field>
+            <br />
+            <mat-form-field appearance="outline">
+              <mat-label>Description</mat-label>
+              <textarea matInput formControlName="mediumDescription"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Package Name</mat-label>
+              <input matInput formControlName="largeName" />
+            </mat-form-field>
+            <br />
+            <mat-form-field appearance="outline">
+              <mat-label>Price</mat-label>
+              <input
+                matInput
+                formControlName="largePrice"
+                (ngModelChange)="save($event)"
+              />
+            </mat-form-field>
+            <br />
+            <mat-form-field appearance="outline">
+              <mat-label>Description</mat-label>
+              <textarea matInput formControlName="largeDescription"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="100px">
+      <div fxFlex="100">
+        <mat-form-field
+          class="admin-packages__form-field width-100"
+          appearance="outline"
+        >
+          <mat-label>Additional info</mat-label>
+          <textarea matInput></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="AddOns">
+    <div *ngIf="this.addOns">
+      <mat-expansion-panel
+        class="admin-packages__add-ons"
+        *ngFor="let addOn of this.addOns"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ addOn.name }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-list>
+          <mat-list-item
+            *ngFor="
+              let question of addOn.additional_data.questions.general;
+              let i = index
+            "
+            >{{ i + 1 }}. {{ question.question }}</mat-list-item
+          >
+        </mat-list>
+      </mat-expansion-panel>
+    </div>
+  </mat-tab>
+  <mat-tab label="Questionnaire">
+    <div *ngIf="this.packages">
+      <mat-expansion-panel
+        class="admin-packages__add-ons"
+        *ngFor="let package of this.packages"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Package Name: {{ package.name }} </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div *ngFor="let group of questionnaireRooms; let i = index">
+          <h3>{{ group }}</h3>
+          <mat-list>
+            <mat-list-item
+              *ngFor="
+                let question of package.additional_data.questions[group];
+                let i = index
+              "
+              >{{ i + 1 }}. {{ question.question }}</mat-list-item
+            >
+          </mat-list>
+        </div>
+      </mat-expansion-panel>
+    </div>
+  </mat-tab>
+</mat-tab-group>

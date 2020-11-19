@@ -1,0 +1,73 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar [routerLink]="'/admin/orders'"
+      ><img
+        src="assets/images/home/logo.png"
+        alt="Whitespaces logo"
+        width="150px"
+    /></mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="'customers'">Customers</a>
+      <a mat-list-item [routerLink]="'orders'">Orders</a>
+      <a mat-list-item [routerLink]="'packages'">Packages</a>
+      <a mat-list-item [routerLink]="'blog'">Blog</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+
+      <span>{{ this.headerName }}</span>
+      <button class="admin-logout" mat-flat-button (click)="this.logOut()">
+        Log out
+      </button>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- <div fxLayout="column" fxLayoutAlign="space-between center">
+  <div fxLayout="row" fxLayoutAlign="start start"> -->
+
+<div fxLayout="row" fxLayoutAlign="center center">
+  <!-- <section *ngIf="this.isDashboard" class="admin-dashboard__greeting">
+    <div
+      fxLayout="column"
+      fxLayoutAlign="start center"
+      class="admin-dashboard__greeting--message"
+    >
+      <h1>Hello, Petar</h1>
+      <h2>Welcome to your admin panel</h2>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="3vw">
+      <div fxLayout="column" fxLayoutAlign="space-between center">
+        <span>0</span>
+        <span>Finished Projects</span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="space-between center">
+        <span>1</span>
+        <span>In progress projects</span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="space-between center">
+        <span>0</span>
+        <span>Not accepted projects</span>
+      </div>
+    </div>
+  </section> -->
+  <router-outlet></router-outlet>
+</div>

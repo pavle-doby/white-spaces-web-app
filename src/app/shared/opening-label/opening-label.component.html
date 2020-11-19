@@ -1,0 +1,21 @@
+<div
+  class="opening-label__container"
+  fxLayout="column"
+  fxLayoutAlign="start start"
+  fxLayoutGap=".52vw"
+  fxFlex
+  (mouseenter)="this.showSubject.next()"
+  (mouseleave)="this.hideSubject.next()"
+  (click)="this.onClick()"
+>
+  <div class="opening-label__title">
+    {{ this.label }}
+  </div>
+  <span
+    *ngIf="this.toShowDescription"
+    [@inOutAnimation]
+    class="opening-label__description"
+  >
+    {{ this.description }}
+  </span>
+</div>

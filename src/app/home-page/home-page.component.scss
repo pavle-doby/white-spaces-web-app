@@ -1,0 +1,31 @@
+@import "src/styles.scss";
+
+.home-page__container {
+  height: 95vh;
+  background-repeat: no-repeat;
+}
+
+.home-page__img {
+  position: absolute;
+  background-repeat: no-repeat;
+  &--closer {
+    height: 70%;
+    left: 140vw;
+    z-index: -1;
+    top: 50vh;
+  }
+
+  &--to {
+    height: 85%;
+    left: 230vw;
+    z-index: -1;
+    top: 0vh;
+  }
+
+  &--home {
+    height: 80%;
+    left: 320vw;
+    z-index: -1;
+    top: 40vh;
+  }
+}

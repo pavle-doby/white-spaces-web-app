@@ -1,0 +1,22 @@
+@import "src/styles-colors.scss";
+
+.info-price-label__label {
+  color: $color-gray-5;
+  min-width: 100px;
+}
+
+.info-price-label__info-price {
+  font-weight: 400;
+}
+
+.info-price-label__info {
+  float: left;
+}
+
+.info-price-label__price {
+  float: right;
+}
+
+.info-price-label--bold {
+  font-weight: bold;
+}

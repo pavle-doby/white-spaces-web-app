@@ -1,1 +1,67 @@
-<p>navbar works!</p>
+<ng-template #navButton> </ng-template>
+
+<div
+  class="navbar__container"
+  fxLayout="row"
+  fxLayoutAlign="space-around center"
+  fxLayoutGap="5%"
+>
+  <button
+    appGradient
+    class="navbar__btn cursor-pointer"
+    (click)="this.onNavButtonClick(CONTACT)"
+    [calculateByHeight]="true"
+  >
+    <span>
+      {{ CONTACT }}
+    </span>
+  </button>
+  <button
+    class="navbar__btn navbar__button--basic cursor-pointer"
+    (click)="this.onNavButtonClick(ABOUT)"
+  >
+    <span>
+      {{ ABOUT }}
+    </span>
+  </button>
+  <button
+    class="navbar__btn navbar__button--basic cursor-pointer"
+    (click)="this.onNavButtonClick(BLOG)"
+  >
+    <span>
+      {{ BLOG }}
+    </span>
+  </button>
+  <button
+    class="navbar__btn navbar__button--basic cursor-pointer"
+    (click)="this.onNavButtonClick(FQAS)"
+  >
+    <span>
+      {{ FQAS }}
+    </span>
+  </button>
+
+  <button
+    appGradient
+    class="navbar__btn cursor-pointer"
+    (click)="this.onNavButtonClick(PACKAGES)"
+    [calculateByHeight]="true"
+  >
+    <span>
+      {{ PACKAGES }}
+    </span>
+  </button>
+</div>
+
+<app-side-card [toShow]="this.navBtnsStateObj.PACKAGES">
+  <app-side-card-packages> </app-side-card-packages>
+</app-side-card>
+<app-side-card [toShow]="this.navBtnsStateObj[this.FQAS]">
+  <app-side-card-fqa> </app-side-card-fqa>
+</app-side-card>
+<app-side-card [toShow]="this.navBtnsStateObj.ABOUT">
+  <app-side-card-about></app-side-card-about>
+</app-side-card>
+<app-side-card [toShow]="this.navBtnsStateObj.CONTACT">
+  <app-side-card-contact></app-side-card-contact>
+</app-side-card>

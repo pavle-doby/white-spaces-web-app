@@ -1,0 +1,24 @@
+<div
+  class="upload-grid__container"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  fxLayoutGap="2vw"
+>
+  <app-upload
+    [data]="this.uploadData"
+    (uploadEvent)="this.onUploadEvent($event)"
+  ></app-upload>
+  <section
+    class="upload-grid__img-grid"
+    fxLayout="row wrap"
+    fxLayoutAlign="start"
+    fxLayoutGap="1vw grid"
+    fxLayoutGap.lt-md="10px grid"
+  >
+    <img
+      *ngFor="let url of this.imgURLs"
+      class="upload-grid__img"
+      [src]="url"
+    />
+  </section>
+</div>

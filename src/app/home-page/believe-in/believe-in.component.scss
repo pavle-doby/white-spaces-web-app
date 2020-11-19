@@ -1,0 +1,26 @@
+@import "../../../styles.scss";
+
+.belive-in__container {
+  width: 65vw;
+  min-height: 400px;
+
+  @media (max-width: 960px) {
+    width: 80vw;
+    padding-bottom: 10vw;
+  }
+}
+
+.belive-in__section {
+  padding: 0.78vw;
+}
+
+.belive-in__divider--right {
+  border-right: 1px solid black;
+  @media (max-width: 960px) {
+    border: none;
+  }
+}
+
+.belive-in__section-labels {
+  padding-top: 3.4vh;
+}

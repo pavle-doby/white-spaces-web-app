@@ -1,0 +1,123 @@
+@import "../../../styles.scss";
+
+.home__container {
+  // min-height: 100vh;
+  width: $page-width;
+  display: block;
+  position: relative;
+
+  &--personal {
+    animation: fadeIn ease-in 0.5s forwards;
+    -webkit-animation: fadeIn ease-in 0.5s forwards;
+    opacity: 0;
+  }
+  &--functional {
+    animation: fadeIn ease-in 0.5s forwards;
+    -webkit-animation: fadeIn ease-in 0.5s forwards;
+
+    animation-delay: 0.75s;
+    -webkit-animation-delay: 0.75s;
+    opacity: 0;
+  }
+  &--balanced {
+    animation: fadeIn ease-in 0.5s forwards;
+    -webkit-animation: fadeIn ease-in 0.5s forwards;
+    animation-delay: 1s;
+    -webkit-animation-delay: 1s;
+    opacity: 0;
+  }
+  @media only screen and (max-width: 959px) {
+    height: 100vh;
+  }
+}
+
+.home__container::after {
+  content: "";
+  background:url("src/assets/images/home/HomeBackground.png") no-repeat
+    center;
+  background-size: 35%;
+  opacity: 0.75;
+  top: 25vh;
+  left: 0;
+  bottom: 0;
+  right: 4vw;
+  position: absolute;
+  z-index: -1;
+  @media only screen and (max-width: 959px) {
+    background-size: 90%;
+  }
+}
+
+// <span class="home__container--human">Human.</span>
+//     <span class="home__container--functional">Functional.</span>
+//     <span class="home__container--balanced">Balanced.</span>
+//     <span class="home__container--private">Private.</span>
+.home__slogan-container {
+  padding-bottom: 55vh;
+  line-height: 2vw;
+
+  > span {
+    font-size: 1.2vw;
+    letter-spacing: 0.2vw;
+
+    @media only screen and(max-width:959px) {
+      font-size: 25px;
+      //letter-spacing: 12px;
+      line-height: 40px;
+    }
+  }
+}
+
+.home__logo {
+  width: 13%;
+  display: block;
+  margin-top: 3.125vw;
+  @media only screen and(max-width:959px) {
+    width: auto;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

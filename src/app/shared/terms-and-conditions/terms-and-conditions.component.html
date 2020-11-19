@@ -1,0 +1,166 @@
+<div
+  class="doucment__dialog"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  fxLayoutGap="10px"
+>
+  <div
+    class="width-100"
+    fxLayout="row"
+    fxLayoutAlign="end center"
+    mat-dialog-title
+  >
+    <button mat-icon-button color="basic" [mat-dialog-close]>
+      <mat-icon class="icon--small">close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content>
+    <div
+      class="width-100 children--no-margins"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10px"
+    >
+      <h3>-Terms and Conditions of Purchase-</h3>
+      <h5>Last updated on 16th of October 2020</h5>
+    </div>
+    <div
+      class="width-100 children--no-margins"
+      fxLayout="column"
+      fxLayoutAlign="start start"
+      fxLayoutGap="10px"
+    >
+      <h4>Seller Information</h4>
+      <p>
+        Natasa Nikolic PR architectural industry White Space Renovation
+        Aleksinac, hereinafter WSR, is a company that offers architectural
+        services on the territory of Serbia, and abroad, via an online platform.
+        Offering distance services is limited to only design projects that
+        require obtaining contractor permits for further realization if stated
+        by the local law.
+      </p>
+      <h4>Product pricing</h4>
+      <p>
+        All the prices on the website are displayed in EUROS. WSR is not subject
+        to VAT so the prices displayed on the website are final. No additional
+        costs will ensue for the chosen services
+      </p>
+      <h4>Shopping procedure</h4>
+      <p>
+        The customer is to select a suitable package according to the size of
+        their real estate. The next step is a mandatory registration on the
+        website and filling out a questionnaire which represents the
+        Buyer-Seller Agreement. Once the questionnaire is filled out, the
+        customer should accept the service terms and conditions upon which
+        he/she will receive a detailed manual for the paying process. The
+        project realization starts on the day when the payment is processed by
+        the WSR designated bank.
+      </p>
+      <h4>Payment method</h4>
+      <p>
+        Customers pay the full amount for the services by direct deposit. After
+        the purchase process, the customer will receive an invoice with the
+        necessary information to carry out the payment. The invoice will be sent
+        via email which the customer had entered beforehand.
+      </p>
+      <h4>Delivery deadline</h4>
+      <p>
+        WSR is to deliver the agreed service in its entirety, depending on the
+        options of each package. In the offer for all packages, it is clearly
+        stated that the delivery period is 10-16 workdays, except in special
+        circumstances. In case of website traffic overload, the delivery period
+        will expand from 16-22 workdays. The customer will be duly noted before
+        paying for any of the packages.
+      </p>
+      <h4>Delivery method</h4>
+      <p>
+        WSR delivers the final design project to the customer’s email address
+        which had been noted and verified during the registration process.
+      </p>
+      <h4>Cancellation period</h4>
+      <p>
+        The customer can cancel the project in the period of 14 days following
+        the conclusion of the agreement, without providing a reason. In this
+        case, the customer has to reimburse the potential actual costs to the
+        seller. However, if the project design has been completed in its
+        entirety, the customer loses his/her right to cancel. If the customer
+        chooses to cancel the project, he/she must print out the cancellation
+        notice, fill it out, sign it and deliver it to the seller’s address: 17
+        Knjaza Milosa, 18220 Aleksinac, Serbia. You can download the document
+        with the cancellation notice
+        <a href="/api/distance_contract_cancellation.pdf" download>here</a>
+        .
+      </p>
+      <p>
+        Should the customer cancel the contract upon paying the total sum, the
+        seller is to refund the money completely or partially, depending on the
+        potential actual costs in the period of 14 days upon receiving the
+        cancellation notice.
+      </p>
+      <h4>Customer complaints</h4>
+      <p>
+        Customers are strongly advised to check whether the chosen package
+        conforms to the Buyer-Seller Agreement. In the instance of any
+        discrepancies between the two documents, the customer is obliged to file
+        a complaint in 30 days upon making the order.
+      </p>
+      <p>
+        To file a complaint, send us an email to the following address:
+        <a [href]="this.mailHref">
+          {{ this.mail }}
+        </a>
+      </p>
+      <p>
+        In the nonconformity report, the customer should include personal
+        information, the date of the purchase, the name of the package with the
+        evidence of nonconformity to standards, as well as the requirement for
+        the correction of nonconformity.
+      </p>
+      <p>
+        The customer has the right to request the elimination of nonconformity
+        on the behalf of the seller:
+      </p>
+      <p>
+        - If the service deviates from the offered standard, the customer can
+        request from the seller to correct the service.
+        <br />
+        -If the correction of the service is unfeasible, illegal, or presents an
+        unreasonable burden for the seller, the customer can request a discount
+        or contract termination
+      </p>
+      <p>
+        The seller must duly reply to the customer via email in the next 10 days
+        upon receiving a complaint, at the latest. The reply should include the
+        seller’s standpoint, a solution proposal, and the deadline for its
+        implementation. This process is possible to carry out only if the
+        customer consents.
+      </p>
+      <p>
+        If there are any objective reasons for delaying the realization of the
+        customer’s request, the seller must inform the customer about the new
+        deadline for nonconformity correction, as well as ask for the customer’s
+        consent. This must be noted in the complaint record. The option to
+        extend the deadline for complaint correction is possible only one time.
+      </p>
+      <p>
+        For the potential issues not regulated by the WSR terms and conditions
+        of purchase, other laws apply – Law on Consumer Protection, Law on
+        Trade, and Law on E-commerce of the Republic of Serbia
+      </p>
+      <p>
+        For hearing all the disputes of WSR and the users of legal persons or
+        entrepreneurs, the Commercial court in Niš is authorized. For hearing
+        all the disputes of WSR and natural persons, the civil court in Niš is
+        authorized.
+      </p>
+    </div>
+  </mat-dialog-content>
+
+  <div
+    class="doucment__dialog-action"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+  >
+    <button class="checkout__btn--invert" [mat-dialog-close]>Ok, got it</button>
+  </div>
+</div>

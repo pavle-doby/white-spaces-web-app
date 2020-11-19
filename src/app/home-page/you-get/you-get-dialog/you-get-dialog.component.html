@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>WHAT YOU GET</h2>
+<mat-dialog-content fxLayout="column">
+  <img
+    class="you-get-dialog__img"
+    [src]="imgSrc"
+    *ngFor="let imgSrc of this.images"
+  />
+</mat-dialog-content>
+<mat-dialog-actions
+  fxLayout="row"
+  fxLayoutAlign="end center"
+  fxLayoutGap="10px"
+>
+  <button class="app__btn--invert" mat-dialog-close>Close</button>
+  <a
+    class="a__text-decoration--none"
+    href="/api/project_example.pdf"
+    [mat-dialog-close]="true"
+    download
+  >
+    <button class="app__btn--invert">Download</button>
+  </a>
+</mat-dialog-actions>

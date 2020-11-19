@@ -1,0 +1,135 @@
+<div
+  fxLayout="column"
+  fxLayoutAlign="start start"
+  fxLayoutGap="1vw"
+  fxLayoutGap.lt-md="10px"
+>
+  <div
+    class="login__form-width"
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+  >
+    <div
+      class="login__form-width--name-label"
+      fxLayout="column"
+      fxLayoutAlign="start start"
+    >
+      <span
+        class="login__input-label"
+        [ngClass]="{ 'login__input-label--error': !this.isFirstNameValid }"
+      >
+        Name*
+        {{ !this.isFirstNameValid ? this.requiredErorrMessage : "" }}
+      </span>
+      <input
+        class="login__input"
+        [ngClass]="{ 'login__input--error': !this.isFirstNameValid }"
+        type="text"
+        [(ngModel)]="this.userVM.first_name"
+        required
+        (input)="this.isFirstNameValid$.next($event.target.value)"
+      />
+    </div>
+    <div
+      class="login__form-width--name-label"
+      fxLayout="column"
+      fxLayoutAlign="start start"
+    >
+      <span
+        class="login__input-label"
+        [ngClass]="{ 'login__input-label--error': !this.isLastNameValid }"
+      >
+        Last Name*
+        {{ !this.isLastNameValid ? this.requiredErorrMessage : "" }}
+      </span>
+      <input
+        class="login__input"
+        [ngClass]="{ 'login__input--error': !this.isLastNameValid }"
+        type="text"
+        [(ngModel)]="this.userVM.last_name"
+        (input)="this.isLastNameValid$.next($event.target.value)"
+      />
+    </div>
+  </div>
+  <div
+    *ngIf="this.showAddresInput"
+    class="login__form-width"
+    fxLayout="column"
+    fxLayoutAlign="start start"
+  >
+    <span
+      class="login__input-label"
+      [ngClass]="{ 'login__input-label--error': !this.isAddressValid }"
+    >
+      Address*
+      {{ !this.isAddressValid ? this.requiredErorrMessage : "" }}
+    </span>
+    <input
+      class="login__input"
+      [ngClass]="{ 'login__input--error': !this.isAddressValid }"
+      type="email"
+      [(ngModel)]="this.userVM.address"
+      (input)="this.isAddressValid$.next($event.target.value)"
+    />
+  </div>
+  <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
+    <span
+      class="login__input-label"
+      [ngClass]="{ 'login__input-label--error': !this.isEmailValid }"
+    >
+      E-mail*
+      {{ !this.isEmailValid ? this.requiredErorrMessage : "" }}
+    </span>
+    <input
+      class="login__input"
+      [ngClass]="{ 'login__input--error': !this.isEmailValid }"
+      type="email"
+      [(ngModel)]="this.userVM.email"
+      (input)="this.isEmailValid$.next($event.target.value)"
+    />
+  </div>
+  <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
+    <span
+      class="login__input-label"
+      [ngClass]="{
+        'login__input-label--error':
+          !this.isPasswordValid || !this.arePasswordsSame
+      }"
+    >
+      Password*
+      {{ !this.isPasswordValid ? this.requiredErorrMessage : "" }}
+      {{ !this.arePasswordsSame ? this.passwordErrorMEssage : "" }}
+    </span>
+    <input
+      class="login__input"
+      [ngClass]="{ 'login__input--error': !this.isPasswordValid }"
+      type="password"
+      [(ngModel)]="this.userVM.password"
+      (input)="this.repeatPassword$.next($event.target.value)"
+      (input)="this.isFormValid$.next($event.target.value)"
+    />
+  </div>
+  <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
+    <span
+      class="login__input-label"
+      [ngClass]="{
+        'login__input-label--error':
+          !this.isRepeatPasswordValid || !this.arePasswordsSame
+      }"
+    >
+      Repeat password*
+      {{ !this.isRepeatPasswordValid ? this.requiredErorrMessage : "" }}
+      {{ !this.arePasswordsSame ? this.passwordErrorMEssage : "" }}
+    </span>
+    <input
+      class="login__input"
+      [ngClass]="{ 'login__input--error': !this.isRepeatPasswordValid }"
+      type="password"
+      [(ngModel)]="this.repeatPassword"
+      (input)="this.repeatPassword$.next($event.target.value)"
+    />
+  </div>
+  <button class="checkout__btn" (click)="this.submitRegistration()">
+    Register
+  </button>
+</div>

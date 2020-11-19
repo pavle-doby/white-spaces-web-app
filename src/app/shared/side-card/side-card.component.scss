@@ -1,0 +1,19 @@
+@import "../../../styles.scss";
+
+$sc-additional-height: 0.834vw;
+
+.side-card__container {
+  position: fixed;
+  bottom: calc(11% - #{$sc-additional-height} / 2);
+  right: 0;
+
+  width: 70vw;
+  height: calc(#{$navbar-width} + #{$sc-additional-height});
+
+  color: white;
+  overflow: hidden;
+
+  span {
+    font-size: 5vw;
+  }
+}

@@ -1,0 +1,43 @@
+@import "src/styles-colors.scss";
+
+$border-width: 2px;
+
+.question-stepper__step {
+  width: 1.875vw;
+  height: 1.875vw;
+
+  border: $border-width solid skyblue;
+  color: skyblue;
+  cursor: pointer;
+
+  @media screen and (max-width: 960px) {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.question-stepper__label {
+  font-size: 0.975vw;
+
+  @media screen and (max-width: 960px) {
+    font-size: 14px;
+  }
+}
+
+//If you change name of this class, change also class Step.
+.question-stepper__step--uncomplited {
+  border: $border-width solid grey;
+  color: grey;
+}
+
+//If you change name of this class, change also class Step.
+.question-stepper__step--current {
+  border: $border-width solid $color-selected;
+  color: $color-selected;
+}
+
+//If you change name of this class, change also class Step.
+.question-stepper__step--complited {
+  border: $border-width solid $color-complited;
+  color: $color-complited;
+}

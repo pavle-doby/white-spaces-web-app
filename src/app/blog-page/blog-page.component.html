@@ -1,0 +1,42 @@
+<section
+  class="blog-page"
+  fxLayout="column"
+  fxLayout.lt-md="row"
+  fxLayoutGap="3vw"
+  *ngIf="this.ready"
+>
+  <app-logo
+    fxLayout="row"
+    fxHide.lt-md
+    fxLayoutAlign="center center"
+  ></app-logo>
+
+  <div
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutGap="3vw"
+    fxLayoutAlign="start center"
+  >
+    <div *ngFor="let post of this.topBlogPosts">
+      <app-blog-post
+        [title]="post.title"
+        [text]="post.text"
+        [date]="post.date"
+      ></app-blog-post>
+    </div>
+  </div>
+  <div
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutGap="3vw"
+    fxLayoutAlign="start center"
+  >
+    <div *ngFor="let post of this.bottomBlogPosts">
+      <app-blog-post
+        [title]="post.title"
+        [text]="post.text"
+        [date]="post.date"
+      ></app-blog-post>
+    </div>
+  </div>
+</section>

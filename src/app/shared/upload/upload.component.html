@@ -1,0 +1,48 @@
+<div
+  *ngIf="this.data"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  fxLayoutGap="1vw"
+>
+  <div *ngIf="this.data?.message" class="upload__message">
+    {{ this.data?.message }}
+  </div>
+  <div *ngIf="this.data?.info" class="upload__info">
+    {{ this.data?.info }}
+  </div>
+  <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
+    <button
+      class="checkout__btn"
+      [ngClass]="{ app__uppercase: this.data.uppercaseButtonText }"
+      (click)="onUpload()"
+    >
+      Upload
+    </button>
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="3px">
+      <span *ngIf="this.data?.bottomInfo" class="upload__info--bottom">
+        {{ this.data.bottomInfo }}
+      </span>
+      <span
+        *ngIf="this.data?.tooltipContent"
+        class="upload__info--tooltip-icon-span"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+      >
+        <mat-icon
+          class="upload__info--tooltip-icon"
+          [matTooltip]="this.data?.tooltipContent"
+          [matTooltipPosition]="this.data?.tooltipPosition"
+        >
+          info
+        </mat-icon>
+      </span>
+    </div>
+    <input
+      style="display: none"
+      type="file"
+      #fileUpload23
+      [multiple]="this.data?.isMultiple"
+      [accept]="this.data?.supportedFileTypes"
+    />
+  </div>
+</div>

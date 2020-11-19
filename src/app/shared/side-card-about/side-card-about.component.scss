@@ -1,0 +1,76 @@
+@import "../../../styles.scss";
+@import "../../../styles-colors.scss";
+
+$font-size-big: 2.8vw;
+$font-size-big--lt-md: 50px;
+$grey-color: rgb(230, 230, 230);
+
+.sc-about__label-big {
+  font-weight: 300;
+  font-size: $font-size-big;
+  color: $color-gray-9;
+
+  @media only screen and (max-width: 960px) {
+    font-size: $font-size-big--lt-md;
+    text-align: center;
+  }
+}
+
+.sc-about__label-big--bold {
+  @extend .app__text-shadow;
+
+  font-size: $font-size-big;
+  font-weight: bold;
+
+  @media only screen and (max-width: 960px) {
+    font-size: $font-size-big--lt-md;
+  }
+}
+
+.sc-about__title-little {
+  @extend .app__text-shadow;
+
+  font-size: 1.9vw;
+  font-weight: bold;
+
+  margin-top: 0.6vw;
+  padding-bottom: 2vw;
+
+  @media only screen and (max-width: 960px) {
+    font-size: 25px;
+  }
+}
+
+.sc-about__content {
+  padding: 12vh 10vh 2vh 2vh;
+}
+
+@media only screen and (max-width: 960px) {
+  .sc-about__content {
+    padding: 25px 30px 25px 30px;
+    color: white;
+  }
+}
+
+.sc-about__p {
+  font-size: 0.9vw;
+  font-weight: 300;
+
+  @media only screen and (max-width: 960px) {
+    font-size: 16px;
+  }
+}
+
+.sc-about__mail {
+  font-weight: bold;
+  font-size: 1vw;
+  color: inherit;
+
+  @media only screen and (max-width: 960px) {
+    font-size: 18px;
+  }
+}
+
+p {
+  margin: 0;
+}

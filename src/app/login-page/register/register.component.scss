@@ -1,0 +1,46 @@
+$form-width: 30vw;
+
+.login__form {
+  width: $form-width;
+}
+
+.login__input-label {
+  font-size: 0.76vw;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.login__form-width {
+  width: $form-width;
+
+  @media screen and (max-width: 960px) {
+    width: 300px;
+  }
+}
+
+.login__form-width--name-label {
+  width: calc(#{$form-width} / 2 - 0.5vw);
+
+  @media screen and (max-width: 960px) {
+    width: 140px;
+  }
+}
+
+.login__input {
+  background-color: transparent;
+  border: 0.5px solid black;
+  color: black;
+  padding: 4px;
+  width: 100%;
+}
+
+.login__input--error {
+  border: 0.5px solid red;
+  color: red;
+  transition: 0.3s;
+}
+
+.login__input-label--error {
+  color: red;
+  transition: 0.3s;
+}

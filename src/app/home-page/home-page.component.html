@@ -2,6 +2,7 @@
   class="home-page__container"
   #homepage
   fxLayout="row"
+  fxLayout.lt-md="column"
   fxLayoutAlign="start center"
   (keydown)="this.onKeyDown($event)"
 >
@@ -11,3 +12,27 @@
   <app-works></app-works>
   <app-you-get></app-you-get>
 </div>
+<div></div>
+<img
+  fxHide.lt-md
+  src="assets/images/home/CLOSER.png"
+  class="home-page__img home-page__img--closer"
+  appParallax
+  [ratio]="this.parallaxRatio"
+/>
+
+<img
+  fxHide.lt-md
+  src="assets/images/home/TO.png"
+  appParallax
+  [ratio]="this.parallaxRatio"
+  class="home-page__img home-page__img--to"
+/>
+
+<img
+  fxHide.lt-md
+  src="assets/images/home/HOME.png"
+  appParallax
+  [ratio]="this.parallaxRatio"
+  class="home-page__img home-page__img--home"
+/>

@@ -1,9 +1,270 @@
-/* You can add global styles to this file, and also import other style files */
+// Overriding ng material theme
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./styles-colors.scss";
+
+$page-width: 100vw;
+$width-viewport-100: 100vw;
+
+$btn-height: 3vh;
+
+$navbar-width: 80vh;
+$navbar-height: $btn-height;
+
+$footer-height: 3vh;
+
+$width-document-dialog: 800px;
+$height-documnet-dialog: 450px;
+
+body {
+  height: 100%;
+  //width: 500vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  @media only screen and (max-width: 960px) {
+    overflow-y: visible;
+    overflow-x: hidden;
+    //height: 420vh;
+  }
+
+  * {
+    font-family: "Roboto", sans-serif;
+  }
+
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .width-100 {
   width: 100% !important;
 }
 
+.height-100 {
+  height: 100% !important;
+}
+
+.height-100vh {
+  height: 100vh;
+}
+
+.margin-top-minus-15 {
+  margin-top: -15px;
+}
+
+.children--no-margins {
+  > * {
+    margin: 0;
+  }
+}
+
+.doucment__dialog {
+  max-width: $width-document-dialog;
+  height: $height-documnet-dialog;
+}
+
+.doucment__dialog-action {
+  height: 50px;
+  margin-bottom: 10px;
+}
+
 .cursor-pointer {
   cursor: pointer;
+}
+
+.app__container {
+}
+
+.iframe-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  @media only screen and(max-width: 959px) {
+    padding-bottom: 0px;
+    height: 80vw;
+    width: 80vw;
+  }
+}
+
+.iframe-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-height: 15.625vw;
+  @media only screen and(max-width: 959px) {
+    max-height: 80vw;
+  }
+}
+
+.app__btn {
+  min-width: calc(#{$navbar-width} * 0.2);
+  height: $btn-height;
+
+  background-color: transparent;
+  color: white;
+
+  border: 0.5px solid white;
+
+  font-size: 1vw;
+  font-weight: 300;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @media only screen and(max-width: 959px) {
+    font-size: 14px;
+    min-height: 36px;
+  }
+}
+
+.app__btn--invert {
+  @extend .app__btn;
+  color: black;
+  border: 0.5px solid black;
+}
+
+.basic__btn {
+  padding: 0.4vw 1.5vw 0.4vw 1.5vw;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+  border: none;
+  background-color: inherit;
+
+  @media screen and (max-width: 960px) {
+    padding-left: 16px;
+    padding-right: 16px;
+    min-height: 30px;
+  }
+}
+
+.checkout__btn {
+  @extend .basic__btn;
+  background-color: $color-primary-btn;
+  color: white;
+  border: 0.5px solid $color-primary-btn;
+}
+
+.checkout__btn--invert {
+  @extend .basic__btn;
+  background-color: transparent;
+  color: black;
+  border: 0.5px solid black;
+}
+
+.checkout__btn--rose {
+  @extend .basic__btn;
+  background-color: rosybrown;
+  color: white;
+  border: 0.5px solid rosybrown;
+}
+
+.text__btn {
+  color: inherit;
+  background-color: transparent;
+
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+
+  &:hover {
+    @extend .app__text-shadow;
+  }
+}
+
+.text__btn--primary {
+  @extend .text__btn;
+  color: $color-primary-btn;
+}
+
+.table-container {
+  min-width: 60vw;
+  margin-top: 5vh;
+}
+
+.table-dialog {
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #4051b5;
+  }
+}
+
+/* Scrollbar tweaks */
+::-webkit-scrollbar {
+  width: 0.26vw;
+  @media screen and (max-width: 960px) {
+    width: 0px;
+  }
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: lightgrey;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $text-shadow;
+}
+
+$shadow-h-len: 0.17vw;
+$shadow-v-len: 0.17vw;
+$shadow-blur-radius: 0.23vw;
+
+.app__text-shadow {
+  text-shadow: $shadow-h-len $shadow-v-len $shadow-blur-radius $text-shadow;
+}
+
+.app__uppercase {
+  text-transform: uppercase;
+}
+
+.container__padding--lt-md {
+  padding: 25px 30px 25px 30px;
+}
+
+.app__a--none {
+  text-decoration: none;
+
+  &:active {
+    text-decoration: none;
+  }
+
+  &:focus {
+    text-decoration: none;
+  }
+
+  &:focus-within {
+    text-decoration: none;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:visited {
+    text-decoration: none;
+  }
+}
+
+.a__text-decoration--none {
+  @extend .app__a--none;
+}
+
+.label--error {
+  color: red;
+  transition: all 1s ease;
+}
+
+.color-inherit {
+  color: inherit;
 }

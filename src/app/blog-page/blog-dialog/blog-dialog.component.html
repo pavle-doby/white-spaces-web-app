@@ -1,0 +1,18 @@
+<article class="blog-dialog">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <h2 mat-dialog-title>{{ this.data?.title }}</h2>
+    <app-social-icons></app-social-icons>
+  </div>
+
+  <mat-dialog-content
+    class="mat-typography blog-dialog__content"
+    fxLayout="column"
+  >
+    <div
+      fxLayout="column"
+      fxLayoutAlign="start center"
+      [innerHTML]="this.data?.text"
+      class="blog-dialog__html"
+    ></div>
+  </mat-dialog-content>
+</article>

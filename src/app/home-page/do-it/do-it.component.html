@@ -1,1 +1,53 @@
-<p>do-it works!</p>
+<div
+  class="do-it__container"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  fxLayoutAlign.lt-md="start center"
+>
+  <app-title
+    [gradient]="this.gradient"
+    [text]="this.doItTitle.text"
+    [size]="this.doItTitle.size"
+  ></app-title>
+  <div
+    class="do-it__content-container"
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutAlign="center center"
+    fxLayoutAlign.lt-md="start center"
+    fxFill
+  >
+    <div
+      class="do-it__content-height"
+      fxLayout="column"
+      fxLayoutAlign="start center"
+      fxFlex="25"
+    >
+      <div *ngFor="let para of this.paragraphs">
+        <p *ngIf="para.isBold">
+          <b>{{ para.text }}</b>
+        </p>
+        <p class="do-it__container--p" *ngIf="!para.isBold">
+          {{ para.text }}
+        </p>
+      </div>
+    </div>
+    <div
+      class="do-it__video-container do-it__content-height"
+      fxLayout="column"
+      fxLayout.lt-md="row"
+      fxLayoutAlign="end end"
+      fxFlex="35"
+      fxFlex.lt-md="100"
+    >
+      <div class="iframe-container">
+        <video autoplay loop>
+          <source
+            src="https://whitespace-client-files.s3-eu-west-1.amazonaws.com/assests/Video+1280x720.mp4"
+            type="video/mp4"
+          />
+        </video>
+      </div>
+    </div>
+  </div>
+</div>

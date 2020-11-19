@@ -1,0 +1,17 @@
+<div
+  class="question width-100"
+  fxLayout="column"
+  fxLayoutAlign="space-between center"
+  fxLayoutGap="1vw"
+>
+  <span class="question__question">
+    {{ this.question.question }}
+  </span>
+  <textarea
+    #questionTextarea
+    class="question__textarea"
+    rows="4"
+    [(ngModel)]="this.answer"
+    (focusout)="this.onFocusOut()"
+  ></textarea>
+</div>

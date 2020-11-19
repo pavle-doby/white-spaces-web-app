@@ -1,0 +1,31 @@
+//TODO(Mladen): dynamic variables
+.image-description--container {
+  @media only screen and(max-width:959px) {
+    img {
+      width: 75px;
+      height: 75px;
+    }
+  }
+  .image-description--number {
+    color: #c5b2d6;
+    margin-bottom: 0.78125vw;
+    font-size: 1vw;
+    @media only screen and(max-width:959px) {
+      font-size: 12px;
+      text-align: left;
+    }
+  }
+  .image-description--description {
+    font-size: 0.9vw;
+    margin-top: 0.723vw;
+    @media only screen and(max-width:959px) {
+      font-size: 12px;
+      text-align: left;
+    }
+  }
+  span {
+    font-weight: 500;
+    white-space: pre-line;
+    text-align: center;
+  }
+}

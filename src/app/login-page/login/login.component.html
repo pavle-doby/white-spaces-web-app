@@ -1,0 +1,40 @@
+<div
+  class="login-form__container"
+  fxLayout="column"
+  fxLayoutAlign="start start"
+  fxLayoutGap="1vw"
+  fxLayoutGap.lt-md="10px"
+>
+  <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
+    <span
+      class="login__input-label"
+      [ngClass]="{ 'login__input-label--error': !this.isEmailValid }"
+    >
+      E-mail*
+      {{ !this.isEmailValid ? this.requiredErorrMessage : "" }}
+    </span>
+    <input class="login__input" type="email" [(ngModel)]="this.email" />
+  </div>
+  <div class="login__form-width" fxLayout="column" fxLayoutAlign="start start">
+    <span
+      class="login__input-label"
+      [ngClass]="{
+        'login__input-label--error': !this.isPasswordValid
+      }"
+    >
+      Password*
+      {{ !this.isPasswordValid ? this.requiredErorrMessage : "" }}
+    </span>
+    <input class="login__input" type="password" [(ngModel)]="this.password" />
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+    <button class="checkout__btn" (click)="this.logInUser()">Log in</button>
+    <button
+      *ngIf="this.loginReqCount > 2"
+      class="basic__btn"
+      (click)="this.resetPassword()"
+    >
+      Reset password
+    </button>
+  </div>
+</div>

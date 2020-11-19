@@ -1,0 +1,204 @@
+<div class="width-100" fxLayout="column" fxLayoutAlign="center center">
+  <div class="width-100" fxLayout="row" fxLayout.lt-md="column">
+    <div
+      class="review-pay__left width-100"
+      fxLayout="column"
+      fxLayoutAlign="starat start"
+    >
+      <div class="review-pay__left-header">
+        <h2>Order summary</h2>
+        <span class="review-pay__title-desc">
+          Here is a short summary of your order. You will receive the full
+          invoice via email after the purchase is complete.
+        </span>
+      </div>
+      <div
+        class="review-pay__label-group width-100"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap="10px"
+      >
+        <app-info-price-label
+          class="width-100"
+          [label]="this.projectInfo.label"
+          [infoPriceList]="this.projectInfo.infoPriceList"
+        ></app-info-price-label>
+        <app-info-price-label
+          class="width-100"
+          [label]="this.customerInfo.label"
+          [infoPriceList]="this.customerInfo.infoPriceList"
+        ></app-info-price-label>
+      </div>
+      <div
+        class="review-pay__label-group width-100"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap="10px"
+      >
+        <app-info-price-label
+          class="width-100"
+          [label]="this.packageInfo.label"
+          [infoPriceList]="this.packageInfo.infoPriceList"
+        ></app-info-price-label>
+        <app-info-price-label
+          class="width-100"
+          [label]="this.addOnInfo.label"
+          [infoPriceList]="this.addOnInfo.infoPriceList"
+        ></app-info-price-label>
+      </div>
+      <div
+        class="review-pay__label-group width-100"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap="10px"
+      >
+        <app-info-price-label
+          class="width-100"
+          [label]="this.totalInfo.label"
+          [infoPriceList]="this.totalInfo.infoPriceList"
+          [isPriceBold]="true"
+        ></app-info-price-label>
+      </div>
+    </div>
+    <div
+      class="review-pay__right width-100"
+      fxLayout="column"
+      fxLayoutAlign="starat start"
+      fxLayoutGap="10px"
+    >
+      <div class="review-pay__right-header">
+        <h2>Payment details</h2>
+        <span class="review-pay__title-desc--white">
+          Please note that the value of your order will be charged to your card
+          instantly.
+        </span>
+      </div>
+      <div
+        class="review-pay__right-body width-100"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutAlign.lt-md="start center"
+        fxLayoutGap="10px"
+      >
+        <div
+          class="width-100"
+          fxLayout="column"
+          fxLayoutAlign="start start"
+          fxLayoutGap="5px"
+        >
+          <span
+            class="review-pay__input-label"
+            [ngClass]="{
+              'review-pay__input-label--error': !this.isFullNameValid
+            }"
+          >
+            Full name
+            {{ !this.isFullNameValid ? this.requiredErorrMessage : "" }}
+          </span>
+          <input
+            class="review-pay__input"
+            [disabled]="true"
+            [ngClass]="{ 'review-pay__input--error': !this.isFullNameValid }"
+            type="text"
+            (input)="this.isFullNameValid$.next($event.target.value)"
+            [(ngModel)]="this.fullName"
+          />
+        </div>
+        <div
+          *ngIf="this.showAddressInput"
+          class="width-100"
+          fxLayout="column"
+          fxLayoutAlign="start start"
+          fxLayoutGap="5px"
+        >
+          <span
+            class="review-pay__input-label"
+            [ngClass]="{
+              'review-pay__input-label--error': !this.isAddressValid
+            }"
+          >
+            Address
+            {{ !this.isAddressValid ? this.requiredErorrMessage : "" }}
+          </span>
+          <input
+            class="review-pay__input"
+            [disabled]="true"
+            [ngClass]="{ 'review-pay__input--error': !this.isAddressValid }"
+            type="text"
+            (input)="this.isAddressValid$.next($event.target.value)"
+            [(ngModel)]="this.address"
+          />
+        </div>
+        <div
+          class="width-100"
+          fxLayout="column"
+          fxLayoutAlign="start start"
+          fxLayoutGap="5px"
+        >
+          <span
+            class="review-pay__input-label"
+            [ngClass]="{
+              'review-pay__input-label--error': !this.isEmailValid
+            }"
+          >
+            E-mail
+            {{ !this.isEmailValid ? this.requiredErorrMessage : "" }}
+          </span>
+          <input
+            class="review-pay__input"
+            [disabled]="true"
+            [ngClass]="{ 'review-pay__input--error': !this.isEmailValid }"
+            type="text"
+            (input)="this.isEmailValid$.next($event.target.value)"
+            [(ngModel)]="this.email"
+          />
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+          <input
+            type="checkbox"
+            name="iAgreeToTerms"
+            [(ngModel)]="this.iAgreeToTerms"
+          />
+          <span>
+            I understand and will comply with the
+            <button
+              class="text__btn--primary"
+              (click)="this.openTermsAndConditions()"
+            >
+              Terms of Service
+            </button>
+            and the
+            <button
+              class="text__btn--primary"
+              (click)="this.openPrivacyPolicy()"
+            >
+              Privacy Policy
+            </button>
+          </span>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+          <input
+            type="checkbox"
+            name="iAgreeToTermsOfDesign"
+            [(ngModel)]="this.iAgreeToDesign"
+          />
+          <span>
+            I am informed and I understand that the final product is a design
+            project.
+          </span>
+        </div>
+        <button
+          class="review-pay__btn checkout__btn"
+          [ngClass]="{
+            'review-pay__btn--disabled':
+              !this.iAgreeToTerms || !this.iAgreeToDesign
+          }"
+          [disabled]="!this.iAgreeToTerms || !this.iAgreeToDesign"
+          (click)="this.createOrder()"
+        >
+          Create order
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

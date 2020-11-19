@@ -1,0 +1,10 @@
+button {
+  padding: 0.1vw 2.6vw;
+  border: 1px solid black !important;
+  width: 100%;
+  font-size: 0.9375vw;
+  letter-spacing: 0.15625vw;
+  @media only screen and(max-width:959px) {
+    font-size: 18px;
+  }
+}

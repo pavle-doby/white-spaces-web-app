@@ -1,0 +1,15 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0.55vw">
+  <div *ngIf="this.info" class="info__info">
+    {{ this.info }}
+  </div>
+  <div
+    *ngIf="this.description?.length"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="0.7vw"
+  >
+    <div class="info__desc" *ngFor="let desc of this.description">
+      {{ this.desc }}
+    </div>
+  </div>
+</div>
