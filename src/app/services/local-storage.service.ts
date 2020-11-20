@@ -1,17 +1,13 @@
 import { Injectable } from '@angular/core';
-import { FloorPlan } from 'src/models/FloorPlan.model';
-import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { Question } from 'src/models/Question.model';
 import { AddOn } from 'src/models/AddOn';
 import { AppUser } from 'src/models/User.model';
-import { PackagesBox } from '../shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
 
 export const BEARER = ' Bearer ';
 
 export enum LocalStorageKey {
   PACKAGE_CATEGORY_ID = 'PACKAGE_CATEGORY_ID',
   ADDON_CATEGORY_ID = 'ADDON_CATEGORY_ID',
-  SPACE_PHOTOS_URLS = 'space-photos-urls',
   ADD_ON_LIST = 'add-ons',
   QUESTIONS = 'questions',
   USER = 'user',
@@ -30,29 +26,6 @@ export class LocalStorageService {
 
   public static get Instance(): LocalStorageService {
     return this._instance ?? (this._instance = new LocalStorageService());
-  }
-
-  public set AuthToken(token: string) {
-    this.storage.setItem(LocalStorageKey.AUTH_TOKEN, `${BEARER}${token}`);
-  }
-
-  public get AuthToken() {
-    return this.storage.getItem(LocalStorageKey.AUTH_TOKEN) ?? '';
-  }
-
-  public clearAuthToken(): void {
-    this.storage.removeItem(LocalStorageKey.AUTH_TOKEN);
-  }
-
-  public set SpacePhotosUrls(spacePhotosUrls: string[]) {
-    this.storage.setItem(
-      LocalStorageKey.SPACE_PHOTOS_URLS,
-      JSON.stringify(spacePhotosUrls)
-    );
-  }
-
-  public get SpacePhotosUrls(): string[] {
-    return JSON.parse(this.storage.getItem(LocalStorageKey.SPACE_PHOTOS_URLS));
   }
 
   public get Questions(): Question[] {

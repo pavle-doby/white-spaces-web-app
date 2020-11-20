@@ -69,7 +69,7 @@ const getInitState = (): CheckoutState => {
     infoDesc: [''],
     floorPlan: null,
     spacePhotos: null,
-    spacePhotosURLs: LocalStorageService.Instance.SpacePhotosUrls ?? [],
+    spacePhotosURLs: [],
     addOnList: LocalStorageService.Instance.AddOnList ?? [],
     questions: LocalStorageService.Instance.Questions ?? [],
     tabbarButtons: getTabbarContnet(),
@@ -93,9 +93,7 @@ const getInitState = (): CheckoutState => {
       spacePhotos: new Step({
         name: TabbarText.SPACE_PHOTOS,
         isRequired: true,
-        state: LocalStorageService.Instance.SpacePhotosUrls?.length
-          ? ProgressState.DONE
-          : ProgressState.TODO,
+        state: ProgressState.TODO,
       }),
       addOns: new Step({
         name: TabbarText.ADD_ONS,
@@ -133,23 +131,41 @@ const reducer = createReducer(
     return { ...getInitState() };
   }),
   on(setShoppingCartCheckout, (state, { shoppingCart }) => {
-    console.log('From BE', { shoppingCart });
-    const packageProduct = ShoppingCart.getPackageProduct(shoppingCart);
-    const packageLineItem = ShoppingCart.getPackageLineItem(shoppingCart);
-    const packageBox = ShoppingCart.convertPackageProductToPackageBox(
-      packageProduct
-    );
-    const url = packageLineItem.additional_data.floor_plan;
-    const name = packageLineItem.additional_data.floor_plan_name;
-    const floorPlan = new FloorPlan({ url, name });
-    const tabbarButtons = updateTabbarBtnComplitedState(
-      state.tabbarButtons,
-      TabbarText.FLOOR_PLAN,
-      !!url
-    );
+    let tabbarButtons = state.tabbarButtons;
 
-    console.log({ packageProduct });
-    console.log({ packageLineItem });
+    console.log('From BE', { shoppingCart });
+    const product = ShoppingCart.getPackageProduct(shoppingCart);
+    const lineItem = ShoppingCart.getPackageLineItem(shoppingCart);
+    const packageBox = ShoppingCart.convertPackageProductToPackageBox(product);
+
+    //#region floorPlan
+    const url = lineItem.additional_data.floor_plan;
+    const name = lineItem.additional_data.floor_plan_name;
+    const floorPlan = new FloorPlan({ url, name });
+
+    const isFloorPalnDone = !!url;
+    console.log({ isFloorPalnDone });
+
+    tabbarButtons = updateTabbarBtnComplitedState(
+      tabbarButtons,
+      TabbarText.FLOOR_PLAN,
+      isFloorPalnDone
+    );
+    //#endregion floorPlan
+
+    //#region spacePhotosURLs
+    const spacePhotosURLs = lineItem.additional_data.images;
+
+    const isSpacePhotosDone = !!spacePhotosURLs?.length;
+    tabbarButtons = updateTabbarBtnComplitedState(
+      tabbarButtons,
+      TabbarText.SPACE_PHOTOS,
+      isSpacePhotosDone
+    );
+    //#endregion
+
+    console.log({ packageProduct: product });
+    console.log({ packageLineItem: lineItem });
     console.log({ packageBox });
 
     return {
@@ -157,12 +173,17 @@ const reducer = createReducer(
       shoppingCart,
       packageBox,
       floorPlan,
+      spacePhotosURLs,
       tabbarButtons,
       progressState: {
         ...state.progressState,
         floorPlan: {
           ...state.progressState.floorPlan,
-          state: !!url ? ProgressState.DONE : ProgressState.TODO,
+          state: isFloorPalnDone ? ProgressState.DONE : ProgressState.TODO,
+        },
+        spacePhotos: {
+          ...state.progressState.spacePhotos,
+          state: isSpacePhotosDone ? ProgressState.DONE : ProgressState.TODO,
         },
       },
     };
@@ -208,7 +229,6 @@ const reducer = createReducer(
     };
   }),
   on(setSpacePhotosURLsCheckout, (state, { filesURLs }) => {
-    LocalStorageService.Instance.SpacePhotosUrls = filesURLs;
     const newTabbarState = updateTabbarBtnComplitedState(
       state.tabbarButtons,
       TabbarText.SPACE_PHOTOS
@@ -228,7 +248,7 @@ const reducer = createReducer(
   }),
   on(addSpacePhotoURLCheckout, (state, { fileURL }) => {
     const newUrls = [...state.spacePhotosURLs, fileURL];
-    LocalStorageService.Instance.SpacePhotosUrls = newUrls;
+
     const newTabbarState = updateTabbarBtnComplitedState(
       state.tabbarButtons,
       TabbarText.SPACE_PHOTOS
@@ -247,7 +267,6 @@ const reducer = createReducer(
     };
   }),
   on(clearSpacePhotosURLsCheckout, (state) => {
-    LocalStorageService.Instance.SpacePhotosUrls = [];
     const newTabbarState = updateTabbarBtnComplitedState(
       state.tabbarButtons,
       TabbarText.SPACE_PHOTOS,
