@@ -67,7 +67,7 @@ const getInitState = (): CheckoutState => {
     allPackageCards: [],
     info: 'Welcome to your renovation project!',
     infoDesc: [''],
-    floorPlan: LocalStorageService.Instance.FloorPlan,
+    floorPlan: null,
     spacePhotos: null,
     spacePhotosURLs: LocalStorageService.Instance.SpacePhotosUrls ?? [],
     addOnList: LocalStorageService.Instance.AddOnList ?? [],
@@ -88,9 +88,7 @@ const getInitState = (): CheckoutState => {
       floorPlan: new Step({
         name: TabbarText.FLOOR_PLAN,
         isRequired: true,
-        state: LocalStorageService.Instance.FloorPlan
-          ? ProgressState.DONE
-          : ProgressState.TODO,
+        state: ProgressState.TODO,
       }),
       spacePhotos: new Step({
         name: TabbarText.SPACE_PHOTOS,
@@ -136,16 +134,38 @@ const reducer = createReducer(
   }),
   on(setShoppingCartCheckout, (state, { shoppingCart }) => {
     console.log('From BE', { shoppingCart });
-    const ppPackage = ShoppingCart.getPackageProduct(shoppingCart);
-    const pliPackage = ShoppingCart.getPackageLineItem(shoppingCart);
+    const packageProduct = ShoppingCart.getPackageProduct(shoppingCart);
+    const packageLineItem = ShoppingCart.getPackageLineItem(shoppingCart);
     const packageBox = ShoppingCart.convertPackageProductToPackageBox(
-      ppPackage
+      packageProduct
     );
-    console.log({ ppPackage });
-    console.log({ pliPackage });
+    const url = packageLineItem.additional_data.floor_plan;
+    const name = packageLineItem.additional_data.floor_plan_name;
+    const floorPlan = new FloorPlan({ url, name });
+    const tabbarButtons = updateTabbarBtnComplitedState(
+      state.tabbarButtons,
+      TabbarText.FLOOR_PLAN,
+      !!url
+    );
+
+    console.log({ packageProduct });
+    console.log({ packageLineItem });
     console.log({ packageBox });
 
-    return { ...state, shoppingCart, packageBox };
+    return {
+      ...state,
+      shoppingCart,
+      packageBox,
+      floorPlan,
+      tabbarButtons,
+      progressState: {
+        ...state.progressState,
+        floorPlan: {
+          ...state.progressState.floorPlan,
+          state: !!url ? ProgressState.DONE : ProgressState.TODO,
+        },
+      },
+    };
   }),
   on(setTabbarStateCheckout, (state, { buttons }) => {
     return { ...state, tabbarButtons: buttons };
@@ -170,7 +190,6 @@ const reducer = createReducer(
     return { ...state, info: info, infoDesc: description };
   }),
   on(setFloorPlanCheckout, (state, { floorPlan }) => {
-    LocalStorageService.Instance.FloorPlan = floorPlan;
     const newTabbarState = updateTabbarBtnComplitedState(
       state.tabbarButtons,
       TabbarText.FLOOR_PLAN

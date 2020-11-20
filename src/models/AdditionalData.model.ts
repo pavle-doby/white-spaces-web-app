@@ -12,5 +12,7 @@ export interface AdditionalDataLineItem {
   questions?: QuestionDTO[];
   type?: string; // For Package
   floor_plan?: string; // For Package
+  //BE needs to be updated, or maybe not :D 
+  floor_plan_name?: string; // For Package
   images?: string[]; // For Package
 }

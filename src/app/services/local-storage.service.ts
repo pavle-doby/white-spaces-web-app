@@ -11,7 +11,6 @@ export const BEARER = ' Bearer ';
 export enum LocalStorageKey {
   PACKAGE_CATEGORY_ID = 'PACKAGE_CATEGORY_ID',
   ADDON_CATEGORY_ID = 'ADDON_CATEGORY_ID',
-  FLOOR_PLAN = 'floor-plan-link',
   SPACE_PHOTOS_URLS = 'space-photos-urls',
   ADD_ON_LIST = 'add-ons',
   QUESTIONS = 'questions',
@@ -54,15 +53,6 @@ export class LocalStorageService {
 
   public get SpacePhotosUrls(): string[] {
     return JSON.parse(this.storage.getItem(LocalStorageKey.SPACE_PHOTOS_URLS));
-  }
-
-  public set FloorPlan(floorPlan: FloorPlan) {
-    this.storage.setItem(LocalStorageKey.FLOOR_PLAN, JSON.stringify(floorPlan));
-  }
-
-  public get FloorPlan(): FloorPlan {
-    const obj = JSON.parse(this.storage.getItem(LocalStorageKey.FLOOR_PLAN));
-    return obj ? new FloorPlan(obj) : null;
   }
 
   public get Questions(): Question[] {
