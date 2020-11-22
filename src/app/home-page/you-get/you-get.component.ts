@@ -33,4 +33,11 @@ export class YouGetComponent implements OnInit {
   public openDialog(): void {
     this.MatDialog.open(YouGetDialogComponent);
   }
+
+  public onOLStateChange(toShowDesc: boolean, index: number): void {
+    for (let i = 0; i < this.openingLabelsArray.length; i++) {
+      this.openingLabelsArray[i].isOpen = false;
+    }
+    this.openingLabelsArray[index].isOpen = toShowDesc;
+  }
 }

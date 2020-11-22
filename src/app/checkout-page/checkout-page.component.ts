@@ -84,7 +84,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
       this.$store.dispatch(setShoppingCartCheckout({ shoppingCart }));
     } catch (error) {
       console.error(error);
-      // alert(error.message);
+      alert(error.message);
     }
   }
 

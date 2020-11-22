@@ -5,20 +5,13 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {
   checkoutSelectPackage,
   setInfoCheckout,
-  setFloorPlanCheckout,
-  setSpacePhotosURLsCheckout,
-  setAddOnIsSelectedCheckout,
   updateQuestionCheckout,
   setCurrentIndexCheckout,
-  addSpacePhotoURLCheckout,
   clearSpacePhotosURLsCheckout,
   setAddOnListCheckout,
-  setQuestionStepperCheckout,
-  setQuestionsCheckout,
   setAllPackagesCheckout,
   setShoppingCartCheckout,
   selectTabbarButtonCheckout,
-  setTabbarStateCheckout,
   setInitStateChekcout,
 } from '../actions/checkout.action';
 import {
@@ -233,18 +226,14 @@ const reducer = createReducer(
       },
     };
   }),
-  on(setTabbarStateCheckout, (state, { buttons }) => {
-    return { ...state, tabbarButtons: buttons };
-  }),
   on(selectTabbarButtonCheckout, (state, { btnText: tabbarBtnText }) => {
-    const newTabbarState: TabbarButton[] = state.tabbarButtons.map(
-      (btn: TabbarButton) => {
-        return btn.text === tabbarBtnText
-          ? { ...btn, isSelected: true }
-          : { ...btn, isSelected: false };
-      }
-    );
-    return { ...state, tabbarButtons: newTabbarState };
+    const tabbarButtons = state.tabbarButtons.map((btn) => {
+      return {
+        ...btn,
+        isSelected: btn.text === tabbarBtnText,
+      };
+    });
+    return { ...state, tabbarButtons };
   }),
   on(setAllPackagesCheckout, (state, { packages }) => {
     return { ...state, allPackageCards: packages };
@@ -253,63 +242,7 @@ const reducer = createReducer(
     return { ...state, packageBox };
   }),
   on(setInfoCheckout, (state, { info, description }) => {
-    return { ...state, info: info, infoDesc: description };
-  }),
-  on(setFloorPlanCheckout, (state, { floorPlan }) => {
-    const newTabbarState = TabbarButton.updateTabbarBtnComplitedState(
-      state.tabbarButtons,
-      TabbarText.FLOOR_PLAN
-    );
-    return {
-      ...state,
-      floorPlan: floorPlan,
-      progressState: {
-        ...state.progressState,
-        floorPlan: {
-          ...state.progressState.floorPlan,
-          state: ProgressState.DONE,
-        },
-      },
-      tabbarButtons: newTabbarState,
-    };
-  }),
-  on(setSpacePhotosURLsCheckout, (state, { filesURLs }) => {
-    const newTabbarState = TabbarButton.updateTabbarBtnComplitedState(
-      state.tabbarButtons,
-      TabbarText.SPACE_PHOTOS
-    );
-    return {
-      ...state,
-      spacePhotosURLs: filesURLs,
-      progressState: {
-        ...state.progressState,
-        spacePhotos: {
-          ...state.progressState.spacePhotos,
-          state: ProgressState.DONE,
-        },
-      },
-      tabbarButtons: newTabbarState,
-    };
-  }),
-  on(addSpacePhotoURLCheckout, (state, { fileURL }) => {
-    const newUrls = [...state.spacePhotosURLs, fileURL];
-
-    const newTabbarState = TabbarButton.updateTabbarBtnComplitedState(
-      state.tabbarButtons,
-      TabbarText.SPACE_PHOTOS
-    );
-    return {
-      ...state,
-      spacePhotosURLs: newUrls,
-      progressState: {
-        ...state.progressState,
-        spacePhotos: {
-          ...state.progressState.spacePhotos,
-          state: ProgressState.DONE,
-        },
-      },
-      tabbarButtons: newTabbarState,
-    };
+    return { ...state, info, infoDesc: description };
   }),
   on(clearSpacePhotosURLsCheckout, (state) => {
     const newTabbarState = TabbarButton.updateTabbarBtnComplitedState(
@@ -330,82 +263,6 @@ const reducer = createReducer(
       tabbarButtons: newTabbarState,
     };
   }),
-  on(setAddOnIsSelectedCheckout, (state, { addOn, isSelected, isProduct }) => {
-    if (isProduct) {
-      addOn = state.addOnList.find((ao) => ao.id === addOn.id);
-    }
-    if (!addOn) {
-      console.log('Addon nullish', { addOn });
-
-      return { ...state };
-    }
-    console.log({ state });
-
-    let questions = state.questions;
-    if (isSelected) {
-      questions = [...questions, ...addOn.questions];
-    } else {
-      const isAddOnQuestion = (addOn, question) =>
-        addOn.questions.find((addOnQ) => addOnQ.id === question.id);
-
-      questions = questions.filter((q) => !isAddOnQuestion(addOn, q));
-    }
-
-    const addOnList = state.addOnList.map((ao) => ({
-      ...ao,
-      isSelected: ao.id === addOn.id ? isSelected : ao.isSelected,
-    }));
-
-    const isOneSelected = isSelected
-      ? isSelected
-      : !!addOnList.find((ao) => ao.isSelected);
-
-    let tabbarButtons = TabbarButton.updateTabbarBtnComplitedState(
-      state.tabbarButtons,
-      TabbarText.ADD_ONS,
-      isOneSelected
-    );
-
-    let finished = Question.calculateFinishedQuestions(questions);
-    let total = questions.length;
-    let isDone = total === finished;
-
-    tabbarButtons = TabbarButton.updateTabbarBtnComplitedState(
-      tabbarButtons,
-      TabbarText.QUESTIONNARIE,
-      isDone
-    );
-
-    return {
-      ...state,
-      addOnList,
-      questions,
-      questionStepper: {
-        ...state.questionStepper,
-        numberOfSteps: questions.length,
-        indexCurrent: QS_INDEX_CURRENT,
-        rangeStart: QS_RANGE_START,
-        rangeEnd: isHandset() ? QS_RANGE_END_SHORT : QS_NUM_RANGE_TO_SHOW_WIDE,
-        numberOfRangeToShow: isHandset()
-          ? QS_NUM_RANGE_TO_SHOW_SHORT
-          : QS_NUM_RANGE_TO_SHOW_WIDE,
-      },
-      progressState: {
-        ...state.progressState,
-        addOns: {
-          ...state.progressState.addOns,
-          state: isOneSelected ? ProgressState.DONE : ProgressState.TODO,
-        },
-        questions: {
-          ...state.progressState.questions,
-          total: total,
-          finshed: finished,
-          state: isDone ? ProgressState.DONE : ProgressState.TODO,
-        },
-      },
-      tabbarButtons,
-    };
-  }),
   on(setAddOnListCheckout, (state, { addOnList }) => {
     const tabbarButtons = TabbarButton.updateTabbarBtnComplitedState(
       state.tabbarButtons,
@@ -413,39 +270,6 @@ const reducer = createReducer(
       !!addOnList.find((addOn) => addOn.isSelected)
     );
     return { ...state, addOnList, tabbarButtons };
-  }),
-  on(setQuestionsCheckout, (state, { questions }) => {
-    const finished = Question.calculateFinishedQuestions(questions);
-    const total = questions.length;
-    const isDone = finished === total;
-    const newTabbarState = TabbarButton.updateTabbarBtnComplitedState(
-      state.tabbarButtons,
-      TabbarText.QUESTIONNARIE,
-      isDone
-    );
-
-    return {
-      ...state,
-      questions: questions,
-      questionStepper: {
-        ...state.questionStepper,
-        numberOfSteps: questions.length,
-        indexCurrent: QS_INDEX_CURRENT,
-      },
-      progressState: {
-        ...state.progressState,
-        questions: {
-          ...state.progressState.questions,
-          finshed: finished,
-          total: total,
-          state: isDone ? ProgressState.DONE : ProgressState.TODO,
-        },
-      },
-      tabbarButtons: newTabbarState,
-    };
-  }),
-  on(setQuestionStepperCheckout, (state, { questionStepper }) => {
-    return { ...state, questionStepper: questionStepper };
   }),
   on(updateQuestionCheckout, (state, { question }) => {
     const newQuestions = state.questions.map((q) => {

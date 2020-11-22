@@ -32,6 +32,18 @@ export class LocalStorageService {
     this.storage.setItem(LocalStorageKey.USER, JSON.stringify(user));
   }
 
+  public set AuthToken(token: string) {
+    this.storage.setItem(LocalStorageKey.AUTH_TOKEN, `${BEARER}${token}`);
+  }
+
+  public get AuthToken() {
+    return this.storage.getItem(LocalStorageKey.AUTH_TOKEN) ?? '';
+  }
+
+  public clearAuthToken(): void {
+    this.storage.removeItem(LocalStorageKey.AUTH_TOKEN);
+  }
+
   public get PackageCategroyId(): number {
     return JSON.parse(
       this.storage.getItem(LocalStorageKey.PACKAGE_CATEGORY_ID)

@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import {
   checkoutSelectPackage,
-  setQuestionsCheckout,
+  setAllPackagesCheckout,
 } from 'src/app/store/actions/checkout.action';
 import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
@@ -42,19 +42,35 @@ export class SideCardPackagesComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.isHandset = BREAKING_POINT_PX > getClientWidthPX();
 
-    this.CheckOutService.getAllPackages().subscribe(async (allPackages) => {
-      LocalStorageService.Instance.PackageCategroyId = allPackages?.length
-        ? allPackages[0].category_id
-        : null;
+    this.CheckOutService.getAllPackages()
+      .toPromise()
+      .then((allPackages) => {
+        LocalStorageService.Instance.PackageCategroyId = allPackages?.length
+          ? allPackages[0].category_id
+          : null;
 
-      this.packages = allPackages.map((packageDTO) => {
-        const box = ShoppingCart.convertPackageProductToPackageBox(packageDTO);
-        return new SideCadrPackage(box, []);
+        this.packages = allPackages.map((packageDTO) => {
+          const box = ShoppingCart.convertPackageProductToPackageBox(
+            packageDTO
+          );
+          return new SideCadrPackage(box, []);
+        });
+        this.$store.dispatch(
+          setAllPackagesCheckout({ packages: this.packages })
+        );
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(err.message);
       });
-    });
+
+    let shoppingCart = await this.CheckOutService.getShoppingCart().toPromise();
+    const package_ = ShoppingCart.getPackageProduct(shoppingCart);
+    const packageBox = ShoppingCart.convertPackageProductToPackageBox(package_);
+    this.$store.dispatch(checkoutSelectPackage({ packageBox }));
   }
 
   public onSelectEvent(packageBox: PackagesBox): void {
