@@ -36,22 +36,23 @@ export const COOKIE_CONFIG: NgcCookieConsentConfig = {
   theme: 'classic',
   palette: {
     popup: {
-      background: '#4051b5',
+      background: '#000000',
       text: '#ffffff',
       link: '#ffffff',
     },
     button: {
-      background: '#f1d600',
-      text: '#4051b5',
+      background: '#ffffff',
+      text: '#000000',
       border: 'transparent',
     },
   },
   type: 'opt-in',
   content: {
     message:
-      'This website uses cookies to ensure you get the best experience on our website.',
+      'This website uses cookies which improve  your experience and improve the site. You can find out more about our cookie policy in our privacy policy document.',
     dismiss: 'Got it!',
-    deny: 'Refuse cookies',
+    allow: 'Accept all cookies',
+    deny: 'Only necessary',
     link: '',
     href: '',
     policy: 'Cookie Policy',
