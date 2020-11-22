@@ -34,6 +34,19 @@ export class TabbarButton {
         : { ...btn };
     });
   };
+
+  public static updateTbbarBtnComplitedStateWithObject({
+    tabbarButtons,
+    tabbarComplitedObj,
+  }: {
+    tabbarButtons: TabbarButton[];
+    tabbarComplitedObj: Record<string, boolean>;
+  }): TabbarButton[] {
+    return tabbarButtons.map((btn) => ({
+      ...btn,
+      isCompleted: tabbarComplitedObj[btn.text] ?? btn.isCompleted,
+    }));
+  }
 }
 
 export const getTabbarContnet = () => {

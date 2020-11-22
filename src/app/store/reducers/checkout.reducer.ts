@@ -140,49 +140,21 @@ const reducer = createReducer(
     const packageBox = ShoppingCart.convertPackageProductToPackageBox(product);
     //#endregion
 
-    //#region Questions
-    let questions = [];
-    let additionalDataQuestions = [];
-    shoppingCart.line_items.forEach((li) => {
-      additionalDataQuestions = li.additional_data?.questions ?? [];
-      questions = [...questions, ...additionalDataQuestions];
-    });
-    const finished = Question.calculateFinishedQuestions(questions);
-    const total = questions.length;
-    const isQuestionsDone = total === finished;
-
-    tabbarButtons = TabbarButton.updateTabbarBtnComplitedState(
-      tabbarButtons,
-      TabbarText.QUESTIONNARIE,
-      isQuestionsDone
-    );
-    //#endregion
-
     //#region floorPlan
     const url = lineItem.additional_data.floor_plan;
     const name = lineItem.additional_data.floor_plan_name;
     const floorPlan = new FloorPlan({ url, name });
 
     const isFloorPalnDone = !!url;
-    tabbarButtons = TabbarButton.updateTabbarBtnComplitedState(
-      tabbarButtons,
-      TabbarText.FLOOR_PLAN,
-      isFloorPalnDone
-    );
     //#endregion floorPlan
 
     //#region spacePhotosURLs
     const spacePhotosURLs = lineItem.additional_data.images;
 
     const isSpacePhotosDone = !!spacePhotosURLs?.length;
-    tabbarButtons = TabbarButton.updateTabbarBtnComplitedState(
-      tabbarButtons,
-      TabbarText.SPACE_PHOTOS,
-      isSpacePhotosDone
-    );
     //#endregion
 
-    //#region AddOns
+    //#region addOnList
     const addOnProdList = ShoppingCart.getAddOnProductList(shoppingCart);
     const selectedAddOns = addOnProdList.map((addOnProd) =>
       AddOn.covertAddOnDTOToAddOn(addOnProd as AddOnDTO, true)
@@ -195,12 +167,35 @@ const reducer = createReducer(
       .sort(AddOn.compare);
 
     const isOneSelected = !!selectedAddOns.length;
-    tabbarButtons = TabbarButton.updateTabbarBtnComplitedState(
-      tabbarButtons,
-      TabbarText.ADD_ONS,
-      isOneSelected
-    );
     //#endregion
+
+    //#region questions
+    let questions = [];
+    let additionalDataQuestions = [];
+    shoppingCart.line_items.forEach((li) => {
+      additionalDataQuestions = li.additional_data?.questions ?? [];
+      questions = [...questions, ...additionalDataQuestions];
+    });
+
+    const finished = Question.calculateFinishedQuestions(questions);
+    const total = questions.length;
+    const isQuestionsDone = total === finished;
+    //#endregion
+
+    //#region tabbarButtons
+    let tabbarComplitedObj = {};
+    tabbarComplitedObj[TabbarText.FLOOR_PLAN] = isFloorPalnDone;
+    tabbarComplitedObj[TabbarText.SPACE_PHOTOS] = isSpacePhotosDone;
+    tabbarComplitedObj[TabbarText.ADD_ONS] = isOneSelected;
+    tabbarComplitedObj[TabbarText.QUESTIONNARIE] = isQuestionsDone;
+
+    tabbarButtons = TabbarButton.updateTbbarBtnComplitedStateWithObject({
+      tabbarButtons,
+      tabbarComplitedObj,
+    });
+    //#endregion
+
+    console.log('shoppingCart map to state finished');
 
     return {
       ...state,
