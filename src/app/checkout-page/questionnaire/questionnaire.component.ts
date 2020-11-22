@@ -18,6 +18,7 @@ import { TabbarText } from 'src/models/TabbarText.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
 import { QuestionStepper } from './question-stepper/question-stepper.model';
 import { TooltipPosition } from 'src/models/TooltipPosition.model';
+import { clone } from 'src/app/shared/Utilities';
 
 const INFO = `Feel free to load us with information so that we
 can truly get to know you and your space. 
@@ -27,6 +28,8 @@ const INFO_DESC = `Your satisfaction with the end result has to do with the amou
 You can ensure that your project is a resounding success by making us understand your needs!`;
 
 const UPLOAD_MSG = 'Upload photo';
+const UPLOADED_MSG = 'Photo is uploaded';
+
 const UPLOAD_TOOLTIP_INFO =
   'You can upload only one photo at the moment. Please, send us the rest of them via email.';
 
@@ -110,12 +113,14 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   public onChangeAnswer(question: Question): void {
+    console.log('onChnageAnswer', { question });
+
     const lineItem = ShoppingCart.getLineItemWithProductId(
       this.shoppingCart,
       question.product_id
     );
 
-    const newQuestions: Question[] = JSON.parse(JSON.stringify(this.questions))
+    const newQuestions: Question[] = clone<Question[]>(this.questions)
       .filter((q) => q.product_id === lineItem.product.id)
       .map((q) => {
         return q.id === question.id ? { ...question } : { ...q };
@@ -163,8 +168,6 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   public onUploadEvent(fileList: FileList): void {
-    console.log({ fileList });
-
     this.checkoutService
       .uploadFile(fileList[0])
       .toPromise()
@@ -179,13 +182,8 @@ export class QuestionnaireComponent implements OnInit {
           this.shoppingCart,
           newQuestion.product_id
         );
-        const additionalData = JSON.parse(
-          JSON.stringify(lineItem.product.additional_data)
-        );
 
-        const newQuestions: Question[] = JSON.parse(
-          JSON.stringify(this.questions)
-        )
+        const newQuestions: Question[] = clone<Question[]>(this.questions)
           .filter((q) => q.product_id === lineItem.product.id)
           .map((q) => {
             return q.id === newQuestion.id ? { ...newQuestion } : { ...q };
@@ -227,7 +225,7 @@ export class QuestionnaireComponent implements OnInit {
   private chagneUploadInfo(): void {
     const imageIsUploaded = !!this.questions[this.toShowIndex]?.images?.length;
     this.uploadData.bottomInfo = imageIsUploaded
-      ? this.questions[this.toShowIndex].image_name ?? UPLOAD_MSG
+      ? this.questions[this.toShowIndex].image_name ?? UPLOADED_MSG
       : UPLOAD_MSG;
   }
 }

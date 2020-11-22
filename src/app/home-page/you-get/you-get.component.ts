@@ -15,11 +15,9 @@ import { TitleSize } from 'src/app/shared/title/TitleSize';
   templateUrl: './you-get.component.html',
   styleUrls: ['./you-get.component.scss'],
 })
-export class YouGetComponent implements OnInit, OnDestroy {
+export class YouGetComponent implements OnInit {
   public readonly youGetTitle: AppTitle;
   public openingLabelsArray: OpeningLabel[];
-
-  private $subDialog: Subscription;
 
   constructor(private readonly MatDialog: MatDialog) {
     this.youGetTitle = new AppTitle(
@@ -32,28 +30,7 @@ export class YouGetComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {}
 
-  ngOnDestroy(): void {
-    if (this.$subDialog) this.$subDialog.unsubscribe();
-  }
-
   public openDialog(): void {
-    const dialogRef = this.MatDialog.open(YouGetDialogComponent);
-
-    this.$subDialog = dialogRef.afterClosed().subscribe((res) => {
-      if (!res) return;
-
-      this.downloadPackage();
-    });
-  }
-
-  public onOLStateChange(toShowDesc: boolean, index: number): void {
-    for (let i = 0; i < this.openingLabelsArray.length; i++) {
-      this.openingLabelsArray[i].isOpen = false;
-    }
-    this.openingLabelsArray[index].isOpen = toShowDesc;
-  }
-
-  public downloadPackage(): void {
-    console.log('downloadPackage');
+    this.MatDialog.open(YouGetDialogComponent);
   }
 }

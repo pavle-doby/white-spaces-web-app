@@ -5,17 +5,13 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import {
   checkoutSelectPackage,
-  setQuestionStepperCheckout,
   setQuestionsCheckout,
 } from 'src/app/store/actions/checkout.action';
 import { Router } from '@angular/router';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 import { BREAKING_POINT_PX, LoginParam } from 'src/app/app.config';
-import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
-import {
-  getClientWidthPX,
-} from '../Utilities';
+import { getClientWidthPX } from '../Utilities';
 import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -61,21 +57,9 @@ export class SideCardPackagesComponent implements OnInit {
     });
   }
 
-  public onSelectEvent(box: PackagesBox): void {
+  public onSelectEvent(packageBox: PackagesBox): void {
     this.$store.dispatch(closeNavbarCard());
-    this.$store.dispatch(checkoutSelectPackage({ packageBox: box }));
-    this.$store.dispatch(setQuestionsCheckout({ questions: box.questions }));
-    this.$store.dispatch(
-      setQuestionStepperCheckout({
-        questionStepper: new QuestionStepper({
-          rangeStart: 0,
-          rangeEnd: 15,
-          numberOfRangeToShow: 16,
-          numberOfSteps: box.questions.length,
-          indexCurrent: 0,
-        }),
-      })
-    );
+    this.$store.dispatch(checkoutSelectPackage({ packageBox }));
 
     this.router.navigateByUrl(
       `/${MainRouterPaths.LOGIN}?login=${LoginParam.REGISTER}`

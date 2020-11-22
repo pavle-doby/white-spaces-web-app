@@ -5,13 +5,17 @@ import { AppState } from '../store';
 import { Observable, Subscription } from 'rxjs';
 import { CheckoutState } from '../store/reducers/checkout.reducer';
 import { CheckoutService } from '../services/checkout.service.ts.service';
-import { setShoppingCartCheckout } from '../store/actions/checkout.action';
+import {
+  setAddOnListCheckout,
+  setShoppingCartCheckout,
+} from '../store/actions/checkout.action';
 import { LocalStorageService } from '../services/local-storage.service';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { PackagesBox } from '../shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
 import { isHandset } from '../shared/Utilities';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
+import { AddOn } from 'src/models/AddOn';
 
 @Component({
   selector: 'app-checkout-page',
@@ -45,18 +49,31 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
     });
 
     try {
+      let addOnDTOList = await this.checkoutService.getAllAddOns().toPromise();
+      const addOnList = addOnDTOList
+        .map((addOnDTO) => AddOn.covertAddOnDTOToAddOn(addOnDTO))
+        .sort(AddOn.compare);
+
+      this.$store.dispatch(setAddOnListCheckout({ addOnList }));
+
+      LocalStorageService.Instance.AddOnCategroyId = addOnDTOList?.length
+        ? addOnDTOList[0].category_id
+        : null;
+
       let shoppingCart = await this.checkoutService
         .getShoppingCart()
         .toPromise();
 
-      const package_ = ShoppingCart.getPackageProduct(shoppingCart); 
-      
+      const package_ = ShoppingCart.getPackageProduct(shoppingCart);
+
       if (!package_) {
         const productVM: ProductVM = {
           shopping_cart_id: shoppingCart.id,
           product_id: this.package.id,
           quantity: 1,
-          additional_data: {},
+          additional_data: {
+            questions: this.package.questions,
+          },
         };
 
         shoppingCart = await this.checkoutService
@@ -64,9 +81,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
           .toPromise();
       }
 
-      this.$store.dispatch(
-        setShoppingCartCheckout({ shoppingCart: shoppingCart })
-      );
+      this.$store.dispatch(setShoppingCartCheckout({ shoppingCart }));
     } catch (error) {
       console.error(error);
       // alert(error.message);

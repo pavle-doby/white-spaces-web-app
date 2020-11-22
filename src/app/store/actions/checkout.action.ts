@@ -55,7 +55,7 @@ export const clearSpacePhotosURLsCheckout = createAction(
 
 export const setAddOnIsSelectedCheckout = createAction(
   '[CHECKOUT] SELECT_ADD_ON',
-  props<{ addOn: AddOn; isSelected: boolean }>()
+  props<{ addOn: AddOn; isSelected: boolean; isProduct?: boolean }>()
 );
 
 export const setAddOnListCheckout = createAction(

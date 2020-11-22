@@ -1,8 +1,9 @@
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { PackagesBox } from 'src/app/shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
-import { convertQuestionsDTOListToQuestionsList } from 'src/app/shared/Utilities';
+import { clone } from 'src/app/shared/Utilities';
 import { LineIntem } from './LineItem.model';
 import { Product } from './Product.model';
+import { Question } from './Question.model';
 
 export class ShoppingCart {
   public id: number;
@@ -23,7 +24,7 @@ export class ShoppingCart {
   public static convertPackageProductToPackageBox(
     product: Product
   ): PackagesBox {
-    const buffQuestions = convertQuestionsDTOListToQuestionsList(
+    const buffQuestions = Question.convertQuestionsDTOListToQuestionsList(
       product.additional_data.questions,
       product
     );
@@ -46,6 +47,15 @@ export class ShoppingCart {
     );
   }
 
+  public static getAddOnProductList(shoppingCart: ShoppingCart): Product[] {
+    const isAddOn = (categoryId) =>
+      categoryId === LocalStorageService.Instance.AddOnCategroyId;
+
+    return shoppingCart.line_items
+      .map((li) => li.product)
+      .filter((prod) => isAddOn(prod.category_id));
+  }
+
   public static getLineItemWithProductId(
     shoppingCart: ShoppingCart,
     productId: number
@@ -59,19 +69,12 @@ export class ShoppingCart {
     shoppingCart: ShoppingCart,
     lineItemId: number
   ): ShoppingCart {
-    let newShoppingCart: ShoppingCart = JSON.parse(
-      JSON.stringify(shoppingCart)
-    );
+    let newShoppingCart: ShoppingCart = clone<ShoppingCart>(shoppingCart);
 
     newShoppingCart.line_items = newShoppingCart.line_items.filter(
-      (lineItem) => {
-        console.log(lineItem.id);
-        console.log(lineItemId);
-        return lineItem.id !== lineItemId;
-      }
+      (lineItem) => lineItem.id !== lineItemId
     );
 
-    console.log(newShoppingCart.line_items);
     return newShoppingCart;
   }
 }

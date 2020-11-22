@@ -3,8 +3,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { TabbarButton } from './tabbar.content';
 import { Observable, Subscription } from 'rxjs';
-import { clone, isHandset } from '../Utilities';
-import { TabbarText } from 'src/models/TabbarText.model';
+import { isHandset } from '../Utilities';
 
 @Component({
   selector: 'app-tabbar',
