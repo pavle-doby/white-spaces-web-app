@@ -20,7 +20,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { CheckoutPageModule } from './checkout-page/checkout-page.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NgxGoogleAnalyticsModule } from 'ngx-google-analytics';
+import {
+  NgxGoogleAnalyticsModule,
+  NgxGoogleAnalyticsRouterModule,
+} from 'ngx-google-analytics';
+import { NgcCookieConsentModule } from 'ngx-cookieconsent';
+import { COOKIE_CONFIG } from './app.config';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,7 +44,11 @@ import { NgxGoogleAnalyticsModule } from 'ngx-google-analytics';
         strictActionImmutability: true,
       },
     }),
-    NgxGoogleAnalyticsModule.forRoot('G-2RFP944R90'),
+    NgxGoogleAnalyticsModule.forRoot(
+      document.cookie && environment.production ? 'G-2RFP944R90' : ''
+    ),
+    NgxGoogleAnalyticsRouterModule,
+    NgcCookieConsentModule.forRoot(COOKIE_CONFIG),
     StoreDevtoolsModule.instrument(),
     // !environment.production ? StoreDevtoolsModule.instrument() : [],
     ServiceWorkerModule.register('ngsw-worker.js', {
