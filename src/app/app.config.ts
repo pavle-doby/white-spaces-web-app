@@ -1,3 +1,5 @@
+import { NgcCookieConsentConfig } from 'ngx-cookieconsent';
+
 //export const API_URL = 'http://18.221.175.43';
 export const API_URL = '';
 
@@ -25,3 +27,34 @@ export const MEDIA_QUERY_WIDTH = '(max-width: 960px)';
 export const SCROLL_SPEED = 30;
 
 export const SHOW_ADDRESS_INPUT = false;
+
+export const COOKIE_CONFIG: NgcCookieConsentConfig = {
+  cookie: {
+    domain: 'whitespacerenovation.com/',
+  },
+  position: 'bottom-left',
+  theme: 'classic',
+  palette: {
+    popup: {
+      background: '#4051b5',
+      text: '#ffffff',
+      link: '#ffffff',
+    },
+    button: {
+      background: '#f1d600',
+      text: '#4051b5',
+      border: 'transparent',
+    },
+  },
+  type: 'opt-in',
+  content: {
+    message:
+      'This website uses cookies to ensure you get the best experience on our website.',
+    dismiss: 'Got it!',
+    deny: 'Refuse cookies',
+    link: '',
+    href: '',
+    policy: 'Cookie Policy',
+  },
+  enabled: document.cookie ? false : true,
+};

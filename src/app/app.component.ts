@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { fromEvent, interval, Observable } from 'rxjs';
 import { debounce, map, shareReplay } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
@@ -8,6 +8,10 @@ import { Store } from '@ngrx/store';
 import { AppState } from './store';
 import { closeNavbarCard } from './store/actions/navbar.actions';
 import { SCROLL_SPEED } from './app.config';
+import {
+  NgcCookieConsentService,
+  NgcStatusChangeEvent,
+} from 'ngx-cookieconsent';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +19,7 @@ import { SCROLL_SPEED } from './app.config';
   providers: [{ provide: Window, useValue: window }],
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
@@ -35,11 +39,23 @@ export class AppComponent {
     private readonly window: Window,
     private breakpointObserver: BreakpointObserver,
     private readonly router: Router,
-    private readonly store: Store<AppState>
+    private readonly store: Store<AppState>,
+    private ccService: NgcCookieConsentService
   ) {
     this.router.events.subscribe((route) => {
       this.footerActive = route instanceof NavigationEnd || this.footerActive;
       this.isAdmin = this.router.url.includes('admin');
+    });
+  }
+
+  public ngOnInit() {
+    this.ccService.statusChange$.subscribe((event: NgcStatusChangeEvent) => {
+      if (event.status !== 'allow') {
+        document.cookie = '';
+      } else {
+        document.cookie = 'consent';
+        this.window.location.reload();
+      }
     });
   }
 
