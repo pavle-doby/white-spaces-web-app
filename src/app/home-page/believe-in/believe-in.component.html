@@ -11,7 +11,7 @@
     fxLayoutAlign="start end"
     fxLayoutAlign.lt-md="start start"
     fxLayoutGap.lt-md="10px"
-    fxLayoutGap=".26vw"
+    fxLayoutGap=".33vw"
   >
     <app-title
       text="WE"
@@ -33,17 +33,18 @@
     class="belive-in__section belive-in__section-labels"
     fxLayout="column"
     fxLayoutAlign="start start"
-    fxLayoutGap=".26vw"
+    fxLayoutGap=".33vw"
     fxFlex="50"
     fxFlex.lt-md="100"
   >
     <app-opening-label
-      *ngFor="let item of this.openingLabelsArray"
-      [label]="item?.label"
-      [description]="item?.description"
-      [toShowDescription]="item?.isOpen"
+      *ngFor="let item of this.openingLabelsArray; let i = index"
+      [label]="item.label"
+      [description]="item.description"
+      [toShowDescription]="item.isOpen"
       [hideDebounceTime]="item.hideDebounceTime"
       [showDebounceTime]="item.showDebounceTime"
+      (showDescEvent)="this.onStatusChange($event, i)"
     ></app-opening-label>
   </section>
 </div>

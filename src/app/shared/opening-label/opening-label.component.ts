@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Subject, Subscription } from 'rxjs';
-import { debounce, debounceTime } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
+import { isHandset } from '../Utilities';
 
 @Component({
   selector: 'app-opening-label',
@@ -24,7 +25,7 @@ export class OpeningLabelComponent implements OnInit {
   @Input()
   public toShowDescription: boolean;
   @Input()
-  public toShowOnClick: boolean = false;
+  public toToggleOnClick: boolean = isHandset();
   @Input()
   public showDebounceTime: number = 0;
   @Input()
@@ -67,7 +68,7 @@ export class OpeningLabelComponent implements OnInit {
   }
 
   public showDescription(): void {
-    if (this.toShowOnClick) {
+    if (this.toToggleOnClick) {
       return;
     }
 
@@ -78,7 +79,7 @@ export class OpeningLabelComponent implements OnInit {
   }
 
   public hideDescription(): void {
-    if (this.toShowOnClick) {
+    if (this.toToggleOnClick) {
       return;
     }
 
@@ -89,13 +90,13 @@ export class OpeningLabelComponent implements OnInit {
   }
 
   public onClick(): void {
-    if (!this.toShowOnClick) {
+    if (!this.toToggleOnClick) {
       return;
     }
 
-    this.toShowDescription = true;
+    this.toShowDescription = !this.toShowDescription;
 
-    this.showDescEvent.emit(true);
-    this.stateChangesEvent.emit(true);
+    this.showDescEvent.emit(this.toShowDescription);
+    this.stateChangesEvent.emit(this.toShowDescription);
   }
 }

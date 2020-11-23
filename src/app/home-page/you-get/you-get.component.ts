@@ -17,7 +17,7 @@ import { TitleSize } from 'src/app/shared/title/TitleSize';
 })
 export class YouGetComponent implements OnInit, OnDestroy {
   public readonly youGetTitle: AppTitle;
-  public readonly openingLabelsArray: OpeningLabel[];
+  public openingLabelsArray: OpeningLabel[];
 
   private $subDialog: Subscription;
 
@@ -44,6 +44,13 @@ export class YouGetComponent implements OnInit, OnDestroy {
 
       this.downloadPackage();
     });
+  }
+
+  public onOLStateChange(toShowDesc: boolean, index: number): void {
+    for (let i = 0; i < this.openingLabelsArray.length; i++) {
+      this.openingLabelsArray[i].isOpen = false;
+    }
+    this.openingLabelsArray[index].isOpen = toShowDesc;
   }
 
   public downloadPackage(): void {

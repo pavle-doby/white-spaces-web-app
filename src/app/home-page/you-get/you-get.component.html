@@ -38,10 +38,11 @@
       >
         <div class="you-get__labels-container">
           <app-opening-label
-            *ngFor="let item of this.openingLabelsArray"
-            [label]="item?.label"
-            [description]="item?.description"
-            [toShowDescription]="item?.isOpen"
+            *ngFor="let item of this.openingLabelsArray; let i = index"
+            [label]="item.label"
+            [description]="item.description"
+            [toShowDescription]="item.isOpen"
+            (stateChangesEvent)="this.onOLStateChange($event, i)"
           ></app-opening-label>
         </div>
 
