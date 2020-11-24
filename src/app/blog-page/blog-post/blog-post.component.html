@@ -1,12 +1,16 @@
 <article
   class="blog-post"
   fxLayout="column"
-  fxLayoutAlign="center stretch"
+  fxLayoutAlign="start stretch"
   fxLayoutGap=".78125vw"
   fxLayoutGap.lt-md="15px"
 >
-  <div fxLayout="row" fxLayoutAlign="space-between center">
-    <h3>
+  <div
+    class="blog-post__header"
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+  >
+    <h3 [matTooltip]="this.title" matTooltipPosition="above">
       {{ this.title }}
     </h3>
     <span class="blog-post__date">
@@ -14,12 +18,11 @@
     </span>
   </div>
 
-  <p>
-    {{ this.textPlaceholder }}
-  </p>
+  <div fxLayout="column" fxLayoutAlign="space-between stretch" fxFlex>
+    <p>
+      {{ this.textPlaceholder }}
+    </p>
 
-  <app-button-monochrome
-    fxFlex="100"
-    (click)="openDialog()"
-  ></app-button-monochrome>
+    <app-button-monochrome (click)="openDialog()"></app-button-monochrome>
+  </div>
 </article>

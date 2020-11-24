@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../services/admin.service';
+import { isHandset } from '../shared/Utilities';
 
 @Component({
   selector: 'app-blog-page',
@@ -10,6 +11,9 @@ export class BlogPageComponent implements OnInit {
   public topBlogPosts: any = [];
   public bottomBlogPosts: any = [];
   public ready: boolean = false;
+
+  public isHandset: boolean = isHandset();
+
   constructor(private window: Window, private adminService: AdminService) {
     this.window.document.body.style.width = 'auto';
     this.adminService.getAllBlogs().subscribe((res) => {
@@ -21,7 +25,14 @@ export class BlogPageComponent implements OnInit {
           text: element.text,
           date: new Date(element.creation_date).toLocaleDateString(),
         };
+
+        if (this.isHandset) {
+          this.topBlogPosts = [...this.topBlogPosts, elementData];
+          return;
+        }
+
         let orientation = index % 2 === 0;
+
         if (orientation)
           this.topBlogPosts = [...this.topBlogPosts, elementData];
         else this.bottomBlogPosts = [...this.bottomBlogPosts, elementData];

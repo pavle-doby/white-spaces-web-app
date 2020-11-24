@@ -1,8 +1,9 @@
 <section
   class="blog-page"
   fxLayout="column"
-  fxLayout.lt-md="row"
-  fxLayoutGap="3vw"
+  fxLayout.lt-md="column"
+  fxLayoutAlign.lt-md="start center"
+  fxLayoutGap="2vw"
   *ngIf="this.ready"
 >
   <app-logo
@@ -14,11 +15,13 @@
   <div
     fxLayout="row"
     fxLayout.lt-md="column"
-    fxLayoutGap="3vw"
+    fxLayoutGap="2vw"
     fxLayoutAlign="start center"
+    class="width-100"
   >
     <div *ngFor="let post of this.topBlogPosts">
       <app-blog-post
+        class="width-100"
         [title]="post.title"
         [text]="post.text"
         [date]="post.date"
@@ -26,13 +29,16 @@
     </div>
   </div>
   <div
+    *ngIf="!this.isHandset"
+    class="width-100"
     fxLayout="row"
     fxLayout.lt-md="column"
-    fxLayoutGap="3vw"
+    fxLayoutGap="2vw"
     fxLayoutAlign="start center"
   >
     <div *ngFor="let post of this.bottomBlogPosts">
       <app-blog-post
+        class="width-100"
         [title]="post.title"
         [text]="post.text"
         [date]="post.date"
