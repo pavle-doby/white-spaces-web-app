@@ -1,12 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { NavBtnsInitStateObj } from '../shared/navbar/navbar.content';
-import { Observable } from 'rxjs';
-import {
-  BreakpointObserver,
-  Breakpoints,
-  MediaMatcher,
-} from '@angular/cdk/layout';
-import { map, shareReplay, tap } from 'rxjs/operators';
+import { MediaMatcher } from '@angular/cdk/layout';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store';
 import { MEDIA_QUERY_WIDTH } from '../app.config';
@@ -60,22 +53,22 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  @HostListener('window:keydown', ['$event'])
-  onKeyDown(event: KeyboardEvent) {
-    switch (event.key) {
-      case 'ArrowRight': {
-        console.log('ArrowRight - dodaj skrol');
+  // @HostListener('window:keydown', ['$event'])
+  // onKeyDown(event: KeyboardEvent) {
+  //   switch (event.key) {
+  //     case 'ArrowRight': {
+  //       console.log('ArrowRight - dodaj skrol');
 
-        break;
-      }
-      case 'ArrowLeft': {
-        console.log('ArrowLeft - dodaj skrol');
+  //       break;
+  //     }
+  //     case 'ArrowLeft': {
+  //       console.log('ArrowLeft - dodaj skrol');
 
-        break;
-      }
-      default: {
-        break;
-      }
-    }
-  }
+  //       break;
+  //     }
+  //     default: {
+  //       break;
+  //     }
+  //   }
+  // }
 }

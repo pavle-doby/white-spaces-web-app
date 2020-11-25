@@ -49,11 +49,10 @@ import { COOKIE_CONFIG } from './app.config';
     ),
     NgxGoogleAnalyticsRouterModule,
     NgcCookieConsentModule.forRoot(COOKIE_CONFIG),
-    StoreDevtoolsModule.instrument(),
-    // !environment.production ? StoreDevtoolsModule.instrument() : [],
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-    }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    // ServiceWorkerModule.register('ngsw-worker.js', {
+    //   enabled: environment.production,
+    // }),
     OpeningLabelModule,
     MatDialogModule,
     CheckoutPageModule,

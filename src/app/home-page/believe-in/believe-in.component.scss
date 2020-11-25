@@ -2,7 +2,9 @@
 
 .belive-in__container {
   width: 65vw;
+  height: 90vh;
   min-height: 400px;
+  background-color: transparent;
 
   @media (max-width: 960px) {
     width: 80vw;
@@ -24,5 +26,9 @@
 
 .belive-in__section-labels {
   padding-top: 1.4vh;
-  // height: 36vh;
+}
+
+.belive-in__paralax {
+  @extend .background-parallax;
+  background-image: url("src/assets/images/home/HomeBackground.png");
 }

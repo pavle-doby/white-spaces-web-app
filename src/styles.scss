@@ -276,3 +276,13 @@ $shadow-blur-radius: 0.23vw;
 .color-inherit {
   color: inherit;
 }
+
+/* Also set background-image */
+// background-image: url('img_parallax.jpg');
+.background-parallax {
+  position: relative;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
