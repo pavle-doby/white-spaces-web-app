@@ -66,6 +66,14 @@ body {
   margin-bottom: 10px;
 }
 
+.app__logo {
+  width: 12vw;
+
+  @media screen and (max-width: 960px) {
+    width: 160px;
+  }
+}
+
 .cursor-pointer {
   cursor: pointer;
 }

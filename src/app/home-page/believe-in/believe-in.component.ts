@@ -9,7 +9,8 @@ import { TitleSize } from 'src/app/shared/title/TitleSize';
   styleUrls: ['./believe-in.component.scss'],
 })
 export class BelieveInComponent implements OnInit {
-  public readonly openingLabelsArray: OpeningLabel[];
+  public openingLabelsArray: OpeningLabel[];
+
   public readonly titleSize: TitleSize;
   public readonly titleGradient: string;
 
@@ -20,4 +21,11 @@ export class BelieveInComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  public onStatusChange(toShowDesc: boolean, index: number): void {
+    for (let i = 0; i < this.openingLabelsArray.length; i++) {
+      this.openingLabelsArray[i].isOpen = false;
+    }
+    this.openingLabelsArray[index].isOpen = toShowDesc;
+  }
 }

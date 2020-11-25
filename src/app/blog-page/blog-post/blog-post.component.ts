@@ -1,10 +1,14 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { BLOG_POST_MAX_TEXT_LENGTH } from './blog-post.config';
+import {
+  BLOG_POST_MAX_TEXT_LENGTH,
+  BLOG_POST_MAX_TEXT_LENGTH_HANDSET,
+} from './blog-post.config';
 import { MatDialog } from '@angular/material/dialog';
 import { BlogDialogComponent } from '../blog-dialog/blog-dialog.component';
 import { Subscription } from 'rxjs';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MEDIA_QUERY_WIDTH } from 'src/app/app.config';
+import { isHandset } from 'src/app/shared/Utilities';
 
 @Component({
   selector: 'app-blog-post',
@@ -43,9 +47,13 @@ export class BlogPostComponent implements OnInit, OnDestroy {
     let plainText = textDiv.innerText;
     textDiv = null;
 
-    return plainText.length <= BLOG_POST_MAX_TEXT_LENGTH
+    const maxLength = isHandset()
+      ? BLOG_POST_MAX_TEXT_LENGTH_HANDSET
+      : BLOG_POST_MAX_TEXT_LENGTH;
+
+    return plainText.length <= maxLength
       ? plainText
-      : `${plainText.substring(0, BLOG_POST_MAX_TEXT_LENGTH)}...`;
+      : `${plainText.substring(0, maxLength)}...`;
   }
 
   public openDialog(): void {

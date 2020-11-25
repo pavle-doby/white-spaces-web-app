@@ -94,6 +94,6 @@ export const firstToUpperCase = (str: string): string => {
   return str.slice(0, 1).toUpperCase() + str.slice(1).toLowerCase();
 };
 
-export const clone = (x: Object | Array<any>): Object | Array<any> => {
+export const clone = <T>(x: Object | Array<any>): T => {
   return JSON.parse(JSON.stringify(x));
 };

@@ -6,8 +6,9 @@ import { ButtonMonochromeModule } from 'src/app/shared/button-monochrome/button-
 import { AttachmentModule } from 'src/app/shared/attachment/attachment.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BlogDialogModule } from '../blog-dialog/blog-dialog.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
-const MATERIAL_IMPORTS = [MatDialogModule];
+const MATERIAL_IMPORTS = [MatDialogModule, MatTooltipModule];
 @NgModule({
   declarations: [BlogPostComponent],
   imports: [

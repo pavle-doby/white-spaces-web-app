@@ -42,7 +42,6 @@
           [label]="content.label"
           [description]="content.description"
           [toShowDescription]="content.isOpen"
-          [toShowOnClick]="this.isHandset"
           (stateChangesEvent)="this.onStatusChange($event, i)"
         ></app-opening-label>
       </div>
@@ -96,7 +95,6 @@
         [label]="content.label"
         [description]="content.description"
         [toShowDescription]="content.isOpen"
-        [toShowOnClick]="this.isHandset"
         (stateChangesEvent)="this.onStatusChange($event, i)"
       ></app-opening-label>
       <span>
