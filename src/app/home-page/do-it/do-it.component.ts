@@ -29,5 +29,9 @@ export class DoItComponent implements OnInit {
     ];
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    var video = document.querySelector('video');
+    video.muted = true;
+    video.play();
+  }
 }
