@@ -6,6 +6,8 @@ import { AddOn } from 'src/models/AddOn';
 import { AppUser } from 'src/models/User.model';
 import { PackagesBox } from '../shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
 
+export const BEARER = ' Bearer ';
+
 export enum LocalStorageKey {
   PACKAGE = 'package',
   PACKAGE_CATEGORY_ID = 'PACKAGE_CATEGORY_ID',
@@ -34,7 +36,7 @@ export class LocalStorageService {
   }
 
   public set AuthToken(token: string) {
-    this.storage.setItem(LocalStorageKey.AUTH_TOKEN, ` Bearer ${token}`);
+    this.storage.setItem(LocalStorageKey.AUTH_TOKEN, `${BEARER}${token}`);
   }
 
   public get AuthToken() {

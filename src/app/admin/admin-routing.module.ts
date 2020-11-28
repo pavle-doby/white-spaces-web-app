@@ -4,10 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { AdminCustomersComponent } from './admin-customers/admin-customers.component';
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
-import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminPackagesComponent } from './admin-packages/admin-packages.component';
 import { AdminBlogComponent } from './admin-blog/admin-blog.component';
-import { AuthGuard } from '../services/auth.guard';
+import { AuthAdminGuard } from '../services/auth-admin.guard';
 
 const routes: Routes = [
   {
@@ -17,22 +16,22 @@ const routes: Routes = [
       {
         path: 'customers',
         component: AdminCustomersComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthAdminGuard],
       },
       {
         path: 'orders',
         component: AdminOrdersComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthAdminGuard],
       },
       {
         path: 'packages',
         component: AdminPackagesComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthAdminGuard],
       },
       {
         path: 'blog',
         component: AdminBlogComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthAdminGuard],
       },
     ],
   },
