@@ -24,7 +24,7 @@ export const DOCUMENT_DIALOG_WIDTH = '800px';
 export const BREAKING_POINT_PX = 960;
 
 export const MEDIA_QUERY_WIDTH = '(max-width: 960px)';
-export const SCROLL_SPEED = 30;
+export const SCROLL_SPEED = 40;
 
 export const SHOW_ADDRESS_INPUT = false;
 

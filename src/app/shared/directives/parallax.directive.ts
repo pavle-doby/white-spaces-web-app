@@ -26,7 +26,7 @@ export class ParallaxDirective {
           const direction = x > 0 ? 1 : -1;
           const offset = SCROLL_SPEED * direction;
           if (
-            window.scrollX > this.startLeft - this.screenWidth / 2 &&
+            window.scrollX > this.startLeft - this.screenWidth &&
             window.scrollX < this.startLeft
           ) {
             if (!this.currentDelta) {
@@ -43,7 +43,7 @@ export class ParallaxDirective {
           }
           this.startLeft = this.element.nativeElement.offsetLeft;
           if (
-            window.scrollX > this.startLeft - this.screenWidth / 2 &&
+            window.scrollX > this.startLeft - this.screenWidth &&
             window.scrollX < this.startLeft
           )
             this.element.nativeElement.style.transform = `translateX(${
