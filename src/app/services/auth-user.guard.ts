@@ -12,14 +12,20 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
+import { LoginParam } from '../app.config';
 import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard
+export class AuthUserGuard
   implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private readonly AuthService: AuthService,
+    private readonly router: Router
+  ) {}
+
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -28,9 +34,9 @@ export class AuthGuard
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    let url: string = state.url;
-    return this.isUserAdmin(next, url);
+    return this.isUserLoggedIn();
   }
+
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -41,6 +47,7 @@ export class AuthGuard
     | UrlTree {
     return this.canActivate(next, state);
   }
+
   canDeactivate(
     component: unknown,
     currentRoute: ActivatedRouteSnapshot,
@@ -53,6 +60,7 @@ export class AuthGuard
     | UrlTree {
     return true;
   }
+
   canLoad(
     route: Route,
     segments: UrlSegment[]
@@ -60,12 +68,14 @@ export class AuthGuard
     return true;
   }
 
-  isUserAdmin(route: ActivatedRouteSnapshot, url: any): boolean {
-    if (this.authService.isAdmin) {
+  isUserLoggedIn() {
+    if (this.AuthService.isUserLoggedIn()) {
       return true;
-    } else {
-      this.router.navigate(['/admin']);
-      return false;
     }
+
+    this.router.navigateByUrl(
+      `/${MainRouterPaths.LOGIN}?login=${LoginParam.LOGIN}`
+    );
+    return false;
   }
 }
