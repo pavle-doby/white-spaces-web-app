@@ -13,6 +13,7 @@ import {
   ConfirmationDialogType,
 } from 'src/app/shared/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { Subscription } from 'rxjs';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -60,6 +61,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       .cleanLogin(this.email, this.password)
       .toPromise()
       .then((res) => {
+
+    
+          LocalStorageService.Instance.AuthHeader = res.token;
+    
         this.store.dispatch(setUser({ user: res.user_info }));
         if (!res.user_info.verified) {
           this.dialog.open(ConfirmationDialogComponent, {

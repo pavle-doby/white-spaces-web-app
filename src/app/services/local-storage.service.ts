@@ -7,6 +7,7 @@ import { AppUser } from 'src/models/User.model';
 import { PackagesBox } from '../shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
 
 export enum LocalStorageKey {
+  AUTH_HEADER = 'auth-header',
   PACKAGE = 'package',
   PACKAGE_CATEGORY_ID = 'PACKAGE_CATEGORY_ID',
   ADDON_CATEGORY_ID = 'ADDON_CATEGORY_ID',
@@ -30,6 +31,14 @@ export class LocalStorageService {
 
   public static get Instance(): LocalStorageService {
     return this._instance ?? (this._instance = new LocalStorageService());
+  }
+
+  public set AuthHeader(header) {
+    this.storage.setItem(LocalStorageKey.AUTH_HEADER, JSON.stringify(header))
+  }
+
+  public get AuthHeader() {
+    return JSON.parse(this.storage.getItem(LocalStorageKey.AUTH_HEADER));
   }
 
   public set SpacePhotosUrls(spacePhotosUrls: string[]) {

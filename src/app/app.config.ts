@@ -1,7 +1,8 @@
 import { NgcCookieConsentConfig } from 'ngx-cookieconsent';
 
 // export const API_URL = 'http://18.221.175.43';
-export const API_URL = '';
+export const API_URL = 'http://127.0.0.1:5000';
+
 
 export const MAIL_FOR_CLIENTS = 'clients@whitespacerenovation.com';
 export const DOMAIN_NAME = 'www.whitespacerenoation.com';
