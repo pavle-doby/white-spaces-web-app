@@ -63,13 +63,17 @@ export class AuthService {
   public cleanLogin(
     email: string,
     password: string
-  ): Observable<{ user_info: AppUser; message: string }> {
+  ): Observable<{ user_info: AppUser; message: string; token: string }> {
     const params = {
       email: email,
       password: password,
     };
     const URL = `${API_URL}/api/auth/login`;
-    return this.http.post<{ user_info: AppUser; message: string }>(URL, params);
+    return this.http.post<{
+      user_info: AppUser;
+      message: string;
+      token: string;
+    }>(URL, params);
   }
 
   public resetPassword(email: string): Observable<{ message: string }> {

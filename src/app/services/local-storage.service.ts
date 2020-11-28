@@ -16,6 +16,7 @@ export enum LocalStorageKey {
   QUESTIONS = 'questions',
   SHOPPING_CART = 'shopping-cart',
   USER = 'user',
+  AUTH_TOKEN = 'auth-token',
 }
 
 @Injectable({
@@ -30,6 +31,18 @@ export class LocalStorageService {
 
   public static get Instance(): LocalStorageService {
     return this._instance ?? (this._instance = new LocalStorageService());
+  }
+
+  public set AuthToken(token: string) {
+    this.storage.setItem(LocalStorageKey.AUTH_TOKEN, ` Bearer ${token}`);
+  }
+
+  public get AuthToken() {
+    return this.storage.getItem(LocalStorageKey.AUTH_TOKEN) ?? '';
+  }
+
+  public clearAuthToken(): void {
+    this.storage.removeItem(LocalStorageKey.AUTH_TOKEN);
   }
 
   public set SpacePhotosUrls(spacePhotosUrls: string[]) {
@@ -72,7 +85,10 @@ export class LocalStorageService {
     this.storage.setItem(LocalStorageKey.QUESTIONS, JSON.stringify(questions));
   }
 
-  public appendQuestions(questions: Question[], toFront: boolean = false): void {
+  public appendQuestions(
+    questions: Question[],
+    toFront: boolean = false
+  ): void {
     const oldQuestions = this.Questions ?? [];
     const newQuestions = toFront
       ? [...questions, ...oldQuestions]
