@@ -19,10 +19,11 @@ import { EVERY_PACKAGE_INCLUDES } from './side-card-packages.content';
   styleUrls: ['./side-card-packages.component.scss'],
 })
 export class SideCardPackagesComponent implements OnInit {
-  public packages: SideCadrPackage[] = [];
   public checkoutState$: Observable<CheckoutState>;
   public selectedPackageBox$: Observable<PackagesBox>;
+
   public everyPackageIncludes: string[] = EVERY_PACKAGE_INCLUDES;
+
   public isHandset: boolean;
 
   constructor(
