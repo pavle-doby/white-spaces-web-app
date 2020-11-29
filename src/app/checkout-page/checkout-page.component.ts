@@ -52,9 +52,10 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
-    if (this.isHandset) {
-      this.router.navigateByUrl(`/${MainRouterPaths.CHECKOUT_MESSAGE}`);
-    }
+    // if (this.isHandset) {
+    //   this.router.navigateByUrl(`/${MainRouterPaths.CHECKOUT_MESSAGE}`);
+    //   return;
+    // }
 
     this.subCheckoutState = this.$checkoutState.subscribe((ckState) => {
       this.package = ckState.packageBox;
@@ -91,7 +92,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
         shoppingCart = await this.checkoutService
           .addProduct(productVM)
           .toPromise();
-      } else if (package_.id !== this.package.id) {
+      } else if (this.package && package_.id !== this.package.id) {
         const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
           width: CONFIRMATION_DIALOG_WIDTH,
           disableClose: false,
