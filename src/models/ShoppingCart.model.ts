@@ -47,6 +47,15 @@ export class ShoppingCart {
     );
   }
 
+  public static getAddOnLineItemList(shoppingCart: ShoppingCart): LineIntem[] {
+    const isAddOn = (categoryId) =>
+      categoryId === LocalStorageService.Instance.AddOnCategroyId;
+
+    return shoppingCart.line_items.filter((li) =>
+      isAddOn(li.product.category_id)
+    );
+  }
+
   public static getAddOnProductList(shoppingCart: ShoppingCart): Product[] {
     const isAddOn = (categoryId) =>
       categoryId === LocalStorageService.Instance.AddOnCategroyId;

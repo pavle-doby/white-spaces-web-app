@@ -18,15 +18,13 @@
       <button class="basic__btn" (click)="this.showRegisterTab()">
         Register
       </button>
-      <span class="login-page__tab-divider">
-        or
-      </span>
+      <span class="login-page__tab-divider"> or </span>
       <button class="checkout__btn" (click)="this.showLoginTab()">
         Log in
       </button>
     </div>
     <div>Let’s make this design all about you!</div>
-    <app-register *ngIf="this.toRegister"></app-register>
-    <app-login *ngIf="!this.toRegister"></app-login>
+    <app-register *ngIf="this.toShowRegisterTab"></app-register>
+    <app-login *ngIf="!this.toShowRegisterTab"></app-login>
   </div>
 </div>

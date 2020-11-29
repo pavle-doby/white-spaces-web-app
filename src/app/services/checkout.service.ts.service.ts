@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../app.config';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
@@ -8,7 +8,6 @@ import { Link } from 'src/models/Link.model';
 import { AddOnDTO } from 'src/models/AddOnDTO';
 import { OrderVM } from 'src/models/OrderVM.model';
 import { ProductVM } from 'src/models/ProductVM.model';
-import { MockShoppingCart } from '../mock-data';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +32,6 @@ export class CheckoutService {
 
   public getShoppingCart(): Observable<ShoppingCart> {
     const URL = `${API_URL}/shopping-cart/get-shopping-cart`;
-    // return of(MockShoppingCart);
     return this.http.get<ShoppingCart>(URL, {});
   }
 
@@ -44,13 +42,11 @@ export class CheckoutService {
 
   public updateProduct(productVM: ProductVM): Observable<ShoppingCart> {
     const URL = `${API_URL}/shopping-cart/update-product`;
-    // return of(MockShoppingCart);
     return this.http.post<ShoppingCart>(URL, { ...productVM });
   }
 
   public deleteProduct(line_item_id: number): Observable<string> {
     const URL = `${API_URL}/shopping-cart/delete-product/${line_item_id}`;
-    // return of('Line item is deleted');
     return this.http.delete<string>(URL);
   }
 

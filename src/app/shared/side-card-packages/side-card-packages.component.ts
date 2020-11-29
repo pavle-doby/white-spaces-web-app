@@ -18,6 +18,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { closeNavbarCard } from 'src/app/store/actions/navbar.actions';
 import { EVERY_PACKAGE_INCLUDES } from './side-card-packages.content';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-side-card-packages',
@@ -34,7 +35,8 @@ export class SideCardPackagesComponent implements OnInit {
   constructor(
     private readonly $store: Store<AppState>,
     private readonly router: Router,
-    private readonly CheckOutService: CheckoutService
+    private readonly CheckOutService: CheckoutService,
+    private readonly AuthService: AuthService
   ) {
     this.checkoutState$ = this.$store.select((state) => state.checkout);
     this.selectedPackageBox$ = this.$store.select(
@@ -66,6 +68,10 @@ export class SideCardPackagesComponent implements OnInit {
         console.error(err);
         alert(err.message);
       });
+
+    if (!this.AuthService.isUserLoggedIn()) {
+      return;
+    }
 
     let shoppingCart = await this.CheckOutService.getShoppingCart().toPromise();
     const package_ = ShoppingCart.getPackageProduct(shoppingCart);

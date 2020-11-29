@@ -124,8 +124,6 @@ const reducer = createReducer(
   on(setShoppingCartCheckout, (state, { shoppingCart }) => {
     let tabbarButtons = state.tabbarButtons;
 
-    console.log('From BE', { shoppingCart });
-
     const product = ShoppingCart.getPackageProduct(shoppingCart);
     const lineItem = ShoppingCart.getPackageLineItem(shoppingCart);
 
@@ -165,7 +163,13 @@ const reducer = createReducer(
     //#region questions
     let questions = [];
     let additionalDataQuestions = [];
-    shoppingCart.line_items.forEach((li) => {
+
+    const packageLineItem = ShoppingCart.getPackageLineItem(shoppingCart);
+    additionalDataQuestions = packageLineItem.additional_data?.questions ?? [];
+    questions = [...questions, ...additionalDataQuestions];
+
+    const addOnsLineItems = ShoppingCart.getAddOnLineItemList(shoppingCart);
+    addOnsLineItems.forEach((li) => {
       additionalDataQuestions = li.additional_data?.questions ?? [];
       questions = [...questions, ...additionalDataQuestions];
     });
@@ -187,8 +191,6 @@ const reducer = createReducer(
       tabbarComplitedObj,
     });
     //#endregion
-
-    console.log('shoppingCart map to state finished');
 
     return {
       ...state,
