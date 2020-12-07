@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AdminOrderDialogComponent } from './admin-order-dialog/admin-order-dialog.component';
 import { AdminService } from 'src/app/services/admin.service';
 import { Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-admin-orders',
@@ -36,17 +37,21 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
     private adminService: AdminService,
     private router: Router
   ) {
-    this.adminService.getAllOrders().subscribe((res) => {
-      res = [...res];
-      const data = res.map((element) => {
+    forkJoin({
+      orders: this.adminService.getAllOrders(),
+      customers: this.adminService.getAllCustomers(),
+    }).subscribe((res) => {
+      const customers = res.customers;
+      const orders = res.orders;
+      const data = orders.map((element) => {
         return {
           id: element.id,
-          customer: '',
+          customer: this.mapIdToEmail(element.user_id, customers),
           date: new Date(element.datetime).toLocaleString(),
-          orderValue: '€' + element.line_items[0].price,
+          orderValue: '€' + this.getOrderValue(element.line_items),
           status: element.state,
           onProject: '',
-          orderDetails: element.line_items[0],
+          orderDetails: element.line_items,
         };
       });
       this.dataSource = new AdminOrdersDataSource(data);
@@ -58,6 +63,17 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
   ngOnInit() {}
 
   ngAfterViewInit() {}
+
+  private mapIdToEmail(id: number, customers: any[]): string {
+    const data = customers.find((customer) => customer.id === id);
+    return data.email;
+  }
+
+  private getOrderValue(items: any[]): number {
+    return items.length > 1
+      ? items.map((element) => element.price).reduce((acc, curr) => acc + curr)
+      : items[0].price;
+  }
 
   public openDialog(order: any): void {
     const dialogRef = this.dialog.open(AdminOrderDialogComponent, {

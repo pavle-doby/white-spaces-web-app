@@ -33,9 +33,7 @@ export class AuthService {
   }
 
   public isAuth(): Observable<any> {
-    return this.http.get(`${API_URL}/api/auth/my_data`, {
-      withCredentials: true,
-    });
+    return this.http.get(`${API_URL}/api/auth/my_data`);
   }
 
   public login(username: string, password: string) {

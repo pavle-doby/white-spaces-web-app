@@ -9,4 +9,5 @@ export enum MainRouterPaths {
   CONTACT = 'contact',
   THANK_YOU = 'thankyou',
   CHECKOUT_MESSAGE = 'messageCheckout',
+  ADMIN = 'admin',
 }

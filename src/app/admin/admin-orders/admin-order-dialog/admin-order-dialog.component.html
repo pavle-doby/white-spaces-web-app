@@ -15,14 +15,17 @@
       </span>
       <span>Email: <b>todo</b></span>
       <span
-        >Package: <b>{{ this.data.orderDetails.product.name }}</b></span
+        >Package and Add ons:
+        <b *ngFor="let product of this.data.orderDetails.product">{{
+          product.name
+        }}</b></span
       >
       <span>Add ons: <b>todo</b></span>
     </div>
 
     <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="15px">
       <div>
-        <a href="">Download project &darr;</a>
+        <a (click)="this.downloadProject()">Download project &darr;</a>
       </div>
       <mat-form-field appearance="fill">
         <mat-label>Status</mat-label>
@@ -38,67 +41,67 @@
   <mat-dialog-content class="mat-typography">
     <mat-tab-group mat-align-tabs="center">
       <mat-tab label="Floor Plan">
-        <div
-          *ngIf="this.data.orderDetails?.additional_data?.floor_plan"
-          fxLayout="column"
-          fxLayoutAlign="start center"
-          fxLayoutGap="30px"
-        >
-          <img
-            src="{{ this.data.orderDetails.additional_data.floor_plan }}"
-            alt=""
-            width="80%"
-          />
+        <div *ngFor="let order of this.data.orderDetails">
+          <div
+            *ngIf="order.additional_data?.floor_plan"
+            fxLayout="column"
+            fxLayoutAlign="start center"
+            fxLayoutGap="30px"
+          >
+            <img
+              src="{{ order.additional_data?.floor_plan }}"
+              alt="Floor Plan"
+              width="80%"
+            />
+          </div>
         </div>
       </mat-tab>
       <mat-tab label="Photos">
-        <div
-          *ngIf="this.data.orderDetails?.additional_data?.images?.length"
-          fxLayout="column"
-          fxLayoutAlign="start center"
-          fxLayoutGap="30px"
-        >
-          <img
-            *ngFor="let img of this.data.orderDetails.additional_data.images"
-            src="{{ img }}"
-            alt=""
-          />
-          <img
-            *ngFor="let img of this.data.orderDetails.additional_data.images"
-            src="{{ img }}"
-            alt=""
-          />
+        <div *ngFor="let order of this.data.orderDetails">
+          <div
+            *ngIf="order.additional_data?.images?.length"
+            fxLayout="column"
+            fxLayoutAlign="start center"
+            fxLayoutGap="30px"
+          >
+            <img
+              *ngFor="let img of order.additional_data.images"
+              src="{{ img }}"
+              width="80%"
+              alt=""
+            />
+          </div>
         </div>
       </mat-tab>
       <mat-tab label="Questionnaire">
-        <div
-          *ngFor="
-            let question of this.data.orderDetails.additional_data.questions
-          "
-        >
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title> {{ question.question }} </mat-panel-title>
-            </mat-expansion-panel-header>
+        <div *ngFor="let order of this.data.orderDetails">
+          <span class="admin-order-dialog--title">
+            <b>{{ order.product.name }}</b>
+          </span>
+          <div *ngFor="let question of order.additional_data.questions">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title> {{ question.question }} </mat-panel-title>
+              </mat-expansion-panel-header>
 
-            <div
-              *ngIf="this.data.orderDetails?.additional_data?.images?.length"
-              fxLayout="column"
-              fxLayoutAlign="start center"
-              fxLayoutGap="30px"
-            >
-              <span>Section: {{ question.section }}</span>
-              <span>Client Anwser: {{ question.answer }}</span>
-              <div *ngIf="question.images !== null && question.images !== []">
-                <img
-                  *ngFor="let img of question.images"
-                  src="{{ img }}"
-                  alt=""
-                  class="admin-orders__img"
-                />
+              <div
+                fxLayout="column"
+                fxLayoutAlign="start center"
+                fxLayoutGap="30px"
+              >
+                <span>Section: {{ question.section }}</span>
+                <span>Client Anwser: {{ question.answer }}</span>
+                <div *ngIf="question.images !== null && question.images !== []">
+                  <img
+                    *ngFor="let img of question.images"
+                    src="{{ img }}"
+                    alt=""
+                    class="admin-orders__img"
+                  />
+                </div>
               </div>
-            </div>
-          </mat-expansion-panel>
+            </mat-expansion-panel>
+          </div>
         </div>
       </mat-tab>
     </mat-tab-group>
