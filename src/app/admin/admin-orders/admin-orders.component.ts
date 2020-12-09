@@ -43,10 +43,17 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
     }).subscribe((res) => {
       const customers = res.customers;
       const orders = res.orders;
+      console.log(orders);
+
       const data = orders.map((element) => {
         return {
           id: element.id,
           customer: this.mapIdToEmail(element.user_id, customers),
+          customerName: this.getFullName(
+            element.additional_data.first_name,
+            element.additional_data.last_name
+          ),
+          packageNames: this.getPackageNames(element.line_items),
           date: new Date(element.datetime).toLocaleString(),
           orderValue: '€' + this.getOrderValue(element.line_items),
           status: element.state,
@@ -64,9 +71,18 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {}
 
+  private getFullName(firstName: string, lastName: string): string {
+    return `${firstName} ${lastName}`;
+  }
   private mapIdToEmail(id: number, customers: any[]): string {
     const data = customers.find((customer) => customer.id === id);
     return data.email;
+  }
+
+  private getPackageNames(lineItems: any[]): string {
+    return lineItems
+      .map((element) => element.product.name)
+      .reduce((prev, curr) => `${prev}, ${curr}`);
   }
 
   private getOrderValue(items: any[]): number {

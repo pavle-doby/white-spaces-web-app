@@ -44,6 +44,8 @@ export class AdminLoginComponent implements OnInit {
               if (res !== 'admin') {
                 this.loginInvalid = true;
               } else {
+                this.authService.isAuthenticated.next(true);
+                localStorage.setItem('isAdmin', 'true');
                 this.router.navigate(['admin/orders']);
               }
             });

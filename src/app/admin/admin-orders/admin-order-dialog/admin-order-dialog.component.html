@@ -11,16 +11,14 @@
     >
       <h2 mat-dialog-title>Order No. {{ this.data.id }}</h2>
       <span
-        >Client: <b>{{ this.data.customer }}</b>
+        >Client: <b>{{ this.data.customerName }}</b>
       </span>
-      <span>Email: <b>todo</b></span>
       <span
-        >Package and Add ons:
-        <b *ngFor="let product of this.data.orderDetails.product">{{
-          product.name
-        }}</b></span
+        >Email: <b>{{ this.data.customer }}</b></span
       >
-      <span>Add ons: <b>todo</b></span>
+      <span
+        >Package and Add ons: <b>{{ this.data.packageNames }}</b></span
+      >
     </div>
 
     <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="15px">
