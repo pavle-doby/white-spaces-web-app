@@ -136,7 +136,7 @@ const reducer = createReducer(
   }),
   on(setShoppingCartCheckout, (state, { shoppingCart }) => {
     LocalStorageService.Instance.ShoppingCart = shoppingCart;
-    console.log('From BE', { shoppingCart });
+     
     return { ...state, shoppingCart: shoppingCart };
   }),
   on(setTabbarStateCheckout, (state, { buttons }) => {

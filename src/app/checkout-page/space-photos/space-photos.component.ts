@@ -109,7 +109,7 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
             },
           };
 
-          console.log('Space photos', { productVM });
+           
 
           this.chekcoutService
             .updateProduct(productVM)
