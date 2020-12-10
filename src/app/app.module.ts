@@ -26,6 +26,7 @@ import {
 } from 'ngx-google-analytics';
 import { NgcCookieConsentModule } from 'ngx-cookieconsent';
 import { COOKIE_CONFIG } from './app.config';
+import { httpInterceptorProviders } from './interceptors/interseptors';
 
 @NgModule({
   declarations: [AppComponent],
@@ -45,7 +46,7 @@ import { COOKIE_CONFIG } from './app.config';
       },
     }),
     NgxGoogleAnalyticsModule.forRoot(
-      document.cookie && environment.production ? 'G-2RFP944R90' : ''
+      document.cookie ? 'G-2RFP944R90' : ''
     ),
     NgxGoogleAnalyticsRouterModule,
     NgcCookieConsentModule.forRoot(COOKIE_CONFIG),
@@ -60,7 +61,7 @@ import { COOKIE_CONFIG } from './app.config';
     MatPaginatorModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
   entryComponents: [YouGetDialogComponent],
 })

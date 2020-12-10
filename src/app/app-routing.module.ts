@@ -7,6 +7,7 @@ import { SideCardAboutComponent } from './shared/side-card-about/side-card-about
 import { SideCardContactComponent } from './shared/side-card-contact/side-card-contact.component';
 import { SideCardFqaComponent } from './shared/side-card-fqa/side-card-fqa.component';
 import { SideCardPackagesComponent } from './shared/side-card-packages/side-card-packages.component';
+import { AuthUserGuard } from './services/auth-user.guard';
 
 const routes: Routes = [
   {
@@ -35,6 +36,7 @@ const routes: Routes = [
       import('./checkout-page/checkout-page.module').then(
         (m) => m.CheckoutPageModule
       ),
+    canActivate: [AuthUserGuard],
   },
   {
     path: MainRouterPaths.LOGIN,

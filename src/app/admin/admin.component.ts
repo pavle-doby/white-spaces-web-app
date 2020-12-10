@@ -11,9 +11,9 @@ export class AdminComponent implements OnInit {
   constructor(private window: Window, private authService: AuthService) {
     this.window.document.body.style.width = '100vw';
     this.window.document.body.style.overflowY = 'scroll';
-    this.authService.isAuthenticated.subscribe(
-      (isLoggedIn) => (this.isLoggedIn = isLoggedIn && this.authService.isAdmin)
-    );
+    this.authService.isAuthenticated.subscribe((isLoggedIn) => {
+      this.isLoggedIn = isLoggedIn && this.authService.isAdmin;
+    });
   }
 
   ngOnInit(): void {}

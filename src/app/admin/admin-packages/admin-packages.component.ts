@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/services/admin.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-packages',
@@ -23,7 +24,10 @@ export class AdminPackagesComponent implements OnInit {
     largeDescription: new FormControl({ value: '', disabled: true }),
   });
 
-  constructor(private adminService: AdminService) {
+  constructor(
+    private adminService: AdminService,
+    private snackBar: MatSnackBar
+  ) {
     this.adminService.getAllPackages().subscribe((res) => {
       this.packages = res;
       this.questionnaireRooms = Object.getOwnPropertyNames(
@@ -48,7 +52,18 @@ export class AdminPackagesComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  save($event: any) {
-    // 
+  save(value: number, id: number) {
+    this.adminService.editProduct(id, value).subscribe(
+      (res) =>
+        this.snackBar.open(
+          `Successfully updated the price of ${
+            this.packages[id - 1].name
+          } to ${value}`,
+          'Close',
+          { duration: 3000 }
+        ),
+      (err) =>
+        this.snackBar.open('Price update failed.', 'Close', { duration: 3000 })
+    );
   }
 }

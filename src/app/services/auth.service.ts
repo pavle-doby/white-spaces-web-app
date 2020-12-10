@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { UserVM, AppUser, UserRole } from 'src/models/User.model';
+import { UserVM, AppUser } from 'src/models/User.model';
 import { API_URL } from '../app.config';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store';
 import { setUser } from '../store/actions/user.actions';
+import { BEARER, LocalStorageService } from './local-storage.service';
+
 //http://18.221.175.43//api/auth/login
 //email: 'petar@psoftware.com',
 //password: 'test',
@@ -31,9 +33,7 @@ export class AuthService {
   }
 
   public isAuth(): Observable<any> {
-    return this.http.get(`${API_URL}/api/auth/my_data`, {
-      withCredentials: true,
-    });
+    return this.http.get(`${API_URL}/api/auth/my_data`);
   }
 
   public login(username: string, password: string) {
@@ -63,13 +63,17 @@ export class AuthService {
   public cleanLogin(
     email: string,
     password: string
-  ): Observable<{ user_info: AppUser; message: string }> {
+  ): Observable<{ user_info: AppUser; message: string; token: string }> {
     const params = {
       email: email,
       password: password,
     };
     const URL = `${API_URL}/api/auth/login`;
-    return this.http.post<{ user_info: AppUser; message: string }>(URL, params);
+    return this.http.post<{
+      user_info: AppUser;
+      message: string;
+      token: string;
+    }>(URL, params);
   }
 
   public resetPassword(email: string): Observable<{ message: string }> {
@@ -93,5 +97,9 @@ export class AuthService {
 
   public getUserData(user_id: number): Observable<AppUser> {
     return this.http.get<AppUser>(`${API_URL}/api/auth/user/${user_id}`);
+  }
+
+  public isUserLoggedIn(): boolean {
+    return !!LocalStorageService.Instance.AuthToken.replace(BEARER, '');
   }
 }

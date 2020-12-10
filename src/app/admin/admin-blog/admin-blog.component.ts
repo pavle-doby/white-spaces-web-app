@@ -81,15 +81,14 @@ export class AdminBlogComponent implements AfterViewInit, OnInit {
     });
   }
 
-  public deleteDialogBlog(order?: any): void {
+  public deleteDialogBlog(order?: any): any {
     const dialogRef = this.dialog.open(AdminBlogDeleteDialogComponent, {
       data: order,
       width: '20vw',
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.adminService.deleteBlog(result.id).subscribe(() => {
-        this.reload('/admin/blog');
-      });
+      this.adminService.deleteBlog(result.id).subscribe();
+      this.reload('/admin/blog');
     });
   }
 
