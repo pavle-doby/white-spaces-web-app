@@ -15,7 +15,7 @@ export class PackagesBox {
     public name: string,
     public price: number,
     public description: string,
-    public type: PackageType,
+    public type: PackageType | string,
     public questions: Question[] = [],
     public id?: any
   ) {}

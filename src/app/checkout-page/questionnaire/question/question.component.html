@@ -12,6 +12,7 @@
     class="question__textarea"
     rows="4"
     [(ngModel)]="this.answer"
-    (focusout)="this.onFocusOut()"
+    (focusout)="this.changeAnswer()"
+    (keyup.enter)="this.changeAnswer()"
   ></textarea>
 </div>

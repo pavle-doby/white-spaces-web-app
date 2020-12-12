@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import {
   setInfoCheckout,
-  addSpacePhotoURLCheckout,
   clearSpacePhotosURLsCheckout,
   setShoppingCartCheckout,
   selectTabbarButtonCheckout,
@@ -91,9 +90,6 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
         .toPromise()
         .then((file) => {
           fileLinks = [...fileLinks, file.link];
-          this.$store.dispatch(
-            addSpacePhotoURLCheckout({ fileURL: file.link })
-          );
 
           //#region For shopping cart update II
           const productVM: ProductVM = {
@@ -108,8 +104,6 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
                 .map((q) => new QuestionDTO(q)),
             },
           };
-
-           
 
           this.chekcoutService
             .updateProduct(productVM)

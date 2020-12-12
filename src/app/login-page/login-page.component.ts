@@ -4,9 +4,9 @@ import { Observable, Subscription } from 'rxjs';
 import { AppUser } from 'src/models/User.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store';
-import { CheckoutService } from '../services/checkout.service.ts.service';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { LoginParam } from '../app.config';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -14,7 +14,7 @@ import { LoginParam } from '../app.config';
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit, OnDestroy {
-  public toRegister: boolean = false;
+  public toShowRegisterTab: boolean = false;
   public isUserLoggedIn: boolean;
   public isUserVerified: boolean;
 
@@ -26,22 +26,21 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly activeRoute: ActivatedRoute,
     private readonly $store: Store<AppState>,
-    private readonly checkoutService: CheckoutService
+    private readonly authService: AuthService
   ) {
     this.window.document.body.style.width = `100vw`;
     this.user$ = this.$store.select((state) => state.user?.user);
   }
 
   ngOnInit(): void {
-    // this.subUser = this.user$.subscribe((user) => {
-    //   if (!!user && user.verified) {
-    //     this.router.navigateByUrl(`/checkout(checkoutSteps:floor-plan)`);
-    //   }
-    // });
+    if (this.authService.isUserLoggedIn()) {
+      this.router.navigateByUrl(`/${MainRouterPaths.CHECKOUT}`);
+      return;
+    }
 
     this.activeRoute.queryParams.subscribe((params) => {
       const { login } = params;
-      this.toRegister = !+login;
+      this.toShowRegisterTab = +login === LoginParam.REGISTER;
     });
   }
 

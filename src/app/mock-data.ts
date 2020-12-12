@@ -1,6 +1,4 @@
-import { ShoppingCart } from 'src/models/ShoppingCart.model';
-
-export let MockShoppingCart: ShoppingCart = {
+export let MockShoppingCart = {
   id: 8,
   datetime: 'Wed, 16 Sep 2020 17:44:06 GMT',
   state: 'existing',

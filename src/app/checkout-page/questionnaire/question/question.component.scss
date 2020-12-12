@@ -7,12 +7,20 @@
 }
 
 .question__question {
-  width: 45vw;
-  font-size: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   text-align: center;
+
+  width: 45vw;
+  min-height: 13.5vh;
+
+  font-size: 1vw;
 
   @media screen and (max-width: 960px) {
     width: 280px;
+    min-height: 150px;
     font-size: 14px;
   }
 }

@@ -1,6 +1,7 @@
 import { QuestionDTO } from './QuestionDTO.model';
 import { PackageType } from 'src/app/shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
 import { Product } from './Product.model';
+import { AdditionalData } from './AdditionalData.model';
 
 export class PackageDTO implements Product {
   public id: number;
@@ -14,8 +15,5 @@ export class PackageDTO implements Product {
   public category_id: number; //ENUM for category
   public attributes: Object;
 
-  public additional_data: {
-    questions: Record<string, QuestionDTO[]>;
-    type?: PackageType;
-  };
+  public additional_data: AdditionalData;
 }

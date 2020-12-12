@@ -1,6 +1,9 @@
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { PackagesBox } from 'src/app/shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
+import { clone } from 'src/app/shared/Utilities';
 import { LineIntem } from './LineItem.model';
 import { Product } from './Product.model';
+import { Question } from './Question.model';
 
 export class ShoppingCart {
   public id: number;
@@ -18,12 +21,48 @@ export class ShoppingCart {
       );
   }
 
+  public static convertPackageProductToPackageBox(
+    product: Product
+  ): PackagesBox {
+    const buffQuestions = Question.convertQuestionsDTOListToQuestionsList(
+      product.additional_data.questions,
+      product
+    );
+    const box = new PackagesBox(
+      product.name,
+      product.price,
+      product.data.description,
+      product.additional_data.type,
+      buffQuestions,
+      product.id
+    );
+    return box;
+  }
+
   public static getPackageLineItem(shoppingCart: ShoppingCart): LineIntem {
     return shoppingCart.line_items.find(
       (line_item) =>
         line_item.product.category_id ===
         LocalStorageService.Instance.PackageCategroyId
     );
+  }
+
+  public static getAddOnLineItemList(shoppingCart: ShoppingCart): LineIntem[] {
+    const isAddOn = (categoryId) =>
+      categoryId === LocalStorageService.Instance.AddOnCategroyId;
+
+    return shoppingCart.line_items.filter((li) =>
+      isAddOn(li.product.category_id)
+    );
+  }
+
+  public static getAddOnProductList(shoppingCart: ShoppingCart): Product[] {
+    const isAddOn = (categoryId) =>
+      categoryId === LocalStorageService.Instance.AddOnCategroyId;
+
+    return shoppingCart.line_items
+      .map((li) => li.product)
+      .filter((prod) => isAddOn(prod.category_id));
   }
 
   public static getLineItemWithProductId(
@@ -39,19 +78,12 @@ export class ShoppingCart {
     shoppingCart: ShoppingCart,
     lineItemId: number
   ): ShoppingCart {
-    let newShoppingCart: ShoppingCart = JSON.parse(
-      JSON.stringify(shoppingCart)
-    );
+    let newShoppingCart: ShoppingCart = clone<ShoppingCart>(shoppingCart);
 
     newShoppingCart.line_items = newShoppingCart.line_items.filter(
-      (lineItem) => {
-         
-         
-        return lineItem.id !== lineItemId;
-      }
+      (lineItem) => lineItem.id !== lineItemId
     );
 
-     
     return newShoppingCart;
   }
 }

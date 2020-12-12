@@ -1,8 +1,8 @@
-import { Question } from 'src/models/Question.model';
-import { QuestionDTO } from 'src/models/QuestionDTO.model';
-import { TabbarText } from 'src/models/TabbarText.model';
 import { BREAKING_POINT_PX } from '../app.config';
-import { TabbarButton } from './tabbar/tabbar.content';
+
+export const clone = <T>(x: T | Array<T>): T => {
+  return JSON.parse(JSON.stringify(x));
+};
 
 /**
  * Generates arraye with ragne values for start to end
@@ -16,65 +16,6 @@ export const range = (start: number, end: number): number[] => {
     ans.push(i);
   }
   return ans;
-};
-
-export const convertQuestionsDTOListToQuestionsList = (
-  questionDTOList: Record<string, QuestionDTO[]>,
-  product: { id: number }
-): Question[] => {
-  let buffQuestions: Question[] = [];
-
-  Object.keys(questionDTOList).forEach((key) => {
-    buffQuestions = [
-      ...buffQuestions,
-      ...questionDTOList[key].map((question) => {
-        return new Question({
-          id: question.id,
-          product_id: product.id,
-          question: question.question,
-          image_required: question.image_required,
-          section: key,
-        });
-      }),
-    ];
-  });
-
-  return buffQuestions;
-};
-
-export const formatQuestionDictToList = (
-  questionDTOList: Record<string, QuestionDTO[]>
-): QuestionDTO[] => {
-  let buffQuestions: QuestionDTO[] = [];
-
-  Object.values(questionDTOList).forEach((list) => {
-    buffQuestions = [...buffQuestions, ...list];
-  });
-
-  return buffQuestions;
-};
-
-export const updateTabbarBtnComplitedState = (
-  tabbarBtnList: TabbarButton[],
-  btnText: TabbarText,
-  isComplited: boolean = true
-): TabbarButton[] => {
-  return tabbarBtnList.map((btn: TabbarButton) => {
-    return btn.text === btnText
-      ? { ...btn, isCompleted: isComplited }
-      : { ...btn };
-  });
-};
-
-export const calculateFinishedQuestions = (questions: Question[]): number => {
-  return questions && questions.length
-    ? questions.filter((q) => isQuestionFullyAnswerd(q)).length
-    : 0;
-};
-
-// Image is not required...
-export const isQuestionFullyAnswerd = (question: Question): boolean => {
-  return question.isAnswerd;
 };
 
 export const getClientWidthPX = (): number => {
@@ -92,8 +33,4 @@ export const isHandset = (
 
 export const firstToUpperCase = (str: string): string => {
   return str.slice(0, 1).toUpperCase() + str.slice(1).toLowerCase();
-};
-
-export const clone = <T>(x: Object | Array<any>): T => {
-  return JSON.parse(JSON.stringify(x));
 };
