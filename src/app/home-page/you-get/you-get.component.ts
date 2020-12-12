@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppTitle } from 'src/app/shared/title/AppTitle';
 import { OpeningLabel } from 'src/app/shared/opening-label/OpeningLabel';
 import {
@@ -6,7 +6,6 @@ import {
   YOU_GET_LINEAR_GRADIENT,
 } from './you-get.config';
 import { MatDialog } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
 import { YouGetDialogComponent } from './you-get-dialog/you-get-dialog.component';
 import { TitleSize } from 'src/app/shared/title/TitleSize';
 

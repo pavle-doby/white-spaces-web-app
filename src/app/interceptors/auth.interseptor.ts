@@ -17,7 +17,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     const authToken = LocalStorageService.Instance.AuthToken;
-
     const authReq = req.clone({
       headers: req.headers.set('Authorization', authToken),
     });
@@ -28,7 +27,10 @@ export class AuthInterceptor implements HttpInterceptor {
         (error) => {
           if (error.status === HttpStatusCode.UNAUTHORIZED) {
             LocalStorageService.Instance.clearAuthToken();
-            const logInRoute = `/${MainRouterPaths.LOGIN}?login=${LoginParam.LOGIN}`;
+            const logInRoute = this.router.url.includes(MainRouterPaths.ADMIN)
+              ? MainRouterPaths.ADMIN
+              : `/${MainRouterPaths.LOGIN}?login=${LoginParam.LOGIN}`;
+
             this.router.navigateByUrl(logInRoute);
           }
         }

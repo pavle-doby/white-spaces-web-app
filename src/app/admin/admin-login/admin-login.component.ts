@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-admin-login',
@@ -35,16 +36,20 @@ export class AdminLoginComponent implements OnInit {
       try {
         const username = this.form.get('username').value;
         const password = this.form.get('password').value;
-        await this.authService.login(username, password);
-        this.store
-          .select((state) => state.user.user.role)
-          .subscribe((res) => {
-            if (res !== 'admin') {
-              this.loginInvalid = true;
-            } else {
-              this.router.navigate(['admin/orders']);
-            }
-          });
+        this.authService.cleanLogin(username, password).subscribe((res) => {
+          LocalStorageService.Instance.AuthToken = res.token ?? '';
+          this.store
+            .select((state) => state.user.user.role)
+            .subscribe((res) => {
+              if (res !== 'admin') {
+                this.loginInvalid = true;
+              } else {
+                this.authService.isAuthenticated.next(true);
+                localStorage.setItem('isAdmin', 'true');
+                this.router.navigate(['admin/orders']);
+              }
+            });
+        });
       } catch (err) {
         this.loginInvalid = true;
       }

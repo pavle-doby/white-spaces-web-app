@@ -62,7 +62,7 @@ export class BlogPostComponent implements OnInit, OnDestroy {
     });
 
     this.$subOpenDialog = dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+       
     });
   }
 }

@@ -137,7 +137,7 @@ export class QuestionnaireComponent implements OnInit {
       quantity: 1,
     };
 
-    console.log('Q - answer', { productVM });
+     
 
     this.checkoutService
       .updateProduct(productVM)
@@ -200,7 +200,7 @@ export class QuestionnaireComponent implements OnInit {
           quantity: 1,
         };
 
-        console.log('Q - upload', { productVM });
+         
 
         this.checkoutService
           .updateProduct(productVM)
@@ -209,7 +209,7 @@ export class QuestionnaireComponent implements OnInit {
             this.$store.dispatch(
               setShoppingCartCheckout({ shoppingCart: newShoppingCart })
             );
-            console.log('Pogledaj state');
+             
 
             this.$store.dispatch(
               updateQuestionCheckout({ question: { ...newQuestion } })

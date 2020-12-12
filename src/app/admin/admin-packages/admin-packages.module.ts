@@ -12,7 +12,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [AdminPackagesComponent],
   imports: [
@@ -27,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatListModule,
     MatTabsModule,
     MatExpansionModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
   ],
   exports: [AdminPackagesComponent],

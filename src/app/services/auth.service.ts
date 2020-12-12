@@ -34,9 +34,7 @@ export class AuthService {
 
   //TODO: Aks team about this call... Maybe now is useless.
   public isAuth(): Observable<any> {
-    return this.http.get(`${API_URL}/api/auth/my_data`, {
-      withCredentials: true,
-    });
+    return this.http.get(`${API_URL}/api/auth/my_data`);
   }
 
   public login(username: string, password: string) {

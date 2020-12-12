@@ -46,7 +46,7 @@ import { httpInterceptorProviders } from './interceptors/interseptors';
       },
     }),
     NgxGoogleAnalyticsModule.forRoot(
-      document.cookie && environment.production ? 'G-2RFP944R90' : ''
+      document.cookie ? 'G-2RFP944R90' : ''
     ),
     NgxGoogleAnalyticsRouterModule,
     NgcCookieConsentModule.forRoot(COOKIE_CONFIG),

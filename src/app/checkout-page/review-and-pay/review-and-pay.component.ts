@@ -155,15 +155,15 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
       ];
 
       const steps: Step[] = Object.values(checkoutState.progressState);
-      console.log({ steps });
+       
 
       const uncomplitedSteps = steps.filter((step) =>
         step.isRequired ? step.state !== ProgressState.DONE : false
       );
-      console.log({ uncomplitedSteps });
+       
 
       this.isAllDone = !uncomplitedSteps.length;
-      console.log('isAllDone', this.isAllDone);
+       
 
       this.addOnInfo.infoPriceList = checkoutState.addOnList
         .filter((addOn) => addOn.isSelected)

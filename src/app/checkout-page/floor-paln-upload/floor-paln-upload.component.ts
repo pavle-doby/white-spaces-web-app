@@ -98,8 +98,6 @@ export class FloorPalnUploadComponent implements OnInit {
           },
         };
 
-        console.log('Floor plan upload', { productVM });
-
         this.checkoutService
           .updateProduct(productVM)
           .toPromise()

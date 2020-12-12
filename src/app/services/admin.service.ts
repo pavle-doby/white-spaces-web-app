@@ -71,11 +71,16 @@ export class AdminService {
   }
 
   public deleteBlog(id: number): Observable<any> {
-    return this.http.delete(
-      `${API_URL}/blog/${id}/delete`,
+    return this.http.delete(`${API_URL}/blog/${id}/delete`, {
+      withCredentials: true,
+    });
+  }
 
-      { withCredentials: true }
-    );
+  public downloadProject(id: number, email: string): Observable<any> {
+    return this.http.post(`${API_URL}/order/download`, {
+      order_id: id,
+      email: email,
+    });
   }
 
   public getAllAdmins(): Observable<any> {
