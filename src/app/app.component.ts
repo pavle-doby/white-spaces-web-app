@@ -92,8 +92,8 @@ export class AppComponent implements OnInit {
         console.error(err);
         alert(err.message);
       });
-
-    if (!this.AuthService.isUserLoggedIn()) {
+    // TODO: Maybe add || !this.AuthService.isUserAdmin
+    if (!this.AuthService.isUserLoggedIn) {
       return;
     }
 

@@ -33,7 +33,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.authService.isUserLoggedIn()) {
+    if (this.authService.isUserLoggedIn) {
       this.router.navigateByUrl(`/${MainRouterPaths.CHECKOUT}`);
       return;
     }
