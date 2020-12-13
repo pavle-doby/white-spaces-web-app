@@ -29,6 +29,8 @@ export const BREAKING_POINT_PX = 960;
 export const MEDIA_QUERY_WIDTH = '(max-width: 960px)';
 export const SCROLL_SPEED = 40;
 
+export const SCROLL_BEHAVIOR = 'smooth'
+
 export const SHOW_ADDRESS_INPUT = false;
 
 export const COOKIE_CONFIG: NgcCookieConsentConfig = {

@@ -4,13 +4,12 @@
   fxLayout="row"
   fxLayout.lt-md="column"
   fxLayoutAlign="start center"
-  (keydown)="this.onKeyDown($event)"
 >
-  <app-home></app-home>
+  <app-home [id]="this.homeId"></app-home>
   <app-believe-in></app-believe-in>
   <app-do-it></app-do-it>
   <app-works></app-works>
-  <app-you-get></app-you-get>
+  <app-you-get [id]="this.youGetId"></app-you-get>
 </div>
 <div></div>
 <img
