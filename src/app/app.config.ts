@@ -18,6 +18,9 @@ export enum ConfirmationDilogType {
   DANGER = 'error',
 }
 
+export const MSG_ACTION_SUCCESSFUL = 'Your action was successful!'
+export const MSG_ACTION_UNSUCCSSFUL = 'Something went wrong... 🤕'
+
 export const CONFIRMATION_DIALOG_WIDTH = '500px';
 export const DOCUMENT_DIALOG_WIDTH = '800px';
 

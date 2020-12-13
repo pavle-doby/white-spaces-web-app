@@ -77,7 +77,7 @@ export class AdminService {
   }
 
   public downloadProject(id: number, email: string): Observable<any> {
-    return this.http.post(`${API_URL}/order/download`, {
+    return this.http.post(`${API_URL}/api/order/download`, {
       order_id: id,
       email: email,
     });

@@ -93,7 +93,7 @@ export class AppComponent implements OnInit {
         alert(err.message);
       });
 
-    if (!this.AuthService.isUserLoggedIn()) {
+    if (!this.AuthService.isUserLoggedIn || this.AuthService.isUserAdmin) {
       return;
     }
 

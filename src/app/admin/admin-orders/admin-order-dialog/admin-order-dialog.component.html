@@ -22,9 +22,9 @@
     </div>
 
     <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="15px">
-      <div>
-        <a (click)="this.downloadProject()">Download project &darr;</a>
-      </div>
+      <button mat-button class="width-100" (click)="this.downloadProject()">
+        Download project ✨
+      </button>
       <mat-form-field appearance="fill">
         <mat-label>Status</mat-label>
         <mat-select (selectionChange)="this.handleSelect($event.value)">
