@@ -13,6 +13,7 @@ import {
   setShoppingCartCheckout,
   selectTabbarButtonCheckout,
   setInitStateChekcout,
+  processDoneCheckout,
 } from '../actions/checkout.action';
 import {
   TabbarButton,
@@ -324,6 +325,13 @@ const reducer = createReducer(
     };
 
     return { ...state, questionStepper: newStepper };
+  }),
+  on(processDoneCheckout, (state, {}) => {
+    return {
+      ...state,
+      ...getInitState(),
+      allPackageCards: [...state.allPackageCards],
+    };
   })
 );
 

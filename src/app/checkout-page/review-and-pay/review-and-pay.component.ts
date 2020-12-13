@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AppState } from 'src/app/store';
 import { Store } from '@ngrx/store';
 import {
+  processDoneCheckout,
   selectTabbarButtonCheckout,
   setInfoCheckout,
-  setInitStateChekcout,
 } from 'src/app/store/actions/checkout.action';
 import { InfoPrice } from 'src/models/InfoPrice.model';
 import { InfoPriceLabelInputs } from 'src/app/shared/info-price-label/info-price-label.component';
@@ -155,15 +155,12 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
       ];
 
       const steps: Step[] = Object.values(checkoutState.progressState);
-       
 
       const uncomplitedSteps = steps.filter((step) =>
         step.isRequired ? step.state !== ProgressState.DONE : false
       );
-       
 
       this.isAllDone = !uncomplitedSteps.length;
-       
 
       this.addOnInfo.infoPriceList = checkoutState.addOnList
         .filter((addOn) => addOn.isSelected)
@@ -222,7 +219,7 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
           .toPromise()
           .then((res) => {
             LocalStorageService.Instance.storage.clear();
-            this.$store.dispatch(setInitStateChekcout({}));
+            this.$store.dispatch(processDoneCheckout());
             const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
               width: CONFIRMATION_DIALOG_WIDTH,
               disableClose: true,

@@ -54,3 +54,5 @@ export const setShoppingCartCheckout = createAction(
   '[CHECKOUT] SET_SHOPPING_CART',
   props<{ shoppingCart: ShoppingCart }>()
 );
+
+export const processDoneCheckout = createAction('[CHECKOUT] DONE');

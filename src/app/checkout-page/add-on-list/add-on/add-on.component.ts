@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { isHandset } from 'src/app/shared/Utilities';
 import { AddOn } from 'src/models/AddOn';
 import { CURRENCY } from '../../../app.config';
 
@@ -21,6 +22,7 @@ export class AddOnComponent implements OnInit {
 
   public addRemoveLabel: string = ADD;
   public readonly currency = CURRENCY;
+  public isHandset: boolean = isHandset();
 
   constructor() {
     this.addRemoveAddOnEvent = new EventEmitter();
@@ -31,11 +33,24 @@ export class AddOnComponent implements OnInit {
   }
 
   public showDescription(): void {
+    if (this.isHandset) {
+      return;
+    }
     this.toShowDescription = true;
   }
 
   public hideDescription(): void {
+    if (this.isHandset) {
+      return;
+    }
     this.toShowDescription = false;
+  }
+
+  public toggleDescription(): void {
+    if (!this.isHandset) {
+      return;
+    }
+    this.toShowDescription = !this.toShowDescription;
   }
 
   public clickOnAddOn(): void {
