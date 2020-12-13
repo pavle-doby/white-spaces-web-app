@@ -24,6 +24,10 @@ export class ShoppingCart {
   public static convertPackageProductToPackageBox(
     product: Product
   ): PackagesBox {
+    if (!product) {
+      return null;
+    }
+
     const buffQuestions = Question.convertQuestionsDTOListToQuestionsList(
       product.additional_data.questions,
       product
