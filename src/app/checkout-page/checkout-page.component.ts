@@ -184,7 +184,9 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
         });
       }
 
+      const currentIndex = 0;
       this.$store.dispatch(setShoppingCartCheckout({ shoppingCart }));
+      this.$store.dispatch(setCurrentIndexCheckout({ currentIndex }));
     } catch (error) {
       console.error(error);
       alert(error.message);

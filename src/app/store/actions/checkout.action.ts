@@ -4,6 +4,7 @@ import { AddOn } from 'src/models/AddOn';
 import { Question } from 'src/models/Question.model';
 import { SideCadrPackage } from 'src/app/shared/side-card-packages/SideCardPackage';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
+import { IndexType } from 'typescript';
 
 export const setInitStateChekcout = createAction(
   '[CHECKOUT] SET_INIT_STATE',

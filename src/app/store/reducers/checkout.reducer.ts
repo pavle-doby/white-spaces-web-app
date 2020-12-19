@@ -33,11 +33,12 @@ import {
 import { isHandset } from 'src/app/shared/Utilities';
 import { TabbarText } from 'src/models/TabbarText.model';
 import { AddOnDTO } from 'src/models/AddOnDTO';
+import { SectionRanges } from 'src/models/SectionRanges.model';
 
 export const QS_RANGE_START = 0;
-export const QS_RANGE_END_SHORT = 4;
+export const QS_RANGE_END_SHORT = 3;
 export const QS_RANGE_END_WIDE = 15;
-export const QS_NUM_RANGE_TO_SHOW_SHORT = 5;
+export const QS_NUM_RANGE_TO_SHOW_SHORT = 4;
 export const QS_NUM_RANGE_TO_SHOW_WIDE = 16;
 export const QS_INDEX_CURRENT = 0;
 
@@ -79,6 +80,8 @@ const getInitState = (): CheckoutState => {
         ? QS_NUM_RANGE_TO_SHOW_SHORT
         : QS_NUM_RANGE_TO_SHOW_WIDE,
       indexCurrent: QS_INDEX_CURRENT,
+      currentSection: '',
+      dictSectionRanges: {},
     }),
     shoppingCart: null,
     //TODO: Change on proper actions
@@ -162,7 +165,7 @@ const reducer = createReducer(
     //#endregion
 
     //#region questions
-    let questions = [];
+    let questions: Question[] = [];
     let additionalDataQuestions = [];
 
     const packageLineItem = ShoppingCart.getPackageLineItem(shoppingCart);
@@ -174,6 +177,10 @@ const reducer = createReducer(
       additionalDataQuestions = li.additional_data?.questions ?? [];
       questions = [...questions, ...additionalDataQuestions];
     });
+
+    console.log(questions.map((q, i) => ({ s: q.section, i })));
+
+    let dictSectionRanges = SectionRanges.makeDictSectionRanges(questions);
 
     const finished = Question.calculateFinishedQuestions(questions);
     const total = questions.length;
@@ -205,6 +212,7 @@ const reducer = createReducer(
       questionStepper: {
         ...state.questionStepper,
         numberOfSteps: questions.length,
+        dictSectionRanges,
       },
       progressState: {
         ...state.progressState,
@@ -309,12 +317,19 @@ const reducer = createReducer(
     let newRangeEnd = state.questionStepper.rangeEnd;
     let range = state.questionStepper.numberOfRangeToShow;
 
-    if (currentIndex > state.questionStepper.rangeEnd) {
-      newRangeStart = currentIndex - range + 1;
-      newRangeEnd = currentIndex;
-    } else if (currentIndex < state.questionStepper.rangeStart) {
-      newRangeStart = currentIndex;
-      newRangeEnd = currentIndex + range - 1;
+    const questions = state.questions;
+    const section = questions[currentIndex].section;
+    const sectionRanges = state.questionStepper.dictSectionRanges[section];
+
+    if (
+      currentIndex === sectionRanges.rangeStart ||
+      currentIndex === sectionRanges.rangeEnd
+    ) {
+      newRangeStart = sectionRanges.rangeStart;
+      newRangeEnd = sectionRanges.rangeEnd;
+      range = isHandset()
+        ? QS_NUM_RANGE_TO_SHOW_SHORT
+        : newRangeEnd - newRangeStart;
     }
 
     const newStepper: QuestionStepper = {
@@ -322,6 +337,8 @@ const reducer = createReducer(
       indexCurrent: currentIndex,
       rangeStart: newRangeStart,
       rangeEnd: newRangeEnd,
+      numberOfRangeToShow: range,
+      currentSection: section,
     };
 
     return { ...state, questionStepper: newStepper };

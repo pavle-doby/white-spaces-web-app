@@ -4,6 +4,9 @@
   fxLayout="column"
   fxLayoutAlign="space-between center"
 >
+  <p class="floor-plan__info">
+    {{ this.info }}
+  </p>
   <app-upload
     [data]="this.uploadData"
     (uploadEvent)="this.onUploadEvent($event)"

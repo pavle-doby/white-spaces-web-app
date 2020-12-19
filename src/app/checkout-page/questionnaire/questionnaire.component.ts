@@ -67,9 +67,7 @@ export class QuestionnaireComponent implements OnInit {
       (state) => state.checkout.shoppingCart
     );
 
-    this.$store.dispatch(
-      setInfoCheckout({ info: INFO, description: [INFO_DESC] })
-    );
+    this.$store.dispatch(setInfoCheckout({ info: '', description: [] }));
 
     this.$store.dispatch(
       selectTabbarButtonCheckout({ btnText: TabbarText.QUESTIONNARIE })
@@ -137,8 +135,6 @@ export class QuestionnaireComponent implements OnInit {
       quantity: 1,
     };
 
-     
-
     this.checkoutService
       .updateProduct(productVM)
       .toPromise()
@@ -200,8 +196,6 @@ export class QuestionnaireComponent implements OnInit {
           quantity: 1,
         };
 
-         
-
         this.checkoutService
           .updateProduct(productVM)
           .toPromise()
@@ -209,7 +203,6 @@ export class QuestionnaireComponent implements OnInit {
             this.$store.dispatch(
               setShoppingCartCheckout({ shoppingCart: newShoppingCart })
             );
-             
 
             this.$store.dispatch(
               updateQuestionCheckout({ question: { ...newQuestion } })

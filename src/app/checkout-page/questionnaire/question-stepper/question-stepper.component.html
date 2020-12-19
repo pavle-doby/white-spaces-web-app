@@ -1,18 +1,23 @@
-<div
-  fxLayout="row"
-  fxLayoutAlign="center center"
-  fxLayoutGap="1.32vw"
-  fxLayoutGap.lt-md="10px"
->
+<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+  <h3>
+    {{ this.section }}
+  </h3>
   <div
-    *ngFor="let step of this.steps"
-    class="question-stepper__step"
-    [ngClass]="step.ngClassObj"
+    fxLayout="row"
     fxLayoutAlign="center center"
-    (click)="this.selectStep(step)"
+    fxLayoutGap="1.32vw"
+    fxLayoutGap.lt-md="10px"
   >
-    <span class="question-stepper__label">
-      {{ step.label }}
-    </span>
+    <div
+      *ngFor="let step of this.steps"
+      class="question-stepper__step"
+      [ngClass]="step.ngClassObj"
+      fxLayoutAlign="center center"
+      (click)="this.selectStep(step)"
+    >
+      <span class="question-stepper__label">
+        {{ step.label }}
+      </span>
+    </div>
   </div>
 </div>

@@ -15,6 +15,10 @@
 
   <app-tabbar></app-tabbar>
   <app-info
+    *ngIf="
+      (this.$checkoutState | async).info &&
+      (this.$checkoutState | async).infoDesc.length
+    "
     [info]="(this.$checkoutState | async).info"
     [description]="(this.$checkoutState | async).infoDesc"
   ></app-info>

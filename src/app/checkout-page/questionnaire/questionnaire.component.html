@@ -7,6 +7,13 @@
   fxLayoutGap="2vh"
   fxLayoutGap.lt-md="10px"
 >
+  <p class="quest_msg">
+    Make sure you fill out the questionnaire in detail, so we can fully
+    understand your needs. <br />
+    There are 10 sections in total (together with the add-on packages). <br />
+    The number of questions may vary per category.
+  </p>
+
   <app-question-stepper
     (selectStepEvent)="this.moveQuestionTo($event.index)"
   ></app-question-stepper>

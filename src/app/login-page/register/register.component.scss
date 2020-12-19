@@ -1,13 +1,22 @@
+@import "src/styles.scss";
+
 $form-width: 30vw;
 
 .login__form {
   width: $form-width;
 }
 
+.register__info {
+  margin-top: 0;
+  font-size: 14px;
+  font-weight: 300;
+  text-align: center;
+}
+
 .login__input-label {
   font-size: 0.76vw;
   font-size: 12px;
-  font-weight: 300;
+  font-weight: $light;
 }
 
 .login__form-width {

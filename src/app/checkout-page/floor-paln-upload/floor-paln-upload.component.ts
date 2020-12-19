@@ -37,6 +37,9 @@ export class FloorPalnUploadComponent implements OnInit {
   public shoppingCart: ShoppingCart;
   public questions: Question[];
 
+  public info: string = '';
+  public description: string = '';
+
   constructor(
     private readonly $store: Store<AppState>,
     private readonly checkoutService: CheckoutService
@@ -66,9 +69,8 @@ export class FloorPalnUploadComponent implements OnInit {
     });
     this.subUserName = this.$userName.subscribe((name) => {
       const _name = firstToUpperCase(name);
-      this.$store.dispatch(
-        setInfoCheckout({ info: `${_name}, ${INFO}`, description: [] })
-      );
+      this.info = `${_name}, \n ${INFO}`;
+      this.$store.dispatch(setInfoCheckout({ info: ``, description: [] }));
     });
   }
 
