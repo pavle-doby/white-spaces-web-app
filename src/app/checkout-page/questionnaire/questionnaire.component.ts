@@ -11,7 +11,7 @@ import {
 import { Observable, Subscription } from 'rxjs';
 import { Question } from 'src/models/Question.model';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
-import { UploadData } from 'src/app/shared/upload/upload.model';
+import { UploadConfig } from 'src/app/shared/upload/upload.model';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { TabbarText } from 'src/models/TabbarText.model';
@@ -57,7 +57,7 @@ export class QuestionnaireComponent implements OnInit {
   public $questionStepper: Observable<QuestionStepper>;
   public $subQuestionStepper: Subscription;
 
-  public uploadData: UploadData;
+  public uploadData: UploadConfig;
   public questionMsg: string =
     'Make sure you fill out the questionnaire in detail, so we can fully understand your needs.\nThere are 10 sections in total (together with the add-on packages).\nThe number of questions may vary per category.';
 
@@ -79,7 +79,7 @@ export class QuestionnaireComponent implements OnInit {
       selectTabbarButtonCheckout({ btnText: TabbarText.QUESTIONNARIE })
     );
 
-    this.uploadData = new UploadData({
+    this.uploadData = new UploadConfig({
       limit: 1,
       info: '',
       bottomInfo: UPLOAD_MSG,

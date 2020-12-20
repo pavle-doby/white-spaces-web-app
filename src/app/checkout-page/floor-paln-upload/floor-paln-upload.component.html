@@ -7,8 +7,16 @@
   <p class="floor-plan__info">
     {{ this.info }}
   </p>
-  <app-upload
-    [data]="this.uploadData"
+
+  <app-image-manager
+    [uploadConfig]="this.uploadConfig"
+    [images]="this.images"
+    (uploadEvent)="this.onUploadEvent($event)"
+  >
+  </app-image-manager>
+
+  <!-- <app-upload
+    [data]="this.uploadConfig"
     (uploadEvent)="this.onUploadEvent($event)"
   ></app-upload>
   <div
@@ -22,5 +30,5 @@
     <span class="floor-plan-upload__file-name">
       {{ (this.$chekcoutState | async).floorPlan?.name }}
     </span>
-  </div>
+  </div> -->
 </div>

@@ -7,7 +7,7 @@ import {
   setShoppingCartCheckout,
   selectTabbarButtonCheckout,
 } from 'src/app/store/actions/checkout.action';
-import { UploadData } from 'src/app/shared/upload/upload.model';
+import { UploadConfig } from 'src/app/shared/upload/upload.model';
 import { Observable, Subscription } from 'rxjs';
 import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
@@ -35,7 +35,7 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
 
   public shoppingCart: ShoppingCart;
   public questions: Question[];
-  public uploadConfigData: UploadData;
+  public uploadConfigData: UploadConfig;
 
   constructor(
     private readonly $store: Store<AppState>,
@@ -49,7 +49,7 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
     );
     this.$checkoutState = this.$store.select((state) => state.checkout);
 
-    this.uploadConfigData = new UploadData({
+    this.uploadConfigData = new UploadConfig({
       supportedFileTypes: SUPPERTED_FILES,
       limit: 16,
     });

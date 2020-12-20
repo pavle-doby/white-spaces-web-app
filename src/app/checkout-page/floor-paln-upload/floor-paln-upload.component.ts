@@ -6,7 +6,7 @@ import {
   setShoppingCartCheckout,
   selectTabbarButtonCheckout,
 } from 'src/app/store/actions/checkout.action';
-import { UploadData } from 'src/app/shared/upload/upload.model';
+import { UploadConfig } from 'src/app/shared/upload/upload.model';
 import { Observable, Subscription } from 'rxjs';
 import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
@@ -16,6 +16,7 @@ import { TabbarText } from 'src/models/TabbarText.model';
 import { Question } from 'src/models/Question.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
 import { firstToUpperCase } from 'src/app/shared/Utilities';
+import { IMG_LOADING } from 'src/app/app.config';
 
 const INFO = 'welcome to your renovation project!';
 
@@ -25,7 +26,7 @@ const INFO = 'welcome to your renovation project!';
   styleUrls: ['./floor-paln-upload.component.scss'],
 })
 export class FloorPalnUploadComponent implements OnInit {
-  public uploadData: UploadData;
+  public uploadConfig: UploadConfig;
   public successMsg: string;
 
   public $chekcoutState: Observable<CheckoutState>;
@@ -39,6 +40,8 @@ export class FloorPalnUploadComponent implements OnInit {
 
   public info: string = '';
   public description: string = '';
+
+  public images: string[] = [];
 
   constructor(
     private readonly $store: Store<AppState>,
@@ -54,10 +57,9 @@ export class FloorPalnUploadComponent implements OnInit {
       (state) => state.user?.user?.first_name
     );
 
-    this.uploadData = new UploadData({
-      limit: 1,
+    this.uploadConfig = new UploadConfig({
+      limit: 8,
       message: 'Please upload your existing floor plan.',
-      bottomInfo: '',
     });
     this.successMsg = 'You successfully uploaded your file!';
   }
@@ -82,10 +84,13 @@ export class FloorPalnUploadComponent implements OnInit {
       return;
     }
 
+    this.images = [IMG_LOADING];
     this.checkoutService
       .uploadFile(files[0])
       .toPromise()
       .then((linkObj) => {
+        this.images = [linkObj.link];
+
         const productVM: ProductVM = {
           shopping_cart_id: this.shoppingCart.id,
           line_item_id: lineItem.id,

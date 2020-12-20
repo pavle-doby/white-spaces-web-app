@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { UploadData } from '../upload/upload.model';
+import { UploadConfig } from '../upload/upload.model';
 
 const MSG = `Please upload your existing floor plan.`;
 const LIMIT = 16;
@@ -11,7 +11,7 @@ const LIMIT = 16;
 })
 export class UploadGridComponent implements OnInit {
   @Input()
-  public uploadData: UploadData;
+  public uploadData: UploadConfig;
   @Input()
   public imgURLs: (string | ArrayBuffer)[];
   @Input()
@@ -25,8 +25,7 @@ export class UploadGridComponent implements OnInit {
   constructor() {
     this.uploadFilesEvent = new EventEmitter();
 
-    //Dobar argument zasto ovakve dodele treba da idu u constructor
-    this.uploadData = new UploadData({
+    this.uploadData = new UploadConfig({
       limit: LIMIT,
     });
   }
@@ -35,7 +34,6 @@ export class UploadGridComponent implements OnInit {
     if (this.files && this.toShowUploadedFilesFromDevice) {
       this.showFilesFromDevice(this.files);
     }
-    console.log(this.imgURLs);
   }
 
   public onUploadEvent(files: FileList): void {

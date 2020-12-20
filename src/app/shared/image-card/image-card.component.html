@@ -1,0 +1,18 @@
+<div
+  class="image-card__div"
+  fxLayout="column"
+  fxLayoutAlign="start end"
+  (mouseenter)="this.onMouseEneter()"
+  (mouseleave)="this.onMouseLeave()"
+>
+  <mat-icon
+    *ngIf="this.showDeleteIcon"
+    class="image-card__icon cursor-pointer"
+    aria-label="Delete image button"
+    (click)="this.delete()"
+  >
+    cancel
+  </mat-icon>
+
+  <img class="image-card__img" [src]="this.src" [alt]="this.alt" />
+</div>

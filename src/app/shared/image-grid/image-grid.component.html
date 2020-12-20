@@ -1,11 +1,16 @@
 <section
   class="image-grid__grid"
   fxLayout="row wrap"
-  fxLayoutAlign="start"
+  fxLayoutAlign="center"
   fxLayoutGap="2vw grid"
   fxLayoutGap.lt-md="10px grid"
 >
-  <div *ngFor="let url of this.stateList" class="image-grid__img-div">
-    <img class="image-grid__img" [src]="url" />
-  </div>
+  <app-image-card
+    *ngFor="let url of this.stateList; let i = index"
+    class="image-grid__img-div"
+    [src]="url"
+    alt="image"
+    (deleteEvent)="deleteImage($event, i)"
+  >
+  </app-image-card>
 </section>

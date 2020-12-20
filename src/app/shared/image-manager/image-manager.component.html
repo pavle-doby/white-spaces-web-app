@@ -1,0 +1,14 @@
+<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+  <h3>
+    {{ this.config.title }}
+  </h3>
+  <div *ngIf="this.config.showDragNDrop">Drag & Drop goes here</div>
+  <app-upload
+    [data]="this.uploadConfig"
+    (uploadEvent)="onUploadEvent($event)"
+  ></app-upload>
+  <app-image-grid
+    [config]="this.gridConfig"
+    [urls]="this.images"
+  ></app-image-grid>
+</div>

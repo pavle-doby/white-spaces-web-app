@@ -8,7 +8,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { UploadData } from './upload.model';
+import { UploadConfig } from './upload.model';
 import { Subscription, fromEvent, Observable } from 'rxjs';
 
 export const SUPPERTED_FILES = '.dwg, .pdf, .jpg, .jpeg, .png ';
@@ -20,7 +20,7 @@ export const SUPPERTED_FILES = '.dwg, .pdf, .jpg, .jpeg, .png ';
 })
 export class UploadComponent implements OnInit, OnDestroy {
   @Input()
-  public data?: UploadData;
+  public data?: UploadConfig;
   @Input()
   public supportedFileTypes: string = SUPPERTED_FILES;
 
