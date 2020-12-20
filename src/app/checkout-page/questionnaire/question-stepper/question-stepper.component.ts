@@ -14,6 +14,8 @@ import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
 import { firstToUpperCase, isHandset, range } from 'src/app/shared/Utilities';
 import { Question } from 'src/models/Question.model';
 import { SECTION_LABEL_MAP } from 'src/enums/QuestionSection.enum';
+import { SectionNavBtn } from 'src/models/SectionNavBtn.model';
+import { setCurrentIndexCheckout } from 'src/app/store/actions/checkout.action';
 
 @Component({
   selector: 'app-question-stepper',
@@ -37,6 +39,9 @@ export class QuestionStepperComponent implements OnInit, OnDestroy {
   public steps: Step[];
 
   public section: string;
+  public navSections: SectionNavBtn[];
+
+  public isHandset: boolean = isHandset();
 
   constructor(private readonly $store: Store<AppState>) {
     this.$questionStepper = this.$store.select(
@@ -50,12 +55,50 @@ export class QuestionStepperComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.$subCheckoutState = this.$checkoutState.subscribe((checkoutState) => {
       this.checkoutState = checkoutState;
-
-      this.stepper = checkoutState.questionStepper;
-      const section = checkoutState.questionStepper.currentSection;
+      const questionStepper = checkoutState.questionStepper;
+      this.stepper = questionStepper;
+      const section = questionStepper.currentSection;
       this.section = SECTION_LABEL_MAP[section] ?? firstToUpperCase(section);
 
       const questions = checkoutState.questions;
+      const navSectionOrder = [];
+      const navSectionDictState = {};
+
+      questions.forEach((q) => {
+        const section = navSectionOrder.find((s) => s === q.section);
+        const isComplited = Question.isQuestionFullyAnswerd(q);
+
+        if (section) {
+          const state = navSectionDictState[q.section];
+          state.total += 1;
+          state.complited += +isComplited;
+          return;
+        }
+
+        navSectionDictState[q.section] = {
+          total: 1,
+          complited: +isComplited,
+        };
+
+        navSectionOrder.push(q.section);
+      });
+
+      this.navSections = navSectionOrder.map((section, i) => {
+        const isLast = navSectionOrder.length - 1 === i;
+        const state = navSectionDictState[section];
+        const sectionRanges = questionStepper.dictSectionRanges[section];
+        const indexCurrent = this.stepper.indexCurrent;
+
+        return new SectionNavBtn({
+          section,
+          label: `${section} ${isLast ? '' : '//'}`,
+          sectionRanges,
+          isCompleted: state.total === state.complited,
+          isSelected:
+            indexCurrent > sectionRanges.rangeStart - 1 &&
+            indexCurrent < sectionRanges.rangeEnd + 1,
+        });
+      });
 
       let indexCurrent = this.stepper.indexCurrent;
       let toShow = this.stepper.numberOfRangeToShow;
@@ -65,12 +108,11 @@ export class QuestionStepperComponent implements OnInit, OnDestroy {
 
       end = indexCurrent > end ? indexCurrent + toShow : end;
       end = end > this.stepper.rangeEnd ? this.stepper.rangeEnd : end;
-      
+
       start = end - toShow;
       start = start < this.stepper.rangeStart ? this.stepper.rangeStart : start;
 
-      const sectionRanges =
-        checkoutState.questionStepper.dictSectionRanges[section];
+      const sectionRanges = questionStepper.dictSectionRanges[section];
 
       const rangeArray = range(start, end);
       this.steps = rangeArray.map(
@@ -98,5 +140,14 @@ export class QuestionStepperComponent implements OnInit, OnDestroy {
 
   public selectStep(step: Step): void {
     this.selectStepEvent.emit(step);
+  }
+
+  public changeSection(sectionNavBtn: SectionNavBtn): void {
+    return;
+    this.$store.dispatch(
+      setCurrentIndexCheckout({
+        currentIndex: sectionNavBtn.sectionRanges.rangeStart,
+      })
+    );
   }
 }

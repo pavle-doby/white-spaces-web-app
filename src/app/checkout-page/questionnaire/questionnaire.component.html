@@ -1,45 +1,54 @@
 <div
-  *ngIf="this.questions?.length"
   class="questionnaire"
   fxLayout="column"
-  fxLayoutAlign="center center"
-  fxLayoutAlign.lt-md="start center"
-  fxLayoutGap="2vh"
-  fxLayoutGap.lt-md="10px"
+  fxLayoutAlign="space-between center"
 >
-  <p class="quest_msg">
-    Make sure you fill out the questionnaire in detail, so we can fully
-    understand your needs. <br />
-    There are 10 sections in total (together with the add-on packages). <br />
-    The number of questions may vary per category.
-  </p>
-
-  <app-question-stepper
-    (selectStepEvent)="this.moveQuestionTo($event.index)"
-  ></app-question-stepper>
-
-  <app-question
-    [question]="this.questions[this.toShowIndex]"
-    (changeAnswerEvent)="this.onChangeAnswer($event)"
+  <div
+    *ngIf="this.questions?.length"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutAlign.lt-md="start center"
+    fxLayoutGap="2vh"
+    fxLayoutGap.lt-md="10px"
   >
-  </app-question>
-  <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="1vw">
-    <button
-      class="checkout__btn--invert questionnaire__btn"
-      (click)="this.moveQuestionTo(this.toShowIndex - 1)"
+    <div class="quest_msg">
+      {{ this.questionMsg }}
+    </div>
+
+    <app-question-stepper
+      (selectStepEvent)="this.moveQuestionTo($event.index)"
+    ></app-question-stepper>
+
+    <app-question
+      class="width-100"
+      [question]="this.questions[this.toShowIndex]"
+      (changeAnswerEvent)="this.onChangeAnswer($event)"
     >
-      Previous
-    </button>
-    <app-upload
-      *ngIf="this.questions[this.toShowIndex].image_required"
-      [data]="this.uploadData"
-      (uploadEvent)="this.onUploadEvent($event)"
-    ></app-upload>
-    <button
-      class="checkout__btn questionnaire__btn"
-      (click)="this.moveQuestionTo(this.toShowIndex + 1)"
-    >
-      Next
-    </button>
+    </app-question>
+    <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="1vw">
+      <button
+        class="checkout__btn--invert questionnaire__btn"
+        (click)="this.moveQuestionTo(this.toShowIndex - 1)"
+      >
+        Previous
+      </button>
+      <app-upload
+        *ngIf="this.questions[this.toShowIndex].image_required"
+        [data]="this.uploadData"
+        (uploadEvent)="this.onUploadEvent($event)"
+      ></app-upload>
+      <button
+        class="checkout__btn questionnaire__btn"
+        (click)="this.moveQuestionTo(this.toShowIndex + 1)"
+      >
+        Next
+      </button>
+    </div>
   </div>
+
+  <span class="quest_msg width-100">
+    If you need help with filling this form out, contact us via
+    <a [href]="this.mailHref" class="app__a--none">email</a>
+    . We are happy to assist you every step of the way
+  </span>
 </div>

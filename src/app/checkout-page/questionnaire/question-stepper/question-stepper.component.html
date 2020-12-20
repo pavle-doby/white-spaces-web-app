@@ -1,7 +1,25 @@
-<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
-  <h3>
+<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="20px">
+  <h2 class="question-stepper__title">
     {{ this.section }}
-  </h3>
+  </h2>
+  <div
+    *ngIf="!this.isHandset"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px"
+  >
+    <span
+      *ngFor="let navSection of this.navSections"
+      class="question-stepper__nav-btn cursor-pointer"
+      [ngClass]="{
+        'question-stepper__nav-btn--selected': navSection.isSelected,
+        'question-stepper__nav-btn--complited': navSection.isCompleted
+      }"
+      (click)="this.changeSection(navSection)"
+    >
+      {{ navSection.label }}
+    </span>
+  </div>
   <div
     fxLayout="row"
     fxLayoutAlign="center center"

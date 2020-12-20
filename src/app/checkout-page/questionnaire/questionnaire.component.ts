@@ -19,6 +19,7 @@ import { QuestionDTO } from 'src/models/QuestionDTO.model';
 import { QuestionStepper } from './question-stepper/question-stepper.model';
 import { TooltipPosition } from 'src/models/TooltipPosition.model';
 import { clone } from 'src/app/shared/Utilities';
+import { MAIL_FOR_CLIENTS } from 'src/app/app.config';
 
 const INFO = `Feel free to load us with information so that we
 can truly get to know you and your space. 
@@ -42,6 +43,9 @@ export class QuestionnaireComponent implements OnInit {
   @Input()
   public toShowIndex: number = 0;
 
+  public readonly mail: string = MAIL_FOR_CLIENTS;
+  public readonly mailHref: string = `mailto:${this.mail}`;
+
   public $shoppingCartState: Observable<ShoppingCart>;
   public $subShoppingCartState: Subscription;
   public shoppingCart: ShoppingCart;
@@ -54,6 +58,8 @@ export class QuestionnaireComponent implements OnInit {
   public $subQuestionStepper: Subscription;
 
   public uploadData: UploadData;
+  public questionMsg: string =
+    'Make sure you fill out the questionnaire in detail, so we can fully understand your needs.\nThere are 10 sections in total (together with the add-on packages).\nThe number of questions may vary per category.';
 
   constructor(
     private readonly $store: Store<AppState>,
