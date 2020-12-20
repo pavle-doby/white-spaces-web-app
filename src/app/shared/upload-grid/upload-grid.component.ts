@@ -35,6 +35,7 @@ export class UploadGridComponent implements OnInit {
     if (this.files && this.toShowUploadedFilesFromDevice) {
       this.showFilesFromDevice(this.files);
     }
+    console.log(this.imgURLs);
   }
 
   public onUploadEvent(files: FileList): void {

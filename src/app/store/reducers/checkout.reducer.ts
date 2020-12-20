@@ -178,7 +178,7 @@ const reducer = createReducer(
       questions = [...questions, ...additionalDataQuestions];
     });
 
-    console.log(questions.map((q, i) => ({ s: q.section, i })));
+    // console.log(questions.map((q, i) => ({ s: q.section, i })));
 
     let dictSectionRanges = SectionRanges.makeDictSectionRanges(questions);
 

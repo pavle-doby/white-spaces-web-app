@@ -24,6 +24,8 @@ import { NavbarSmallSrceenComponent } from './navbar-small-srceen/navbar-small-s
 import { NavbarSmallSrceenModule } from './navbar-small-srceen/navbar-small-srceen.module';
 import { PrivacyPolicyDialogModule } from './privacy-policy-dialog/privacy-policy-dialog.module';
 import { TermsAndConditionsModule } from './terms-and-conditions/terms-and-conditions.module';
+import { ImageGridModule } from './image-grid/image-grid.module';
+import { ImageGridComponent } from './image-grid/image-grid.component';
 
 @NgModule({
   declarations: [],
@@ -42,6 +44,7 @@ import { TermsAndConditionsModule } from './terms-and-conditions/terms-and-condi
     NavbarSmallSrceenModule,
     PrivacyPolicyDialogModule,
     TermsAndConditionsModule,
+    ImageGridModule,
   ],
   exports: [
     FooterComponent,
@@ -55,6 +58,7 @@ import { TermsAndConditionsModule } from './terms-and-conditions/terms-and-condi
     UploadGridComponent,
     ConfirmationDialogComponent,
     NavbarSmallSrceenComponent,
+    ImageGridComponent,
   ],
 })
 export class SharedModule {}

@@ -64,3 +64,6 @@ export const COOKIE_CONFIG: NgcCookieConsentConfig = {
   },
   enabled: document.cookie ? false : true,
 };
+
+export const IMG_PLACHOLDER = 'assets/images/checkout/image-placeholder.png';
+export const IMG_LOADING = 'assets/images/checkout/image-loading.gif';
