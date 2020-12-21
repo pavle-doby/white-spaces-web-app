@@ -26,9 +26,9 @@ export const selectTabbarButtonCheckout = createAction(
   props<{ btnText: string }>()
 );
 
-export const clearSpacePhotosURLsCheckout = createAction(
-  '[CHECKOUT] CLEAR_SPACE_PHOTOS_URLS',
-  props()
+export const appendSpacePhotoImageCheckout = createAction(
+  '[CHECKOUT] APPEND_SPACE_PHOTO_IMAGE',
+  props<{ image: Image }>()
 );
 
 export const setAddOnListCheckout = createAction(
@@ -63,9 +63,4 @@ export const processDoneCheckout = createAction(
 export const appendImageFloorPalnCheckout = createAction(
   '[CHECKOUT] APPEND_IMAGE_FLOOR_PLAN',
   props<{ image: Image }>()
-);
-
-export const deleteImageFloorPalnCheckout = createAction(
-  '[CHECKOUT] DELETE_IMAGE_FLOOR_PLAN',
-  props<{ image: Image; i: number }>()
 );

@@ -96,7 +96,7 @@ export class FloorPalnUploadComponent implements OnInit {
     let liFloorPlan = lineItem.additional_data.floor_plan;
     let floor_plan = isArray(liFloorPlan) ? liFloorPlan : [];
 
-    Object.values(files).forEach((file, fileIndex) => {
+    Object.values(files).forEach((file) => {
       const loadinImg = new Image({ src: IMG_LOADING });
       this.$store.dispatch(appendImageFloorPalnCheckout({ image: loadinImg }));
 

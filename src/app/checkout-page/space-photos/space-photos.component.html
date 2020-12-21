@@ -6,6 +6,7 @@
   <app-image-manager
     [uploadConfig]="this.uploadConfig"
     [images]="(this.$checkoutState | async).spacePhotoImages"
+    (uploadEvent)="this.onUploadFilesEvent($event)"
   >
   </app-image-manager>
 </div>

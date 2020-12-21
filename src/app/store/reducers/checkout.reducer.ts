@@ -7,7 +7,6 @@ import {
   setInfoCheckout,
   updateQuestionCheckout,
   setCurrentIndexCheckout,
-  clearSpacePhotosURLsCheckout,
   setAddOnListCheckout,
   setAllPackagesCheckout,
   setShoppingCartCheckout,
@@ -15,6 +14,7 @@ import {
   setInitStateChekcout,
   processDoneCheckout,
   appendImageFloorPalnCheckout,
+  appendSpacePhotoImageCheckout,
 } from '../actions/checkout.action';
 import {
   TabbarButton,
@@ -264,25 +264,6 @@ const reducer = createReducer(
   on(setInfoCheckout, (state, { info, description }) => {
     return { ...state, info, infoDesc: description };
   }),
-  on(clearSpacePhotosURLsCheckout, (state) => {
-    const newTabbarState = TabbarButton.updateTabbarBtnComplitedState(
-      state.tabbarButtons,
-      TabbarText.SPACE_PHOTOS,
-      false
-    );
-    return {
-      ...state,
-      spacePhotoImages: [],
-      progressState: {
-        ...state.progressState,
-        spacePhotos: {
-          ...state.progressState.spacePhotos,
-          state: ProgressState.TODO,
-        },
-      },
-      tabbarButtons: newTabbarState,
-    };
-  }),
   on(setAddOnListCheckout, (state, { addOnList }) => {
     const tabbarButtons = TabbarButton.updateTabbarBtnComplitedState(
       state.tabbarButtons,
@@ -363,6 +344,12 @@ const reducer = createReducer(
     return {
       ...state,
       floorPlanImages: [...state.floorPlanImages, image],
+    };
+  }),
+  on(appendSpacePhotoImageCheckout, (state, { image }) => {
+    return {
+      ...state,
+      spacePhotoImages: [...state.spacePhotoImages, image],
     };
   })
 );
