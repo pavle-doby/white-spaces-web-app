@@ -9,6 +9,7 @@
   ></app-upload>
   <app-image-grid
     [config]="this.gridConfig"
-    [urls]="this.images"
+    [images]="this.images"
+    (deleteEvent)="this.onDeleteEvent($event)"
   ></app-image-grid>
 </div>

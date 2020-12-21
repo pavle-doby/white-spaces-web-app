@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Image } from 'src/models/Image.model';
 import { ImageGridConfig } from '../image-grid/models/ImageGridConfig.model';
 import { UploadConfig } from '../upload/upload.model';
 import { ImageManagerConfig } from './models/ImageManagerConfig.model';
@@ -13,10 +14,10 @@ export class ImageManagerComponent implements OnInit {
   @Input() gridConfig?: ImageGridConfig;
   @Input() config?: ImageManagerConfig;
 
-  @Input() images?: string[];
+  @Input() images?: Image[];
 
   @Output() uploadEvent: EventEmitter<FileList>;
-  @Output() deleteEvent: EventEmitter<string>;
+  @Output() deleteEvent: EventEmitter<{ id: any; src: string }>;
 
   constructor() {
     this.config = new ImageManagerConfig({});
@@ -34,8 +35,7 @@ export class ImageManagerComponent implements OnInit {
     this.uploadEvent.emit(files);
   }
 
-  //TODO: Refactor this to be id
-  onDeleteEvent(src: string): void {
-    this.deleteEvent.emit(src);
+  onDeleteEvent(image): void {
+    this.deleteEvent.emit(image);
   }
 }

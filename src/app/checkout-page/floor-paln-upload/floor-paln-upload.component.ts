@@ -17,6 +17,7 @@ import { Question } from 'src/models/Question.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
 import { firstToUpperCase } from 'src/app/shared/Utilities';
 import { IMG_LOADING } from 'src/app/app.config';
+import { Image } from 'src/models/Image.model';
 
 const INFO = 'welcome to your renovation project!';
 
@@ -41,7 +42,7 @@ export class FloorPalnUploadComponent implements OnInit {
   public info: string = '';
   public description: string = '';
 
-  public images: string[] = [];
+  public images: Image[] = [];
 
   constructor(
     private readonly $store: Store<AppState>,
@@ -84,12 +85,12 @@ export class FloorPalnUploadComponent implements OnInit {
       return;
     }
 
-    this.images = [IMG_LOADING];
+    this.images = [new Image({ src: IMG_LOADING })];
     this.checkoutService
       .uploadFile(files[0])
       .toPromise()
       .then((linkObj) => {
-        this.images = [linkObj.link];
+        this.images = [new Image({ src: linkObj.link })];
 
         const productVM: ProductVM = {
           shopping_cart_id: this.shoppingCart.id,
@@ -122,5 +123,9 @@ export class FloorPalnUploadComponent implements OnInit {
         console.error(err);
         alert(err.message);
       });
+  }
+
+  public onDeleteImageEvent(image: Image): void {
+    console.log({ image });
   }
 }

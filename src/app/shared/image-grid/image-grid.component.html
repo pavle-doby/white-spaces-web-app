@@ -6,9 +6,9 @@
   fxLayoutGap.lt-md="10px grid"
 >
   <app-image-card
-    *ngFor="let url of this.stateList; let i = index"
+    *ngFor="let img of this.stateList; let i = index"
     class="image-grid__img-div"
-    [src]="url"
+    [image]="img"
     alt="image"
     (deleteEvent)="deleteImage($event, i)"
   >

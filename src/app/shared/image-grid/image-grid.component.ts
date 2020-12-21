@@ -7,7 +7,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { IMG_LOADING, IMG_PLACHOLDER } from 'src/app/app.config';
+import { Image } from 'src/models/Image.model';
 import { ImageGridConfig } from './models/ImageGridConfig.model';
 
 @Component({
@@ -16,12 +16,12 @@ import { ImageGridConfig } from './models/ImageGridConfig.model';
   styleUrls: ['./image-grid.component.scss'],
 })
 export class ImageGridComponent implements OnInit, OnChanges {
-  @Input() public urls: string[] = [];
+  @Input() public images: Image[] = [];
   @Input() public config: ImageGridConfig;
 
-  @Output() deleteEvent: EventEmitter<string>;
+  @Output() deleteEvent: EventEmitter<Image>;
 
-  public stateList: string[] = [];
+  public stateList: Image[] = [];
 
   constructor() {
     this.config = new ImageGridConfig({});
@@ -33,23 +33,25 @@ export class ImageGridComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.stateList = new Array(this.config.limit).fill(
-      this.config.imgPlacholder,
+      new Image({ src: this.config.imgPlacholder }),
       0,
       this.config.limit
     );
 
-    (this.urls || []).forEach((url, i) => {
-      this.stateList[i] = url;
+    (this.images || []).forEach((img, i) => {
+      this.stateList[i] = { ...img };
     });
   }
 
   setLoadingImages(): void {
-    this.stateList = this.stateList.map((_) => this.config.imgLoading);
+    this.stateList = this.stateList.map(
+      (_) => new Image({ src: this.config.imgLoading })
+    );
   }
 
-  deleteImage(src, i): void {
-    console.log({ src, i });
+  deleteImage(img: Image, i): void {
+    console.log({ img, i });
     //Refactor to go with id...
-    this.deleteEvent.emit(src);
+    this.deleteEvent.emit(img);
   }
 }

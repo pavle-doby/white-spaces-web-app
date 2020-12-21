@@ -1,4 +1,5 @@
 <div
+  *ngIf="this.image"
   class="image-card__div"
   fxLayout="column"
   fxLayoutAlign="start end"
@@ -14,5 +15,10 @@
     cancel
   </mat-icon>
 
-  <img class="image-card__img" [src]="this.src" [alt]="this.alt" />
+  <img
+    class="image-card__img"
+    [src]="this.image.src"
+    [alt]="this.image.alt"
+    (error)="this.onError($event)"
+  />
 </div>
