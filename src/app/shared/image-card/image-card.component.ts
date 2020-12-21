@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IMG_PLACHOLDER } from 'src/app/app.config';
+import { IMG_LOADING, IMG_PLACHOLDER } from 'src/app/app.config';
 import { Image } from 'src/models/Image.model';
 
 @Component({
@@ -27,6 +27,9 @@ export class ImageCardComponent implements OnInit {
   }
 
   onMouseEneter(): void {
+    if (this.image.src === IMG_PLACHOLDER || this.image.src === IMG_LOADING) {
+      return;
+    }
     this.showDeleteIcon = true;
   }
 

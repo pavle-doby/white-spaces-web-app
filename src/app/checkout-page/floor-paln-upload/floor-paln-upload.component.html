@@ -9,27 +9,11 @@
   </p>
 
   <app-image-manager
+    class="fp__image-manager"
     [uploadConfig]="this.uploadConfig"
-    [images]="this.images"
+    [images]="(this.$chekcoutState | async).floorPlanImages"
     (uploadEvent)="this.onUploadEvent($event)"
     (deleteEvent)="this.onDeleteImageEvent($event)"
   >
   </app-image-manager>
-
-  <!-- <app-upload
-    [data]="this.uploadConfig"
-    (uploadEvent)="this.onUploadEvent($event)"
-  ></app-upload>
-  <div
-    *ngIf="(this.$chekcoutState | async).floorPlan?.name"
-    fxLayout="column"
-    fxLayoutAlign="start center"
-  >
-    <span class="floor-paln-upload__msg">
-      {{ this.successMsg }}
-    </span>
-    <span class="floor-plan-upload__file-name">
-      {{ (this.$chekcoutState | async).floorPlan?.name }}
-    </span>
-  </div> -->
 </div>

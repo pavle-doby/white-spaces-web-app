@@ -3,8 +3,9 @@
   fxLayout="column"
   fxLayoutAlign="start start"
 >
-  <app-upload-grid
-    (uploadFilesEvent)="this.onUploadFilesEvent($event)"
-    [imgURLs]="(this.$checkoutState | async).spacePhotosURLs"
-  ></app-upload-grid>
+  <app-image-manager
+    [uploadConfig]="this.uploadConfig"
+    [images]="(this.$checkoutState | async).spacePhotoImages"
+  >
+  </app-image-manager>
 </div>

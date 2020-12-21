@@ -35,7 +35,7 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
 
   public shoppingCart: ShoppingCart;
   public questions: Question[];
-  public uploadConfigData: UploadConfig;
+  public uploadConfig: UploadConfig;
 
   constructor(
     private readonly $store: Store<AppState>,
@@ -49,7 +49,7 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
     );
     this.$checkoutState = this.$store.select((state) => state.checkout);
 
-    this.uploadConfigData = new UploadConfig({
+    this.uploadConfig = new UploadConfig({
       supportedFileTypes: SUPPERTED_FILES,
       limit: 16,
     });
@@ -68,7 +68,7 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
 
   public onUploadFilesEvent(files: FileList): void {
     if (files.length > 16) {
-      alert('Max number of photos is 16.');
+      alert('Max number of images is 16.');
       return;
     }
 

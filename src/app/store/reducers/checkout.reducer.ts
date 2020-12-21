@@ -14,6 +14,7 @@ import {
   selectTabbarButtonCheckout,
   setInitStateChekcout,
   processDoneCheckout,
+  appendImageFloorPalnCheckout,
 } from '../actions/checkout.action';
 import {
   TabbarButton,
@@ -22,7 +23,6 @@ import {
 
 import * as _ from 'lodash';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
-import { FloorPlan } from 'src/models/FloorPlan.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { SideCadrPackage } from 'src/app/shared/side-card-packages/SideCardPackage';
 import {
@@ -30,10 +30,11 @@ import {
   ProgressState,
   Step,
 } from 'src/models/CheckoutProgress.model';
-import { isHandset } from 'src/app/shared/Utilities';
+import { isArray, isHandset } from 'src/app/shared/Utilities';
 import { TabbarText } from 'src/models/TabbarText.model';
 import { AddOnDTO } from 'src/models/AddOnDTO';
 import { SectionRanges } from 'src/models/SectionRanges.model';
+import { Image } from 'src/models/Image.model';
 
 export const QS_RANGE_START = 0;
 export const QS_RANGE_END_SHORT = 3;
@@ -47,9 +48,9 @@ export interface CheckoutState {
   allPackageCards: SideCadrPackage[];
   info: string; //
   infoDesc: string[];
-  floorPlan?: FloorPlan;
+  floorPlanImages?: Image[];
   spacePhotos?: FileList;
-  spacePhotosURLs: string[];
+  spacePhotoImages: Image[];
   addOnList: AddOn[];
   questions: Question[];
   tabbarButtons: TabbarButton[];
@@ -64,9 +65,9 @@ const getInitState = (): CheckoutState => {
     allPackageCards: [],
     info: 'Welcome to your renovation project!',
     infoDesc: [''],
-    floorPlan: null,
+    floorPlanImages: [],
     spacePhotos: null,
-    spacePhotosURLs: [],
+    spacePhotoImages: [],
     addOnList: [],
     questions: [],
     tabbarButtons: getTabbarContnet(),
@@ -136,17 +137,25 @@ const reducer = createReducer(
     //#endregion
 
     //#region floorPlan
-    const url = lineItem.additional_data.floor_plan;
-    const name = lineItem.additional_data.floor_plan_name;
-    const floorPlan = new FloorPlan({ url, name });
+    console.log({ shoppingCart });
 
-    const isFloorPalnDone = !!url;
+    const urls = lineItem.additional_data.floor_plan;
+    const floorPlanImages =
+      urls && Array.isArray(urls)
+        ? urls.map((url) => {
+            return new Image({ src: url });
+          })
+        : [];
+
+    const isFloorPalnDone = !!floorPlanImages.length;
     //#endregion floorPlan
 
     //#region spacePhotosURLs
-    const spacePhotosURLs = lineItem.additional_data.images;
+    const spacePhotoImages = isArray(lineItem.additional_data.images)
+      ? lineItem.additional_data.images.map((src) => new Image({ src }))
+      : [];
 
-    const isSpacePhotosDone = !!spacePhotosURLs?.length;
+    const isSpacePhotosDone = !!spacePhotoImages.length;
     //#endregion
 
     //#region addOnList
@@ -204,8 +213,8 @@ const reducer = createReducer(
       ...state,
       shoppingCart,
       packageBox,
-      floorPlan,
-      spacePhotosURLs,
+      floorPlanImages,
+      spacePhotoImages,
       addOnList,
       questions,
       tabbarButtons,
@@ -263,7 +272,7 @@ const reducer = createReducer(
     );
     return {
       ...state,
-      spacePhotosURLs: [],
+      spacePhotoImages: [],
       progressState: {
         ...state.progressState,
         spacePhotos: {
@@ -348,6 +357,12 @@ const reducer = createReducer(
       ...state,
       ...getInitState(),
       allPackageCards: [...state.allPackageCards],
+    };
+  }),
+  on(appendImageFloorPalnCheckout, (state, { image }) => {
+    return {
+      ...state,
+      floorPlanImages: [...state.floorPlanImages, image],
     };
   })
 );

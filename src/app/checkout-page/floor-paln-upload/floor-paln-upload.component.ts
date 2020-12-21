@@ -5,6 +5,7 @@ import {
   setInfoCheckout,
   setShoppingCartCheckout,
   selectTabbarButtonCheckout,
+  appendImageFloorPalnCheckout,
 } from 'src/app/store/actions/checkout.action';
 import { UploadConfig } from 'src/app/shared/upload/upload.model';
 import { Observable, Subscription } from 'rxjs';
@@ -15,11 +16,13 @@ import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { TabbarText } from 'src/models/TabbarText.model';
 import { Question } from 'src/models/Question.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
-import { firstToUpperCase } from 'src/app/shared/Utilities';
+import { firstToUpperCase, isArray } from 'src/app/shared/Utilities';
 import { IMG_LOADING } from 'src/app/app.config';
 import { Image } from 'src/models/Image.model';
 
 const INFO = 'welcome to your renovation project!';
+
+const IMG_LIMIT = 8;
 
 @Component({
   selector: 'app-floor-paln-upload',
@@ -78,6 +81,11 @@ export class FloorPalnUploadComponent implements OnInit {
   }
 
   public onUploadEvent(files: FileList): void {
+    if (files.length > IMG_LIMIT) {
+      alert(`Max number of images is ${IMG_LIMIT}.`);
+      return;
+    }
+
     const lineItem = ShoppingCart.getPackageLineItem(this.shoppingCart);
 
     if (!lineItem.product) {
@@ -85,47 +93,79 @@ export class FloorPalnUploadComponent implements OnInit {
       return;
     }
 
-    this.images = [new Image({ src: IMG_LOADING })];
-    this.checkoutService
-      .uploadFile(files[0])
-      .toPromise()
-      .then((linkObj) => {
-        this.images = [new Image({ src: linkObj.link })];
+    let liFloorPlan = lineItem.additional_data.floor_plan;
+    let floor_plan = isArray(liFloorPlan) ? liFloorPlan : [];
 
-        const productVM: ProductVM = {
-          shopping_cart_id: this.shoppingCart.id,
-          line_item_id: lineItem.id,
-          quantity: 1,
-          additional_data: {
-            ...lineItem.additional_data,
-            floor_plan: linkObj.link,
-            floor_plan_name: files[0].name,
-            questions: this.questions
-              .filter((q) => q.product_id === lineItem.product.id)
-              .map((q) => new QuestionDTO(q)),
-          },
-        };
+    Object.values(files).forEach((file, fileIndex) => {
+      const loadinImg = new Image({ src: IMG_LOADING });
+      this.$store.dispatch(appendImageFloorPalnCheckout({ image: loadinImg }));
 
-        this.checkoutService
-          .updateProduct(productVM)
-          .toPromise()
-          .then((newShoppingCart) => {
-            this.$store.dispatch(
-              setShoppingCartCheckout({ shoppingCart: newShoppingCart })
-            );
-          })
-          .catch((error) => {
-            console.error(error);
-            alert(error.message);
-          });
-      })
-      .catch((err) => {
-        console.error(err);
-        alert(err.message);
-      });
+      this.checkoutService
+        .uploadFile(file)
+        .toPromise()
+        .then((linkObj) => {
+          floor_plan = [...floor_plan, linkObj.link];
+
+          const productVM: ProductVM = {
+            shopping_cart_id: this.shoppingCart.id,
+            line_item_id: lineItem.id,
+            quantity: 1,
+            additional_data: {
+              ...lineItem.additional_data,
+              floor_plan,
+              questions: this.questions
+                .filter((q) => q.product_id === lineItem.product.id)
+                .map((q) => new QuestionDTO(q)),
+            },
+          };
+
+          this.checkoutService
+            .updateProduct(productVM)
+            .toPromise()
+            .then((newShoppingCart) => {
+              this.$store.dispatch(
+                setShoppingCartCheckout({ shoppingCart: newShoppingCart })
+              );
+            })
+            .catch((error) => {
+              console.error(error);
+              alert(error.message);
+            });
+        })
+        .catch((err) => {
+          console.error(err);
+          alert(err.message);
+        });
+    });
   }
 
-  public onDeleteImageEvent(image: Image): void {
+  public async onDeleteImageEvent(image: Image): Promise<void> {
     console.log({ image });
+
+    const lineItem = ShoppingCart.getPackageLineItem(this.shoppingCart);
+    let liFloorPlan = lineItem.additional_data.floor_plan;
+    let floor_plan = liFloorPlan.filter((src) => src !== image.src);
+
+    console.log({ floor_plan });
+
+    const productVM: ProductVM = {
+      shopping_cart_id: this.shoppingCart.id,
+      line_item_id: lineItem.id,
+      quantity: 1,
+      additional_data: {
+        ...lineItem.additional_data,
+        floor_plan,
+      },
+    };
+
+    console.log({ productVM });
+
+    try {
+      await this.checkoutService.updateProduct(productVM).toPromise;
+      await this.checkoutService.deleteImage(image.src).toPromise();
+    } catch (error) {
+      console.error(error);
+      alert('Something went wrong...');
+    }
   }
 }

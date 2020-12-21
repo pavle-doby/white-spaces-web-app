@@ -50,8 +50,6 @@ export class ImageGridComponent implements OnInit, OnChanges {
   }
 
   deleteImage(img: Image, i): void {
-    console.log({ img, i });
-    //Refactor to go with id...
     this.deleteEvent.emit(img);
   }
 }

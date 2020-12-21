@@ -20,6 +20,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {
   ConfirmationDialogComponent,
   ConfirmationDialogData,
+  ConfirmationDialogType,
 } from '../shared/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { CONFIRMATION_DIALOG_WIDTH } from '../app.config';
 import HttpStatusCode from 'src/models/HttpStatusCode';
@@ -97,6 +98,19 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
       const package_ = ShoppingCart.getPackageProduct(shoppingCart);
 
       if (!package_) {
+        if (!this.package || !this.package.id) {
+          const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+            width: CONFIRMATION_DIALOG_WIDTH,
+            disableClose: false,
+            data: new ConfirmationDialogData({
+              titleLabel: 'Please select package',
+              message:
+                'Please select the package so you can continue your process.',
+              type: ConfirmationDialogType.INFO,
+            }),
+          });
+          return;
+        }
         const productVM: ProductVM = {
           shopping_cart_id: shoppingCart.id,
           product_id: this.package.id,

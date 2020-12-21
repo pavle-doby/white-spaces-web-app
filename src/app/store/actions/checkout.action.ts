@@ -4,7 +4,7 @@ import { AddOn } from 'src/models/AddOn';
 import { Question } from 'src/models/Question.model';
 import { SideCadrPackage } from 'src/app/shared/side-card-packages/SideCardPackage';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
-import { IndexType } from 'typescript';
+import { Image } from 'src/models/Image.model';
 
 export const setInitStateChekcout = createAction(
   '[CHECKOUT] SET_INIT_STATE',
@@ -58,4 +58,14 @@ export const setShoppingCartCheckout = createAction(
 
 export const processDoneCheckout = createAction(
   '[CHECKOUT] PROCESS_DONE_FINIS'
+);
+
+export const appendImageFloorPalnCheckout = createAction(
+  '[CHECKOUT] APPEND_IMAGE_FLOOR_PLAN',
+  props<{ image: Image }>()
+);
+
+export const deleteImageFloorPalnCheckout = createAction(
+  '[CHECKOUT] DELETE_IMAGE_FLOOR_PLAN',
+  props<{ image: Image; i: number }>()
 );

@@ -37,3 +37,7 @@ export const firstToUpperCase = (str: string): string => {
   }
   return str.slice(0, 1).toUpperCase() + str.slice(1).toLowerCase();
 };
+
+export const isArray = (x: any): boolean => {
+  return !!x && Array.isArray(x);
+};

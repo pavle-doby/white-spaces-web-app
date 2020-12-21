@@ -93,14 +93,22 @@ export class AppComponent implements OnInit {
         alert(err.message);
       });
 
-    // Da li je verifikovan?!?!?
-    if (!this.AuthService.isUserLoggedIn || this.AuthService.isUserAdmin) {
+    if (
+      !this.AuthService.isUserLoggedIn ||
+      this.AuthService.isUserAdmin ||
+      !this.AuthService.isUserVerified
+    ) {
       return;
     }
+
+    console.log('Evo ga');
 
     let shoppingCart = await this.CheckOutService.getShoppingCart().toPromise();
     const package_ = ShoppingCart.getPackageProduct(shoppingCart);
     const packageBox = ShoppingCart.convertPackageProductToPackageBox(package_);
+    if (!packageBox) {
+      return;
+    }
     this.store.dispatch(checkoutSelectPackage({ packageBox }));
   }
 
