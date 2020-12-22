@@ -32,11 +32,14 @@
       >
         Previous
       </button>
-      <app-upload
-        *ngIf="this.questions[this.toShowIndex].image_required"
-        [data]="this.uploadData"
-        (uploadEvent)="this.onUploadEvent($event)"
-      ></app-upload>
+
+      <button
+        class="checkout__btn questionnaire__btn"
+        (click)="this.openUploadModal()"
+      >
+        UPLOAD
+      </button>
+
       <button
         class="checkout__btn questionnaire__btn"
         (click)="this.moveQuestionTo(this.toShowIndex + 1)"

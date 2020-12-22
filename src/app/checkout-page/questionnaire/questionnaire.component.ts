@@ -20,6 +20,11 @@ import { QuestionStepper } from './question-stepper/question-stepper.model';
 import { TooltipPosition } from 'src/models/TooltipPosition.model';
 import { clone } from 'src/app/shared/Utilities';
 import { MAIL_FOR_CLIENTS } from 'src/app/app.config';
+import { MatDialog } from '@angular/material/dialog';
+import { ImageManagerDialogComponent } from 'src/app/shared/image-manager-dialog/image-manager-dialog.component';
+import { ImageManagerDialogData } from 'src/models/ImageManagerDialogData.model';
+import { ImageManagerConfig } from 'src/app/shared/image-manager/models/ImageManagerConfig.model';
+import { ImageGridConfig } from 'src/app/shared/image-grid/models/ImageGridConfig.model';
 
 const INFO = `Feel free to load us with information so that we
 can truly get to know you and your space. 
@@ -61,9 +66,12 @@ export class QuestionnaireComponent implements OnInit {
   public questionMsg: string =
     'Make sure you fill out the questionnaire in detail, so we can fully understand your needs.\nThere are 10 sections in total (together with the add-on packages).\nThe number of questions may vary per category.';
 
+  public subDialog: Subscription;
+
   constructor(
     private readonly $store: Store<AppState>,
-    private readonly checkoutService: CheckoutService
+    private readonly checkoutService: CheckoutService,
+    private readonly dialog: MatDialog
   ) {
     this.$questions = this.$store.select((state) => state.checkout.questions);
     this.$questionStepper = this.$store.select(
@@ -78,21 +86,14 @@ export class QuestionnaireComponent implements OnInit {
     this.$store.dispatch(
       selectTabbarButtonCheckout({ btnText: TabbarText.QUESTIONNARIE })
     );
-
-    this.uploadData = new UploadConfig({
-      limit: 1,
-      info: '',
-      bottomInfo: UPLOAD_MSG,
-      uppercaseButtonText: true,
-      tooltipContent: UPLOAD_TOOLTIP_INFO,
-      tooltipPosition: TooltipPosition.RIGHT,
-    });
   }
 
   ngOnDestroy(): void {
     this.$subQuestions.unsubscribe();
     this.$subQuestionStepper.unsubscribe();
     this.$subShoppingCartState.unsubscribe();
+
+    if (this.subDialog) this.subDialog.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -169,6 +170,26 @@ export class QuestionnaireComponent implements OnInit {
     this.chagneUploadInfo();
   }
 
+  public openUploadModal(): void {
+    const dialogRef = this.dialog.open(ImageManagerDialogComponent, {
+      data: new ImageManagerDialogData({
+        title: 'Image Manager',
+        managerConfig: new ImageManagerConfig({}),
+        uploadConfig: new UploadConfig({
+          limit: 16,
+          info: '',
+          uppercaseButtonText: true,
+        }),
+        gridConfig: new ImageGridConfig({ limit: 16 }),
+        images: [],
+      }),
+    });
+
+    this.subDialog = dialogRef.afterClosed().subscribe((res) => {
+      console.log({ res });
+    });
+  }
+
   public onUploadEvent(fileList: FileList): void {
     this.checkoutService
       .uploadFile(fileList[0])
@@ -223,8 +244,5 @@ export class QuestionnaireComponent implements OnInit {
 
   private chagneUploadInfo(): void {
     const imageIsUploaded = !!this.questions[this.toShowIndex]?.images?.length;
-    this.uploadData.bottomInfo = imageIsUploaded
-      ? this.questions[this.toShowIndex].image_name ?? UPLOADED_MSG
-      : UPLOAD_MSG;
   }
 }

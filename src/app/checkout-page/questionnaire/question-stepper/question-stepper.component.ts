@@ -143,7 +143,7 @@ export class QuestionStepperComponent implements OnInit, OnDestroy {
   }
 
   public changeSection(sectionNavBtn: SectionNavBtn): void {
-    return;
+    // return;
     this.$store.dispatch(
       setCurrentIndexCheckout({
         currentIndex: sectionNavBtn.sectionRanges.rangeStart,

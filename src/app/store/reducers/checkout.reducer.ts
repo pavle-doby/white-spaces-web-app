@@ -49,7 +49,6 @@ export interface CheckoutState {
   info: string; //
   infoDesc: string[];
   floorPlanImages?: Image[];
-  spacePhotos?: FileList;
   spacePhotoImages: Image[];
   addOnList: AddOn[];
   questions: Question[];
@@ -66,7 +65,6 @@ const getInitState = (): CheckoutState => {
     info: 'Welcome to your renovation project!',
     infoDesc: [''],
     floorPlanImages: [],
-    spacePhotos: null,
     spacePhotoImages: [],
     addOnList: [],
     questions: [],
