@@ -16,7 +16,7 @@ import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { TabbarText } from 'src/models/TabbarText.model';
 import { Question } from 'src/models/Question.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
-import { firstToUpperCase, isArray } from 'src/app/shared/Utilities';
+import { count, firstToUpperCase, isArray } from 'src/app/shared/Utilities';
 import { IMG_LOADING } from 'src/app/app.config';
 import { Image } from 'src/models/Image.model';
 
@@ -91,7 +91,7 @@ export class FloorPalnUploadComponent implements OnInit {
     let liFloorPlan = lineItem.additional_data.floor_plan;
     let floor_plan = isArray(liFloorPlan) ? liFloorPlan : [];
 
-    if (files.length + floor_plan.length > IMG_LIMIT) {
+    if (count(files) + floor_plan.length > IMG_LIMIT) {
       alert(`Max number of files is ${IMG_LIMIT}.`);
       return;
     }

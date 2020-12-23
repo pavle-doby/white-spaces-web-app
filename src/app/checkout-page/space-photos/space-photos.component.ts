@@ -18,7 +18,7 @@ import { TabbarText } from 'src/models/TabbarText.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
 import { Image } from 'src/models/Image.model';
 import { IMG_LOADING } from 'src/app/app.config';
-import { isArray } from 'src/app/shared/Utilities';
+import { count, isArray } from 'src/app/shared/Utilities';
 
 const INFO = `Please upload photos of your space.`;
 
@@ -83,7 +83,7 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
     let liSpacePhotos = lineItem.additional_data.images;
     let fileLinks: string[] = isArray(liSpacePhotos) ? liSpacePhotos : [];
 
-    if (files.length + fileLinks.length > UPLOAD_LIMIT) {
+    if (count(files) + fileLinks.length > UPLOAD_LIMIT) {
       alert(`Max number of files is ${UPLOAD_LIMIT}.`);
       return;
     }

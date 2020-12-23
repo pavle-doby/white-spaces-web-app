@@ -4,7 +4,7 @@ import { IMG_LOADING, MSG_ACTION_UNSUCCSSFUL } from 'src/app/app.config';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 import { Image } from 'src/models/Image.model';
 import { ImageManagerDialogData } from '../../../models/ImageManagerDialogData.model';
-import { clone } from '../Utilities';
+import { clone, count } from '../Utilities';
 
 @Component({
   selector: 'app-image-manager-dialog',
@@ -29,8 +29,9 @@ export class ImageManagerDialogComponent implements OnInit {
 
   public onUploadEvent(fileList: FileList): void {
     const limit = this.data.uploadConfig.limit;
-    if (this.imgBuffer.length + fileList.length > limit) {
+    if (count(fileList) + this.imgBuffer.length > limit) {
       alert(`Max number of files is ${limit}`);
+      return;
     }
 
     let updated = [];

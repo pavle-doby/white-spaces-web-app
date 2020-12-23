@@ -68,3 +68,7 @@ export const isNotPresentableFile = (fileSrc: string): boolean => {
 export const puralize = (n: number): string => {
   return n > 1 ? 's' : '';
 };
+
+export const count = (obj: Object): number => {
+  return Object.values(obj).length;
+};
