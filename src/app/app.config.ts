@@ -67,3 +67,5 @@ export const COOKIE_CONFIG: NgcCookieConsentConfig = {
 
 export const IMG_PLACHOLDER = 'assets/images/checkout/image-placeholder.png';
 export const IMG_LOADING = 'assets/images/checkout/image-loading.gif';
+export const IMG_PDF = 'assets/icons/pdf-icon.png';
+export const IMG_DWG = 'assets/icons/dwg-icon.png';

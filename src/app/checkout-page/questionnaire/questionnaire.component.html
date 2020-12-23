@@ -34,6 +34,7 @@
       </button>
 
       <button
+        *ngIf="this.questions[this.toShowIndex].image_required"
         class="checkout__btn questionnaire__btn"
         (click)="this.openUploadModal()"
       >

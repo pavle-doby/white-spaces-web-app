@@ -54,7 +54,15 @@ export class UploadComponent implements OnInit, OnDestroy {
     this.$change = fromEvent(this.uploadElement.nativeElement, 'change');
     this.$subChange = this.$change.subscribe((event) => {
       const files = { ...(event.target as any).files };
-      this.uploadEvent.emit(files);
+      const n = Object.values(files).length;
+
+      if (n > this.data.limit) {
+        alert('You have selected too many files.');
+        return;
+      } else {
+        this.uploadEvent.emit(files);
+      }
+
       (event.target as any).value = '';
     });
   }

@@ -25,6 +25,7 @@ import { ImageManagerDialogComponent } from 'src/app/shared/image-manager-dialog
 import { ImageManagerDialogData } from 'src/models/ImageManagerDialogData.model';
 import { ImageManagerConfig } from 'src/app/shared/image-manager/models/ImageManagerConfig.model';
 import { ImageGridConfig } from 'src/app/shared/image-grid/models/ImageGridConfig.model';
+import { Image } from 'src/models/Image.model';
 
 const INFO = `Feel free to load us with information so that we
 can truly get to know you and your space. 
@@ -171,9 +172,13 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   public openUploadModal(): void {
+    const quetion = this.questions[this.toShowIndex];
+    const images = quetion.images.map((src) => new Image({ src }));
+
     const dialogRef = this.dialog.open(ImageManagerDialogComponent, {
       data: new ImageManagerDialogData({
-        title: 'Image Manager',
+        images,
+        title: 'File Manager',
         managerConfig: new ImageManagerConfig({}),
         uploadConfig: new UploadConfig({
           limit: 16,
@@ -181,12 +186,59 @@ export class QuestionnaireComponent implements OnInit {
           uppercaseButtonText: true,
         }),
         gridConfig: new ImageGridConfig({ limit: 16 }),
-        images: [],
       }),
     });
 
-    this.subDialog = dialogRef.afterClosed().subscribe((res) => {
-      console.log({ res });
+    this.subDialog = dialogRef.afterClosed().subscribe((imageBuff: Image[]) => {
+      if (!imageBuff) {
+        return;
+      }
+
+      const images = imageBuff.map((img) => img.src);
+
+      const newQuestion = {
+        ...this.questions[this.toShowIndex],
+        images,
+      };
+
+      const lineItem = ShoppingCart.getLineItemWithProductId(
+        this.shoppingCart,
+        newQuestion.product_id
+      );
+
+      const newQuestions: Question[] = clone<Question[]>(this.questions)
+        .filter((q) => q.product_id === lineItem.product.id)
+        .map((q) => {
+          return q.id === newQuestion.id ? { ...newQuestion } : { ...q };
+        });
+
+      const productVM: ProductVM = {
+        shopping_cart_id: this.shoppingCart.id,
+        product_id: newQuestion.product_id,
+        line_item_id: lineItem.id,
+        additional_data: {
+          ...lineItem.additional_data,
+          questions: newQuestions.map((q) => new QuestionDTO(q)),
+        },
+        quantity: 1,
+      };
+
+      this.checkoutService
+        .updateProduct(productVM)
+        .toPromise()
+        .then((newShoppingCart) => {
+          this.$store.dispatch(
+            setShoppingCartCheckout({ shoppingCart: newShoppingCart })
+          );
+
+          this.$store.dispatch(
+            updateQuestionCheckout({ question: { ...newQuestion } })
+          );
+        })
+        .catch((err) => {
+          console.error(err);
+          alert(err.message);
+        });
     });
   }
 
@@ -194,52 +246,7 @@ export class QuestionnaireComponent implements OnInit {
     this.checkoutService
       .uploadFile(fileList[0])
       .toPromise()
-      .then((linkObj) => {
-        const newQuestion = {
-          ...this.questions[this.toShowIndex],
-          images: [linkObj.link],
-          image_name: fileList[0].name,
-        };
-
-        const lineItem = ShoppingCart.getLineItemWithProductId(
-          this.shoppingCart,
-          newQuestion.product_id
-        );
-
-        const newQuestions: Question[] = clone<Question[]>(this.questions)
-          .filter((q) => q.product_id === lineItem.product.id)
-          .map((q) => {
-            return q.id === newQuestion.id ? { ...newQuestion } : { ...q };
-          });
-
-        const productVM: ProductVM = {
-          shopping_cart_id: this.shoppingCart.id,
-          product_id: newQuestion.product_id,
-          line_item_id: lineItem.id,
-          additional_data: {
-            ...lineItem.additional_data,
-            questions: newQuestions.map((q) => new QuestionDTO(q)),
-          },
-          quantity: 1,
-        };
-
-        this.checkoutService
-          .updateProduct(productVM)
-          .toPromise()
-          .then((newShoppingCart) => {
-            this.$store.dispatch(
-              setShoppingCartCheckout({ shoppingCart: newShoppingCart })
-            );
-
-            this.$store.dispatch(
-              updateQuestionCheckout({ question: { ...newQuestion } })
-            );
-          })
-          .catch((err) => {
-            console.error(err);
-            alert(err.message);
-          });
-      });
+      .then((linkObj) => {});
   }
 
   private chagneUploadInfo(): void {

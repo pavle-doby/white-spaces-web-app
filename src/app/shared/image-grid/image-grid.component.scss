@@ -1,7 +1,7 @@
 @import "src/styles-colors";
 
 $img_size: 6vw;
-$grid_gap: 2vw;
+$grid_gap: 1.3vw;
 
 .image-grid__grid {
   width: calc(#{$img_size} * 8 + #{$grid_gap} * 8);

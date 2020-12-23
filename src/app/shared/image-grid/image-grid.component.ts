@@ -19,7 +19,7 @@ export class ImageGridComponent implements OnInit, OnChanges {
   @Input() public images: Image[] = [];
   @Input() public config: ImageGridConfig;
 
-  @Output() deleteEvent: EventEmitter<Image>;
+  @Output() deleteEvent: EventEmitter<{ image: Image; i: number }>;
 
   public stateList: Image[] = [];
 
@@ -49,7 +49,7 @@ export class ImageGridComponent implements OnInit, OnChanges {
     );
   }
 
-  deleteImage(img: Image, i): void {
-    this.deleteEvent.emit(img);
+  deleteImage(image: Image, i): void {
+    this.deleteEvent.emit({ image, i });
   }
 }

@@ -1,15 +1,15 @@
 <div
   *ngIf="this.data"
   fxLayout="column"
-  fxLayoutAlign="center center"
-  fxLayoutGap="10px"
+  fxLayoutAlign="space-between center"
+  fxLayoutGap="25px"
 >
   <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
     <h2 class="imd__title">
       {{ this.data.title }}
     </h2>
   </div>
-  <mat-dialog-content
+  <div
     class="conf-dialog__message"
     fxLayout="column"
     fxLayoutAlign="center center"
@@ -23,8 +23,8 @@
       (deleteEvent)="this.onDeleteEvent($event)"
     >
     </app-image-manager>
-  </mat-dialog-content>
-  <mat-dialog-actions
+  </div>
+  <div
     class="width-100"
     fxLayout="row"
     fxLayoutAlign="center center"
@@ -32,16 +32,16 @@
   >
     <button
       class="checkout__btn--invert conf-dialog__btn-width"
-      [mat-dialog-close]="false"
+      [mat-dialog-close]="null"
+      (click)="this.cancel()"
     >
       Cancel
     </button>
     <button
       class="checkout__btn conf-dialog__btn-width"
-      [mat-dialog-close]="true"
-      cdkFocusInitial
+      (click)="this.addFiles()"
     >
-      Yes
+      Add
     </button>
-  </mat-dialog-actions>
+  </div>
 </div>

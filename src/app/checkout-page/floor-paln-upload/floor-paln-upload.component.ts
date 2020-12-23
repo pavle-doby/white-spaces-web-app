@@ -139,8 +139,8 @@ export class FloorPalnUploadComponent implements OnInit {
     });
   }
 
-  public async onDeleteImageEvent(image: Image): Promise<void> {
-    console.log({ image });
+  public async onDeleteImageEvent({ image, i }): Promise<void> {
+    console.log({ image, i });
 
     const lineItem = ShoppingCart.getPackageLineItem(this.shoppingCart);
     let liFloorPlan = lineItem.additional_data.floor_plan;

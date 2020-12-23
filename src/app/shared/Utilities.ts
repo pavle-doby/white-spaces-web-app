@@ -41,3 +41,30 @@ export const firstToUpperCase = (str: string): string => {
 export const isArray = (x: any): boolean => {
   return !!x && Array.isArray(x);
 };
+
+export const reverseString = (str: string): string => {
+  return str.split('').reverse().join('');
+};
+
+export const getExtension = (fileName: string): string => {
+  let ext = '';
+  let isNotDot = true;
+  let i = fileName.length - 1;
+
+  console.log(fileName);
+
+  while (isNotDot && i >= 0) {
+    ext = ext + fileName[i];
+    isNotDot = fileName[i] !== '.';
+    i--;
+  }
+
+  console.log(reverseString(ext));
+
+  return reverseString(ext);
+};
+
+export const isNotPresentableFile = (fileSrc: string): boolean => {
+  const NOT_PRESENTABLE_FILES = ['.pdf', '.dwg'];
+  return NOT_PRESENTABLE_FILES.includes(getExtension(fileSrc));
+};

@@ -17,7 +17,7 @@ export class ImageManagerComponent implements OnInit {
   @Input() images?: Image[];
 
   @Output() uploadEvent: EventEmitter<FileList>;
-  @Output() deleteEvent: EventEmitter<{ id: any; src: string }>;
+  @Output() deleteEvent: EventEmitter<{ image: Image; i: number }>;
 
   constructor() {
     this.config = new ImageManagerConfig({});
@@ -35,7 +35,7 @@ export class ImageManagerComponent implements OnInit {
     this.uploadEvent.emit(files);
   }
 
-  onDeleteEvent(image): void {
-    this.deleteEvent.emit(image);
+  onDeleteEvent({ image, i }): void {
+    this.deleteEvent.emit({ image, i });
   }
 }

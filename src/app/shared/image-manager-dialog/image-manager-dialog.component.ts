@@ -1,5 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IMG_LOADING } from 'src/app/app.config';
+import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 import { Image } from 'src/models/Image.model';
 import { ImageManagerDialogData } from '../../../models/ImageManagerDialogData.model';
 import { clone } from '../Utilities';
@@ -12,41 +14,47 @@ import { clone } from '../Utilities';
 export class ImageManagerDialogComponent implements OnInit {
   public imgBuffer: Image[];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ImageManagerDialogData) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: ImageManagerDialogData,
+    private readonly dialogRef: MatDialogRef<ImageManagerDialogComponent>,
+    private readonly checkoutService: CheckoutService
+  ) {}
 
   ngOnInit(): void {
     this.imgBuffer = clone<Image[]>(this.data.images);
   }
 
-  public onUploadEvent(files: FileList): void {
-    this.showFilesFromDevice(files);
-  }
-
-  public onDeleteEvent(image: Image): void {
-    console.log('Po indexu');
-
-    this.imgBuffer = this.imgBuffer.filter((img) => img.src !== image.src);
-  }
-
-  public showFilesFromDevice(files: FileList): void {
-    const fileVals = Object.values(files);
-    if (
-      this.data.uploadConfig.limit <
-      fileVals.length + this.imgBuffer.length
-    ) {
-      alert('Too many images are selected.');
-      return;
-    }
-
-    Object.keys(files).forEach((key) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(files[key]);
-      reader.onload = () => {
-        this.imgBuffer = [
-          ...this.imgBuffer,
-          new Image({ src: reader.result as string }),
-        ];
-      };
+  public onUploadEvent(fileList: FileList): void {
+    let updated = [];
+    Object.values(fileList).forEach((file, i) => {
+      updated = [...updated, this.imgBuffer.length];
+      this.imgBuffer = [...this.imgBuffer, new Image({ src: IMG_LOADING })];
+      this.checkoutService
+        .uploadFile(file)
+        .toPromise()
+        .then((linkObj) => {
+          this.imgBuffer[updated[i]] = new Image({ src: linkObj.link });
+          this.imgBuffer = clone<Image[]>(this.imgBuffer);
+        })
+        .catch((err) => {
+          console.error(err);
+          alert('Something went wrong.');
+        });
     });
+  }
+
+  public onDeleteEvent({ image, i }): void {
+    console.log({ image, i });
+  }
+
+  addFiles(): void {
+    console.log('Add Files');
+    this.dialogRef.close(this.imgBuffer);
+  }
+
+  cancel(): void {
+    console.log('Cancel');
+    //delete files from s3
+    this.dialogRef.close(null);
   }
 }
