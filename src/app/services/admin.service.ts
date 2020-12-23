@@ -110,7 +110,7 @@ export class AdminService {
     return this.http.post(
       `${API_URL}/product/${productId}/update`,
       {
-        price: price,
+        price: +price,
       },
       { withCredentials: true }
     );
