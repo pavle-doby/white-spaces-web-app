@@ -1,9 +1,8 @@
-<div
-  class="space-photos__container"
-  fxLayout="column"
-  fxLayoutAlign="start start"
->
+<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="20px">
+  <app-info class="sp__info-desc" [info]="this.info" [description]="this.desc">
+  </app-info>
   <app-image-manager
+    class="sp__image-manager"
     [uploadConfig]="this.uploadConfig"
     [images]="(this.$checkoutState | async).spacePhotoImages"
     (uploadEvent)="this.onUploadFilesEvent($event)"

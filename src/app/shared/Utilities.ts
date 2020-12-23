@@ -64,3 +64,7 @@ export const isNotPresentableFile = (fileSrc: string): boolean => {
   const NOT_PRESENTABLE_FILES = ['.pdf', '.dwg'];
   return NOT_PRESENTABLE_FILES.includes(getExtension(fileSrc));
 };
+
+export const puralize = (n: number): string => {
+  return n > 1 ? 's' : '';
+};

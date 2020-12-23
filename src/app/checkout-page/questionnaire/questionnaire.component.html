@@ -27,25 +27,72 @@
     </app-question>
     <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="1vw">
       <button
+        *ngIf="!this.isHandset"
         class="checkout__btn--invert questionnaire__btn"
         (click)="this.moveQuestionTo(this.toShowIndex - 1)"
       >
         Previous
       </button>
-
       <button
-        *ngIf="this.questions[this.toShowIndex].image_required"
-        class="checkout__btn questionnaire__btn"
-        (click)="this.openUploadModal()"
+        mat-icon-button
+        *ngIf="this.isHandset"
+        aria-label="Previous button"
+        (click)="this.moveQuestionTo(this.toShowIndex - 1)"
       >
-        UPLOAD
+        <mat-icon>arrow_back</mat-icon>
       </button>
 
+      <div
+        *ngIf="this.questions[this.toShowIndex].image_required"
+        fxLayout="column"
+        fxLayoutAlign="start center"
+        fxLayoutGap="10px"
+      >
+        <button
+          class="checkout__btn questionnaire__btn"
+          (click)="this.openUploadModal()"
+        >
+          Manage
+        </button>
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+          fxLayoutGap="5px"
+        >
+          <span class="upload__info--bottom">
+            {{ this.manageInfo }}
+          </span>
+          <span
+            *ngIf="!this.isHandset"
+            class="upload__info--tooltip-icon-span"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+          >
+            <mat-icon
+              class="upload__info--tooltip-icon"
+              [matTooltip]="this.manageTooltipInfo"
+              [matTooltipPosition]="this.mangeTooltipPosition"
+            >
+              info
+            </mat-icon>
+          </span>
+        </div>
+      </div>
+
       <button
+        *ngIf="!this.isHandset"
         class="checkout__btn questionnaire__btn"
         (click)="this.moveQuestionTo(this.toShowIndex + 1)"
       >
         Next
+      </button>
+      <button
+        mat-icon-button
+        *ngIf="this.isHandset"
+        aria-label="Next button"
+        (click)="this.moveQuestionTo(this.toShowIndex + 1)"
+      >
+        <mat-icon>arrow_forward</mat-icon>
       </button>
     </div>
   </div>

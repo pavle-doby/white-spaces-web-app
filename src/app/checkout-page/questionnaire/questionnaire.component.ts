@@ -18,7 +18,7 @@ import { TabbarText } from 'src/models/TabbarText.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
 import { QuestionStepper } from './question-stepper/question-stepper.model';
 import { TooltipPosition } from 'src/models/TooltipPosition.model';
-import { clone, isHandset } from 'src/app/shared/Utilities';
+import { clone, isHandset, puralize } from 'src/app/shared/Utilities';
 import { MAIL_FOR_CLIENTS } from 'src/app/app.config';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageManagerDialogComponent } from 'src/app/shared/image-manager-dialog/image-manager-dialog.component';
@@ -26,19 +26,6 @@ import { ImageManagerDialogData } from 'src/models/ImageManagerDialogData.model'
 import { ImageManagerConfig } from 'src/app/shared/image-manager/models/ImageManagerConfig.model';
 import { ImageGridConfig } from 'src/app/shared/image-grid/models/ImageGridConfig.model';
 import { Image } from 'src/models/Image.model';
-
-const INFO = `Feel free to load us with information so that we
-can truly get to know you and your space. 
-Tell us the details so we can extend its potential to the maximum.`;
-
-const INFO_DESC = `Your satisfaction with the end result has to do with the amount of information you share about your apartment with us. 
-You can ensure that your project is a resounding success by making us understand your needs!`;
-
-const UPLOAD_MSG = 'Upload photo';
-const UPLOADED_MSG = 'Photo is uploaded';
-
-const UPLOAD_TOOLTIP_INFO =
-  'You can upload only one photo at the moment. Please, send us the rest of them via email.';
 
 @Component({
   selector: 'app-questionnaire',
@@ -48,6 +35,8 @@ const UPLOAD_TOOLTIP_INFO =
 export class QuestionnaireComponent implements OnInit {
   @Input()
   public toShowIndex: number = 0;
+
+  public isHandset: boolean = isHandset();
 
   public readonly mail: string = MAIL_FOR_CLIENTS;
   public readonly mailHref: string = `mailto:${this.mail}`;
@@ -63,9 +52,12 @@ export class QuestionnaireComponent implements OnInit {
   public $questionStepper: Observable<QuestionStepper>;
   public $subQuestionStepper: Subscription;
 
-  public uploadData: UploadConfig;
   public questionMsg: string =
     'Make sure you fill out the questionnaire in detail, so we can fully understand your needs.\nThere are 10 sections in total (together with the add-on packages).\nThe number of questions may vary per category.';
+
+  public manageInfo: string;
+  public manageTooltipInfo: string;
+  public mangeTooltipPosition: TooltipPosition = TooltipPosition.RIGHT;
 
   public subDialog: Subscription;
 
@@ -178,7 +170,7 @@ export class QuestionnaireComponent implements OnInit {
         images,
         title: 'File Manager',
         managerConfig: new ImageManagerConfig({
-          dialogOneColMode: isHandset(),
+          dialogOneColMode: this.isHandset,
         }),
         uploadConfig: new UploadConfig({
           limit: 16,
@@ -243,6 +235,11 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   private chagneUploadInfo(): void {
-    const imageIsUploaded = !!this.questions[this.toShowIndex]?.images?.length;
+    const filesCount = this.questions[this.toShowIndex]?.images?.length;
+
+    this.manageInfo = !!filesCount
+      ? `You uploaded ${filesCount} file${puralize(filesCount)}`
+      : `No uploaded files`;
+    this.manageTooltipInfo = 'Here you can manage files for question.';
   }
 }
