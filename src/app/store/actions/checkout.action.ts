@@ -4,6 +4,7 @@ import { AddOn } from 'src/models/AddOn';
 import { Question } from 'src/models/Question.model';
 import { SideCadrPackage } from 'src/app/shared/side-card-packages/SideCardPackage';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
+import { Image } from 'src/models/Image.model';
 
 export const setInitStateChekcout = createAction(
   '[CHECKOUT] SET_INIT_STATE',
@@ -25,9 +26,9 @@ export const selectTabbarButtonCheckout = createAction(
   props<{ btnText: string }>()
 );
 
-export const clearSpacePhotosURLsCheckout = createAction(
-  '[CHECKOUT] CLEAR_SPACE_PHOTOS_URLS',
-  props()
+export const appendSpacePhotoImageCheckout = createAction(
+  '[CHECKOUT] APPEND_SPACE_PHOTO_IMAGE',
+  props<{ image: Image }>()
 );
 
 export const setAddOnListCheckout = createAction(
@@ -55,4 +56,11 @@ export const setShoppingCartCheckout = createAction(
   props<{ shoppingCart: ShoppingCart }>()
 );
 
-export const processDoneCheckout = createAction('[CHECKOUT] DONE');
+export const processDoneCheckout = createAction(
+  '[CHECKOUT] PROCESS_DONE_FINIS'
+);
+
+export const appendImageFloorPalnCheckout = createAction(
+  '[CHECKOUT] APPEND_IMAGE_FLOOR_PLAN',
+  props<{ image: Image }>()
+);

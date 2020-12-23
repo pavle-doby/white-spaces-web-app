@@ -7,13 +7,14 @@ import {
   setInfoCheckout,
   updateQuestionCheckout,
   setCurrentIndexCheckout,
-  clearSpacePhotosURLsCheckout,
   setAddOnListCheckout,
   setAllPackagesCheckout,
   setShoppingCartCheckout,
   selectTabbarButtonCheckout,
   setInitStateChekcout,
   processDoneCheckout,
+  appendImageFloorPalnCheckout,
+  appendSpacePhotoImageCheckout,
 } from '../actions/checkout.action';
 import {
   TabbarButton,
@@ -22,7 +23,6 @@ import {
 
 import * as _ from 'lodash';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
-import { FloorPlan } from 'src/models/FloorPlan.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { SideCadrPackage } from 'src/app/shared/side-card-packages/SideCardPackage';
 import {
@@ -30,14 +30,16 @@ import {
   ProgressState,
   Step,
 } from 'src/models/CheckoutProgress.model';
-import { isHandset } from 'src/app/shared/Utilities';
+import { isArray, isHandset } from 'src/app/shared/Utilities';
 import { TabbarText } from 'src/models/TabbarText.model';
 import { AddOnDTO } from 'src/models/AddOnDTO';
+import { SectionRanges } from 'src/models/SectionRanges.model';
+import { Image } from 'src/models/Image.model';
 
 export const QS_RANGE_START = 0;
-export const QS_RANGE_END_SHORT = 4;
+export const QS_RANGE_END_SHORT = 3;
 export const QS_RANGE_END_WIDE = 15;
-export const QS_NUM_RANGE_TO_SHOW_SHORT = 5;
+export const QS_NUM_RANGE_TO_SHOW_SHORT = 4;
 export const QS_NUM_RANGE_TO_SHOW_WIDE = 16;
 export const QS_INDEX_CURRENT = 0;
 
@@ -46,9 +48,8 @@ export interface CheckoutState {
   allPackageCards: SideCadrPackage[];
   info: string; //
   infoDesc: string[];
-  floorPlan?: FloorPlan;
-  spacePhotos?: FileList;
-  spacePhotosURLs: string[];
+  floorPlanImages?: Image[];
+  spacePhotoImages: Image[];
   addOnList: AddOn[];
   questions: Question[];
   tabbarButtons: TabbarButton[];
@@ -63,9 +64,8 @@ const getInitState = (): CheckoutState => {
     allPackageCards: [],
     info: 'Welcome to your renovation project!',
     infoDesc: [''],
-    floorPlan: null,
-    spacePhotos: null,
-    spacePhotosURLs: [],
+    floorPlanImages: [],
+    spacePhotoImages: [],
     addOnList: [],
     questions: [],
     tabbarButtons: getTabbarContnet(),
@@ -79,6 +79,8 @@ const getInitState = (): CheckoutState => {
         ? QS_NUM_RANGE_TO_SHOW_SHORT
         : QS_NUM_RANGE_TO_SHOW_WIDE,
       indexCurrent: QS_INDEX_CURRENT,
+      currentSection: '',
+      dictSectionRanges: {},
     }),
     shoppingCart: null,
     //TODO: Change on proper actions
@@ -133,17 +135,23 @@ const reducer = createReducer(
     //#endregion
 
     //#region floorPlan
-    const url = lineItem.additional_data.floor_plan;
-    const name = lineItem.additional_data.floor_plan_name;
-    const floorPlan = new FloorPlan({ url, name });
+    const urls = lineItem.additional_data.floor_plan;
+    const floorPlanImages =
+      urls && Array.isArray(urls)
+        ? urls.map((url) => {
+            return new Image({ src: url });
+          })
+        : [];
 
-    const isFloorPalnDone = !!url;
+    const isFloorPalnDone = !!floorPlanImages.length;
     //#endregion floorPlan
 
     //#region spacePhotosURLs
-    const spacePhotosURLs = lineItem.additional_data.images;
+    const spacePhotoImages = isArray(lineItem.additional_data.images)
+      ? lineItem.additional_data.images.map((src) => new Image({ src }))
+      : [];
 
-    const isSpacePhotosDone = !!spacePhotosURLs?.length;
+    const isSpacePhotosDone = !!spacePhotoImages.length;
     //#endregion
 
     //#region addOnList
@@ -162,7 +170,7 @@ const reducer = createReducer(
     //#endregion
 
     //#region questions
-    let questions = [];
+    let questions: Question[] = [];
     let additionalDataQuestions = [];
 
     const packageLineItem = ShoppingCart.getPackageLineItem(shoppingCart);
@@ -174,6 +182,8 @@ const reducer = createReducer(
       additionalDataQuestions = li.additional_data?.questions ?? [];
       questions = [...questions, ...additionalDataQuestions];
     });
+
+    let dictSectionRanges = SectionRanges.makeDictSectionRanges(questions);
 
     const finished = Question.calculateFinishedQuestions(questions);
     const total = questions.length;
@@ -197,14 +207,15 @@ const reducer = createReducer(
       ...state,
       shoppingCart,
       packageBox,
-      floorPlan,
-      spacePhotosURLs,
+      floorPlanImages,
+      spacePhotoImages,
       addOnList,
       questions,
       tabbarButtons,
       questionStepper: {
         ...state.questionStepper,
         numberOfSteps: questions.length,
+        dictSectionRanges,
       },
       progressState: {
         ...state.progressState,
@@ -246,25 +257,6 @@ const reducer = createReducer(
   }),
   on(setInfoCheckout, (state, { info, description }) => {
     return { ...state, info, infoDesc: description };
-  }),
-  on(clearSpacePhotosURLsCheckout, (state) => {
-    const newTabbarState = TabbarButton.updateTabbarBtnComplitedState(
-      state.tabbarButtons,
-      TabbarText.SPACE_PHOTOS,
-      false
-    );
-    return {
-      ...state,
-      spacePhotosURLs: [],
-      progressState: {
-        ...state.progressState,
-        spacePhotos: {
-          ...state.progressState.spacePhotos,
-          state: ProgressState.TODO,
-        },
-      },
-      tabbarButtons: newTabbarState,
-    };
   }),
   on(setAddOnListCheckout, (state, { addOnList }) => {
     const tabbarButtons = TabbarButton.updateTabbarBtnComplitedState(
@@ -309,12 +301,19 @@ const reducer = createReducer(
     let newRangeEnd = state.questionStepper.rangeEnd;
     let range = state.questionStepper.numberOfRangeToShow;
 
-    if (currentIndex > state.questionStepper.rangeEnd) {
-      newRangeStart = currentIndex - range + 1;
-      newRangeEnd = currentIndex;
-    } else if (currentIndex < state.questionStepper.rangeStart) {
-      newRangeStart = currentIndex;
-      newRangeEnd = currentIndex + range - 1;
+    const questions = state.questions;
+    const section = questions[currentIndex].section;
+    const sectionRanges = state.questionStepper.dictSectionRanges[section];
+
+    if (
+      currentIndex === sectionRanges.rangeStart ||
+      currentIndex === sectionRanges.rangeEnd
+    ) {
+      newRangeStart = sectionRanges.rangeStart;
+      newRangeEnd = sectionRanges.rangeEnd;
+      range = isHandset()
+        ? QS_NUM_RANGE_TO_SHOW_SHORT
+        : newRangeEnd - newRangeStart;
     }
 
     const newStepper: QuestionStepper = {
@@ -322,6 +321,8 @@ const reducer = createReducer(
       indexCurrent: currentIndex,
       rangeStart: newRangeStart,
       rangeEnd: newRangeEnd,
+      numberOfRangeToShow: range,
+      currentSection: section,
     };
 
     return { ...state, questionStepper: newStepper };
@@ -331,6 +332,18 @@ const reducer = createReducer(
       ...state,
       ...getInitState(),
       allPackageCards: [...state.allPackageCards],
+    };
+  }),
+  on(appendImageFloorPalnCheckout, (state, { image }) => {
+    return {
+      ...state,
+      floorPlanImages: [...state.floorPlanImages, image],
+    };
+  }),
+  on(appendSpacePhotoImageCheckout, (state, { image }) => {
+    return {
+      ...state,
+      spacePhotoImages: [...state.spacePhotoImages, image],
     };
   })
 );

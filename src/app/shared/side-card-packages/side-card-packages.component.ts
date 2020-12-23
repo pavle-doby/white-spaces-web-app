@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SideCadrPackage } from './SideCardPackage';
 import { PackagesBox } from './side-card-packages-box/side-card-packages-box.component';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';

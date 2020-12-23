@@ -1,0 +1,36 @@
+@import "src/styles-colors.scss";
+
+$img_size: 6vw;
+$grid_gap: 2vw;
+
+.image-card__div {
+  width: $img_size;
+  height: $img_size;
+
+  display: inline-block;
+  position: relative;
+}
+
+.image-card__img {
+  width: $img_size;
+  height: $img_size;
+  object-fit: cover;
+  border: 1px solid $color-gray-8;
+
+  @media screen and (max-width: 960px) {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+.image-card__icon {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+
+  color: $color-gray-4;
+
+  &:hover {
+    color: $color-gray-3;
+  }
+}

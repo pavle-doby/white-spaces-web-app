@@ -31,7 +31,6 @@ export class QuestionComponent implements OnInit {
   }
 
   public changeAnswer(): void {
-    console.log('changeAnswer');
     if (this.answer === this.question.answer) {
       return;
     }
@@ -40,7 +39,6 @@ export class QuestionComponent implements OnInit {
       answer: this.answer,
       isAnswerd: !!this.answer,
     };
-    console.log('changeAnswer emit');
     this.changeAnswerEvent.emit(newQuestion);
   }
 }

@@ -5,18 +5,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { GradientDirectiveModule } from '../../directives/gradient.directive.module';
 
 const MaterialModules = [MatDialogModule, MatIconModule, MatButtonModule];
 
 @NgModule({
   declarations: [ConfirmationDialogComponent],
-  imports: [
-    CommonModule,
-    ...MaterialModules,
-    FlexLayoutModule,
-    GradientDirectiveModule,
-  ],
+  imports: [CommonModule, ...MaterialModules, FlexLayoutModule],
   exports: [ConfirmationDialogComponent],
 })
 export class ConfirmationDialogModule {}

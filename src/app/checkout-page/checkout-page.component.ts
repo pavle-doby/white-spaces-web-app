@@ -14,17 +14,17 @@ import { LocalStorageService } from '../services/local-storage.service';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { PackagesBox } from '../shared/side-card-packages/side-card-packages-box/side-card-packages-box.component';
 import { isHandset } from '../shared/Utilities';
-import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { AddOn } from 'src/models/AddOn';
 import { MatDialog } from '@angular/material/dialog';
 import {
   ConfirmationDialogComponent,
   ConfirmationDialogData,
+  ConfirmationDialogType,
 } from '../shared/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { CONFIRMATION_DIALOG_WIDTH } from '../app.config';
 import HttpStatusCode from 'src/models/HttpStatusCode';
-import { async } from '@angular/core/testing';
+import { TabbarButton } from '../shared/tabbar/tabbar.content';
 
 @Component({
   selector: 'app-checkout-page',
@@ -35,10 +35,15 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
   public $checkoutState: Observable<CheckoutState>;
   public subCheckoutState: Subscription;
 
+  public $tabbarState: Observable<TabbarButton[]>;
+  public subTabbarButtons: Subscription;
+
   public subDialog: Subscription;
 
   public package: PackagesBox;
   public isHandset: boolean = isHandset();
+
+  public count: number = 0;
 
   constructor(
     private readonly router: Router,
@@ -48,17 +53,29 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
     private readonly dialog: MatDialog
   ) {
     this.$checkoutState = this.$store.select((state) => state.checkout);
+    this.$tabbarState = this.$store.select(
+      (state) => state.checkout.tabbarButtons
+    );
     this.window.document.body.style.width = `100vw`;
   }
 
   async ngOnInit(): Promise<void> {
-    // if (this.isHandset) {
-    //   this.router.navigateByUrl(`/${MainRouterPaths.CHECKOUT_MESSAGE}`);
-    //   return;
-    // }
-
     this.subCheckoutState = this.$checkoutState.subscribe((ckState) => {
       this.package = ckState.packageBox;
+    });
+
+    this.subTabbarButtons = this.$tabbarState.subscribe((tabState) => {
+      if (this.count === 0) {
+        let i = tabState.findIndex((btn) => !btn.isCompleted);
+
+        if (i <= 0) {
+          return;
+        }
+
+        let unfinshedStep = tabState[i];
+        this.router.navigate(unfinshedStep.routerLinkArray);
+        this.count += 1;
+      }
     });
 
     try {
@@ -80,6 +97,19 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
       const package_ = ShoppingCart.getPackageProduct(shoppingCart);
 
       if (!package_) {
+        if (!this.package || !this.package.id) {
+          const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+            width: CONFIRMATION_DIALOG_WIDTH,
+            disableClose: false,
+            data: new ConfirmationDialogData({
+              titleLabel: 'Please select package',
+              message:
+                'Please select the package so you can continue your process.',
+              type: ConfirmationDialogType.INFO,
+            }),
+          });
+          return;
+        }
         const productVM: ProductVM = {
           shopping_cart_id: shoppingCart.id,
           product_id: this.package.id,
@@ -168,7 +198,9 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
         });
       }
 
+      const currentIndex = 0;
       this.$store.dispatch(setShoppingCartCheckout({ shoppingCart }));
+      this.$store.dispatch(setCurrentIndexCheckout({ currentIndex }));
     } catch (error) {
       console.error(error);
       alert(error.message);
@@ -177,5 +209,6 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.subCheckoutState) this.subCheckoutState.unsubscribe();
+    if (this.subTabbarButtons) this.subTabbarButtons.unsubscribe();
   }
 }

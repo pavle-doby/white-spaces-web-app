@@ -1,18 +1,41 @@
-<div
-  fxLayout="row"
-  fxLayoutAlign="center center"
-  fxLayoutGap="1.32vw"
-  fxLayoutGap.lt-md="10px"
->
+<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="20px">
+  <h2 class="question-stepper__title">
+    {{ this.section }}
+  </h2>
   <div
-    *ngFor="let step of this.steps"
-    class="question-stepper__step"
-    [ngClass]="step.ngClassObj"
+    *ngIf="!this.isHandset"
+    fxLayout="row"
     fxLayoutAlign="center center"
-    (click)="this.selectStep(step)"
+    fxLayoutGap="10px"
   >
-    <span class="question-stepper__label">
-      {{ step.label }}
+    <span
+      *ngFor="let navSection of this.navSections"
+      class="question-stepper__nav-btn cursor-pointer"
+      [ngClass]="{
+        'question-stepper__nav-btn--selected': navSection.isSelected,
+        'question-stepper__nav-btn--complited': navSection.isCompleted
+      }"
+      (click)="this.changeSection(navSection)"
+    >
+      {{ navSection.label }}
     </span>
+  </div>
+  <div
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    fxLayoutGap="1.32vw"
+    fxLayoutGap.lt-md="10px"
+  >
+    <div
+      *ngFor="let step of this.steps"
+      class="question-stepper__step"
+      [ngClass]="step.ngClassObj"
+      fxLayoutAlign="center center"
+      (click)="this.selectStep(step)"
+    >
+      <span class="question-stepper__label">
+        {{ step.label }}
+      </span>
+    </div>
   </div>
 </div>

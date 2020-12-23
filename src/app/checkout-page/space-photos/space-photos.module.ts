@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { SpacePhotosComponent } from './space-photos.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { UploadGridModule } from 'src/app/shared/upload-grid/upload-grid.module';
+import { ImageManagerModule } from 'src/app/shared/image-manager/image-manager.module';
 
 @NgModule({
   declarations: [SpacePhotosComponent],
-  imports: [CommonModule, FlexLayoutModule, UploadGridModule],
+  imports: [CommonModule, FlexLayoutModule, ImageManagerModule],
   exports: [SpacePhotosComponent],
 })
 export class SpacePhotosModule {}

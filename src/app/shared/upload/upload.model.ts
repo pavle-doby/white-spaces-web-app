@@ -1,6 +1,6 @@
 import { TooltipPosition } from '@angular/material/tooltip';
 
-export class UploadData {
+export class UploadConfig {
   public limit: number;
   public message?: string;
   public info?: string;
@@ -12,7 +12,7 @@ export class UploadData {
   public tooltipContent?: string;
   public tooltipPosition?: TooltipPosition;
 
-  constructor(obj: UploadData) {
+  constructor(obj: UploadConfig) {
     this.message = obj.message;
     this.info = obj.info;
     this.bottomInfo = obj.bottomInfo;

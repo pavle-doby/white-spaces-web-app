@@ -2,8 +2,8 @@
   *ngIf="this.$checkoutState | async"
   class="checkout-page"
   fxLayout="column"
-  fxLayoutAlign="center center"
-  fxLayoutGap="2.5vw"
+  fxLayoutAlign="start center"
+  fxLayoutGap="20px"
 >
   <a *ngIf="!this.isHandset" class="app__a--none cursor-pointer" href="/home">
     <img
@@ -15,6 +15,10 @@
 
   <app-tabbar></app-tabbar>
   <app-info
+    *ngIf="
+      (this.$checkoutState | async).info &&
+      (this.$checkoutState | async).infoDesc.length
+    "
     [info]="(this.$checkoutState | async).info"
     [description]="(this.$checkoutState | async).infoDesc"
   ></app-info>

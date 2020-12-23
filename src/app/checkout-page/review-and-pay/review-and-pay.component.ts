@@ -149,8 +149,8 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
 
       this.packageInfo.infoPriceList = [
         new InfoPrice({
-          info: firstToUpperCase(checkoutState.packageBox.name),
-          price: checkoutState.packageBox.price,
+          info: firstToUpperCase(checkoutState?.packageBox?.name),
+          price: checkoutState?.packageBox?.price,
         }),
       ];
 

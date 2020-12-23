@@ -34,6 +34,11 @@ export class AuthService {
     return User ? User.role === UserRole.ADMIN : false;
   }
 
+  public get isUserVerified(): boolean {
+    const { User } = LocalStorageService.Instance;
+    return User.verified;
+  }
+
   //TODO: Aks team about this call... Maybe now is useless.
   public isAuth(): Observable<any> {
     return this.http.get(`${API_URL}/api/auth/my_data`);

@@ -3,11 +3,11 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import {
   setInfoCheckout,
-  clearSpacePhotosURLsCheckout,
   setShoppingCartCheckout,
   selectTabbarButtonCheckout,
+  appendSpacePhotoImageCheckout,
 } from 'src/app/store/actions/checkout.action';
-import { UploadData } from 'src/app/shared/upload/upload.model';
+import { UploadConfig } from 'src/app/shared/upload/upload.model';
 import { Observable, Subscription } from 'rxjs';
 import { CheckoutState } from 'src/app/store/reducers/checkout.reducer';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
@@ -16,6 +16,9 @@ import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { Question } from 'src/models/Question.model';
 import { TabbarText } from 'src/models/TabbarText.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
+import { Image } from 'src/models/Image.model';
+import { IMG_LOADING } from 'src/app/app.config';
+import { isArray } from 'src/app/shared/Utilities';
 
 const INFO = `Please upload photos of your space.`;
 
@@ -35,11 +38,11 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
 
   public shoppingCart: ShoppingCart;
   public questions: Question[];
-  public uploadConfigData: UploadData;
+  public uploadConfig: UploadConfig;
 
   constructor(
     private readonly $store: Store<AppState>,
-    private readonly chekcoutService: CheckoutService
+    private readonly checkoutService: CheckoutService
   ) {
     this.$store.dispatch(
       setInfoCheckout({ info: INFO, description: [INFO_DESC_0] })
@@ -49,7 +52,7 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
     );
     this.$checkoutState = this.$store.select((state) => state.checkout);
 
-    this.uploadConfigData = new UploadData({
+    this.uploadConfig = new UploadConfig({
       supportedFileTypes: SUPPERTED_FILES,
       limit: 16,
     });
@@ -68,7 +71,7 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
 
   public onUploadFilesEvent(files: FileList): void {
     if (files.length > 16) {
-      alert('Max number of photos is 16.');
+      alert('Max number of images is 16.');
       return;
     }
 
@@ -81,11 +84,14 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
     }
     //#endregion
 
-    this.$store.dispatch(clearSpacePhotosURLsCheckout({}));
-    let fileLinks: string[] = [];
+    let liSpacePhotos = lineItem.additional_data.images;
+    let fileLinks: string[] = isArray(liSpacePhotos) ? liSpacePhotos : [];
 
     Object.values(files).forEach((file) => {
-      this.chekcoutService
+      const loadinImg = new Image({ src: IMG_LOADING });
+      this.$store.dispatch(appendSpacePhotoImageCheckout({ image: loadinImg }));
+
+      this.checkoutService
         .uploadFile(file)
         .toPromise()
         .then((file) => {
@@ -105,7 +111,7 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
             },
           };
 
-          this.chekcoutService
+          this.checkoutService
             .updateProduct(productVM)
             .toPromise()
             .then((newShoppingCart) => {
@@ -124,5 +130,35 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
           alert(error.messages);
         });
     });
+  }
+
+  public async onDeleteEvent(image: Image): Promise<void> {
+    console.log({ image });
+
+    const lineItem = ShoppingCart.getPackageLineItem(this.shoppingCart);
+    let liFloorPlan = lineItem.additional_data.floor_plan;
+    let floor_plan = liFloorPlan.filter((src) => src !== image.src);
+
+    console.log({ floor_plan });
+
+    const productVM: ProductVM = {
+      shopping_cart_id: this.shoppingCart.id,
+      line_item_id: lineItem.id,
+      quantity: 1,
+      additional_data: {
+        ...lineItem.additional_data,
+        floor_plan,
+      },
+    };
+
+    console.log({ productVM });
+
+    try {
+      await this.checkoutService.updateProduct(productVM).toPromise;
+      await this.checkoutService.deleteImage(image.src).toPromise();
+    } catch (error) {
+      console.error(error);
+      alert('Something went wrong...');
+    }
   }
 }

@@ -93,13 +93,20 @@ export class AppComponent implements OnInit {
         alert(err.message);
       });
 
-    if (!this.AuthService.isUserLoggedIn || this.AuthService.isUserAdmin) {
+    if (
+      !this.AuthService.isUserLoggedIn ||
+      this.AuthService.isUserAdmin ||
+      !this.AuthService.isUserVerified
+    ) {
       return;
     }
 
     let shoppingCart = await this.CheckOutService.getShoppingCart().toPromise();
     const package_ = ShoppingCart.getPackageProduct(shoppingCart);
     const packageBox = ShoppingCart.convertPackageProductToPackageBox(package_);
+    if (!packageBox) {
+      return;
+    }
     this.store.dispatch(checkoutSelectPackage({ packageBox }));
   }
 

@@ -55,4 +55,13 @@ export class CheckoutService {
     const URL = `${API_URL}/order/create`;
     return this.http.post(URL, { ...data });
   }
+
+  public deleteImage(imgSrc: string): Observable<any> {
+    const URL = `${API_URL}/api/file/delete`;
+    return this.http.delete<any>(URL, {
+      params: {
+        filename: imgSrc,
+      },
+    });
+  }
 }

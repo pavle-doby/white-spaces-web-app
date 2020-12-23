@@ -4,20 +4,16 @@
   fxLayout="column"
   fxLayoutAlign="space-between center"
 >
-  <app-upload
-    [data]="this.uploadData"
+  <p class="floor-plan__info">
+    {{ this.info }}
+  </p>
+
+  <app-image-manager
+    class="fp__image-manager"
+    [uploadConfig]="this.uploadConfig"
+    [images]="(this.$chekcoutState | async).floorPlanImages"
     (uploadEvent)="this.onUploadEvent($event)"
-  ></app-upload>
-  <div
-    *ngIf="(this.$chekcoutState | async).floorPlan?.name"
-    fxLayout="column"
-    fxLayoutAlign="start center"
+    (deleteEvent)="this.onDeleteImageEvent($event)"
   >
-    <span class="floor-paln-upload__msg">
-      {{ this.successMsg }}
-    </span>
-    <span class="floor-plan-upload__file-name">
-      {{ (this.$chekcoutState | async).floorPlan?.name }}
-    </span>
-  </div>
+  </app-image-manager>
 </div>
