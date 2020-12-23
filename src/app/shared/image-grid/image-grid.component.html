@@ -1,15 +1,27 @@
 <section
   class="image-grid__grid"
+  *ngIf="!this.onColMode"
   fxLayout="row wrap"
   fxLayoutAlign="center"
   fxLayoutGap="1.3vw grid"
-  fxLayoutGap.lt-md="10px grid"
 >
   <app-image-card
     *ngFor="let img of this.stateList; let i = index"
-    class="image-grid__img-div"
     [image]="img"
-    alt="image"
+    (deleteEvent)="deleteImage($event, i)"
+  >
+  </app-image-card>
+</section>
+<section
+  class="image-grid__grid--one-col"
+  *ngIf="this.onColMode"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  fxLayoutGap="10px"
+>
+  <app-image-card
+    *ngFor="let img of this.stateList; let i = index"
+    [image]="img"
     (deleteEvent)="deleteImage($event, i)"
   >
   </app-image-card>

@@ -1,5 +1,8 @@
 <div
   class="image-manager"
+  [ngClass]="{
+    'image-manager--dialog-one-col-mode': this.config.dialogOneColMode
+  }"
   fxLayout="column"
   fxLayoutAlign="space-between center"
   fxLayoutGap="10px"
@@ -17,6 +20,7 @@
 
   <app-image-grid
     *ngIf="this.config.showGrid"
+    [onColMode]="this.config.dialogOneColMode"
     [config]="this.gridConfig"
     [images]="this.images"
     (deleteEvent)="this.onDeleteEvent($event)"

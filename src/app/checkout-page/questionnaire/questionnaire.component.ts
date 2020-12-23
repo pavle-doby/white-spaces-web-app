@@ -18,7 +18,7 @@ import { TabbarText } from 'src/models/TabbarText.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
 import { QuestionStepper } from './question-stepper/question-stepper.model';
 import { TooltipPosition } from 'src/models/TooltipPosition.model';
-import { clone } from 'src/app/shared/Utilities';
+import { clone, isHandset } from 'src/app/shared/Utilities';
 import { MAIL_FOR_CLIENTS } from 'src/app/app.config';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageManagerDialogComponent } from 'src/app/shared/image-manager-dialog/image-manager-dialog.component';
@@ -177,7 +177,9 @@ export class QuestionnaireComponent implements OnInit {
       data: new ImageManagerDialogData({
         images,
         title: 'File Manager',
-        managerConfig: new ImageManagerConfig({}),
+        managerConfig: new ImageManagerConfig({
+          dialogOneColMode: isHandset(),
+        }),
         uploadConfig: new UploadConfig({
           limit: 16,
           info: '',

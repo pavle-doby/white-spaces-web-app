@@ -9,6 +9,11 @@ $grid_gap: 2vw;
 
   display: inline-block;
   position: relative;
+
+  @media screen and (max-width: 960px) {
+    width: 140px;
+    height: 140px;
+  }
 }
 
 .image-card__img {
@@ -25,8 +30,8 @@ $grid_gap: 2vw;
 
 .image-card__icon {
   position: absolute;
-  top: -12px;
-  right: -12px;
+  top: -11px;
+  right: -9px;
 
   color: $color-gray-4;
 

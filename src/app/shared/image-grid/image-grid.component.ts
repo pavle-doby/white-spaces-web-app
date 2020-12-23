@@ -19,6 +19,8 @@ export class ImageGridComponent implements OnInit, OnChanges {
   @Input() public images: Image[] = [];
   @Input() public config: ImageGridConfig;
 
+  @Input() public onColMode: boolean = false;
+
   @Output() deleteEvent: EventEmitter<{ image: Image; i: number }>;
 
   public stateList: Image[] = [];
