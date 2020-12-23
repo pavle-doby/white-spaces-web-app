@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IMG_LOADING } from 'src/app/app.config';
+import { IMG_LOADING, MSG_ACTION_UNSUCCSSFUL } from 'src/app/app.config';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 import { Image } from 'src/models/Image.model';
 import { ImageManagerDialogData } from '../../../models/ImageManagerDialogData.model';
@@ -13,6 +13,9 @@ import { clone } from '../Utilities';
 })
 export class ImageManagerDialogComponent implements OnInit {
   public imgBuffer: Image[];
+
+  public imgBuffDeleted: Image[] = [];
+  public imgBuffAdded: Image[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ImageManagerDialogData,
@@ -33,27 +36,49 @@ export class ImageManagerDialogComponent implements OnInit {
         .uploadFile(file)
         .toPromise()
         .then((linkObj) => {
-          this.imgBuffer[updated[i]] = new Image({ src: linkObj.link });
+          const newImg = new Image({ src: linkObj.link });
+          this.imgBuffer[updated[i]] = newImg;
           this.imgBuffer = clone<Image[]>(this.imgBuffer);
+          this.imgBuffAdded = [...this.imgBuffAdded, newImg];
         })
         .catch((err) => {
           console.error(err);
-          alert('Something went wrong.');
+          alert(MSG_ACTION_UNSUCCSSFUL);
         });
     });
   }
 
-  public onDeleteEvent({ image, i }): void {
-    console.log({ image, i });
+  public async onDeleteEvent({ image, i }): Promise<void> {
+    this.imgBuffer = this.imgBuffer.filter((img) => img.src !== image.src);
+    this.imgBuffDeleted = [...this.imgBuffDeleted, image];
   }
 
-  addFiles(): void {
+  confirmActions(): void {
+    this.imgBuffDeleted.forEach((img) => {
+      this.checkoutService
+        .deleteImage(img.src)
+        .toPromise()
+        .then()
+        .catch((err) => {
+          console.error(err);
+          alert(MSG_ACTION_UNSUCCSSFUL);
+        });
+    });
+
     this.dialogRef.close(this.imgBuffer);
   }
 
   cancel(): void {
-    console.log('Cancel - Delete files from S3 ');
-    //TODO: Delete files from S3
+    this.imgBuffAdded.forEach((img) => {
+      this.checkoutService
+        .deleteImage(img.src)
+        .toPromise()
+        .then()
+        .catch((err) => {
+          console.error(err);
+          alert(MSG_ACTION_UNSUCCSSFUL);
+        });
+    });
     this.dialogRef.close(null);
   }
 }
