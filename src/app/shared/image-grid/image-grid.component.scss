@@ -12,19 +12,9 @@ $grid_gap: 1.3vw;
   }
 }
 
-.image-grid__img-div {
-  width: $img_size;
-  height: $img_size;
-}
-
-.image-grid__img {
-  width: $img_size;
-  height: $img_size;
-  object-fit: cover;
-  border: 1px solid $color-gray-8;
-
+.image-grid__grid--one-col {
   @media screen and (max-width: 960px) {
-    width: 140px;
-    height: 140px;
+    height: 380px;
+    overflow: auto;
   }
 }

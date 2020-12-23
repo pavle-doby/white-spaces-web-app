@@ -40,13 +40,14 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
   public questions: Question[];
   public uploadConfig: UploadConfig;
 
+  public info: string = INFO;
+  public desc: string[] = [INFO_DESC_0];
+
   constructor(
     private readonly $store: Store<AppState>,
     private readonly checkoutService: CheckoutService
   ) {
-    this.$store.dispatch(
-      setInfoCheckout({ info: INFO, description: [INFO_DESC_0] })
-    );
+    this.$store.dispatch(setInfoCheckout({ info: '', description: [] }));
     this.$store.dispatch(
       selectTabbarButtonCheckout({ btnText: TabbarText.SPACE_PHOTOS })
     );

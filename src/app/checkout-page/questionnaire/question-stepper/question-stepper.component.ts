@@ -74,7 +74,7 @@ export class QuestionStepperComponent implements OnInit, OnDestroy {
           state.complited += +isComplited;
           return;
         }
-        
+
         navSectionDictState[q.section] = {
           total: 1,
           complited: +isComplited,
@@ -143,7 +143,6 @@ export class QuestionStepperComponent implements OnInit, OnDestroy {
   }
 
   public changeSection(sectionNavBtn: SectionNavBtn): void {
-    return;
     this.$store.dispatch(
       setCurrentIndexCheckout({
         currentIndex: sectionNavBtn.sectionRanges.rangeStart,

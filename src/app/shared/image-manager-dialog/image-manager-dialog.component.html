@@ -1,5 +1,6 @@
 <div
   *ngIf="this.data"
+  class="image-manager-dialog"
   fxLayout="column"
   fxLayoutAlign="space-between center"
   fxLayoutGap="25px"
@@ -10,7 +11,7 @@
     </h2>
   </div>
   <div
-    class="conf-dialog__message"
+    class="imd__image-manager"
     fxLayout="column"
     fxLayoutAlign="center center"
   >
@@ -41,7 +42,7 @@
       class="checkout__btn conf-dialog__btn-width"
       (click)="this.addFiles()"
     >
-      Add
+      Confirm
     </button>
   </div>
 </div>
