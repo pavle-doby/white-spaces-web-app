@@ -81,11 +81,6 @@ export class FloorPalnUploadComponent implements OnInit {
   }
 
   public onUploadEvent(files: FileList): void {
-    if (files.length > IMG_LIMIT) {
-      alert(`Max number of images is ${IMG_LIMIT}.`);
-      return;
-    }
-
     const lineItem = ShoppingCart.getPackageLineItem(this.shoppingCart);
 
     if (!lineItem.product) {
@@ -95,6 +90,11 @@ export class FloorPalnUploadComponent implements OnInit {
 
     let liFloorPlan = lineItem.additional_data.floor_plan;
     let floor_plan = isArray(liFloorPlan) ? liFloorPlan : [];
+
+    if (files.length + floor_plan.length > IMG_LIMIT) {
+      alert(`Max number of files is ${IMG_LIMIT}.`);
+      return;
+    }
 
     Object.values(files).forEach((file) => {
       const loadinImg = new Image({ src: IMG_LOADING });
