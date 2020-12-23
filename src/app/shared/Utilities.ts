@@ -51,15 +51,11 @@ export const getExtension = (fileName: string): string => {
   let isNotDot = true;
   let i = fileName.length - 1;
 
-  console.log(fileName);
-
   while (isNotDot && i >= 0) {
     ext = ext + fileName[i];
     isNotDot = fileName[i] !== '.';
     i--;
   }
-
-  console.log(reverseString(ext));
 
   return reverseString(ext);
 };

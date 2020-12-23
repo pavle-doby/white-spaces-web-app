@@ -49,7 +49,6 @@ export class AdminOrderDialogComponent implements OnInit {
         .downloadProject(this.data.id, email)
         .toPromise()
         .then((res) => {
-          console.log({ res });
           this.snackBar.open(MSG_ACTION_SUCCESSFUL, 'Close', {
             duration: 3000,
           });

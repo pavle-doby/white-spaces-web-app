@@ -101,8 +101,6 @@ export class AppComponent implements OnInit {
       return;
     }
 
-    console.log('Evo ga');
-
     let shoppingCart = await this.CheckOutService.getShoppingCart().toPromise();
     const package_ = ShoppingCart.getPackageProduct(shoppingCart);
     const packageBox = ShoppingCart.convertPackageProductToPackageBox(package_);

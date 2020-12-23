@@ -43,7 +43,6 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
     }).subscribe((res) => {
       const customers = res.customers;
       const orders = res.orders;
-      console.log(orders);
 
       const data = orders.map((element) => {
         return {

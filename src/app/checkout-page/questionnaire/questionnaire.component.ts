@@ -119,8 +119,6 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   public onChangeAnswer(question: Question): void {
-    console.log('onChnageAnswer', { question });
-
     const lineItem = ShoppingCart.getLineItemWithProductId(
       this.shoppingCart,
       question.product_id
@@ -240,13 +238,6 @@ export class QuestionnaireComponent implements OnInit {
           alert(err.message);
         });
     });
-  }
-
-  public onUploadEvent(fileList: FileList): void {
-    this.checkoutService
-      .uploadFile(fileList[0])
-      .toPromise()
-      .then((linkObj) => {});
   }
 
   private chagneUploadInfo(): void {

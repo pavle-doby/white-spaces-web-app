@@ -48,13 +48,12 @@ export class ImageManagerDialogComponent implements OnInit {
   }
 
   addFiles(): void {
-    console.log('Add Files');
     this.dialogRef.close(this.imgBuffer);
   }
 
   cancel(): void {
-    console.log('Cancel');
-    //delete files from s3
+    console.log('Cancel - Delete files from S3 ');
+    //TODO: Delete files from S3
     this.dialogRef.close(null);
   }
 }

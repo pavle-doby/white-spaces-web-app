@@ -16,14 +16,7 @@ export class HomePageComponent implements OnInit {
   matcher: MediaQueryList;
   isMobile: boolean = false;
   parallaxRatio: number = 1;
-  // isHandset$: Observable<boolean> = this.breakpointObserver
-  //   .observe([Breakpoints.Handset, Breakpoints.HandsetPortrait])
-  //   .pipe(
-  //     tap((result) => console.log(result)),
-  //     map((result) => result.matches),
-  //     shareReplay()
-  //   );
-
+  
   public scrollLeftSub: Subject<void> = new Subject<void>();
   public scrollRightSub: Subject<void> = new Subject<void>();
 

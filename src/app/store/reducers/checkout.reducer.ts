@@ -135,8 +135,6 @@ const reducer = createReducer(
     //#endregion
 
     //#region floorPlan
-    console.log({ shoppingCart });
-
     const urls = lineItem.additional_data.floor_plan;
     const floorPlanImages =
       urls && Array.isArray(urls)
@@ -184,8 +182,6 @@ const reducer = createReducer(
       additionalDataQuestions = li.additional_data?.questions ?? [];
       questions = [...questions, ...additionalDataQuestions];
     });
-
-    // console.log(questions.map((q, i) => ({ s: q.section, i })));
 
     let dictSectionRanges = SectionRanges.makeDictSectionRanges(questions);
 
