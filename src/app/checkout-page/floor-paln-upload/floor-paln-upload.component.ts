@@ -140,13 +140,9 @@ export class FloorPalnUploadComponent implements OnInit {
   }
 
   public async onDeleteImageEvent({ image, i }): Promise<void> {
-    console.log({ image, i });
-
     const lineItem = ShoppingCart.getPackageLineItem(this.shoppingCart);
     let liFloorPlan = lineItem.additional_data.floor_plan;
     let floor_plan = liFloorPlan.filter((src) => src !== image.src);
-
-    console.log({ floor_plan });
 
     const productVM: ProductVM = {
       shopping_cart_id: this.shoppingCart.id,
@@ -158,10 +154,11 @@ export class FloorPalnUploadComponent implements OnInit {
       },
     };
 
-    console.log({ productVM });
-
     try {
-      await this.checkoutService.updateProduct(productVM).toPromise;
+      const shoppingCart = await this.checkoutService
+        .updateProduct(productVM)
+        .toPromise();
+      this.$store.dispatch(setShoppingCartCheckout({ shoppingCart }));
       await this.checkoutService.deleteImage(image.src).toPromise();
     } catch (error) {
       console.error(error);

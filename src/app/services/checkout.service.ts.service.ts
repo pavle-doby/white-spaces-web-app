@@ -58,10 +58,8 @@ export class CheckoutService {
 
   public deleteImage(imgSrc: string): Observable<any> {
     const URL = `${API_URL}/api/file/delete`;
-    return this.http.delete<any>(URL, {
-      params: {
-        filename: imgSrc,
-      },
+    return this.http.put(URL, {
+      filename: imgSrc,
     });
   }
 }

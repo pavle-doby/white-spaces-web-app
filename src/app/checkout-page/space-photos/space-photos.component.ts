@@ -133,14 +133,10 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
     });
   }
 
-  public async onDeleteEvent(image: Image): Promise<void> {
-    console.log({ image });
-
+  public async onDeleteEvent({ image, i }): Promise<void> {
     const lineItem = ShoppingCart.getPackageLineItem(this.shoppingCart);
-    let liFloorPlan = lineItem.additional_data.floor_plan;
-    let floor_plan = liFloorPlan.filter((src) => src !== image.src);
-
-    console.log({ floor_plan });
+    let liImages = lineItem.additional_data.images;
+    let images = liImages.filter((src) => src !== image.src);
 
     const productVM: ProductVM = {
       shopping_cart_id: this.shoppingCart.id,
@@ -148,14 +144,15 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
       quantity: 1,
       additional_data: {
         ...lineItem.additional_data,
-        floor_plan,
+        images,
       },
     };
 
-    console.log({ productVM });
-
     try {
-      await this.checkoutService.updateProduct(productVM).toPromise;
+      const shoppingCart = await this.checkoutService
+        .updateProduct(productVM)
+        .toPromise();
+      this.$store.dispatch(setShoppingCartCheckout({ shoppingCart }));
       await this.checkoutService.deleteImage(image.src).toPromise();
     } catch (error) {
       console.error(error);
