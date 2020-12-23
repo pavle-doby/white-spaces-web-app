@@ -28,6 +28,11 @@ export class ImageManagerDialogComponent implements OnInit {
   }
 
   public onUploadEvent(fileList: FileList): void {
+    const limit = this.data.uploadConfig.limit;
+    if (this.imgBuffer.length + fileList.length > limit) {
+      alert(`Max number of files is ${limit}`);
+    }
+
     let updated = [];
     Object.values(fileList).forEach((file, i) => {
       updated = [...updated, this.imgBuffer.length];

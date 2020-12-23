@@ -27,6 +27,8 @@ Take photos in different periods during the day so that we can feel the light ch
 
 export const SUPPERTED_FILES = '.jpg, .jpeg, .png ';
 
+const UPLOAD_LIMIT = 16;
+
 @Component({
   selector: 'app-space-photos',
   templateUrl: './space-photos.component.html',
@@ -55,7 +57,7 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
 
     this.uploadConfig = new UploadConfig({
       supportedFileTypes: SUPPERTED_FILES,
-      limit: 16,
+      limit: UPLOAD_LIMIT,
     });
   }
 
@@ -71,22 +73,20 @@ export class SpacePhotosComponent implements OnInit, OnDestroy {
   }
 
   public onUploadFilesEvent(files: FileList): void {
-    if (files.length > 16) {
-      alert('Max number of images is 16.');
-      return;
-    }
-
-    //#region For shopping cart update I
     const lineItem = ShoppingCart.getPackageLineItem(this.shoppingCart);
 
     if (!lineItem.product) {
       alert('Select package');
       return;
     }
-    //#endregion
 
     let liSpacePhotos = lineItem.additional_data.images;
     let fileLinks: string[] = isArray(liSpacePhotos) ? liSpacePhotos : [];
+
+    if (files.length + fileLinks.length > UPLOAD_LIMIT) {
+      alert(`Max number of files is ${UPLOAD_LIMIT}.`);
+      return;
+    }
 
     Object.values(files).forEach((file) => {
       const loadinImg = new Image({ src: IMG_LOADING });
