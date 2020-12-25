@@ -1,4 +1,4 @@
-import { BREAKING_POINT_PX } from '../app.config';
+import { BREAKING_POINT_PX, IMG_DWG, IMG_PDF } from '../app.config';
 
 export const clone = <T>(x: T | Array<T>): T => {
   return JSON.parse(JSON.stringify(x));
@@ -62,7 +62,22 @@ export const getExtension = (fileName: string): string => {
 
 export const isNotPresentableFile = (fileSrc: string): boolean => {
   const NOT_PRESENTABLE_FILES = ['.pdf', '.dwg'];
-  return NOT_PRESENTABLE_FILES.includes(getExtension(fileSrc));
+  return NOT_PRESENTABLE_FILES.includes(
+    getExtension(fileSrc).toLocaleLowerCase()
+  );
+};
+
+export const fileToPrsentableImage = (fileName: string): string => {
+  switch (getExtension(fileName).toLowerCase()) {
+    case '.pdf': {
+      return IMG_PDF;
+    }
+    case '.dwg': {
+      return IMG_DWG;
+    }
+    default:
+      return fileName;
+  }
 };
 
 export const puralize = (n: number): string => {

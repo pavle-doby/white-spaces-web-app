@@ -102,14 +102,19 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <mat-list>
-          <mat-list-item
-            *ngFor="
-              let question of addOn.additional_data.questions.general;
-              let i = index
-            "
-            >{{ i + 1 }}. {{ question.question }}</mat-list-item
-          >
+        <mat-list
+          *ngFor="
+            let section of addOn.additional_data.questions | keyvalue;
+            let i = index
+          "
+        >
+          <h4>
+            {{ section.key }}
+          </h4>
+          <p *ngFor="let quest of section.value; let i = index">
+            <b>{{ i + 1 }}. </b>
+            <span>{{ quest.question }}</span>
+          </p>
         </mat-list>
       </mat-expansion-panel>
     </div>
@@ -127,13 +132,14 @@
         <div *ngFor="let group of questionnaireRooms; let i = index">
           <h3>{{ group }}</h3>
           <mat-list>
-            <mat-list-item
+            <p
               *ngFor="
                 let question of package.additional_data.questions[group];
                 let i = index
               "
-              >{{ i + 1 }}. {{ question.question }}</mat-list-item
             >
+              <b>{{ i + 1 }}.</b> <span>{{ question.question }}</span>
+            </p>
           </mat-list>
         </div>
       </mat-expansion-panel>

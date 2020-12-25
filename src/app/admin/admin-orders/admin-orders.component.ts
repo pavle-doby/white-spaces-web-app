@@ -75,7 +75,7 @@ export class AdminOrdersComponent implements AfterViewInit, OnInit {
   }
   private mapIdToEmail(id: number, customers: any[]): string {
     const data = customers.find((customer) => customer.id === id);
-    return data.email;
+    return !data ? id : data.email;
   }
 
   private getPackageNames(lineItems: any[]): string {
