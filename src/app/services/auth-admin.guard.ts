@@ -61,6 +61,8 @@ export class AuthAdminGuard
   }
 
   isUserAdmin(route: ActivatedRouteSnapshot, url: any): boolean {
+    console.log(this.authService.isUserAdmin);
+
     if (this.authService.isUserAdmin) {
       return true;
     } else {

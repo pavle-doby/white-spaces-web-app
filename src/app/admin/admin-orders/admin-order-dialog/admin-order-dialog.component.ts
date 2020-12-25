@@ -10,6 +10,11 @@ import {
   MSG_ACTION_SUCCESSFUL,
   MSG_ACTION_UNSUCCSSFUL,
 } from 'src/app/app.config';
+import {
+  fileToPrsentableImage,
+  getExtension,
+  isNotPresentableFile,
+} from 'src/app/shared/Utilities';
 
 @Component({
   selector: 'app-admin-order-dialog',
@@ -30,6 +35,9 @@ export class AdminOrderDialogComponent implements OnInit {
     { value: 0, viewValue: 'Natasa Nikolic' },
     { value: 1, viewValue: 'Admin 2' },
   ];
+
+  public floorPlanList: string[] = [];
+
   constructor(
     private readonly dialogRef: MatDialogRef<AdminOrderDialogComponent>,
     private readonly $store: Store<AppState>,
@@ -39,6 +47,12 @@ export class AdminOrderDialogComponent implements OnInit {
   ) {
     this.data = data;
     this.$adminEmail = this.$store.select((state) => state.user.user.email);
+
+    this.floorPlanList = this.data.orderDetails
+      .map((order) => order.additional_data.floor_plan)
+      .map((fpList: string[]) => fpList ?? [])
+      .flat(1)
+      .map((fileName) => fileToPrsentableImage(fileName));
   }
 
   ngOnInit(): void {}

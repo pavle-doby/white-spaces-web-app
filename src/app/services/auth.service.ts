@@ -7,6 +7,7 @@ import { API_URL } from '../app.config';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store';
 import { BEARER, LocalStorageService } from './local-storage.service';
+import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 
 //http://18.221.175.43//api/auth/login
 //email: 'petar@psoftware.com',
@@ -66,8 +67,8 @@ export class AuthService {
   }
 
   public logout() {
-    this.isAuthenticated.next(false);
-    localStorage.setItem('isAdmin', 'false');
+    LocalStorageService.Instance.clearAuthToken();
+    this.router.navigateByUrl(`/${MainRouterPaths.HOME}`);
   }
 
   public registerUser(
