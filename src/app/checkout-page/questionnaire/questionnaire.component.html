@@ -5,6 +5,7 @@
 >
   <div
     *ngIf="this.questions?.length"
+    class="questions_box"
     fxLayout="column"
     fxLayoutAlign="center center"
     fxLayoutAlign.lt-md="start center"
@@ -25,7 +26,7 @@
       (changeAnswerEvent)="this.onChangeAnswer($event)"
     >
     </app-question>
-    <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="1vw">
+    <div class="questions__btns-box" fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="1vw">
       <button
         *ngIf="!this.isHandset"
         class="checkout__btn--invert questionnaire__btn"
