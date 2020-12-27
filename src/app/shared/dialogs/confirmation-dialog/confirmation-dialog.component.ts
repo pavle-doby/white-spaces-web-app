@@ -9,11 +9,13 @@ export class ConfirmationDialogData {
   public titleLabel: string;
   public message: string;
   public type?: ConfirmationDialogType;
+  public textAlign?: string;
 
   constructor(obj: ConfirmationDialogData) {
     this.titleLabel = obj.titleLabel;
     this.message = obj.message;
     this.type = obj.type;
+    this.textAlign = obj.textAlign;
   }
 }
 

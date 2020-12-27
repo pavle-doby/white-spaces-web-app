@@ -13,6 +13,7 @@
     class="conf-dialog__message"
     fxLayout="column"
     fxLayoutAlign="center center"
+    [style.text-align]="this.data.textAlign || 'center'"
   >
     {{ this.data.message }}
   </mat-dialog-content>

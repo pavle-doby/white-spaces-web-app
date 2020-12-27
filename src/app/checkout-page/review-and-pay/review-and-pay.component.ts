@@ -31,6 +31,7 @@ import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { firstToUpperCase } from 'src/app/shared/Utilities';
 import { PrivacyPolicyDialogComponent } from 'src/app/shared/privacy-policy-dialog/privacy-policy-dialog.component';
 import { TermsAndConditionsComponent } from 'src/app/shared/terms-and-conditions/terms-and-conditions.component';
+import { Question } from 'src/models/Question.model';
 
 @Component({
   selector: 'app-review-and-pay',
@@ -44,8 +45,11 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
   public checkout$: Observable<CheckoutState>;
   public subChekout: Subscription;
 
-  public isAllDone: boolean;
   public shoppingCart: ShoppingCart;
+
+  public isAllDone: boolean;
+  public uncomplitedSteps: Step[] = [];
+  public questions: Question[] = [];
 
   public projectInfo: InfoPriceLabelInputs;
   public customerInfo: InfoPriceLabelInputs;
@@ -146,6 +150,7 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
 
     this.subChekout = this.checkout$.subscribe((checkoutState) => {
       this.shoppingCart = checkoutState.shoppingCart;
+      this.questions = checkoutState.questions;
 
       this.packageInfo.infoPriceList = [
         new InfoPrice({
@@ -160,6 +165,7 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
         step.isRequired ? step.state !== ProgressState.DONE : false
       );
 
+      this.uncomplitedSteps = uncomplitedSteps;
       this.isAllDone = !uncomplitedSteps.length;
 
       this.addOnInfo.infoPriceList = checkoutState.addOnList
@@ -241,13 +247,41 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
           });
       });
     } else {
+      let message = `\nUncomplited steps:\n`;
+      message += this.uncomplitedSteps
+        .map((step) => `- ${step.name}\n`)
+        .join('');
+
+      let uncomplitedSections = [];
+
+      if (
+        this.uncomplitedSteps.find(
+          (step) => step.name === TabbarText.QUESTIONNARIE
+        )
+      ) {
+        this.questions.forEach((quest) => {
+          if (!Question.isQuestionFullyAnswerd(quest)) {
+            uncomplitedSections.push(quest.section);
+          }
+        });
+        uncomplitedSections = [...new Set(uncomplitedSections)];
+      }
+
+      let uncSectionStr = `  Unanswerd sections:\n`;
+      uncSectionStr += uncomplitedSections
+        .map((sec) => `  - ${sec}\n`)
+        .join('');
+
+      message += uncSectionStr;
+
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
         width: CONFIRMATION_DIALOG_WIDTH,
         disableClose: true,
         data: new ConfirmationDialogData({
           titleLabel: 'Information dialog',
-          message: `You haven't completed all steps. Make sure you answered all questions.`,
+          message,
           type: ConfirmationDialogType.INFO,
+          textAlign: 'left',
         }),
       });
     }
