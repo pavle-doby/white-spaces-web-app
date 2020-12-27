@@ -28,6 +28,8 @@ import { ImageGridModule } from './image-grid/image-grid.module';
 import { ImageGridComponent } from './image-grid/image-grid.component';
 import { ImageManagerDialogModule } from './image-manager-dialog/image-manager-dialog.module';
 import { ImageManagerDialogComponent } from './image-manager-dialog/image-manager-dialog.component';
+import { LoaderModule } from './loader/loader.module';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [],
@@ -48,6 +50,7 @@ import { ImageManagerDialogComponent } from './image-manager-dialog/image-manage
     TermsAndConditionsModule,
     ImageGridModule,
     ImageManagerDialogModule,
+    LoaderModule,
   ],
   exports: [
     FooterComponent,
@@ -63,6 +66,7 @@ import { ImageManagerDialogComponent } from './image-manager-dialog/image-manage
     NavbarSmallSrceenComponent,
     ImageGridComponent,
     ImageManagerDialogComponent,
+    LoaderComponent,
   ],
 })
 export class SharedModule {}

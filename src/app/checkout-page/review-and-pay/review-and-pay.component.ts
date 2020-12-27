@@ -82,6 +82,8 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
 
   public showAddressInput: boolean = SHOW_ADDRESS_INPUT;
 
+  public isCreateInProgress: boolean = false;
+
   constructor(
     private readonly $store: Store<AppState>,
     private readonly dialog: MatDialog,
@@ -220,6 +222,7 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
           return;
         }
 
+        this.isCreateInProgress = true;
         this.checkoutService
           .createOrder(this.shoppingCart.id)
           .toPromise()
@@ -236,6 +239,7 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
                 type: ConfirmationDialogType.INFO,
               }),
             });
+            this.isCreateInProgress = false;
 
             this.dialogInvoiceSub = dialogRef.afterClosed().subscribe(() => {
               this.router.navigateByUrl(`/${MainRouterPaths.THANK_YOU}`);
@@ -244,10 +248,11 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
           .catch((err) => {
             console.error(err);
             alert(err.message);
+            this.isCreateInProgress = false;
           });
       });
     } else {
-      let message = `\nUncomplited steps:\n`;
+      let message = `\nUncompleted steps:\n`;
       message += this.uncomplitedSteps
         .map((step) => `- ${step.name}\n`)
         .join('');
@@ -267,7 +272,7 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
         uncomplitedSections = [...new Set(uncomplitedSections)];
       }
 
-      let uncSectionStr = `  Unanswerd sections:\n`;
+      let uncSectionStr = `  Unanswered sections:\n`;
       uncSectionStr += uncomplitedSections
         .map((sec) => `  - ${sec}\n`)
         .join('');

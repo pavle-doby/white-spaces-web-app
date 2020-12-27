@@ -191,12 +191,21 @@
           class="review-pay__btn checkout__btn"
           [ngClass]="{
             'review-pay__btn--disabled':
-              !this.iAgreeToTerms || !this.iAgreeToDesign
+              !this.iAgreeToTerms ||
+              !this.iAgreeToDesign ||
+              this.isCreateInProgress
           }"
-          [disabled]="!this.iAgreeToTerms || !this.iAgreeToDesign"
+          [disabled]="
+            !this.iAgreeToTerms ||
+            !this.iAgreeToDesign ||
+            this.isCreateInProgress
+          "
           (click)="this.createOrder()"
+          fxLayout="row"
+          fxLayoutAlign="center center"
         >
-          Create order
+          <app-loader *ngIf="this.isCreateInProgress"> </app-loader>
+          <span *ngIf="!this.isCreateInProgress">Create order</span>
         </button>
       </div>
     </div>
