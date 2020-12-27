@@ -26,6 +26,15 @@ import { ImageManagerDialogData } from 'src/models/ImageManagerDialogData.model'
 import { ImageManagerConfig } from 'src/app/shared/image-manager/models/ImageManagerConfig.model';
 import { ImageGridConfig } from 'src/app/shared/image-grid/models/ImageGridConfig.model';
 import { Image } from 'src/models/Image.model';
+import {
+  CheckoutProgress,
+  ProgressState,
+} from 'src/models/CheckoutProgress.model';
+import {
+  ConfirmationDialogComponent,
+  ConfirmationDialogData,
+  ConfirmationDialogType,
+} from 'src/app/shared/dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-questionnaire',
@@ -52,6 +61,9 @@ export class QuestionnaireComponent implements OnInit {
   public $questionStepper: Observable<QuestionStepper>;
   public $subQuestionStepper: Subscription;
 
+  public $progressState: Observable<CheckoutProgress>;
+  public $subProgressState: Subscription;
+
   public questionMsg: string =
     'Make sure you fill out the questionnaire in detail, so we can fully understand your needs.\nThere are 10 sections in total (together with the add-on packages).\nThe number of questions may vary per category.';
 
@@ -73,6 +85,9 @@ export class QuestionnaireComponent implements OnInit {
     this.$shoppingCartState = this.$store.select(
       (state) => state.checkout.shoppingCart
     );
+    this.$progressState = this.$store.select(
+      (state) => state.checkout.progressState
+    );
 
     this.$store.dispatch(setInfoCheckout({ info: '', description: [] }));
 
@@ -85,11 +100,26 @@ export class QuestionnaireComponent implements OnInit {
     this.$subQuestions.unsubscribe();
     this.$subQuestionStepper.unsubscribe();
     this.$subShoppingCartState.unsubscribe();
+    this.$subProgressState.unsubscribe();
 
     if (this.subDialog) this.subDialog.unsubscribe();
   }
 
   ngOnInit(): void {
+    this.$subProgressState = this.$progressState.subscribe((progressState) => {
+      if (progressState.questions.state !== ProgressState.DONE) {
+        return;
+      }
+
+      this.dialog.open(ConfirmationDialogComponent, {
+        data: new ConfirmationDialogData({
+          titleLabel: 'Congratulations!',
+          message: 'You answered all questions!',
+          type: ConfirmationDialogType.INFO,
+        }),
+      });
+    });
+
     this.$subShoppingCartState = this.$shoppingCartState.subscribe(
       (shoppingCart) => {
         this.shoppingCart = shoppingCart;

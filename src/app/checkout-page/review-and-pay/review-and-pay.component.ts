@@ -270,16 +270,16 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
           }
         });
         uncomplitedSections = [...new Set(uncomplitedSections)];
+
+        let uncSectionStr = `  Unanswered sections:\n`;
+        uncSectionStr += uncomplitedSections
+          .map((sec) => `  - ${sec}\n`)
+          .join('');
+
+        message += uncSectionStr;
       }
 
-      let uncSectionStr = `  Unanswered sections:\n`;
-      uncSectionStr += uncomplitedSections
-        .map((sec) => `  - ${sec}\n`)
-        .join('');
-
-      message += uncSectionStr;
-
-      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      this.dialog.open(ConfirmationDialogComponent, {
         width: CONFIRMATION_DIALOG_WIDTH,
         disableClose: true,
         data: new ConfirmationDialogData({
