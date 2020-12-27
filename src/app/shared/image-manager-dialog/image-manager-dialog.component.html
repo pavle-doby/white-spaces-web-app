@@ -33,6 +33,10 @@
   >
     <button
       class="checkout__btn--invert conf-dialog__btn-width"
+      [ngClass]="{
+        'app__btn--disabled': this.isInProgress && !this.isErrorOccurred
+      }"
+      [disabled]="this.isInProgress && !this.isErrorOccurred"
       [mat-dialog-close]="null"
       (click)="this.cancel()"
     >
@@ -40,6 +44,10 @@
     </button>
     <button
       class="checkout__btn conf-dialog__btn-width"
+      [ngClass]="{
+        'app__btn--disabled': this.isInProgress || this.isErrorOccurred
+      }"
+      [disabled]="this.isInProgress || this.isErrorOccurred"
       (click)="this.confirmActions()"
     >
       Confirm

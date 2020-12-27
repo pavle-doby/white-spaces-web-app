@@ -166,6 +166,7 @@ export class QuestionnaireComponent implements OnInit {
     const images = quetion.images.map((src) => new Image({ src }));
 
     const dialogRef = this.dialog.open(ImageManagerDialogComponent, {
+      disableClose: true,
       data: new ImageManagerDialogData({
         images,
         title: 'File Manager',

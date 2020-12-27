@@ -17,6 +17,9 @@ export class ImageManagerDialogComponent implements OnInit {
   public imgBuffDeleted: Image[] = [];
   public imgBuffAdded: Image[] = [];
 
+  public isInProgress: boolean = false;
+  public isErrorOccurred: boolean = false;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ImageManagerDialogData,
     private readonly dialogRef: MatDialogRef<ImageManagerDialogComponent>,
@@ -34,6 +37,7 @@ export class ImageManagerDialogComponent implements OnInit {
       return;
     }
 
+    this.isInProgress = true;
     let updated = [];
     Object.values(fileList).forEach((file, i) => {
       updated = [...updated, this.imgBuffer.length];
@@ -46,9 +50,14 @@ export class ImageManagerDialogComponent implements OnInit {
           this.imgBuffer[updated[i]] = newImg;
           this.imgBuffer = clone<Image[]>(this.imgBuffer);
           this.imgBuffAdded = [...this.imgBuffAdded, newImg];
+          this.isInProgress = !!this.imgBuffer.find(
+            (img) => img.src === IMG_LOADING
+          );
         })
         .catch((err) => {
           console.error(err);
+          this.isInProgress = false;
+          this.isErrorOccurred = true;
           alert(MSG_ACTION_UNSUCCSSFUL);
         });
     });
@@ -60,31 +69,49 @@ export class ImageManagerDialogComponent implements OnInit {
   }
 
   confirmActions(): void {
-    this.imgBuffDeleted.forEach((img) => {
+    this.isInProgress = true;
+    if (!this.imgBuffDeleted.length) {
+      this.dialogRef.close(this.imgBuffer);
+    }
+    this.imgBuffDeleted.forEach((img, i) => {
       this.checkoutService
         .deleteImage(img.src)
         .toPromise()
-        .then()
+        .then(() => {
+          if (i === this.imgBuffDeleted.length - 1) {
+            this.isInProgress = false;
+            this.dialogRef.close(this.imgBuffer);
+          }
+        })
         .catch((err) => {
           console.error(err);
           alert(MSG_ACTION_UNSUCCSSFUL);
+          this.isInProgress = false;
+          this.isErrorOccurred = true;
+          this.dialogRef.close(this.imgBuffer);
         });
     });
-
-    this.dialogRef.close(this.imgBuffer);
   }
 
   cancel(): void {
-    this.imgBuffAdded.forEach((img) => {
+    this.isInProgress = true;
+    this.imgBuffAdded.forEach((img, i) => {
       this.checkoutService
         .deleteImage(img.src)
         .toPromise()
-        .then()
+        .then(() => {
+          if (i === this.imgBuffAdded.length - 1) {
+            this.isInProgress = false;
+            this.dialogRef.close(null);
+          }
+        })
         .catch((err) => {
           console.error(err);
           alert(MSG_ACTION_UNSUCCSSFUL);
+          this.isInProgress = false;
+          this.isErrorOccurred = true;
+          this.dialogRef.close(null);
         });
     });
-    this.dialogRef.close(null);
   }
 }

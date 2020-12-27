@@ -22,14 +22,12 @@ $medium: 500;
 
 body {
   height: 100%;
-  //width: 500vw;
   margin: 0;
   padding: 0;
   overflow: hidden;
   @media only screen and (max-width: 960px) {
     overflow-y: visible;
     overflow-x: hidden;
-    //height: 420vh;
   }
 
   * {
@@ -212,6 +210,11 @@ body {
 .text__btn--primary {
   @extend .text__btn;
   color: $color-primary-btn;
+}
+
+.app__btn--disabled {
+  cursor: not-allowed !important;
+  opacity: 0.7;
 }
 
 .table-container {
