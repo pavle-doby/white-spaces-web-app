@@ -44,13 +44,13 @@
 .quest_msg-bottom {
   width: 55vw;
   text-align: center;
-  font-size: 1vw;
+  font-size: 0.8vw;
   font-weight: $regular;
 
   white-space: pre-line;
 
   @media screen and (max-width: 960px) {
-    font-size: 14px;
+    font-size: 12px;
     white-space: normal;
     padding: 20px 0;
     min-height: 55px;
@@ -71,24 +71,24 @@
 
 .upload__info--bottom {
   @extend .upload__info;
-  font-size: 0.75vw;
+  font-size: 12px;
 
-  @media screen and (max-width: 960px) {
-    font-size: 12px;
-  }
+  // @media screen and (max-width: 960px) {
+  //   font-size: 12px;
+  // }
 }
 
 .upload__info--tooltip-icon {
   cursor: help;
-  font-size: 1.2vw;
+  font-size: 18px;
   color: $color-primary-btn;
 
-  @media screen and (max-width: 960px) {
-    font-size: 12px;
-  }
+  // @media screen and (max-width: 960px) {
+  //   font-size: 12px;
+  // }
 }
 
 .upload__info--tooltip-icon-span {
-  width: 1.2vw;
-  height: 1.2vw;
+  width: 18px !important;
+  height: 18px !important;
 }

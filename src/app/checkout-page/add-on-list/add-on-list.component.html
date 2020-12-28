@@ -1,8 +1,19 @@
 <div class="add-on-list" fxLayout="column" fxLayoutAlign="start start">
-  <app-add-on
-    class="width-100"
-    *ngFor="let addOn of (this.$checkoutState | async).addOnList"
-    [addOn]="addOn"
-    (addRemoveAddOnEvent)="this.onAddRemoveAddOn($event)"
-  ></app-add-on>
+  <app-info
+    class="add-on-list__info"
+    [info]="this.info"
+    [description]="this.desc"
+  ></app-info>
+  <div
+    class="add-on-list__list width-100"
+    fxLayout="column"
+    fxLayoutAlign="start center"
+  >
+    <app-add-on
+      class="width-100"
+      *ngFor="let addOn of (this.$checkoutState | async).addOnList"
+      [addOn]="addOn"
+      (addRemoveAddOnEvent)="this.onAddRemoveAddOn($event)"
+    ></app-add-on>
+  </div>
 </div>

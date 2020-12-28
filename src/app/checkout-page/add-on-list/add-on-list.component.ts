@@ -33,14 +33,15 @@ export class AddOnListComponent implements OnInit {
   public subChekcoutState: Subscription;
   public shoppingCart: ShoppingCart;
 
+  public info: string = INFO;
+  public desc: string[] = [INFO_DESC];
+
   constructor(
     private readonly $store: Store<AppState>,
     private readonly checkoutService: CheckoutService
   ) {
     this.$checkoutState = this.$store.select((state) => state.checkout);
-    this.$store.dispatch(
-      setInfoCheckout({ info: INFO, description: [INFO_DESC] })
-    );
+    this.$store.dispatch(setInfoCheckout({ info: '', description: [] }));
     this.$store.dispatch(
       selectTabbarButtonCheckout({ btnText: TabbarText.ADD_ONS })
     );

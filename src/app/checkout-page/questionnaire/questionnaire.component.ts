@@ -110,7 +110,7 @@ export class QuestionnaireComponent implements OnInit {
       if (progressState.questions.state !== ProgressState.DONE) {
         return;
       }
-
+      return;
       this.dialog.open(ConfirmationDialogComponent, {
         data: new ConfirmationDialogData({
           titleLabel: 'Congratulations!',

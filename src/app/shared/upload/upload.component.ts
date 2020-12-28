@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { UploadConfig } from './upload.model';
 import { Subscription, fromEvent, Observable } from 'rxjs';
+import { puralize } from '../Utilities';
 
 export const SUPPERTED_FILES = '.dwg, .pdf, .jpg, .jpeg, .png ';
 
@@ -47,7 +48,7 @@ export class UploadComponent implements OnInit, OnDestroy {
 
     this.data.bottomInfo =
       this.data.bottomInfo ??
-      `The limit is ${this.data.limit} photo${this.data.limit > 1 ? 's' : ''}`;
+      `The limit is ${this.data.limit} file${puralize(this.data.limit)}`;
   }
 
   ngAfterViewInit(): void {

@@ -7,9 +7,9 @@
     *ngIf="this.questions?.length"
     class="questions_box"
     fxLayout="column"
-    fxLayoutAlign="center center"
+    fxLayoutAlign="start center"
     fxLayoutAlign.lt-md="start center"
-    fxLayoutGap="2vh"
+    fxLayoutGap="1vw"
     fxLayoutGap.lt-md="10px"
   >
     <div class="quest_msg">
@@ -26,7 +26,12 @@
       (changeAnswerEvent)="this.onChangeAnswer($event)"
     >
     </app-question>
-    <div class="questions__btns-box" fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="1vw">
+    <div
+      class="questions__btns-box"
+      fxLayout="row"
+      fxLayoutAlign="center start"
+      fxLayoutGap="1vw"
+    >
       <button
         *ngIf="!this.isHandset"
         class="checkout__btn--invert questionnaire__btn"
@@ -100,7 +105,7 @@
 
   <span class="quest_msg-bottom width-100">
     If you need help with filling this form out, contact us via
-    <a [href]="this.mailHref" class="app__a--none">email</a>
+    <a [href]="this.mailHref" class="app__a--none text__btn">email</a>
     . We are happy to assist you every step of the way
   </span>
 </div>

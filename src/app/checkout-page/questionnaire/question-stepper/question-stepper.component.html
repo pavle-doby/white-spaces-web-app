@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="20px">
+<div fxLayout="column" fxLayoutAlign="start center">
   <h2
     fxLayout="column"
     fxLayoutAlign="center center"
@@ -8,6 +8,7 @@
   </h2>
   <div
     *ngIf="!this.isHandset"
+    class="question-stepper__navigation"
     fxLayout="row"
     fxLayoutAlign="center center"
     fxLayoutGap="10px"
@@ -25,6 +26,7 @@
     </span>
   </div>
   <div
+    class="question-stepper__steps"
     fxLayout="row"
     fxLayoutAlign="center center"
     fxLayoutGap="1.32vw"
