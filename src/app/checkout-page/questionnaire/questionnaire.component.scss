@@ -72,23 +72,15 @@
 .upload__info--bottom {
   @extend .upload__info;
   font-size: 12px;
-
-  // @media screen and (max-width: 960px) {
-  //   font-size: 12px;
-  // }
 }
 
 .upload__info--tooltip-icon {
   cursor: help;
   font-size: 18px;
   color: $color-primary-btn;
-
-  // @media screen and (max-width: 960px) {
-  //   font-size: 12px;
-  // }
 }
 
 .upload__info--tooltip-icon-span {
-  width: 18px !important;
-  height: 18px !important;
+  width: 18px;
+  height: 18px;
 }

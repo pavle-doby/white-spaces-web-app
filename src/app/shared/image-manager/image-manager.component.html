@@ -11,18 +11,23 @@
     {{ this.config.title }}
   </h3>
 
-  <div *ngIf="this.config.showDragNDrop">Drag & Drop goes here</div>
-
   <app-upload
     [data]="this.uploadConfig"
     (uploadEvent)="onUploadEvent($event)"
   ></app-upload>
 
-  <app-image-grid
-    *ngIf="this.config.showGrid"
-    [onColMode]="this.config.dialogOneColMode"
-    [config]="this.gridConfig"
-    [images]="this.images"
-    (deleteEvent)="this.onDeleteEvent($event)"
-  ></app-image-grid>
+  <div
+    [id]="this.dragNDropId"
+    class="image-manager__drag-n-drop"
+    (drop)="this.dropHandler($event)"
+    (dragover)="this.dragOverHandler($event)"
+  >
+    <app-image-grid
+      *ngIf="this.config.showGrid"
+      [onColMode]="this.config.dialogOneColMode"
+      [config]="this.gridConfig"
+      [images]="this.images"
+      (deleteEvent)="this.onDeleteEvent($event)"
+    ></app-image-grid>
+  </div>
 </div>

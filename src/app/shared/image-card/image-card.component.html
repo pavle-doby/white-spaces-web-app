@@ -21,4 +21,8 @@
     [alt]="this.image.alt"
     (error)="this.onError($event)"
   />
+
+  <div *ngIf="this.showDeleteIcon" class="overlay">
+    {{ this.image.name }}
+  </div>
 </div>
