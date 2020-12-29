@@ -76,10 +76,17 @@
           <span class="admin-order-dialog--title">
             <b>{{ order.product.name }}</b>
           </span>
-          <div *ngFor="let question of order.additional_data.questions">
+          <div
+            *ngFor="
+              let question of order.additional_data.questions;
+              let i = index
+            "
+          >
             <mat-expansion-panel>
               <mat-expansion-panel-header>
-                <mat-panel-title> {{ question.question }} </mat-panel-title>
+                <mat-panel-title>
+                  <b>{{ i + 1 }}.&nbsp;</b> {{ question.question }}
+                </mat-panel-title>
               </mat-expansion-panel-header>
 
               <div
@@ -89,12 +96,17 @@
               >
                 <span>Section: {{ question.section }}</span>
                 <span>Client Anwser: {{ question.answer }}</span>
-                <div *ngIf="question.images !== null && question.images !== []">
+                <div
+                  *ngIf="question.images !== null && question.images !== []"
+                  fxLayout="row wrap"
+                  fxLayoutAlign="start"
+                  fxLayoutGap="15px grid"
+                >
                   <img
                     *ngFor="let img of question.images"
+                    class="admin-orders__img-question"
                     [src]="img"
                     alt=""
-                    class="admin-orders__img"
                   />
                 </div>
               </div>

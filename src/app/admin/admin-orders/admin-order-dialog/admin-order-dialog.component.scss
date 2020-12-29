@@ -8,6 +8,12 @@
   max-width: 600px;
 }
 
+.admin-orders__img-question {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
 .admin-order-dialog--title {
   margin: 30px 0px;
   display: block;
