@@ -73,8 +73,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
         }
 
         let unfinshedStep = tabState[i];
-        //TODO: uncomment when done development
-        // this.router.navigate(unfinshedStep.routerLinkArray);
+        this.router.navigate(unfinshedStep.routerLinkArray);
         this.count += 1;
       }
     });

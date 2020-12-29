@@ -39,6 +39,20 @@ $grid_gap: 2vw;
   color: #ffffff;
 }
 
+.overlay__text {
+  position: absolute;
+  bottom: 3px;
+  left: 3px;
+
+  width: 5vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media screen and (max-width: 960px) {
+    width: 130px;
+  }
+}
+
 .image-card__icon {
   position: absolute;
   color: white;

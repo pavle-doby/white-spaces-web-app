@@ -23,6 +23,8 @@
   />
 
   <div *ngIf="this.showDeleteIcon" class="overlay">
-    {{ this.image.name }}
+    <div class="overlay__text" [title]="this.image.name">
+      {{ this.image.name }}
+    </div>
   </div>
 </div>
