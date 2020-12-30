@@ -2,17 +2,26 @@
   class="add-on width-100"
   fxLayout="row"
   fxLayoutAlign="start start"
+  fxLayoutAlign.lt-md="start start"
   fxLayoutGap="1vw"
+  fxLayoutGap.lt-md="10px"
 >
   <div
     class="add-on__info width-100"
+    [ngClass]="{ 'cursor-pointer': this.isHandset }"
     fxLayout="column"
     fxLayoutAlign="start start"
     fxLayoutGap="0.5vw"
     (mouseenter)="this.showDescription()"
     (mouseleave)="this.hideDescription()"
+    (click)="this.toggleDescription()"
   >
-    <div class="width-100" fxLayout="row" fxLayoutAlign="space-between center">
+    <div
+      class="width-100"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      fxLayoutAlign.lt-md="space-between start"
+    >
       <span class="add-on__label">
         {{ this.addOn.name }}
       </span>

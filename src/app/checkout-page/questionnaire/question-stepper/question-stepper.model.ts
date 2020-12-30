@@ -1,9 +1,13 @@
+import { SectionRanges } from 'src/models/SectionRanges.model';
+
 export class QuestionStepper {
   public numberOfSteps: number;
   public rangeStart?: number;
   public rangeEnd?: number;
   public numberOfRangeToShow: number;
   public indexCurrent: number;
+  public currentSection: string;
+  public dictSectionRanges: Record<string, SectionRanges>;
 
   constructor(obj: QuestionStepper) {
     this.numberOfSteps = obj.numberOfSteps;
@@ -17,6 +21,7 @@ export class QuestionStepper {
         ? this.numberOfSteps - 1
         : obj.rangeEnd;
     this.indexCurrent = obj.indexCurrent;
+    this.dictSectionRanges = obj.dictSectionRanges;
   }
 }
 

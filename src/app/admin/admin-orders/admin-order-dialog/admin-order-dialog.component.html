@@ -10,21 +10,21 @@
       fxLayoutGap=".26vw"
     >
       <h2 mat-dialog-title>Order No. {{ this.data.id }}</h2>
-      <span
-        >Client: <b>{{ this.data.customerName }}</b>
+      <span>
+        Client: <b>{{ this.data.customerName }}</b>
       </span>
-      <span
-        >Email: <b>{{ this.data.customer }}</b></span
+      <span>
+        Email: <b>{{ this.data.customer }}</b></span
       >
-      <span
-        >Package and Add ons: <b>{{ this.data.packageNames }}</b></span
-      >
+      <span>
+        Package and Add ons: <b>{{ this.data.packageNames }}</b>
+      </span>
     </div>
 
     <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="15px">
-      <div>
-        <a (click)="this.downloadProject()">Download project &darr;</a>
-      </div>
+      <button mat-button class="width-100" (click)="this.downloadProject()">
+        Download project ✨
+      </button>
       <mat-form-field appearance="fill">
         <mat-label>Status</mat-label>
         <mat-select (selectionChange)="this.handleSelect($event.value)">
@@ -39,19 +39,18 @@
   <mat-dialog-content class="mat-typography">
     <mat-tab-group mat-align-tabs="center">
       <mat-tab label="Floor Plan">
-        <div *ngFor="let order of this.data.orderDetails">
-          <div
-            *ngIf="order.additional_data?.floor_plan"
-            fxLayout="column"
-            fxLayoutAlign="start center"
-            fxLayoutGap="30px"
-          >
-            <img
-              src="{{ order.additional_data?.floor_plan }}"
-              alt="Floor Plan"
-              width="80%"
-            />
-          </div>
+        <div
+          *ngFor="let img of floorPlanList"
+          fxLayout="column"
+          fxLayoutAlign="start center"
+          fxLayoutGap="30px"
+        >
+          <img
+            class="admin-orders__img"
+            [src]="img"
+            alt="Floor Plan"
+            width="80%"
+          />
         </div>
       </mat-tab>
       <mat-tab label="Photos">
@@ -64,7 +63,8 @@
           >
             <img
               *ngFor="let img of order.additional_data.images"
-              src="{{ img }}"
+              class="admin-orders__img"
+              [src]="img"
               width="80%"
               alt=""
             />
@@ -76,10 +76,17 @@
           <span class="admin-order-dialog--title">
             <b>{{ order.product.name }}</b>
           </span>
-          <div *ngFor="let question of order.additional_data.questions">
+          <div
+            *ngFor="
+              let question of order.additional_data.questions;
+              let i = index
+            "
+          >
             <mat-expansion-panel>
               <mat-expansion-panel-header>
-                <mat-panel-title> {{ question.question }} </mat-panel-title>
+                <mat-panel-title>
+                  <b>{{ i + 1 }}.&nbsp;</b> {{ question.question }}
+                </mat-panel-title>
               </mat-expansion-panel-header>
 
               <div
@@ -89,12 +96,17 @@
               >
                 <span>Section: {{ question.section }}</span>
                 <span>Client Anwser: {{ question.answer }}</span>
-                <div *ngIf="question.images !== null && question.images !== []">
+                <div
+                  *ngIf="question.images !== null && question.images !== []"
+                  fxLayout="row wrap"
+                  fxLayoutAlign="start"
+                  fxLayoutGap="15px grid"
+                >
                   <img
                     *ngFor="let img of question.images"
-                    src="{{ img }}"
+                    class="admin-orders__img-question"
+                    [src]="img"
                     alt=""
-                    class="admin-orders__img"
                   />
                 </div>
               </div>

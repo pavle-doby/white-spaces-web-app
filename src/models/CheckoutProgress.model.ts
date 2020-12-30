@@ -1,3 +1,5 @@
+import { TabbarText } from './TabbarText.model';
+
 export enum ProgressState {
   TODO = 'to do',
   IN_PROGRESS = 'in progress',
@@ -5,7 +7,7 @@ export enum ProgressState {
 }
 
 export class Step {
-  public name: string;
+  public name: TabbarText;
   public isRequired: boolean;
   public state: ProgressState;
   public total?: number;

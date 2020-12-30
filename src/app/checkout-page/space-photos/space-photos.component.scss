@@ -1,2 +1,19 @@
-.space-photos__container {
+.space-photos {
+  @media screen and (max-width: 960px) {
+    height: 1555px;
+  }
+}
+
+.sp__image-manager ::ng-deep {
+  .image-manager {
+    height: 50vh;
+  }
+
+  @media screen and (max-width: 960px) {
+    height: auto;
+  }
+}
+
+.sp__info-desc {
+  margin-top: 4vh;
 }

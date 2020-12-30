@@ -1,5 +1,6 @@
 import { CHECKOUT_PATHS_TO_LABEL_MAP } from 'src/app/checkout-page/checkout-page-routing.module';
 import { CheckoutPaths } from 'src/app/checkout-page/checkout-paths';
+import { TabbarText } from 'src/models/TabbarText.model';
 
 export class CheckoutStepsRouterLink {
   public static produce(
@@ -20,6 +21,31 @@ export class TabbarButton {
     this.isSelected = !!obj.isSelected;
     this.isCompleted = !!obj.isCompleted;
     this.routerLinkArray = obj.routerLinkArray;
+  }
+
+  public static updateTabbarBtnComplitedState = (
+    tabbarBtnList: TabbarButton[],
+    btnText: TabbarText,
+    isComplited: boolean = true
+  ): TabbarButton[] => {
+    return tabbarBtnList.map((btn: TabbarButton) => {
+      return btn.text === btnText
+        ? { ...btn, isCompleted: isComplited }
+        : { ...btn };
+    });
+  };
+
+  public static updateTbbarBtnComplitedStateWithObject({
+    tabbarButtons,
+    tabbarComplitedObj,
+  }: {
+    tabbarButtons: TabbarButton[];
+    tabbarComplitedObj: Record<string, boolean>;
+  }): TabbarButton[] {
+    return tabbarButtons.map((btn) => ({
+      ...btn,
+      isCompleted: tabbarComplitedObj[btn.text] ?? btn.isCompleted,
+    }));
   }
 }
 

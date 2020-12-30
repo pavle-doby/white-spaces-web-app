@@ -10,29 +10,23 @@ export class AdminService {
   constructor(private http: HttpClient) {}
 
   public getAllAddons(): Observable<any> {
-    return this.http.get(`${API_URL}/api/addons/all`, {
-      withCredentials: true,
-    });
+    return this.http.get(`${API_URL}/api/addons/all`);
   }
 
   public getAllPackages(): Observable<any> {
-    return this.http.get(`${API_URL}/api/packages/all`, {
-      withCredentials: true,
-    });
+    return this.http.get(`${API_URL}/api/packages/all`);
   }
 
   public getAllCustomers(): Observable<any> {
-    return this.http.get(`${API_URL}/api/auth/customers`, {
-      withCredentials: true,
-    });
+    return this.http.get(`${API_URL}/api/auth/customers`);
   }
 
   public getAllOrders(): Observable<any> {
-    return this.http.get(`${API_URL}/order/get-all`, { withCredentials: true });
+    return this.http.get(`${API_URL}/order/get-all`,);
   }
 
   public getAllBlogs(): Observable<any> {
-    return this.http.get(`${API_URL}/blog/all`, { withCredentials: true });
+    return this.http.get(`${API_URL}/blog/all`);
   }
 
   public postBlog(
@@ -77,7 +71,7 @@ export class AdminService {
   }
 
   public downloadProject(id: number, email: string): Observable<any> {
-    return this.http.post(`${API_URL}/order/download`, {
+    return this.http.post(`${API_URL}/api/order/download`, {
       order_id: id,
       email: email,
     });
@@ -110,7 +104,7 @@ export class AdminService {
     return this.http.post(
       `${API_URL}/product/${productId}/update`,
       {
-        price: price,
+        price: +price,
       },
       { withCredentials: true }
     );

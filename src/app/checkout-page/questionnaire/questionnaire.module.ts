@@ -4,8 +4,9 @@ import { QuestionnaireComponent } from './questionnaire.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuestionModule } from './question/question.module';
 import { QuestionStepperModule } from './question-stepper/question-stepper.module';
-import { GradientDirectiveModule } from 'src/app/shared/directives/gradient.directive.module';
-import { UploadModule } from 'src/app/shared/upload/upload.module';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [QuestionnaireComponent],
@@ -14,8 +15,9 @@ import { UploadModule } from 'src/app/shared/upload/upload.module';
     FlexLayoutModule,
     QuestionModule,
     QuestionStepperModule,
-    GradientDirectiveModule,
-    UploadModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatButtonModule,
   ],
   exports: [QuestionnaireComponent],
 })

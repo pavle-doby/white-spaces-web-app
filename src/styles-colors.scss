@@ -24,7 +24,9 @@ $color-gray-8: #f2f2f2;
 $color-gray-9: #f7f7f7;
 $color-gray-10: #fafafa;
 
-$color-selected: #010153;
-$color-complited: #000;
+$color-primay: #1b0069;
 
-$color-primary-btn: #1b0069;
+$color-selected: $color-primay;
+$color-complited: rosybrown;
+
+$color-primary-btn: $color-primay;

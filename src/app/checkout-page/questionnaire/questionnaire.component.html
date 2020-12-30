@@ -1,38 +1,111 @@
 <div
-  *ngIf="this.questions?.length"
   class="questionnaire"
   fxLayout="column"
-  fxLayoutAlign="center center"
-  fxLayoutAlign.lt-md="start center"
-  fxLayoutGap="2vh"
-  fxLayoutGap.lt-md="10px"
+  fxLayoutAlign="space-between center"
 >
-  <app-question-stepper
-    (selectStepEvent)="this.moveQuestionTo($event.index)"
-  ></app-question-stepper>
-
-  <app-question
-    [question]="this.questions[this.toShowIndex]"
-    (changeAnswerEvent)="this.onChangeAnswer($event)"
+  <div
+    *ngIf="this.questions?.length"
+    class="questions_box"
+    fxLayout="column"
+    fxLayoutAlign="start center"
+    fxLayoutAlign.lt-md="start center"
+    fxLayoutGap="1vw"
+    fxLayoutGap.lt-md="10px"
   >
-  </app-question>
-  <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="1vw">
-    <button
-      class="checkout__btn--invert questionnaire__btn"
-      (click)="this.moveQuestionTo(this.toShowIndex - 1)"
+    <div class="quest_msg">
+      {{ this.questionMsg }}
+    </div>
+
+    <app-question-stepper
+      (selectStepEvent)="this.moveQuestionTo($event.index)"
+    ></app-question-stepper>
+
+    <app-question
+      class="width-100"
+      [question]="this.questions[this.toShowIndex]"
+      (changeAnswerEvent)="this.onChangeAnswer($event)"
     >
-      Previous
-    </button>
-    <app-upload
-      *ngIf="this.questions[this.toShowIndex].image_required"
-      [data]="this.uploadData"
-      (uploadEvent)="this.onUploadEvent($event)"
-    ></app-upload>
-    <button
-      class="checkout__btn questionnaire__btn"
-      (click)="this.moveQuestionTo(this.toShowIndex + 1)"
+    </app-question>
+    <div
+      class="questions__btns-box"
+      fxLayout="row"
+      fxLayoutAlign="center start"
+      fxLayoutGap="1vw"
     >
-      Next
-    </button>
+      <button
+        *ngIf="!this.isHandset"
+        class="checkout__btn--invert questionnaire__btn"
+        (click)="this.moveQuestionTo(this.toShowIndex - 1)"
+      >
+        Previous
+      </button>
+      <button
+        mat-icon-button
+        *ngIf="this.isHandset"
+        aria-label="Previous button"
+        (click)="this.moveQuestionTo(this.toShowIndex - 1)"
+      >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+
+      <div
+        *ngIf="this.questions[this.toShowIndex].image_required"
+        fxLayout="column"
+        fxLayoutAlign="start center"
+        fxLayoutGap="10px"
+      >
+        <button
+          class="checkout__btn questionnaire__btn"
+          (click)="this.openUploadModal()"
+        >
+          Manage
+        </button>
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+          fxLayoutGap="5px"
+        >
+          <span class="upload__info--bottom">
+            {{ this.manageInfo }}
+          </span>
+          <span
+            *ngIf="!this.isHandset"
+            class="upload__info--tooltip-icon-span"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+          >
+            <mat-icon
+              class="upload__info--tooltip-icon"
+              [matTooltip]="this.manageTooltipInfo"
+              [matTooltipPosition]="this.mangeTooltipPosition"
+            >
+              info
+            </mat-icon>
+          </span>
+        </div>
+      </div>
+
+      <button
+        *ngIf="!this.isHandset"
+        class="checkout__btn questionnaire__btn"
+        (click)="this.moveQuestionTo(this.toShowIndex + 1)"
+      >
+        Next
+      </button>
+      <button
+        mat-icon-button
+        *ngIf="this.isHandset"
+        aria-label="Next button"
+        (click)="this.moveQuestionTo(this.toShowIndex + 1)"
+      >
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
   </div>
+
+  <span class="quest_msg-bottom width-100">
+    If you need help with filling this form out, contact us via
+    <a [href]="this.mailHref" class="app__a--none text__btn">email</a>
+    . We are happy to assist you every step of the way
+  </span>
 </div>

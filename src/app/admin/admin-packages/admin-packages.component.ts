@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/services/admin.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 
 @Component({
   selector: 'app-admin-packages',
@@ -12,6 +13,7 @@ export class AdminPackagesComponent implements OnInit {
   public packages = [];
   public questionnaireRooms: string[] = [];
   public addOns = [];
+
   public form: FormGroup = new FormGroup({
     smallName: new FormControl({ value: '', disabled: true }),
     smallPrice: new FormControl({ value: '', disabled: false }),
@@ -25,8 +27,9 @@ export class AdminPackagesComponent implements OnInit {
   });
 
   constructor(
-    private adminService: AdminService,
-    private snackBar: MatSnackBar
+    private readonly adminService: AdminService,
+    private checkoutService: CheckoutService,
+    private readonly snackBar: MatSnackBar
   ) {
     this.adminService.getAllPackages().subscribe((res) => {
       this.packages = res;
@@ -45,7 +48,7 @@ export class AdminPackagesComponent implements OnInit {
         largeDescription: res[2].data.description,
       });
     });
-    this.adminService.getAllAddons().subscribe((res) => {
+    this.checkoutService.getAllAddOns().subscribe((res) => {
       this.addOns = res;
     });
   }

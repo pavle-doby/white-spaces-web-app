@@ -8,13 +8,18 @@ import { AuthService } from '../services/auth.service';
 })
 export class AdminComponent implements OnInit {
   public isLoggedIn: boolean = false;
+
   constructor(private window: Window, private authService: AuthService) {
     this.window.document.body.style.width = '100vw';
     this.window.document.body.style.overflowY = 'scroll';
     this.authService.isAuthenticated.subscribe((isLoggedIn) => {
-      this.isLoggedIn = isLoggedIn && this.authService.isAdmin;
+      const isAdmin = this.authService.isUserAdmin;
+      this.isLoggedIn = isAdmin && this.authService.isUserLoggedIn;
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isLoggedIn =
+      this.authService.isUserAdmin && this.authService.isUserLoggedIn;
+  }
 }

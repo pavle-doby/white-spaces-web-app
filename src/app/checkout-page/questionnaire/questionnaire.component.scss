@@ -1,9 +1,86 @@
+@import "src/styles-colors.scss";
+@import "src/styles.scss";
+
 .questionnaire {
+  height: 70vh;
+  padding-left: 10px;
+  padding-right: 10px;
   @media screen and (max-width: 960px) {
-    height: 620px;
+    height: auto;
+  }
+}
+
+.questions_box {
+  @media screen and (max-width: 960px) {
+    height: 610px;
+  }
+}
+
+.questions__btns-box {
+  @media screen and (max-width: 960px) {
+    height: 55px;
   }
 }
 
 .questionnaire__btn {
   min-width: 120px;
+}
+
+.quest_msg {
+  width: 55vw;
+  text-align: center;
+  font-size: 1vw;
+  font-weight: $regular;
+
+  white-space: pre-line;
+
+  @media screen and (max-width: 960px) {
+    font-size: 14px;
+    white-space: normal;
+    padding: 20px 0;
+  }
+}
+
+.quest_msg-bottom {
+  width: 55vw;
+  text-align: center;
+  font-size: 0.8vw;
+  font-weight: $regular;
+
+  white-space: pre-line;
+
+  @media screen and (max-width: 960px) {
+    font-size: 12px;
+    white-space: normal;
+    padding: 20px 0;
+    min-height: 55px;
+  }
+}
+
+.upload__info {
+  font-size: 0.9vw;
+  font-weight: 400;
+  white-space: pre-wrap;
+  text-align: center;
+  color: rgb(178, 178, 178);
+
+  @media screen and (max-width: 960px) {
+    font-size: 14px;
+  }
+}
+
+.upload__info--bottom {
+  @extend .upload__info;
+  font-size: 12px;
+}
+
+.upload__info--tooltip-icon {
+  cursor: help;
+  font-size: 18px;
+  color: $color-primary-btn;
+}
+
+.upload__info--tooltip-icon-span {
+  width: 18px;
+  height: 18px;
 }

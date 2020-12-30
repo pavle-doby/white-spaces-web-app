@@ -6,10 +6,9 @@ import { InfoPriceLabelModule } from '../../shared/info-price-label/info-price-l
 import { FormsModule } from '@angular/forms';
 import { GradientDirectiveModule } from 'src/app/shared/directives/gradient.directive.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { LoaderModule } from 'src/app/shared/loader/loader.module';
 
-const MaterialModule = [
-  MatDialogModule
-]
+const MaterialModule = [MatDialogModule];
 
 @NgModule({
   declarations: [ReviewAndPayComponent],
@@ -19,7 +18,8 @@ const MaterialModule = [
     InfoPriceLabelModule,
     FormsModule,
     GradientDirectiveModule,
-    MaterialModule
+    MaterialModule,
+    LoaderModule,
   ],
   exports: [ReviewAndPayComponent],
 })

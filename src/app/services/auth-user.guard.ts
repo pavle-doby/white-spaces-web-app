@@ -69,7 +69,7 @@ export class AuthUserGuard
   }
 
   isUserLoggedIn() {
-    if (this.AuthService.isUserLoggedIn()) {
+    if (this.AuthService.isUserLoggedIn) {
       return true;
     }
 

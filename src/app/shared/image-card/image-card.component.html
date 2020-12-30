@@ -1,0 +1,30 @@
+<div
+  *ngIf="this.image"
+  class="image-card__div"
+  fxLayout="column"
+  fxLayoutAlign="start end"
+  (mouseenter)="this.onMouseEneter()"
+  (mouseleave)="this.onMouseLeave()"
+>
+  <mat-icon
+    *ngIf="this.showDeleteIcon"
+    class="image-card__icon cursor-pointer"
+    aria-label="Delete image button"
+    (click)="this.delete()"
+  >
+    delete
+  </mat-icon>
+
+  <img
+    class="image-card__img"
+    [src]="this.image.srcToShow"
+    [alt]="this.image.alt"
+    (error)="this.onError($event)"
+  />
+
+  <div *ngIf="this.showDeleteIcon" class="overlay">
+    <div class="overlay__text" [title]="this.image.name">
+      {{ this.image.name }}
+    </div>
+  </div>
+</div>

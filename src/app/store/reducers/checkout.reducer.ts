@@ -5,21 +5,16 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {
   checkoutSelectPackage,
   setInfoCheckout,
-  setFloorPlanCheckout,
-  setSpacePhotosURLsCheckout,
-  setAddOnIsSelectedCheckout,
   updateQuestionCheckout,
   setCurrentIndexCheckout,
-  addSpacePhotoURLCheckout,
-  clearSpacePhotosURLsCheckout,
   setAddOnListCheckout,
-  setQuestionStepperCheckout,
-  setQuestionsCheckout,
   setAllPackagesCheckout,
   setShoppingCartCheckout,
   selectTabbarButtonCheckout,
-  setTabbarStateCheckout,
   setInitStateChekcout,
+  processDoneCheckout,
+  appendImageFloorPalnCheckout,
+  appendSpacePhotoImageCheckout,
 } from '../actions/checkout.action';
 import {
   TabbarButton,
@@ -28,8 +23,6 @@ import {
 
 import * as _ from 'lodash';
 import { QuestionStepper } from 'src/app/checkout-page/questionnaire/question-stepper/question-stepper.model';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { FloorPlan } from 'src/models/FloorPlan.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { SideCadrPackage } from 'src/app/shared/side-card-packages/SideCardPackage';
 import {
@@ -37,22 +30,26 @@ import {
   ProgressState,
   Step,
 } from 'src/models/CheckoutProgress.model';
-import {
-  calculateFinishedQuestions,
-  getClientWidthPX,
-  isHandset,
-  updateTabbarBtnComplitedState,
-} from 'src/app/shared/Utilities';
+import { isArray, isHandset } from 'src/app/shared/Utilities';
 import { TabbarText } from 'src/models/TabbarText.model';
+import { AddOnDTO } from 'src/models/AddOnDTO';
+import { SectionRanges } from 'src/models/SectionRanges.model';
+import { Image } from 'src/models/Image.model';
+
+export const QS_RANGE_START = 0;
+export const QS_RANGE_END_SHORT = 3;
+export const QS_RANGE_END_WIDE = 15;
+export const QS_NUM_RANGE_TO_SHOW_SHORT = 4;
+export const QS_NUM_RANGE_TO_SHOW_WIDE = 16;
+export const QS_INDEX_CURRENT = 0;
 
 export interface CheckoutState {
   packageBox?: PackagesBox; // Jedan paket koji je u side kartici
   allPackageCards: SideCadrPackage[];
   info: string; //
   infoDesc: string[];
-  floorPlan?: FloorPlan;
-  spacePhotos?: FileList;
-  spacePhotosURLs: string[];
+  floorPlanImages?: Image[];
+  spacePhotoImages: Image[];
   addOnList: AddOn[];
   questions: Question[];
   tabbarButtons: TabbarButton[];
@@ -63,24 +60,27 @@ export interface CheckoutState {
 
 const getInitState = (): CheckoutState => {
   let initState: CheckoutState = {
-    packageBox: LocalStorageService.Instance.Package,
+    packageBox: null,
     allPackageCards: [],
     info: 'Welcome to your renovation project!',
     infoDesc: [''],
-    floorPlan: LocalStorageService.Instance.FloorPlan,
-    spacePhotos: null,
-    spacePhotosURLs: LocalStorageService.Instance.SpacePhotosUrls ?? [],
-    addOnList: LocalStorageService.Instance.AddOnList ?? [],
-    questions: LocalStorageService.Instance.Questions ?? [],
+    floorPlanImages: [],
+    spacePhotoImages: [],
+    addOnList: [],
+    questions: [],
     tabbarButtons: getTabbarContnet(),
     questionStepper: new QuestionStepper({
-      rangeStart: 0,
-      rangeEnd: isHandset() ? 4 : 15,
-      numberOfRangeToShow: isHandset() ? 5 : 16,
-      numberOfSteps:
-        LocalStorageService.Instance.Questions?.length ??
-        (isHandset() ? 5 : 16),
-      indexCurrent: 0,
+      rangeStart: QS_RANGE_START,
+      rangeEnd: isHandset() ? QS_RANGE_END_SHORT : QS_RANGE_END_WIDE,
+      numberOfRangeToShow: isHandset()
+        ? QS_NUM_RANGE_TO_SHOW_SHORT
+        : QS_NUM_RANGE_TO_SHOW_WIDE,
+      numberOfSteps: isHandset()
+        ? QS_NUM_RANGE_TO_SHOW_SHORT
+        : QS_NUM_RANGE_TO_SHOW_WIDE,
+      indexCurrent: QS_INDEX_CURRENT,
+      currentSection: '',
+      dictSectionRanges: {},
     }),
     shoppingCart: null,
     //TODO: Change on proper actions
@@ -88,34 +88,24 @@ const getInitState = (): CheckoutState => {
       floorPlan: new Step({
         name: TabbarText.FLOOR_PLAN,
         isRequired: true,
-        state: LocalStorageService.Instance.FloorPlan
-          ? ProgressState.DONE
-          : ProgressState.TODO,
+        state: ProgressState.TODO,
       }),
       spacePhotos: new Step({
         name: TabbarText.SPACE_PHOTOS,
         isRequired: true,
-        state: LocalStorageService.Instance.SpacePhotosUrls?.length
-          ? ProgressState.DONE
-          : ProgressState.TODO,
+        state: ProgressState.TODO,
       }),
       addOns: new Step({
         name: TabbarText.ADD_ONS,
         isRequired: false,
-        state: LocalStorageService.Instance?.AddOnList?.find(
-          (addon) => addon.isSelected
-        )
-          ? ProgressState.DONE
-          : ProgressState.TODO,
+        state: ProgressState.TODO,
       }),
       questions: new Step({
         name: TabbarText.QUESTIONNARIE,
         isRequired: true,
         state: ProgressState.TODO, // will be set properly in constructor
-        total: LocalStorageService.Instance.Questions?.length,
-        finshed: calculateFinishedQuestions(
-          LocalStorageService.Instance.Questions
-        ),
+        total: null,
+        finshed: null,
       }),
     }),
   };
@@ -135,231 +125,157 @@ const reducer = createReducer(
     return { ...getInitState() };
   }),
   on(setShoppingCartCheckout, (state, { shoppingCart }) => {
-    LocalStorageService.Instance.ShoppingCart = shoppingCart;
-     
-    return { ...state, shoppingCart: shoppingCart };
-  }),
-  on(setTabbarStateCheckout, (state, { buttons }) => {
-    return { ...state, tabbarButtons: buttons };
+    let tabbarButtons = state.tabbarButtons;
+
+    const product = ShoppingCart.getPackageProduct(shoppingCart);
+    const lineItem = ShoppingCart.getPackageLineItem(shoppingCart);
+
+    //#region packageBox
+    const packageBox = ShoppingCart.convertPackageProductToPackageBox(product);
+    //#endregion
+
+    //#region floorPlan
+    const urls = lineItem.additional_data.floor_plan;
+    const floorPlanImages =
+      urls && Array.isArray(urls)
+        ? urls.map((url) => {
+            return new Image({ src: url });
+          })
+        : [];
+
+    const isFloorPalnDone = !!floorPlanImages.length;
+    //#endregion floorPlan
+
+    //#region spacePhotosURLs
+    const spacePhotoImages = isArray(lineItem.additional_data.images)
+      ? lineItem.additional_data.images.map((src) => new Image({ src }))
+      : [];
+
+    const isSpacePhotosDone = !!spacePhotoImages.length;
+    //#endregion
+
+    //#region addOnList
+    const addOnProdList = ShoppingCart.getAddOnProductList(shoppingCart);
+    const selectedAddOns = addOnProdList.map((addOnProd) =>
+      AddOn.covertAddOnDTOToAddOn(addOnProd as AddOnDTO, true)
+    );
+    const addOnList = state.addOnList
+      .map((addOn) => ({
+        ...addOn,
+        isSelected: !!selectedAddOns.find((sAddOn) => sAddOn.id === addOn.id),
+      }))
+      .sort(AddOn.compare);
+
+    const isOneSelected = !!selectedAddOns.length;
+    //#endregion
+
+    //#region questions
+    let questions: Question[] = [];
+    let additionalDataQuestions = [];
+
+    const packageLineItem = ShoppingCart.getPackageLineItem(shoppingCart);
+    additionalDataQuestions = packageLineItem.additional_data?.questions ?? [];
+    questions = [...questions, ...additionalDataQuestions];
+
+    const addOnsLineItems = ShoppingCart.getAddOnLineItemList(shoppingCart);
+    addOnsLineItems.forEach((li) => {
+      additionalDataQuestions = li.additional_data?.questions ?? [];
+      questions = [...questions, ...additionalDataQuestions];
+    });
+
+    let dictSectionRanges = SectionRanges.makeDictSectionRanges(questions);
+
+    const finished = Question.calculateFinishedQuestions(questions);
+    const total = questions.length;
+    const isQuestionsDone = total === finished;
+    //#endregion
+
+    //#region tabbarButtons
+    let tabbarComplitedObj = {};
+    tabbarComplitedObj[TabbarText.FLOOR_PLAN] = isFloorPalnDone;
+    tabbarComplitedObj[TabbarText.SPACE_PHOTOS] = isSpacePhotosDone;
+    tabbarComplitedObj[TabbarText.ADD_ONS] = isOneSelected;
+    tabbarComplitedObj[TabbarText.QUESTIONNARIE] = isQuestionsDone;
+
+    tabbarButtons = TabbarButton.updateTbbarBtnComplitedStateWithObject({
+      tabbarButtons,
+      tabbarComplitedObj,
+    });
+    //#endregion
+
+    return {
+      ...state,
+      shoppingCart,
+      packageBox,
+      floorPlanImages,
+      spacePhotoImages,
+      addOnList,
+      questions,
+      tabbarButtons,
+      questionStepper: {
+        ...state.questionStepper,
+        numberOfSteps: questions.length,
+        dictSectionRanges,
+      },
+      progressState: {
+        ...state.progressState,
+        floorPlan: {
+          ...state.progressState.floorPlan,
+          state: isFloorPalnDone ? ProgressState.DONE : ProgressState.TODO,
+        },
+        spacePhotos: {
+          ...state.progressState.spacePhotos,
+          state: isSpacePhotosDone ? ProgressState.DONE : ProgressState.TODO,
+        },
+        questions: {
+          ...state.progressState.questions,
+          finshed: finished,
+          total: total,
+          state: isQuestionsDone ? ProgressState.DONE : ProgressState.TODO,
+        },
+        addOns: {
+          ...state.progressState.addOns,
+          state: isOneSelected ? ProgressState.DONE : ProgressState.TODO,
+        },
+      },
+    };
   }),
   on(selectTabbarButtonCheckout, (state, { btnText: tabbarBtnText }) => {
-    const newTabbarState: TabbarButton[] = state.tabbarButtons.map(
-      (btn: TabbarButton) => {
-        return btn.text === tabbarBtnText
-          ? { ...btn, isSelected: true }
-          : { ...btn, isSelected: false };
-      }
-    );
-    return { ...state, tabbarButtons: newTabbarState };
+    const tabbarButtons = state.tabbarButtons.map((btn) => {
+      return {
+        ...btn,
+        isSelected: btn.text === tabbarBtnText,
+      };
+    });
+    return { ...state, tabbarButtons };
   }),
   on(setAllPackagesCheckout, (state, { packages }) => {
     return { ...state, allPackageCards: packages };
   }),
   on(checkoutSelectPackage, (state, { packageBox }) => {
-    LocalStorageService.Instance.Package = packageBox;
-    return { ...state, packageBox: packageBox };
+    return { ...state, packageBox };
   }),
   on(setInfoCheckout, (state, { info, description }) => {
-    return { ...state, info: info, infoDesc: description };
-  }),
-  on(setFloorPlanCheckout, (state, { floorPlan }) => {
-    LocalStorageService.Instance.FloorPlan = floorPlan;
-    const newTabbarState = updateTabbarBtnComplitedState(
-      state.tabbarButtons,
-      TabbarText.FLOOR_PLAN
-    );
-    return {
-      ...state,
-      floorPlan: floorPlan,
-      progressState: {
-        ...state.progressState,
-        floorPlan: {
-          ...state.progressState.floorPlan,
-          state: ProgressState.DONE,
-        },
-      },
-      tabbarButtons: newTabbarState,
-    };
-  }),
-  on(setSpacePhotosURLsCheckout, (state, { filesURLs }) => {
-    LocalStorageService.Instance.SpacePhotosUrls = filesURLs;
-    const newTabbarState = updateTabbarBtnComplitedState(
-      state.tabbarButtons,
-      TabbarText.SPACE_PHOTOS
-    );
-    return {
-      ...state,
-      spacePhotosURLs: filesURLs,
-      progressState: {
-        ...state.progressState,
-        spacePhotos: {
-          ...state.progressState.spacePhotos,
-          state: ProgressState.DONE,
-        },
-      },
-      tabbarButtons: newTabbarState,
-    };
-  }),
-  on(addSpacePhotoURLCheckout, (state, { fileURL }) => {
-    const newUrls = [...state.spacePhotosURLs, fileURL];
-    LocalStorageService.Instance.SpacePhotosUrls = newUrls;
-    const newTabbarState = updateTabbarBtnComplitedState(
-      state.tabbarButtons,
-      TabbarText.SPACE_PHOTOS
-    );
-    return {
-      ...state,
-      spacePhotosURLs: newUrls,
-      progressState: {
-        ...state.progressState,
-        spacePhotos: {
-          ...state.progressState.spacePhotos,
-          state: ProgressState.DONE,
-        },
-      },
-      tabbarButtons: newTabbarState,
-    };
-  }),
-  on(clearSpacePhotosURLsCheckout, (state) => {
-    LocalStorageService.Instance.SpacePhotosUrls = [];
-    const newTabbarState = updateTabbarBtnComplitedState(
-      state.tabbarButtons,
-      TabbarText.SPACE_PHOTOS,
-      false
-    );
-    return {
-      ...state,
-      spacePhotosURLs: [],
-      progressState: {
-        ...state.progressState,
-        spacePhotos: {
-          ...state.progressState.spacePhotos,
-          state: ProgressState.TODO,
-        },
-      },
-      tabbarButtons: newTabbarState,
-    };
-  }),
-  on(setAddOnIsSelectedCheckout, (state, { addOn, isSelected }) => {
-    if (isSelected) {
-      LocalStorageService.Instance.appendQuestions(addOn.questions);
-    } else {
-      LocalStorageService.Instance.Questions = LocalStorageService.Instance.Questions.filter(
-        (q) => !addOn.questions.find((addOnQ) => addOnQ.id === q.id)
-      );
-    }
-
-    LocalStorageService.Instance.chageAddOnState(addOn, isSelected);
-    const isOneSelected = !!LocalStorageService.Instance.AddOnList.find(
-      (addOn) => addOn.isSelected
-    );
-
-    let newTabbarState = updateTabbarBtnComplitedState(
-      state.tabbarButtons,
-      TabbarText.ADD_ONS,
-      isOneSelected
-    );
-
-    const newQuestions = LocalStorageService.Instance.Questions;
-
-    let finished = calculateFinishedQuestions(newQuestions);
-    let total = newQuestions.length;
-    let isDone = total === finished;
-
-    newTabbarState = updateTabbarBtnComplitedState(
-      newTabbarState,
-      TabbarText.QUESTIONNARIE,
-      isDone
-    );
-
-    return {
-      ...state,
-      addOnList: LocalStorageService.Instance.AddOnList,
-      questions: LocalStorageService.Instance.Questions,
-      questionStepper: {
-        ...state.questionStepper,
-        numberOfSteps: LocalStorageService.Instance.Questions?.length,
-        indexCurrent: 0,
-        rangeStart: 0,
-        rangeEnd: 15,
-        numberOfRangeToShow: 16,
-      },
-      progressState: {
-        ...state.progressState,
-        addOns: {
-          ...state.progressState.addOns,
-          state: LocalStorageService.Instance.AddOnList.find(
-            (addOn) => addOn.isSelected
-          )
-            ? ProgressState.DONE
-            : ProgressState.TODO,
-        },
-        questions: {
-          ...state.progressState.questions,
-          total: total,
-          finshed: finished,
-          state: isDone ? ProgressState.DONE : ProgressState.TODO,
-        },
-      },
-      tabbarButtons: newTabbarState,
-    };
+    return { ...state, info, infoDesc: description };
   }),
   on(setAddOnListCheckout, (state, { addOnList }) => {
-    LocalStorageService.Instance.AddOnList = addOnList;
-    const newTabbarState = updateTabbarBtnComplitedState(
+    const tabbarButtons = TabbarButton.updateTabbarBtnComplitedState(
       state.tabbarButtons,
       TabbarText.ADD_ONS,
       !!addOnList.find((addOn) => addOn.isSelected)
     );
-    return { ...state, addOnList: addOnList, tabbarButtons: newTabbarState };
-  }),
-  on(setQuestionsCheckout, (state, { questions }) => {
-    LocalStorageService.Instance.Questions = questions;
-
-    const finished = calculateFinishedQuestions(questions);
-    const total = questions.length;
-    const isDone = finished === total;
-    const newTabbarState = updateTabbarBtnComplitedState(
-      state.tabbarButtons,
-      TabbarText.QUESTIONNARIE,
-      isDone
-    );
-
-    return {
-      ...state,
-      questions: questions,
-      questionStepper: {
-        ...state.questionStepper,
-        numberOfSteps: questions.length,
-        indexCurrent: 0,
-      },
-      progressState: {
-        ...state.progressState,
-        questions: {
-          ...state.progressState.questions,
-          finshed: finished,
-          total: total,
-          state: isDone ? ProgressState.DONE : ProgressState.TODO,
-        },
-      },
-      tabbarButtons: newTabbarState,
-    };
-  }),
-  on(setQuestionStepperCheckout, (state, { questionStepper }) => {
-    return { ...state, questionStepper: questionStepper };
+    return { ...state, addOnList, tabbarButtons };
   }),
   on(updateQuestionCheckout, (state, { question }) => {
     const newQuestions = state.questions.map((q) => {
       return q.id === question.id ? { ...question } : { ...q };
     });
 
-    LocalStorageService.Instance.Questions = newQuestions;
-
-    let finished = calculateFinishedQuestions(newQuestions);
-    let total = newQuestions.length;
+    const finished = Question.calculateFinishedQuestions(newQuestions);
+    const total = newQuestions.length;
     const isDone = total === finished;
 
-    const newTabbarState = updateTabbarBtnComplitedState(
+    const newTabbarState = TabbarButton.updateTabbarBtnComplitedState(
       state.tabbarButtons,
       TabbarText.QUESTIONNARIE,
       isDone
@@ -385,12 +301,19 @@ const reducer = createReducer(
     let newRangeEnd = state.questionStepper.rangeEnd;
     let range = state.questionStepper.numberOfRangeToShow;
 
-    if (currentIndex > state.questionStepper.rangeEnd) {
-      newRangeStart = currentIndex - range + 1;
-      newRangeEnd = currentIndex;
-    } else if (currentIndex < state.questionStepper.rangeStart) {
-      newRangeStart = currentIndex;
-      newRangeEnd = currentIndex + range - 1;
+    const questions = state.questions;
+    const section = questions[currentIndex].section;
+    const sectionRanges = state.questionStepper.dictSectionRanges[section];
+
+    if (
+      currentIndex === sectionRanges.rangeStart ||
+      currentIndex === sectionRanges.rangeEnd
+    ) {
+      newRangeStart = sectionRanges.rangeStart;
+      newRangeEnd = sectionRanges.rangeEnd;
+      range = isHandset()
+        ? QS_NUM_RANGE_TO_SHOW_SHORT
+        : newRangeEnd - newRangeStart;
     }
 
     const newStepper: QuestionStepper = {
@@ -398,9 +321,30 @@ const reducer = createReducer(
       indexCurrent: currentIndex,
       rangeStart: newRangeStart,
       rangeEnd: newRangeEnd,
+      numberOfRangeToShow: range,
+      currentSection: section,
     };
 
     return { ...state, questionStepper: newStepper };
+  }),
+  on(processDoneCheckout, (state, {}) => {
+    return {
+      ...state,
+      ...getInitState(),
+      allPackageCards: [...state.allPackageCards],
+    };
+  }),
+  on(appendImageFloorPalnCheckout, (state, { image }) => {
+    return {
+      ...state,
+      floorPlanImages: [...state.floorPlanImages, image],
+    };
+  }),
+  on(appendSpacePhotoImageCheckout, (state, { image }) => {
+    return {
+      ...state,
+      spacePhotoImages: [...state.spacePhotoImages, image],
+    };
   })
 );
 

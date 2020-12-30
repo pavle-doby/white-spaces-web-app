@@ -5,15 +5,12 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import {
   setInfoCheckout,
-  setAddOnIsSelectedCheckout,
-  setAddOnListCheckout,
   setShoppingCartCheckout,
   selectTabbarButtonCheckout,
+  setCurrentIndexCheckout,
 } from 'src/app/store/actions/checkout.action';
 import { AddOn } from 'src/models/AddOn';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
-import { convertQuestionsDTOListToQuestionsList } from 'src/app/shared/Utilities';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { TabbarText } from 'src/models/TabbarText.model';
@@ -36,14 +33,15 @@ export class AddOnListComponent implements OnInit {
   public subChekcoutState: Subscription;
   public shoppingCart: ShoppingCart;
 
+  public info: string = INFO;
+  public desc: string[] = [INFO_DESC];
+
   constructor(
     private readonly $store: Store<AppState>,
     private readonly checkoutService: CheckoutService
   ) {
     this.$checkoutState = this.$store.select((state) => state.checkout);
-    this.$store.dispatch(
-      setInfoCheckout({ info: INFO, description: [INFO_DESC] })
-    );
+    this.$store.dispatch(setInfoCheckout({ info: '', description: [] }));
     this.$store.dispatch(
       selectTabbarButtonCheckout({ btnText: TabbarText.ADD_ONS })
     );
@@ -53,42 +51,6 @@ export class AddOnListComponent implements OnInit {
     this.subChekcoutState = this.$checkoutState.subscribe((ckState) => {
       this.shoppingCart = ckState.shoppingCart;
     });
-
-    this.addOnList = LocalStorageService.Instance.AddOnList;
-    if (!this.addOnList?.length) {
-      this.checkoutService
-        .getAllAddOns()
-        .toPromise()
-        .then((addOnList) => {
-          LocalStorageService.Instance.AddOnCategroyId = addOnList?.length
-            ? addOnList[0].category_id
-            : null;
-          this.addOnList = addOnList
-            .map((addOnDTO) => {
-              const questions = convertQuestionsDTOListToQuestionsList(
-                addOnDTO.additional_data.questions,
-                addOnDTO
-              );
-              return new AddOn({
-                id: addOnDTO.id,
-                name: addOnDTO.name,
-                description: addOnDTO.data?.description,
-                price: addOnDTO.price,
-                isSelected: false,
-                questions,
-              });
-            })
-            .sort(this.compareAddOns);
-
-          this.$store.dispatch(
-            setAddOnListCheckout({ addOnList: this.addOnList })
-          );
-        });
-    }
-  }
-
-  public compareAddOns(a: AddOn, b: AddOn): number {
-    return a.name.localeCompare(b.name);
   }
 
   public onAddRemoveAddOn(addOn: AddOn): void {
@@ -97,22 +59,17 @@ export class AddOnListComponent implements OnInit {
         shopping_cart_id: this.shoppingCart.id,
         product_id: addOn.id,
         quantity: 1,
-        additional_data: {},
+        additional_data: {
+          questions: addOn.questions,
+        },
       };
 
       this.checkoutService
         .addProduct(productVM)
         .toPromise()
-        .then((newShoppingCart) => {
-          this.$store.dispatch(
-            setShoppingCartCheckout({ shoppingCart: newShoppingCart })
-          );
-          this.$store.dispatch(
-            setAddOnIsSelectedCheckout({
-              addOn: addOn,
-              isSelected: addOn.isSelected,
-            })
-          );
+        .then((shoppingCart) => {
+          this.$store.dispatch(setShoppingCartCheckout({ shoppingCart }));
+          this.$store.dispatch(setCurrentIndexCheckout({ currentIndex: 0 }));
         })
         .catch((error) => {
           console.error(error);
@@ -128,36 +85,24 @@ export class AddOnListComponent implements OnInit {
         .deleteProduct(addOnLineItem.id)
         .toPromise()
         .then((message) => {
-          const newShoppingCart = ShoppingCart.deleteLineItem(
+          const shoppingCart = ShoppingCart.deleteLineItem(
             this.shoppingCart,
             addOnLineItem.id
           );
-          this.$store.dispatch(
-            setShoppingCartCheckout({ shoppingCart: newShoppingCart })
-          );
-          this.$store.dispatch(
-            setAddOnIsSelectedCheckout({
-              addOn: addOn,
-              isSelected: addOn.isSelected,
-            })
-          );
+          this.$store.dispatch(setShoppingCartCheckout({ shoppingCart }));
+          this.$store.dispatch(setCurrentIndexCheckout({ currentIndex: 0 }));
+
           alert(message);
         })
         .catch((err) => {
           if (err.status === 200) {
-            const newShoppingCart = ShoppingCart.deleteLineItem(
+            const shoppingCart = ShoppingCart.deleteLineItem(
               this.shoppingCart,
               addOnLineItem.id
             );
-            this.$store.dispatch(
-              setShoppingCartCheckout({ shoppingCart: newShoppingCart })
-            );
-            this.$store.dispatch(
-              setAddOnIsSelectedCheckout({
-                addOn: addOn,
-                isSelected: addOn.isSelected,
-              })
-            );
+            this.$store.dispatch(setShoppingCartCheckout({ shoppingCart }));
+            this.$store.dispatch(setCurrentIndexCheckout({ currentIndex: 0 }));
+
             return;
           }
           console.error(err);

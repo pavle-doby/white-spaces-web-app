@@ -3,6 +3,7 @@
   fxLayout="column"
   fxLayoutAlign="start center"
   fxLayoutGap="1vw"
+  fxLayoutGap.lt-md="10px"
 >
   <div *ngIf="this.data?.message" class="upload__message">
     {{ this.data?.message }}
@@ -10,7 +11,7 @@
   <div *ngIf="this.data?.info" class="upload__info">
     {{ this.data?.info }}
   </div>
-  <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
+  <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
     <button
       class="checkout__btn"
       [ngClass]="{ app__uppercase: this.data.uppercaseButtonText }"

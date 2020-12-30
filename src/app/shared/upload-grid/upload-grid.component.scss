@@ -1,26 +1,3 @@
-$img_size: 6vw;
-$grid_gap: 1vw;
-
-.upload-grid__img {
-  width: $img_size;
-  height: $img_size;
-  object-fit: cover;
-
-  @media screen and (max-width: 960px) {
-    width: 140px;
-    height: 140px;
-  }
-}
-
 .upload-grid__container {
   padding: 0;
-}
-
-.upload-grid__img-grid {
-  width: calc(#{$img_size} * 8 + #{$grid_gap} * 8);
-
-  @media screen and (max-width: 960px) {
-    width: 300px;
-    margin-right: -10px;
-  }
 }

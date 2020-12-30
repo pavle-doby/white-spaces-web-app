@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [AdminOrderDialogComponent],
@@ -16,6 +17,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatTabsModule,
     MatSelectModule,
     MatExpansionModule,
+    MatButtonModule,
   ],
   exports: [AdminOrderDialogComponent],
 })

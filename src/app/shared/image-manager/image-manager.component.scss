@@ -1,0 +1,13 @@
+@import "src/styles-colors.scss";
+
+.image-manager--dialog-one-col-mode {
+  @media screen and (max-width: 960px) {
+    height: 420px;
+    overflow: auto;
+  }
+}
+
+.image-manager__drag-n-drop {
+  border: 2px dashed $color-gray-7;
+  padding: 15px;
+}

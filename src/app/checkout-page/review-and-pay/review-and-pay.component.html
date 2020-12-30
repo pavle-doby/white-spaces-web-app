@@ -1,4 +1,8 @@
-<div class="width-100" fxLayout="column" fxLayoutAlign="center center">
+<div
+  class="review-pay width-100"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+>
   <div class="width-100" fxLayout="row" fxLayout.lt-md="column">
     <div
       class="review-pay__left width-100"
@@ -68,10 +72,6 @@
     >
       <div class="review-pay__right-header">
         <h2>Payment details</h2>
-        <span class="review-pay__title-desc--white">
-          Please note that the value of your order will be charged to your card
-          instantly.
-        </span>
       </div>
       <div
         class="review-pay__right-body width-100"
@@ -190,13 +190,22 @@
         <button
           class="review-pay__btn checkout__btn"
           [ngClass]="{
-            'review-pay__btn--disabled':
-              !this.iAgreeToTerms || !this.iAgreeToDesign
+            'app__btn--disabled-grey':
+              !this.iAgreeToTerms ||
+              !this.iAgreeToDesign ||
+              this.isCreateInProgress
           }"
-          [disabled]="!this.iAgreeToTerms || !this.iAgreeToDesign"
+          [disabled]="
+            !this.iAgreeToTerms ||
+            !this.iAgreeToDesign ||
+            this.isCreateInProgress
+          "
           (click)="this.createOrder()"
+          fxLayout="row"
+          fxLayoutAlign="center center"
         >
-          Create order
+          <app-loader *ngIf="this.isCreateInProgress"> </app-loader>
+          <span *ngIf="!this.isCreateInProgress">Create order</span>
         </button>
       </div>
     </div>

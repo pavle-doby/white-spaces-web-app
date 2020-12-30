@@ -1,10 +1,17 @@
 <div
-  class="space-photos__container"
+  class="space-photos"
   fxLayout="column"
-  fxLayoutAlign="start start"
+  fxLayoutAlign="start center"
+  fxLayoutGap="20px"
 >
-  <app-upload-grid
-    (uploadFilesEvent)="this.onUploadFilesEvent($event)"
-    [imgURLs]="(this.$checkoutState | async).spacePhotosURLs"
-  ></app-upload-grid>
+  <app-info class="sp__info-desc" [info]="this.info" [description]="this.desc">
+  </app-info>
+  <app-image-manager
+    class="sp__image-manager"
+    [uploadConfig]="this.uploadConfig"
+    [images]="(this.$checkoutState | async).spacePhotoImages"
+    (uploadEvent)="this.onUploadFilesEvent($event)"
+    (deleteEvent)="this.onDeleteEvent($event)"
+  >
+  </app-image-manager>
 </div>

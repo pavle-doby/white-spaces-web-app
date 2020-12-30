@@ -61,7 +61,9 @@ export class AuthAdminGuard
   }
 
   isUserAdmin(route: ActivatedRouteSnapshot, url: any): boolean {
-    if (this.authService.isAdmin) {
+    console.log(this.authService.isUserAdmin);
+
+    if (this.authService.isUserAdmin) {
       return true;
     } else {
       this.router.navigate(['/admin']);

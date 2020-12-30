@@ -1,15 +1,10 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { NavBtnsInitStateObj } from '../shared/navbar/navbar.content';
-import { Observable } from 'rxjs';
-import {
-  BreakpointObserver,
-  Breakpoints,
-  MediaMatcher,
-} from '@angular/cdk/layout';
-import { map, shareReplay, tap } from 'rxjs/operators';
+import { MediaMatcher } from '@angular/cdk/layout';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store';
-import { MEDIA_QUERY_WIDTH } from '../app.config';
+import { MEDIA_QUERY_WIDTH, SCROLL_BEHAVIOR } from '../app.config';
+import { Subject } from 'rxjs';
+import { throttleTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home-page',
@@ -21,13 +16,15 @@ export class HomePageComponent implements OnInit {
   matcher: MediaQueryList;
   isMobile: boolean = false;
   parallaxRatio: number = 1;
-  // isHandset$: Observable<boolean> = this.breakpointObserver
-  //   .observe([Breakpoints.Handset, Breakpoints.HandsetPortrait])
-  //   .pipe(
-  //     tap((result) => console.log(result)),
-  //     map((result) => result.matches),
-  //     shareReplay()
-  //   );
+  
+  public scrollLeftSub: Subject<void> = new Subject<void>();
+  public scrollRightSub: Subject<void> = new Subject<void>();
+
+  private throttleDuration: number = 500; // in ms
+  private scrollOffset = 500; // in px
+
+  public readonly homeId: string = 'home23';
+  public readonly youGetId: string = 'you-get23';
 
   constructor(
     private window: Window,
@@ -43,39 +40,78 @@ export class HomePageComponent implements OnInit {
     }
     this.matcher = this.mediaMatcher.matchMedia(MEDIA_QUERY_WIDTH);
     this.matcher.addListener((event) => {
-       
       this.window.document.body.style.width = event.matches ? '100vw' : '450vw';
     });
-    // this.isHandset$.subscribe((res) => {
-    //    
-
-    //   if (res) {
-    //     this.window.document.body.style.width = '100vw';
-    //   } else {
-    //     this.window.document.body.style.width = '500vw';
-    //   }
-    // });
-    //this.window.document.body.style.width = `${100 * 5}vw`;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.scrollRightSub
+      .pipe(throttleTime(this.throttleDuration))
+      .subscribe(() => {
+        this.scrollRight();
+      });
+
+    this.scrollLeftSub
+      .pipe(throttleTime(this.throttleDuration))
+      .subscribe(() => {
+        this.scrollLeft();
+      });
+  }
 
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
     switch (event.key) {
+      case 'PageDown':
+      case 'ArrowDown':
       case 'ArrowRight': {
-         
-
+        this.scrollRightSub.next();
         break;
       }
+      case 'PageUp':
+      case 'ArrowUp':
       case 'ArrowLeft': {
-         
+        this.scrollLeftSub.next();
+        break;
+      }
+      case 'Home': {
+        const home = document.getElementById(this.homeId);
 
+        home.scrollIntoView({
+          behavior: SCROLL_BEHAVIOR,
+          inline: 'center',
+          block: 'center',
+        });
+        break;
+      }
+      case 'End': {
+        const youGet = document.getElementById(this.youGetId);
+
+        youGet.scrollIntoView({
+          behavior: SCROLL_BEHAVIOR,
+          inline: 'center',
+          block: 'center',
+        });
         break;
       }
       default: {
         break;
       }
     }
+  }
+
+  scrollRight(): void {
+    window.scrollBy({
+      left: this.scrollOffset,
+      top: 0,
+      behavior: SCROLL_BEHAVIOR,
+    });
+  }
+
+  scrollLeft(): void {
+    window.scrollBy({
+      left: -this.scrollOffset,
+      top: 0,
+      behavior: SCROLL_BEHAVIOR,
+    });
   }
 }

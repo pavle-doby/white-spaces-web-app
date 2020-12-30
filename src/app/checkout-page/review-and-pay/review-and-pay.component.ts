@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AppState } from 'src/app/store';
 import { Store } from '@ngrx/store';
 import {
+  processDoneCheckout,
   selectTabbarButtonCheckout,
   setInfoCheckout,
-  setInitStateChekcout,
 } from 'src/app/store/actions/checkout.action';
 import { InfoPrice } from 'src/models/InfoPrice.model';
 import { InfoPriceLabelInputs } from 'src/app/shared/info-price-label/info-price-label.component';
@@ -31,6 +31,7 @@ import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 import { firstToUpperCase } from 'src/app/shared/Utilities';
 import { PrivacyPolicyDialogComponent } from 'src/app/shared/privacy-policy-dialog/privacy-policy-dialog.component';
 import { TermsAndConditionsComponent } from 'src/app/shared/terms-and-conditions/terms-and-conditions.component';
+import { Question } from 'src/models/Question.model';
 
 @Component({
   selector: 'app-review-and-pay',
@@ -44,8 +45,11 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
   public checkout$: Observable<CheckoutState>;
   public subChekout: Subscription;
 
-  public isAllDone: boolean;
   public shoppingCart: ShoppingCart;
+
+  public isAllDone: boolean;
+  public uncomplitedSteps: Step[] = [];
+  public questions: Question[] = [];
 
   public projectInfo: InfoPriceLabelInputs;
   public customerInfo: InfoPriceLabelInputs;
@@ -77,6 +81,8 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
   private dialogInvoiceSub: Subscription;
 
   public showAddressInput: boolean = SHOW_ADDRESS_INPUT;
+
+  public isCreateInProgress: boolean = false;
 
   constructor(
     private readonly $store: Store<AppState>,
@@ -146,24 +152,23 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
 
     this.subChekout = this.checkout$.subscribe((checkoutState) => {
       this.shoppingCart = checkoutState.shoppingCart;
+      this.questions = checkoutState.questions;
 
       this.packageInfo.infoPriceList = [
         new InfoPrice({
-          info: firstToUpperCase(checkoutState.packageBox.name),
-          price: checkoutState.packageBox.price,
+          info: firstToUpperCase(checkoutState?.packageBox?.name),
+          price: checkoutState?.packageBox?.price,
         }),
       ];
 
       const steps: Step[] = Object.values(checkoutState.progressState);
-       
 
       const uncomplitedSteps = steps.filter((step) =>
         step.isRequired ? step.state !== ProgressState.DONE : false
       );
-       
 
+      this.uncomplitedSteps = uncomplitedSteps;
       this.isAllDone = !uncomplitedSteps.length;
-       
 
       this.addOnInfo.infoPriceList = checkoutState.addOnList
         .filter((addOn) => addOn.isSelected)
@@ -217,12 +222,13 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
           return;
         }
 
+        this.isCreateInProgress = true;
         this.checkoutService
           .createOrder(this.shoppingCart.id)
           .toPromise()
           .then((res) => {
             LocalStorageService.Instance.storage.clear();
-            this.$store.dispatch(setInitStateChekcout({}));
+            this.$store.dispatch(processDoneCheckout());
             const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
               width: CONFIRMATION_DIALOG_WIDTH,
               disableClose: true,
@@ -233,6 +239,7 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
                 type: ConfirmationDialogType.INFO,
               }),
             });
+            this.isCreateInProgress = false;
 
             this.dialogInvoiceSub = dialogRef.afterClosed().subscribe(() => {
               this.router.navigateByUrl(`/${MainRouterPaths.THANK_YOU}`);
@@ -241,16 +248,45 @@ export class ReviewAndPayComponent implements OnInit, OnDestroy {
           .catch((err) => {
             console.error(err);
             alert(err.message);
+            this.isCreateInProgress = false;
           });
       });
     } else {
-      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      let message = `\nUncompleted steps:\n`;
+      message += this.uncomplitedSteps
+        .map((step) => `- ${step.name}\n`)
+        .join('');
+
+      let uncomplitedSections = [];
+
+      if (
+        this.uncomplitedSteps.find(
+          (step) => step.name === TabbarText.QUESTIONNARIE
+        )
+      ) {
+        this.questions.forEach((quest) => {
+          if (!Question.isQuestionFullyAnswerd(quest)) {
+            uncomplitedSections.push(quest.section);
+          }
+        });
+        uncomplitedSections = [...new Set(uncomplitedSections)];
+
+        let uncSectionStr = `  Unanswered sections:\n`;
+        uncSectionStr += uncomplitedSections
+          .map((sec) => `  - ${sec}\n`)
+          .join('');
+
+        message += uncSectionStr;
+      }
+
+      this.dialog.open(ConfirmationDialogComponent, {
         width: CONFIRMATION_DIALOG_WIDTH,
         disableClose: true,
         data: new ConfirmationDialogData({
           titleLabel: 'Information dialog',
-          message: `You haven't completed all steps. Make sure you answered all questions.`,
+          message,
           type: ConfirmationDialogType.INFO,
+          textAlign: 'left',
         }),
       });
     }

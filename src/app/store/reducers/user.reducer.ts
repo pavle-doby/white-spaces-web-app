@@ -15,7 +15,7 @@ const reducer = createReducer(
   initState,
   on(setUser, (state, { user }) => {
     LocalStorageService.Instance.User = user;
-    return { ...state, user: { ...user } };
+    return { ...state, user };
   }),
   on(clearUser, (state) => {
     LocalStorageService.Instance.User = null;

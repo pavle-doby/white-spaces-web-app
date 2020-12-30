@@ -55,7 +55,7 @@
         fxLayoutGap.lt-md="20px"
       >
         <app-side-card-packages-box
-          *ngFor="let package of this.packages"
+          *ngFor="let package of (checkoutState$ | async).allPackageCards"
           [isSelected]="package.box?.id === (selectedPackageBox$ | async)?.id"
           [package]="package"
           (selectEvent)="this.onSelectEvent($event)"

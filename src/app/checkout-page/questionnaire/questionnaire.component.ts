@@ -11,24 +11,30 @@ import {
 import { Observable, Subscription } from 'rxjs';
 import { Question } from 'src/models/Question.model';
 import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
-import { UploadData } from 'src/app/shared/upload/upload.model';
+import { UploadConfig } from 'src/app/shared/upload/upload.model';
 import { ProductVM } from 'src/models/ProductVM.model';
 import { ShoppingCart } from 'src/models/ShoppingCart.model';
 import { TabbarText } from 'src/models/TabbarText.model';
 import { QuestionDTO } from 'src/models/QuestionDTO.model';
 import { QuestionStepper } from './question-stepper/question-stepper.model';
 import { TooltipPosition } from 'src/models/TooltipPosition.model';
-
-const INFO = `Feel free to load us with information so that we
-can truly get to know you and your space. 
-Tell us the details so we can extend its potential to the maximum.`;
-
-const INFO_DESC = `Your satisfaction with the end result has to do with the amount of information you share about your apartment with us. 
-You can ensure that your project is a resounding success by making us understand your needs!`;
-
-const UPLOAD_MSG = 'Upload photo';
-const UPLOAD_TOOLTIP_INFO =
-  'You can upload only one photo at the moment. Please, send us the rest of them via email.';
+import { clone, isHandset, puralize } from 'src/app/shared/Utilities';
+import { MAIL_FOR_CLIENTS } from 'src/app/app.config';
+import { MatDialog } from '@angular/material/dialog';
+import { ImageManagerDialogComponent } from 'src/app/shared/image-manager-dialog/image-manager-dialog.component';
+import { ImageManagerDialogData } from 'src/models/ImageManagerDialogData.model';
+import { ImageManagerConfig } from 'src/app/shared/image-manager/models/ImageManagerConfig.model';
+import { ImageGridConfig } from 'src/app/shared/image-grid/models/ImageGridConfig.model';
+import { Image } from 'src/models/Image.model';
+import {
+  CheckoutProgress,
+  ProgressState,
+} from 'src/models/CheckoutProgress.model';
+import {
+  ConfirmationDialogComponent,
+  ConfirmationDialogData,
+  ConfirmationDialogType,
+} from 'src/app/shared/dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-questionnaire',
@@ -38,6 +44,11 @@ const UPLOAD_TOOLTIP_INFO =
 export class QuestionnaireComponent implements OnInit {
   @Input()
   public toShowIndex: number = 0;
+
+  public isHandset: boolean = isHandset();
+
+  public readonly mail: string = MAIL_FOR_CLIENTS;
+  public readonly mailHref: string = `mailto:${this.mail}`;
 
   public $shoppingCartState: Observable<ShoppingCart>;
   public $subShoppingCartState: Subscription;
@@ -50,11 +61,22 @@ export class QuestionnaireComponent implements OnInit {
   public $questionStepper: Observable<QuestionStepper>;
   public $subQuestionStepper: Subscription;
 
-  public uploadData: UploadData;
+  public $progressState: Observable<CheckoutProgress>;
+  public $subProgressState: Subscription;
+
+  public questionMsg: string =
+    'Make sure you fill out the questionnaire in detail, so we can fully understand your needs.\nThere are 10 sections in total (together with the add-on packages).\nThe number of questions may vary per category.';
+
+  public manageInfo: string;
+  public manageTooltipInfo: string;
+  public mangeTooltipPosition: TooltipPosition = TooltipPosition.RIGHT;
+
+  public subDialog: Subscription;
 
   constructor(
     private readonly $store: Store<AppState>,
-    private readonly checkoutService: CheckoutService
+    private readonly checkoutService: CheckoutService,
+    private readonly dialog: MatDialog
   ) {
     this.$questions = this.$store.select((state) => state.checkout.questions);
     this.$questionStepper = this.$store.select(
@@ -63,32 +85,40 @@ export class QuestionnaireComponent implements OnInit {
     this.$shoppingCartState = this.$store.select(
       (state) => state.checkout.shoppingCart
     );
-
-    this.$store.dispatch(
-      setInfoCheckout({ info: INFO, description: [INFO_DESC] })
+    this.$progressState = this.$store.select(
+      (state) => state.checkout.progressState
     );
+
+    this.$store.dispatch(setInfoCheckout({ info: '', description: [] }));
 
     this.$store.dispatch(
       selectTabbarButtonCheckout({ btnText: TabbarText.QUESTIONNARIE })
     );
-
-    this.uploadData = new UploadData({
-      limit: 1,
-      info: '',
-      bottomInfo: UPLOAD_MSG,
-      uppercaseButtonText: true,
-      tooltipContent: UPLOAD_TOOLTIP_INFO,
-      tooltipPosition: TooltipPosition.RIGHT,
-    });
   }
 
   ngOnDestroy(): void {
     this.$subQuestions.unsubscribe();
     this.$subQuestionStepper.unsubscribe();
     this.$subShoppingCartState.unsubscribe();
+    this.$subProgressState.unsubscribe();
+
+    if (this.subDialog) this.subDialog.unsubscribe();
   }
 
   ngOnInit(): void {
+    this.$subProgressState = this.$progressState.subscribe((progressState) => {
+      if (progressState.questions.state !== ProgressState.DONE) {
+        return;
+      }
+      this.dialog.open(ConfirmationDialogComponent, {
+        data: new ConfirmationDialogData({
+          titleLabel: 'Congratulations!',
+          message: 'You answered all questions!',
+          type: ConfirmationDialogType.INFO,
+        }),
+      });
+    });
+
     this.$subShoppingCartState = this.$shoppingCartState.subscribe(
       (shoppingCart) => {
         this.shoppingCart = shoppingCart;
@@ -115,7 +145,7 @@ export class QuestionnaireComponent implements OnInit {
       question.product_id
     );
 
-    const newQuestions: Question[] = JSON.parse(JSON.stringify(this.questions))
+    const newQuestions: Question[] = clone<Question[]>(this.questions)
       .filter((q) => q.product_id === lineItem.product.id)
       .map((q) => {
         return q.id === question.id ? { ...question } : { ...q };
@@ -131,8 +161,6 @@ export class QuestionnaireComponent implements OnInit {
       },
       quantity: 1,
     };
-
-     
 
     this.checkoutService
       .updateProduct(productVM)
@@ -162,72 +190,86 @@ export class QuestionnaireComponent implements OnInit {
     this.chagneUploadInfo();
   }
 
-  public onUploadEvent(fileList: FileList): void {
-     
+  public openUploadModal(): void {
+    const quetion = this.questions[this.toShowIndex];
+    const images = quetion.images.map((src) => new Image({ src }));
 
-    this.checkoutService
-      .uploadFile(fileList[0])
-      .toPromise()
-      .then((linkObj) => {
-        const newQuestion = {
-          ...this.questions[this.toShowIndex],
-          images: [linkObj.link],
-          image_name: fileList[0].name,
-        };
+    const dialogRef = this.dialog.open(ImageManagerDialogComponent, {
+      disableClose: true,
+      data: new ImageManagerDialogData({
+        images,
+        title: 'File Manager',
+        managerConfig: new ImageManagerConfig({
+          dialogOneColMode: this.isHandset,
+        }),
+        uploadConfig: new UploadConfig({
+          limit: 16,
+          info: '',
+          uppercaseButtonText: true,
+        }),
+        gridConfig: new ImageGridConfig({ limit: 16 }),
+      }),
+    });
 
-        const lineItem = ShoppingCart.getLineItemWithProductId(
-          this.shoppingCart,
-          newQuestion.product_id
-        );
-        const additionalData = JSON.parse(
-          JSON.stringify(lineItem.product.additional_data)
-        );
+    this.subDialog = dialogRef.afterClosed().subscribe((imageBuff: Image[]) => {
+      if (!imageBuff) {
+        return;
+      }
 
-        const newQuestions: Question[] = JSON.parse(
-          JSON.stringify(this.questions)
-        )
-          .filter((q) => q.product_id === lineItem.product.id)
-          .map((q) => {
-            return q.id === newQuestion.id ? { ...newQuestion } : { ...q };
-          });
+      const images = imageBuff.map((img) => img.src);
 
-        const productVM: ProductVM = {
-          shopping_cart_id: this.shoppingCart.id,
-          product_id: newQuestion.product_id,
-          line_item_id: lineItem.id,
-          additional_data: {
-            ...lineItem.additional_data,
-            questions: newQuestions.map((q) => new QuestionDTO(q)),
-          },
-          quantity: 1,
-        };
+      const newQuestion = {
+        ...this.questions[this.toShowIndex],
+        images,
+      };
 
-         
+      const lineItem = ShoppingCart.getLineItemWithProductId(
+        this.shoppingCart,
+        newQuestion.product_id
+      );
 
-        this.checkoutService
-          .updateProduct(productVM)
-          .toPromise()
-          .then((newShoppingCart) => {
-            this.$store.dispatch(
-              setShoppingCartCheckout({ shoppingCart: newShoppingCart })
-            );
-             
+      const newQuestions: Question[] = clone<Question[]>(this.questions)
+        .filter((q) => q.product_id === lineItem.product.id)
+        .map((q) => {
+          return q.id === newQuestion.id ? { ...newQuestion } : { ...q };
+        });
 
-            this.$store.dispatch(
-              updateQuestionCheckout({ question: { ...newQuestion } })
-            );
-          })
-          .catch((err) => {
-            console.error(err);
-            alert(err.message);
-          });
-      });
+      const productVM: ProductVM = {
+        shopping_cart_id: this.shoppingCart.id,
+        product_id: newQuestion.product_id,
+        line_item_id: lineItem.id,
+        additional_data: {
+          ...lineItem.additional_data,
+          questions: newQuestions.map((q) => new QuestionDTO(q)),
+        },
+        quantity: 1,
+      };
+
+      this.checkoutService
+        .updateProduct(productVM)
+        .toPromise()
+        .then((newShoppingCart) => {
+          this.$store.dispatch(
+            setShoppingCartCheckout({ shoppingCart: newShoppingCart })
+          );
+
+          this.$store.dispatch(
+            updateQuestionCheckout({ question: { ...newQuestion } })
+          );
+        })
+        .catch((err) => {
+          console.error(err);
+          alert(err.message);
+        });
+    });
   }
 
   private chagneUploadInfo(): void {
-    const imageIsUploaded = !!this.questions[this.toShowIndex]?.images?.length;
-    this.uploadData.bottomInfo = imageIsUploaded
-      ? this.questions[this.toShowIndex].image_name ?? UPLOAD_MSG
-      : UPLOAD_MSG;
+    const filesCount = this.questions[this.toShowIndex]?.images?.length;
+
+    this.manageInfo = !!filesCount
+      ? `You uploaded ${filesCount} file${puralize(filesCount)}`
+      : `No uploaded files`;
+    this.manageTooltipInfo = 'Here you can manage files for question.';
   }
 }

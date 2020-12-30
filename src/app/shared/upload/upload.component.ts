@@ -8,8 +8,9 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { UploadData } from './upload.model';
+import { UploadConfig } from './upload.model';
 import { Subscription, fromEvent, Observable } from 'rxjs';
+import { puralize } from '../Utilities';
 
 export const SUPPERTED_FILES = '.dwg, .pdf, .jpg, .jpeg, .png ';
 
@@ -20,7 +21,7 @@ export const SUPPERTED_FILES = '.dwg, .pdf, .jpg, .jpeg, .png ';
 })
 export class UploadComponent implements OnInit, OnDestroy {
   @Input()
-  public data?: UploadData;
+  public data?: UploadConfig;
   @Input()
   public supportedFileTypes: string = SUPPERTED_FILES;
 
@@ -47,14 +48,22 @@ export class UploadComponent implements OnInit, OnDestroy {
 
     this.data.bottomInfo =
       this.data.bottomInfo ??
-      `The limit is ${this.data.limit} photo${this.data.limit > 1 ? 's' : ''}`;
+      `The limit is ${this.data.limit} file${puralize(this.data.limit)}`;
   }
 
   ngAfterViewInit(): void {
     this.$change = fromEvent(this.uploadElement.nativeElement, 'change');
     this.$subChange = this.$change.subscribe((event) => {
       const files = { ...(event.target as any).files };
-      this.uploadEvent.emit(files);
+      const n = Object.values(files).length;
+
+      if (n > this.data.limit) {
+        alert('You have selected too many files.');
+        return;
+      } else {
+        this.uploadEvent.emit(files);
+      }
+
       (event.target as any).value = '';
     });
   }

@@ -1,0 +1,56 @@
+<div
+  *ngIf="this.data"
+  class="image-manager-dialog"
+  fxLayout="column"
+  fxLayoutAlign="space-between center"
+  fxLayoutGap="25px"
+>
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <h2 class="imd__title">
+      {{ this.data.title }}
+    </h2>
+  </div>
+  <div
+    class="imd__image-manager"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+  >
+    <app-image-manager
+      [uploadConfig]="this.data.uploadConfig"
+      [config]="this.data.managerConfig"
+      [gridConfig]="this.data.gridConfig"
+      [images]="this.imgBuffer"
+      (uploadEvent)="this.onUploadEvent($event)"
+      (deleteEvent)="this.onDeleteEvent($event)"
+    >
+    </app-image-manager>
+  </div>
+  <div
+    class="width-100"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px"
+  >
+    <button
+      class="checkout__btn--invert conf-dialog__btn-width"
+      [ngClass]="{
+        'app__btn--disabled': this.isInProgress && !this.isErrorOccurred
+      }"
+      [disabled]="this.isInProgress && !this.isErrorOccurred"
+      [mat-dialog-close]="null"
+      (click)="this.cancel()"
+    >
+      Cancel
+    </button>
+    <button
+      class="checkout__btn conf-dialog__btn-width"
+      [ngClass]="{
+        'app__btn--disabled': this.isInProgress || this.isErrorOccurred
+      }"
+      [disabled]="this.isInProgress || this.isErrorOccurred"
+      (click)="this.confirmActions()"
+    >
+      Confirm
+    </button>
+  </div>
+</div>

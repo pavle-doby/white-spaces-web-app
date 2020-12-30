@@ -3,15 +3,15 @@
   fxLayout="column"
   fxLayoutAlign="space-around center"
 >
-  <app-logo></app-logo>
+  <app-logo *ngIf="!isHandset"></app-logo>
   <div fxLayout="column" fxLayoutAlign="start center">
     <h1 class="thank-you__text--big">
-      Thank you for making us <br/>
+      Thank you for making us <br />
       part of your life
     </h1>
     <p>
-      Once your payment is processed you will hear from your
-      architect within next 24 hours. <br>
+      Once your payment is processed you will hear from your architect within
+      next 24 hours. <br />
       All you need to do now is relax
     </p>
   </div>

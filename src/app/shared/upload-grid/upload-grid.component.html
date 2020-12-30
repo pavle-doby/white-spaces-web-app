@@ -8,17 +8,5 @@
     [data]="this.uploadData"
     (uploadEvent)="this.onUploadEvent($event)"
   ></app-upload>
-  <section
-    class="upload-grid__img-grid"
-    fxLayout="row wrap"
-    fxLayoutAlign="start"
-    fxLayoutGap="1vw grid"
-    fxLayoutGap.lt-md="10px grid"
-  >
-    <img
-      *ngFor="let url of this.imgURLs"
-      class="upload-grid__img"
-      [src]="url"
-    />
-  </section>
+  <app-image-grid [images]="this.images"></app-image-grid>
 </div>

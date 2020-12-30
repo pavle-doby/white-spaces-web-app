@@ -25,20 +25,16 @@
 
 .upload__info--bottom {
   @extend .upload__info;
-  font-size: 0.75vw;
-
-  @media screen and (max-width: 960px) {
-    font-size: 12px;
-  }
+  font-size: 12px;
 }
 
 .upload__info--tooltip-icon {
   cursor: help;
-  font-size: 1.2vw;
+  font-size: 18px;
   color: $color-primary-btn;
 }
 
 .upload__info--tooltip-icon-span {
-  width: 1.2vw;
-  height: 1.2vw;
+  width: 18px;
+  height: 18px;
 }

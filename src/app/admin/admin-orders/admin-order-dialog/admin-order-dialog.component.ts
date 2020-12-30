@@ -4,6 +4,18 @@ import { AdminService } from 'src/app/services/admin.service';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
+import HttpStatusCode from 'src/models/HttpStatusCode';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  MSG_ACTION_SUCCESSFUL,
+  MSG_ACTION_UNSUCCSSFUL,
+} from 'src/app/app.config';
+import {
+  fileToPrsentableImage,
+  getExtension,
+  isNotPresentableFile,
+} from 'src/app/shared/Utilities';
+
 @Component({
   selector: 'app-admin-order-dialog',
   templateUrl: './admin-order-dialog.component.html',
@@ -23,24 +35,50 @@ export class AdminOrderDialogComponent implements OnInit {
     { value: 0, viewValue: 'Natasa Nikolic' },
     { value: 1, viewValue: 'Admin 2' },
   ];
+
+  public floorPlanList: string[] = [];
+
   constructor(
-    private dialogRef: MatDialogRef<AdminOrderDialogComponent>,
-    private $store: Store<AppState>,
-    private adminService: AdminService,
+    private readonly dialogRef: MatDialogRef<AdminOrderDialogComponent>,
+    private readonly $store: Store<AppState>,
+    private readonly adminService: AdminService,
+    private readonly snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) data
   ) {
     this.data = data;
     this.$adminEmail = this.$store.select((state) => state.user.user.email);
+
+    this.floorPlanList = this.data.orderDetails
+      .map((order) => order.additional_data.floor_plan)
+      .map((fpList: string[]) => fpList ?? [])
+      .flat(1)
+      .map((fileName) => fileToPrsentableImage(fileName));
   }
 
   ngOnInit(): void {}
 
   public downloadProject() {
     this.$adminEmail.subscribe((email) => {
-      this.adminService.downloadProject(this.data.id, email).subscribe(
-        (res) => res,
-        (err) => console.error(err)
-      );
+      this.adminService
+        .downloadProject(this.data.id, email)
+        .toPromise()
+        .then((res) => {
+          this.snackBar.open(MSG_ACTION_SUCCESSFUL, 'Close', {
+            duration: 3000,
+          });
+        })
+        .catch((err) => {
+          if (err.status === HttpStatusCode.OK) {
+            this.snackBar.open(MSG_ACTION_SUCCESSFUL, 'Close', {
+              duration: 3000,
+            });
+            return;
+          }
+          console.error(err);
+          this.snackBar.open(MSG_ACTION_UNSUCCSSFUL, 'Close', {
+            duration: 3000,
+          });
+        });
     });
   }
 
