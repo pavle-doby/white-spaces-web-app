@@ -32,7 +32,7 @@ import { httpInterceptorProviders } from './interceptors/interseptors';
   declarations: [AppComponent],
   imports: [
     CommonModule,
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
