@@ -2,39 +2,54 @@
   [ngClass]="{ 'social-icons--white': this.whiteIcons }"
   fxLayout="row"
   fxLayoutAlign="start center"
-  fxLayoutGap="7px"
 >
   <button
     mat-icon-button
     shareButton="facebook"
+    [url]="this.url"
+    #fbBtn="shareButton"
+    [style.color]="fbBtn.color"
+  >
+    <fa-icon [icon]="this.icons.facebook" size="lg"></fa-icon>
+  </button>
+  <button
+    mat-icon-button
+    shareButton="pinterest"
     #fbBtn="shareButton"
     [url]="this.url"
+    #piBtn="shareButton"
+    [style.color]="piBtn.color"
   >
-    <img
-      src="assets/icons/social media/facebook-icon.svg"
-      alt="Facebook"
-      width="20px"
-    />
+    <fa-icon [icon]="this.icons.pinterest" size="lg"></fa-icon>
   </button>
-  <a href="https://instagram.com/whitespacerenovation?igshid=1rs0he5r52z82">
-    <img
-      src="assets/icons/social media/instagram-icon.svg"
-      alt="Instagram"
-      width="20px"
-    />
-  </a>
-  <a href="https://www.pinterest.fr/white_space_renovation">
-    <img
-      src="assets/icons/social media/pinterest-icon.svg"
-      alt="Pinterest"
-      width="20px"
-    />
-  </a>
-  <a href="https://www.linkedin.com/company/white-space-renovation">
-    <img
-      src="assets/icons/social media/linkedin-icon.svg"
-      alt="Linked-in"
-      width="20px"
-    />
-  </a>
+  <button
+    mat-icon-button
+    #fbBtn="shareButton"
+    shareButton="linkedin"
+    [url]="this.url"
+    title="WS"
+    #liBtn="shareButton"
+    [style.color]="liBtn.color"
+  >
+    <fa-icon [icon]="this.icons.linkedIn" size="lg"></fa-icon>
+  </button>
+  <button
+    mat-icon-button
+    #fbBtn="shareButton"
+    shareButton="twitter"
+    [url]="this.url"
+    #twBtn="shareButton"
+    [style.color]="twBtn.color"
+  >
+    <fa-icon [icon]="this.icons.twitter" size="lg"></fa-icon>
+  </button>
+  <button
+    mat-icon-button
+    shareButton="email"
+    [url]="this.url"
+    #emBtn="shareButton"
+    [style.color]="emBtn.color"
+  >
+    <fa-icon [icon]="this.icons.email" size="lg"></fa-icon>
+  </button>
 </div>

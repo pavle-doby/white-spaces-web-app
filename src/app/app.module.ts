@@ -27,6 +27,7 @@ import {
 import { NgcCookieConsentModule } from 'ngx-cookieconsent';
 import { COOKIE_CONFIG } from './app.config';
 import { httpInterceptorProviders } from './interceptors/interseptors';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [AppComponent],
@@ -60,6 +61,7 @@ import { httpInterceptorProviders } from './interceptors/interseptors';
     CheckoutPageModule,
     MatPaginatorModule,
     HttpClientModule,
+    FontAwesomeModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],

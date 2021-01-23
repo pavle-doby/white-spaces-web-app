@@ -5,6 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ShareModule } from 'ngx-sharebuttons';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [SocialIconsShareComponent],
@@ -14,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
     ShareModule,
     MatIconModule,
     MatButtonModule,
+    FontAwesomeModule,
   ],
   exports: [SocialIconsShareComponent],
 })
