@@ -30,6 +30,8 @@ import { ImageManagerDialogModule } from './image-manager-dialog/image-manager-d
 import { ImageManagerDialogComponent } from './image-manager-dialog/image-manager-dialog.component';
 import { LoaderModule } from './loader/loader.module';
 import { LoaderComponent } from './loader/loader.component';
+import { SocialIconsShareModule } from './social-icons-share/social-icons-share.module';
+import { SocialIconsShareComponent } from './social-icons-share/social-icons-share.component';
 
 @NgModule({
   declarations: [],
@@ -51,6 +53,7 @@ import { LoaderComponent } from './loader/loader.component';
     ImageGridModule,
     ImageManagerDialogModule,
     LoaderModule,
+    SocialIconsShareModule,
   ],
   exports: [
     FooterComponent,
@@ -67,6 +70,7 @@ import { LoaderComponent } from './loader/loader.component';
     ImageGridComponent,
     ImageManagerDialogComponent,
     LoaderComponent,
+    SocialIconsShareComponent,
   ],
 })
 export class SharedModule {}

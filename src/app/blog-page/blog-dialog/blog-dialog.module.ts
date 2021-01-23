@@ -4,7 +4,7 @@ import { BlogDialogComponent } from './blog-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AttachmentModule } from 'src/app/shared/attachment/attachment.module';
-import { SocialIconsModule } from 'src/app/shared/social-icons/social-icons.module';
+import { SocialIconsShareModule } from 'src/app/shared/social-icons-share/social-icons-share.module';
 
 @NgModule({
   declarations: [BlogDialogComponent],
@@ -13,7 +13,7 @@ import { SocialIconsModule } from 'src/app/shared/social-icons/social-icons.modu
     MatDialogModule,
     FlexLayoutModule,
     AttachmentModule,
-    SocialIconsModule,
+    SocialIconsShareModule,
   ],
   exports: [BlogDialogComponent],
 })
