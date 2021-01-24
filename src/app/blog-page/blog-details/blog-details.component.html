@@ -1,0 +1,33 @@
+<div
+  *ngIf="this.blogDetails"
+  class="blog-details__container"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  fxLayoutGap="10px"
+>
+  <a fxHide.lt-md class="app__a--none cursor-pointer" href="/home">
+    <img
+      class="app__logo blog-details__logo"
+      src="assets/images/home/logo.png"
+      alt="Website Logo"
+    />
+  </a>
+
+  <div class="blog-deatails__header" fxLayout="row" fxLayoutAlign="space-between center">
+    <h2 mat-dialog-title>{{ this.blogDetails?.title }}</h2>
+    <app-social-icons-share
+      [blogId]="this.blogDetails?.id"
+    ></app-social-icons-share>
+  </div>
+
+  <article class="blog-details">
+    <div class="blog-details__content mat-typography" fxLayout="column">
+      <div
+        fxLayout="column"
+        fxLayoutAlign="start center"
+        [innerHTML]="this.blogDetails?.innterHTML"
+        class="blog-details__html"
+      ></div>
+    </div>
+  </article>
+</div>

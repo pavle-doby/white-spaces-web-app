@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { BlogPostModule } from './blog-post/blog-post.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LogoModule } from '../shared/logo/logo.module';
+import { BlogDetailsModule } from './blog-details/blog-details.module';
 
 @NgModule({
   declarations: [BlogPageComponent],
@@ -16,6 +17,7 @@ import { LogoModule } from '../shared/logo/logo.module';
     BlogPostModule,
     FlexLayoutModule,
     LogoModule,
+    BlogDetailsModule,
   ],
 })
 export class BlogPageModule {}

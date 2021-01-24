@@ -8,6 +8,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { faMailBulk } from '@fortawesome/free-solid-svg-icons';
 import { DOMAIN_URL } from 'src/app/app.config';
+import { BlogPath } from 'src/app/blog-page/BlogPath.enum';
 import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
 
 @Component({
@@ -16,7 +17,6 @@ import { MainRouterPaths } from 'src/models/MainRouterPaths.model';
   styleUrls: ['./social-icons-share.component.scss'],
 })
 export class SocialIconsShareComponent implements OnInit {
-  //Fb, pinterest, linkedin, twiter i mejl
   public icons: Record<string, IconDefinition> = {
     facebook: faFacebook,
     pinterest: faPinterest,
@@ -25,14 +25,15 @@ export class SocialIconsShareComponent implements OnInit {
     email: faMailBulk,
   };
 
-  @Input() whiteIcons: boolean = false;
   @Input() blogId: number = null;
 
-  public readonly url = this.blogId
-    ? `${DOMAIN_URL}/${MainRouterPaths.BLOG}?id=${this.blogId}`
-    : DOMAIN_URL;
+  public url: string;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.url = this.blogId
+      ? `${DOMAIN_URL}/${MainRouterPaths.BLOG}/${BlogPath.DETAILS}?id=${this.blogId}`
+      : DOMAIN_URL;
+  }
 }

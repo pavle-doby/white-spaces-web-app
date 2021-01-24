@@ -23,6 +23,8 @@
       {{ this.textPlaceholder }}
     </p>
 
-    <app-button-monochrome (click)="openDialog()"></app-button-monochrome>
+    <a class="app__a--none" [href]="this.url" target="_blank">
+      <app-button-monochrome></app-button-monochrome>
+    </a>
   </div>
 </article>
