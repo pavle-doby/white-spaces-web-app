@@ -1,0 +1,51 @@
+<div fxLayout="row" fxLayoutAlign="start center">
+  <button
+    mat-icon-button
+    shareButton="facebook"
+    [url]="this.url"
+    #fbBtn="shareButton"
+    [style.color]="fbBtn.color"
+  >
+    <fa-icon [icon]="this.icons.facebook" size="lg"></fa-icon>
+  </button>
+  <button
+    mat-icon-button
+    shareButton="pinterest"
+    #fbBtn="shareButton"
+    [url]="this.url"
+    #piBtn="shareButton"
+    [style.color]="piBtn.color"
+  >
+    <fa-icon [icon]="this.icons.pinterest" size="lg"></fa-icon>
+  </button>
+  <button
+    mat-icon-button
+    #fbBtn="shareButton"
+    shareButton="linkedin"
+    [url]="this.url"
+    title="WS"
+    #liBtn="shareButton"
+    [style.color]="liBtn.color"
+  >
+    <fa-icon [icon]="this.icons.linkedIn" size="lg"></fa-icon>
+  </button>
+  <button
+    mat-icon-button
+    #fbBtn="shareButton"
+    shareButton="twitter"
+    [url]="this.url"
+    #twBtn="shareButton"
+    [style.color]="twBtn.color"
+  >
+    <fa-icon [icon]="this.icons.twitter" size="lg"></fa-icon>
+  </button>
+  <button
+    mat-icon-button
+    shareButton="email"
+    [url]="this.url"
+    #emBtn="shareButton"
+    [style.color]="emBtn.color"
+  >
+    <fa-icon [icon]="this.icons.email" size="lg"></fa-icon>
+  </button>
+</div>

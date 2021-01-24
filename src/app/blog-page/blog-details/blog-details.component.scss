@@ -1,0 +1,55 @@
+@media only screen and(min-width:959px) {
+  p {
+    line-height: 1.3vw;
+    font-weight: 300;
+    font-size: 16px;
+  }
+}
+
+.blog-details__container {
+  width: 100vw;
+  height: 95vh;
+}
+
+.blog-details__logo {
+  margin-top: 45px;
+}
+
+.blog-deatails__header {
+  width: 60vw;
+  margin-top: 20px;
+}
+.mat-dialog-title {
+  font-size: 1.3vw;
+  margin-bottom: 0;
+  line-height: normal;
+  letter-spacing: 0.15625vw;
+  @media only screen and(max-width:959px) {
+    font-size: 18px;
+    line-height: normal;
+    margin-right: 15px;
+  }
+}
+
+.blog-details {
+  width: 60vw;
+  height: 85vh;
+  overflow: auto;
+
+  figure > img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  @media only screen and(max-width:959px) {
+    width: 100%;
+    figure > img {
+      width: 80vw !important;
+    }
+  }
+}
+
+.blog-details__content {
+  margin-top: 15px;
+}
