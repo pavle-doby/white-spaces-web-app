@@ -1,1 +1,9 @@
-
+@media (max-width: 960px) {
+  .app__a--overflow {
+    display: block;
+    width: 222px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
