@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { API_URL } from 'src/app/app.config';
 import * as Editor from './ckeditor';
 
 @Component({
@@ -75,7 +76,7 @@ export class AdminBlogDialogComponent implements OnInit {
       },
       licenseKey: '',
       simpleUpload: {
-        uploadUrl: 'http://18.221.175.43/api/file/upload',
+        uploadUrl: `${API_URL}/api/file/upload`,
       },
     };
   }
