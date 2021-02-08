@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { API_URL } from '../app.config';
+import { BusyFlag } from 'src/models/BusyFlag.model';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class AdminService {
   }
 
   public getAllOrders(): Observable<any> {
-    return this.http.get(`${API_URL}/order/get-all`,);
+    return this.http.get(`${API_URL}/order/get-all`);
   }
 
   public getAllBlogs(): Observable<any> {
@@ -108,5 +109,15 @@ export class AdminService {
       },
       { withCredentials: true }
     );
+  }
+
+  public updateBusyFlag(flag: boolean): Observable<BusyFlag> {
+    const URL = `${API_URL}/api/busy-flag/update`;
+    return this.http.put<BusyFlag>(URL, { flag });
+  }
+
+  public getBusyFlag(): Observable<BusyFlag> {
+    const URL = `${API_URL}/api/busy-flag/get`;
+    return this.http.get<BusyFlag>(URL);
   }
 }

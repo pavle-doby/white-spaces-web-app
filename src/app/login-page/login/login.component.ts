@@ -14,6 +14,7 @@ import {
 } from 'src/app/shared/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { Subscription } from 'rxjs';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { CheckoutService } from 'src/app/services/checkout.service.ts.service';
 
 @Component({
   selector: 'app-login',
@@ -27,8 +28,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   public isEmailValid: boolean = true;
   public isPasswordValid: boolean = true;
 
+  public isWSRTeamBusy: boolean;
   public requiredErorrMessage: string = 'required.';
-
   public loginReqCount: number = 0;
 
   public subDialogClosed: Subscription;
@@ -37,10 +38,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly store: Store<AppState>,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly checkoutService: CheckoutService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {}
   ngOnDestroy(): void {
     if (this.subDialogClosed) this.subDialogClosed.unsubscribe();
   }
@@ -60,7 +62,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService
       .cleanLogin(this.email, this.password)
       .toPromise()
-      .then((res) => {
+      .then(async (res) => {
         LocalStorageService.Instance.AuthToken = res.token ?? '';
 
         this.store.dispatch(setUser({ user: res.user_info }));
@@ -75,6 +77,26 @@ export class LoginComponent implements OnInit, OnDestroy {
             }),
           });
           return;
+        }
+
+        this.isWSRTeamBusy = await this.checkoutService
+          .getBusyFlag()
+          .toPromise()
+          .then((busyFlagObj) => busyFlagObj.flag)
+          .catch((err) => {
+            console.error(err);
+            return true;
+          });
+
+        if (this.isWSRTeamBusy) {
+          this.dialog.open(ConfirmationDialogComponent, {
+            width: CONFIRMATION_DIALOG_WIDTH,
+            data: new ConfirmationDialogData({
+              titleLabel: 'Information',
+              message: `Usually, it takes 10-15 working days to finish a project.\nBut due to heavy traffic on the website right now, it could take 16 -22 days.\nWe assure you it’s worth the wait!`,
+              type: ConfirmationDialogType.INFO,
+            }),
+          });
         }
 
         this.router.navigateByUrl(`/${MainRouterPaths.CHECKOUT}`);

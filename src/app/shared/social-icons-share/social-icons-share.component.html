@@ -2,19 +2,19 @@
   <button
     mat-icon-button
     shareButton="facebook"
+    title="Share On Facebook"
     [url]="this.url"
     #fbBtn="shareButton"
-    [style.color]="fbBtn.color"
   >
     <fa-icon [icon]="this.icons.facebook" size="lg"></fa-icon>
   </button>
   <button
     mat-icon-button
     shareButton="pinterest"
+    title="Share On Pinterest"
     #fbBtn="shareButton"
     [url]="this.url"
     #piBtn="shareButton"
-    [style.color]="piBtn.color"
   >
     <fa-icon [icon]="this.icons.pinterest" size="lg"></fa-icon>
   </button>
@@ -22,10 +22,9 @@
     mat-icon-button
     #fbBtn="shareButton"
     shareButton="linkedin"
+    title="Share On LinkedIn"
     [url]="this.url"
-    title="WS"
     #liBtn="shareButton"
-    [style.color]="liBtn.color"
   >
     <fa-icon [icon]="this.icons.linkedIn" size="lg"></fa-icon>
   </button>
@@ -33,18 +32,18 @@
     mat-icon-button
     #fbBtn="shareButton"
     shareButton="twitter"
+    title="Share On Twitter"
     [url]="this.url"
     #twBtn="shareButton"
-    [style.color]="twBtn.color"
   >
     <fa-icon [icon]="this.icons.twitter" size="lg"></fa-icon>
   </button>
   <button
     mat-icon-button
     shareButton="email"
+    title="Share In Email"
     [url]="this.url"
     #emBtn="shareButton"
-    [style.color]="emBtn.color"
   >
     <fa-icon [icon]="this.icons.email" size="lg"></fa-icon>
   </button>

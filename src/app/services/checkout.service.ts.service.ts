@@ -8,6 +8,7 @@ import { Link } from 'src/models/Link.model';
 import { AddOnDTO } from 'src/models/AddOnDTO';
 import { OrderVM } from 'src/models/OrderVM.model';
 import { ProductVM } from 'src/models/ProductVM.model';
+import { BusyFlag } from 'src/models/BusyFlag.model';
 
 @Injectable({
   providedIn: 'root',
@@ -61,5 +62,10 @@ export class CheckoutService {
     return this.http.put(URL, {
       filename: imgSrc,
     });
+  }
+
+  public getBusyFlag(): Observable<BusyFlag> {
+    const URL = `${API_URL}/api/busy-flag/get`;
+    return this.http.get<BusyFlag>(URL);
   }
 }

@@ -32,7 +32,16 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
-      <span>{{ this.headerName }}</span>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <span>{{ this.headerName }}</span>
+        <mat-slide-toggle
+          color="accent"
+          [checked]="isWSTeamBusy"
+          (click)="updateBusyFlag()"
+        >
+          <small class="admin-dashboard__busy-label"> We are busy </small>
+        </mat-slide-toggle>
+      </div>
       <button class="admin-logout" mat-flat-button (click)="this.logOut()">
         Log out
       </button>

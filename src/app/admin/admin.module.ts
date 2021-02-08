@@ -21,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { AdminPackagesModule } from './admin-packages/admin-packages.module';
 import { AdminBlogModule } from './admin-blog/admin-blog.module';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [AdminComponent, AdminDashboardComponent],
@@ -46,6 +47,7 @@ import { AdminBlogModule } from './admin-blog/admin-blog.module';
     MatDialogModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatSlideToggleModule,
   ],
   exports: [AdminComponent],
 })
