@@ -13,7 +13,11 @@
     />
   </a>
 
-  <div class="blog-deatails__header" fxLayout="row" fxLayoutAlign="space-between center">
+  <div
+    class="blog-deatails__header"
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+  >
     <h2 mat-dialog-title>{{ this.blogDetails?.title }}</h2>
     <app-social-icons-share
       [blogId]="this.blogDetails?.id"
