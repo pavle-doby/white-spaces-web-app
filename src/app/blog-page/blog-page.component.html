@@ -1,11 +1,13 @@
-<section
+<div
+  *ngIf="this.ready"
+  id="blog-page23"
   class="blog-page"
   fxLayout="column"
   fxLayout.lt-md="column"
   fxLayoutAlign.lt-md="start center"
   fxLayoutGap="2vw"
-  *ngIf="this.ready"
 >
+  <!-- (wheel)="this.onMouseWheel($event)" -->
   <app-logo
     fxLayout="row"
     fxHide.lt-md
@@ -13,13 +15,13 @@
   ></app-logo>
 
   <div
+    class="blog-page__row"
     fxLayout="row"
     fxLayout.lt-md="column"
     fxLayoutGap="2vw"
     fxLayoutAlign="start center"
-    class="width-100"
   >
-    <div *ngFor="let post of this.topBlogPosts">
+    <div *ngFor="let post of this.topBlogPosts" class="blog-page__post">
       <app-blog-post
         class="width-100"
         [id]="post.id"
@@ -31,13 +33,13 @@
   </div>
   <div
     *ngIf="!this.isHandset"
-    class="width-100"
+    class="blog-page__row"
     fxLayout="row"
     fxLayout.lt-md="column"
     fxLayoutGap="2vw"
     fxLayoutAlign="start center"
   >
-    <div *ngFor="let post of this.bottomBlogPosts">
+    <div *ngFor="let post of this.bottomBlogPosts" class="blog-page__post">
       <app-blog-post
         class="width-100"
         [id]="post.id"
@@ -47,4 +49,4 @@
       ></app-blog-post>
     </div>
   </div>
-</section>
+</div>
