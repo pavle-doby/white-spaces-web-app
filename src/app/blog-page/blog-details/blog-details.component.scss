@@ -19,16 +19,23 @@
 .blog-deatails__header {
   width: 60vw;
   margin-top: 20px;
+
+  @media only screen and(max-width:959px) {
+    width: 90vw;
+  }
 }
+
 .mat-dialog-title {
   font-size: 1.3vw;
   margin-bottom: 0;
   line-height: normal;
   letter-spacing: 0.15625vw;
+
   @media only screen and(max-width:959px) {
     font-size: 18px;
     line-height: normal;
     margin-right: 15px;
+    text-align: center;
   }
 }
 
@@ -37,20 +44,22 @@
   height: 85vh;
   overflow: auto;
 
-  figure > img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-
   @media only screen and(max-width:959px) {
-    width: 100%;
-    figure > img {
-      width: 80vw !important;
-    }
+    width: 90vw;
   }
 }
 
 .blog-details__content {
   margin-top: 15px;
+}
+
+:host ::ng-deep figure > img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+
+  @media only screen and(max-width:959px) {
+    width: 85vw;
+    height: auto;
+  }
 }

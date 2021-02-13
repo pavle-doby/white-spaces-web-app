@@ -17,8 +17,12 @@
     class="blog-deatails__header"
     fxLayout="row"
     fxLayoutAlign="space-between center"
+    fxLayout.lt-md="column"
+    fxLayoutAlign="start center"
   >
-    <h2 mat-dialog-title>{{ this.blogDetails?.title }}</h2>
+    <h2 mat-dialog-title>
+      {{ this.blogDetails?.title }}
+    </h2>
     <app-social-icons-share
       [blogId]="this.blogDetails?.id"
     ></app-social-icons-share>
